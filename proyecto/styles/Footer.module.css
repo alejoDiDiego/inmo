@@ -1,0 +1,66 @@
+
+.footer{
+    margin-top: auto;
+    background-color: black;
+    position: relative;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-image: url("https://images.unsplash.com/photo-1556089175-54732507ad23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+    background-size: cover;
+    background-position: 10% 40%;
+    opacity: 0.40;
+}
+
+.footer_img{
+    position: relative;
+    margin-left: 50px;
+    height: 50px;
+
+}
+
+.img{
+    position: relative;
+    margin-left: 50px;
+    height: 50px;
+}
+
+
+.div_img_social{
+    position: relative;
+    margin-right: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 150px;
+}
+
+.div_img_social_inside{
+    display: flex;
+    color: white;
+    align-items: center;
+}
+
+.div_img_social_inside p{
+    margin: 0;
+    margin-left: 10px;
+    font-size: 20px;
+
+}
+
+.img_social{
+    width: 50px;
+}
+
+/*Para el registro*/
+/*https://images.unsplash.com/photo-1556089175-54732507ad23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80*/
