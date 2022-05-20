@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import ContainerRegister from '../components/Register-Main/ContainerRegister'
-import styles from '../styles/RegisterMain.module.css'
+import ContainerRegister from '../../components/Register/Register-Main/ContainerRegister'
+import styles from '../../styles/RegisterMain.module.css'
 
 export default function RegisterMain() {
   return (

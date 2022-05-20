@@ -1,0 +1,44 @@
+.main_container{
+    position: relative;
+    height: 100%;
+    width: 600px;
+    background-color: #E8EFF4;
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.main_container h2{
+    font-size: 40px;
+    margin-right: 40px;
+    line-height: 80px;
+    margin-bottom: 0;
+}
+
+.text_blue{
+    color: #38B6FF;
+}
+
+.form{
+    margin-top: 20px;
+}
+
+.fields{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.fields p{
+    
+}
+
+.fields input{
+    width: 300px;
+}
+
+.inside_container{
+    width: 500px;
+}

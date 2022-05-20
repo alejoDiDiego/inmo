@@ -34,8 +34,8 @@
 
 .inside{
     width: 100%;
-    margin-top: 10px;
-    margin-left: 10px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .texts{
@@ -63,3 +63,15 @@
     background-color: #38B6FF;
 }
 
+.link:hover{
+    cursor: pointer;
+}
+
+.inside_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 20px;
+    
+
+}
