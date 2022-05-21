@@ -6,4 +6,4 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp
 
-//UCHIHA testeo
+//UCHIHA alejo 21 del 5
