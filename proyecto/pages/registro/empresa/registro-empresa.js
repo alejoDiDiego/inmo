@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import ContainerRegisterEmpresa from '../../components/Register/Register-Empresa/ContainerRegisterEmpresa.js'
-import styles from '../../styles/RegisterEmpresa.module.css'
+import ContainerRegisterEmpresa from '../../../components/Register/Register-Empresa/ContainerRegisterEmpresa.js'
+import styles from '../../../styles/RegisterEmpresa.module.css'
 
 export default function RegisterEmpresa() {
   return (

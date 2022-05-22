@@ -8,7 +8,7 @@ const ContainerRegister = () => {
         <div className={styles.main_container}>
             <h2 className={styles.h2}>¿Que tipo de cuenta se adapta mas a <span className={styles.text_blue}>ti?</span></h2>
 
-            <Link href='/registro/register-empresa' >
+            <Link href='/registro/empresa/registro-empresa' >
                 <a className={styles.link}> 
                     <div className={styles.containers}>
                         <div className={styles.inside}>
