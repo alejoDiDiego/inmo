@@ -21,8 +21,20 @@
     color: #38B6FF;
 }
 
+.inside_container{
+    width: 500px;
+    height: 700px;
+}
+
+
 .form{
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_fields{
+    margin-bottom: 30px;
 }
 
 .fields{
@@ -31,14 +43,55 @@
     margin-bottom: 20px;
 }
 
-.fields p{
-    
+.fields label{
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 .fields input{
-    width: 300px;
+    width: 400px;
+    border: none;
+    margin-top: 10px;
+    height: 30px;
+    font-size: 18px;
 }
 
-.inside_container{
-    width: 500px;
+
+
+.label_link{
+    padding-top: 20px;
+    line-height: 30px;
 }
+
+
+.form a{
+    color: #38B6FF;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+
+
+.div_link input{
+    height: 15px;
+    width: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+.form input[type="submit"]{
+    align-self: flex-end;
+    margin-top: 200px;
+    border: none;
+    background-color: #38B6FF;
+    color: #FFFFFF;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+
+
