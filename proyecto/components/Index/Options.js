@@ -35,7 +35,7 @@ const Options = () => {
                             <Image src="/publicar_logo.png" height={113} width={150}/>
                         </div>
                         <h3>Ventas</h3>
-                        <p>Alejo pelado</p>
+                        <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
                     </div>
                 </div>
             </div>
