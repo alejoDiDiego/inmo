@@ -21,8 +21,16 @@
     color: #38B6FF;
 }
 
-.containers{
+
+.link{
     margin-top: 50px;
+}
+
+.link:hover{
+    cursor: pointer;
+}
+
+.containers{
     min-height: 250px;
     min-width: 500px;
     background-color: #FFFFFF;
@@ -63,9 +71,10 @@
     background-color: #38B6FF;
 }
 
-.link:hover{
-    cursor: pointer;
-}
+
+
+
+
 
 .inside_info{
     display: flex;
