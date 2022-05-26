@@ -11,7 +11,7 @@ const Options = () => {
                 <div className={styles.square}>
                     <div className={styles.inside_square}>
                         <div className={styles.img}>
-                            <Image src="/venta_logo.png" height={113} width={130}/>
+                            <Image src="/venta_logo.png" height={113} width={120}/>
                         </div>
                         <h3>Casas en Venta</h3>
                         <p>Encuentra tu hogar entre las publicaciones hechas por los usuarios</p>
@@ -34,7 +34,7 @@ const Options = () => {
                         <div className={styles.img}>
                             <Image src="/publicar_logo.png" height={113} width={150}/>
                         </div>
-                        <h3>Ventas</h3>
+                        <h3>Publicar</h3>
                         <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
                     </div>
                 </div>
