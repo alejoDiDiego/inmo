@@ -11,7 +11,7 @@ const Options = () => {
                 <div className={styles.square}>
                     <div className={styles.inside_square}>
                         <div className={styles.img}>
-                            <Image src="/venta_logo.png" height={113} width={150}/>
+                            <Image src="/venta_logo.png" height={113} width={130}/>
                         </div>
                         <h3>Casas en Venta</h3>
                         <p>Encuentra tu hogar entre las publicaciones hechas por los usuarios</p>
