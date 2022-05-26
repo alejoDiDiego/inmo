@@ -29,7 +29,7 @@ const ContainerRegister = () => {
                 </a>
             </Link>
 
-            <Link href='/registro/register-particular' >
+            <Link href='/registro/particular/registro-particular' >
                 <a className={styles.link}>
                     <div className={styles.containers}>
                         <div className={styles.inside}>
