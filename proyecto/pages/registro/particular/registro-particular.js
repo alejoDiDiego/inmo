@@ -11,6 +11,10 @@ export default function RegisterParticular() {
   const [verdadero, setVerdadero] = useState(false)
   const [verdadero2, setVerdadero2] = useState(false)
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmarPassword, setConfirmarPassword] = useState("")
+
 
 
   return (
@@ -21,12 +25,28 @@ export default function RegisterParticular() {
         <link rel="icon" href="/icono_inmo_corto.png" />
       </Head>
       {verdadero == false ? 
-      <ContainerRegisterParticular1 setVerdadero={setVerdadero} /> 
+      <ContainerRegisterParticular1 
+        setVerdadero={setVerdadero}
+        email={email} 
+        setEmail={setEmail} 
+        password={password} 
+        setPassword={setPassword} 
+        confirmarPassword={confirmarPassword} 
+        setConfirmarPassword={setConfirmarPassword} 
+      /> 
       : 
       (
         verdadero2 == false ? <ContainerRegisterParticular2 setVerdadero={setVerdadero} setVerdadero2={setVerdadero2} /> 
         :
-        <ContainerRegisterParticular3 setVerdadero2={setVerdadero2} /> 
+        <ContainerRegisterParticular3 
+          setVerdadero2={setVerdadero2}
+          email={email} 
+          setEmail={setEmail} 
+          password={password} 
+          setPassword={setPassword} 
+          confirmarPassword={confirmarPassword} 
+          setConfirmarPassword={setConfirmarPassword} 
+        /> 
       )}
     </div>
   )

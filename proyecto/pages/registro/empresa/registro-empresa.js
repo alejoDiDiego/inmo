@@ -12,6 +12,10 @@ export default function RegisterEmpresa() {
   const [verdadero, setVerdadero] = useState(false)
   const [verdadero2, setVerdadero2] = useState(false)
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmarPassword, setConfirmarPassword] = useState("")
+
 
   return (
     <div className={styles.body}>
@@ -21,12 +25,26 @@ export default function RegisterEmpresa() {
         <link rel="icon" href="/icono_inmo_corto.png" />
       </Head>
       {verdadero == false ? 
-      <ContainerRegisterEmpresa1 setVerdadero={setVerdadero} /> 
+      <ContainerRegisterEmpresa1 
+        email={email} 
+        setEmail={setEmail} 
+        password={password} 
+        setPassword={setPassword} 
+        confirmarPassword={confirmarPassword} 
+        setConfirmarPassword={setConfirmarPassword} 
+        setVerdadero={setVerdadero} /> 
       : 
       (
         verdadero2 == false ? <ContainerRegisterEmpresa2 setVerdadero={setVerdadero} setVerdadero2={setVerdadero2} /> 
         :
-        <ContainerRegisterEmpresa3 setVerdadero2={setVerdadero2} /> 
+        <ContainerRegisterEmpresa3 
+          email={email} 
+          setEmail={setEmail} 
+          password={password} 
+          setPassword={setPassword} 
+          confirmarPassword={confirmarPassword} 
+          setConfirmarPassword={setConfirmarPassword} 
+          setVerdadero2={setVerdadero2} /> 
       )}
       
     </div>

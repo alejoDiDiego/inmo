@@ -5,7 +5,15 @@ import styles from '../../../styles/ContainerRegisterEmpresa1.module.css'
 
 
 
-const ContainerRegisterEmpresa = ({setVerdadero}) => {
+const ContainerRegisterEmpresa = ({
+  setVerdadero,
+  email ,
+  setEmail ,
+  password ,
+  setPassword ,
+  confirmarPassword ,
+  setConfirmarPassword
+}) => {
 
   const handleSiguiente = () => {
     setVerdadero(true)
@@ -25,12 +33,12 @@ const ContainerRegisterEmpresa = ({setVerdadero}) => {
 
             <div className={styles.fields}>
               <label>Email</label>
-              <input type='email' />
+              <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
             </div>
 
             <div className={styles.fields}>
               <label>Constraseña</label>
-              <input type='password' />
+              <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
             </div>
 
             <div className={styles.fields}>

@@ -5,11 +5,22 @@ import styles from '../../../styles/ContainerRegisterEmpresa3.module.css'
 
 
 
-const ContainerRegisterEmpresa3 = ({setVerdadero2}) => {
+const ContainerRegisterEmpresa3 = ({
+  setVerdadero2,
+  email,
+  password ,
+  confirmarPassword,
 
-    const handleAnterior = () => {
-        setVerdadero2(false)
-    }
+}) => {
+
+  const handleAnterior = () => {
+    setVerdadero2(false)
+  }
+
+
+  const handleRegister = () => {
+
+  }
 
 
 
@@ -58,7 +69,7 @@ const ContainerRegisterEmpresa3 = ({setVerdadero2}) => {
 
           <div className={styles.buttons}>
             <button onClick={handleAnterior}>Anterior</button>
-            <button onClick={handleAnterior}>Registrarse</button>
+            <button onClick={handleRegister}>Registrarse</button>
           </div>
         </div>
       </div>
