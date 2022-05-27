@@ -26,64 +26,7 @@
 }
 
 
-.form{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.div_fields{
-    margin-bottom: 30px;
-}
-
-.fields{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.fields label{
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-
-
-.fields input{
-    width: 400px;
-    border: none;
-    margin-top: 10px;
-    height: 30px;
-    font-size: 18px;
-    outline: none;
-    border-radius: 5px;
-}
-
-
-
-.label_link{
-    padding-top: 20px;
-    line-height: 30px;
-}
-
-
-.form a{
-    color: #38B6FF;
-    text-decoration: underline;
-    font-weight: 600;
-}
-
-
-
-.div_link input{
-    height: 15px;
-    width: 15px;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-
-.form input[type="submit"]{
+.form button{
     align-self: flex-end;
     margin-top: 200px;
     border: none;
@@ -100,8 +43,7 @@
 
 
 
-.form input[type="submit"]:hover{
+.form button:hover{
     background-color: black;
     color:  #FFFFFF;
 }
-

@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import styles from '../../../styles/ContainerRegisterEmpresa.module.css'
+import Router from "next/router";
+import styles from '../../../styles/ContainerRegisterEmpresa1.module.css'
 
 
 
-const ContainerRegisterEmpresa = () => {
+const ContainerRegisterEmpresa = ({setVerdadero}) => {
+
+  const handleSiguiente = () => {
+    setVerdadero(true)
+  }
+
+
   return (
     <div className={styles.main_container}>
       <div className={styles.inside_container}>
@@ -41,7 +48,7 @@ const ContainerRegisterEmpresa = () => {
 
 
 
-          <input type="submit" value='Siguiente' />
+          <button onClick={handleSiguiente}>Siguiente</button>
 
         </form>
       </div>

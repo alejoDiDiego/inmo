@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import styles from '../../../styles/ContainerRegisterParticular.module.css'
+import styles from '../../../styles/ContainerRegisterParticular1.module.css'
 
-const ContainerRegisterParticular = () => {
+const ContainerRegisterParticular1 = () => {
     return (
       <div className={styles.main_container}>
         <div className={styles.inside_container}>
@@ -47,4 +47,4 @@ const ContainerRegisterParticular = () => {
     )
   }
 
-export default ContainerRegisterParticular
+export default ContainerRegisterParticular1
