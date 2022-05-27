@@ -23,14 +23,14 @@ const ContainerRegisterEmpresa2 = ({setVerdadero, setVerdadero2}) => {
         <h2>Registra <span className={styles.text_blue}>tu empresa 2</span></h2>
         <div className={styles.form}>
           <div>
-            <p>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</p>
+            <label>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
             <div>
               <button className={styles.btn_subir_imagen}>Subir Imagen</button>
             </div>
           </div>
 
           <div>
-            <p>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</p>
+            <label>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
             <div>
               <button className={styles.btn_subir_imagen}>Subir Imagen</button>
             </div>

@@ -49,43 +49,10 @@
 
 
 
-.fields input{
-    width: 400px;
-    border: none;
-    margin-top: 10px;
-    height: 30px;
-    font-size: 18px;
-    outline: none;
-    border-radius: 5px;
-}
 
 
-
-.label_link{
-    padding-top: 20px;
-    line-height: 30px;
-}
-
-
-.form a{
-    color: #38B6FF;
-    text-decoration: underline;
-    font-weight: 600;
-}
-
-
-
-.div_link input{
-    height: 15px;
-    width: 15px;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-
-.form button{
-    align-self: flex-end;
-    margin-top: 200px;
+.btn_subir_imagen{
+    width: 200px;
     border: none;
     background-color: #38B6FF;
     color: #FFFFFF;
@@ -99,8 +66,31 @@
 }
 
 
+.buttons{
+    width: 100%;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-.form button:hover{
+
+.button{
+    width: 100%;
+    border: none;
+    background-color: #38B6FF;
+    color: #FFFFFF;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    border-radius: 3px;
+}
+
+
+.button:hover, .btn_subir_imagen:hover{
     background-color: black;
     color:  #FFFFFF;
 }

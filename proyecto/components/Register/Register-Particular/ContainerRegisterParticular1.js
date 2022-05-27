@@ -2,12 +2,19 @@ import React from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
 
-const ContainerRegisterParticular1 = () => {
+
+const ContainerRegisterParticular1 = ({setVerdadero}) => {
+
+  const handleSiguiente = () => {
+    setVerdadero(true)
+  }
+
+
     return (
       <div className={styles.main_container}>
         <div className={styles.inside_container}>
           <h2>Registra<span className={styles.text_blue}>te</span></h2>
-          <form className={styles.form}>
+          <div className={styles.form}>
             <div className={styles.div_fields}>
               <div className={styles.fields}>
                 <label>Nombre de usuario</label>
@@ -39,9 +46,9 @@ const ContainerRegisterParticular1 = () => {
   
   
   
-            <input type="submit" value='Siguiente' />
+            <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
   
-          </form>
+          </div>
         </div>
       </div>
     )

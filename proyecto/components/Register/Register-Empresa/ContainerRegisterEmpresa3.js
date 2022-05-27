@@ -56,8 +56,10 @@ const ContainerRegisterEmpresa3 = ({setVerdadero2}) => {
             <input type='text'></input>
           </div>
 
-          <button onClick={handleAnterior}>Anterior</button>
-          <button onClick={handleAnterior}>Registrarse</button>
+          <div className={styles.buttons}>
+            <button onClick={handleAnterior}>Anterior</button>
+            <button onClick={handleAnterior}>Registrarse</button>
+          </div>
         </div>
       </div>
     </div>

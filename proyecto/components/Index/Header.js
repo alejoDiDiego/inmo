@@ -15,7 +15,7 @@ export const Header = () => {
 
             <div className={styles.div_right}>
                 <div className={styles.div_button}>
-                    <Link href="/"><a className={styles.link_inicio}>Iniciar Sesion</a></Link>
+                    <Link href="/inicio-sesion/inicio-main"><a className={styles.link_inicio}>Iniciar Sesion</a></Link>
                     <Link href="/registro/register-main"><a className={styles.link_registro}>Registrarse</a></Link>
                 </div>
 

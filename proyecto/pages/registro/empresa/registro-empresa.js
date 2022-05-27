@@ -32,3 +32,8 @@ export default function RegisterEmpresa() {
     </div>
   )
 }
+
+
+let a = 4
+a == 5 ? "Si" : "No"
+
