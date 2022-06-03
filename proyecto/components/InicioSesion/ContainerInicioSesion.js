@@ -30,21 +30,22 @@ const ContainerInicioSesion = ({
 
 
   return (
-    <div className={styles.main_container}>
 
-        <div>
+    <div className={styles.main_container}>
+      <div className={styles.inside_container}>
+
+        <div classname ={styles.fields}>
             <label>Email</label>
             <input value={email} onChange={e => setEmail(e.target.value)} type='email'/>
         </div>
 
-        <div>
+        <div classname ={styles.fields}>
             <label>Contraseña</label>
             <input value={password} onChange={e => setPassword(e.target.value)} type='text'/>
         </div>
-
         <button onClick={handlerIniciarSesion}>Iniciar Sesion</button>
+      </div>
     </div>
-
   )
 }
 

@@ -7,4 +7,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 2px black solid;
+    
+}
+
+.inside_container{
+
+}
+
+.fields{
+
+
 }
