@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
+import MyApp from '../../../pages/_app';
+import {createUserWithEmailAndPassword } from "firebase/auth";
+import {getAuth} from "firebase/auth";
 
 
 const ContainerRegisterParticular1 = ({
@@ -15,6 +18,21 @@ const ContainerRegisterParticular1 = ({
 
   const handleSiguiente = () => {
     setVerdadero(true)
+  }
+
+  const handleRegistrar = () => {
+    const auth = getAuth(MyApp.app)
+    const emailAccount = email
+    const passwordAccount = password
+    createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
+      const user = userCredential.user
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+      const errorMessage = error.message;  
+      console.log(errorMessage) 
+  });
   }
 
 
@@ -54,7 +72,7 @@ const ContainerRegisterParticular1 = ({
   
   
   
-            <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
+            <button className={styles.button} onClick={handleSiguiente}>Registrarse</button>
   
           </div>
         </div>

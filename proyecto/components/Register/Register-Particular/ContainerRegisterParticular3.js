@@ -1,39 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular3.module.css'
-import MyApp from '../../../pages/_app';
-import {createUserWithEmailAndPassword } from "firebase/auth";
-import {getAuth} from "firebase/auth";
+
 
 const ContainerRegisterParticular3 = ({
-  setVerdadero2,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  confirmarPassword,
-  setConfirmarPassword
-}) => {
 
+}) => {
 
   const handleAnterior = () => {
     setVerdadero2(false)
   }
 
-  const handleRegistrar = () => {
-    const auth = getAuth(MyApp.app)
-    const emailAccount = email
-    const passwordAccount = password
-    createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
-      const user = userCredential.user
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode)
-      const errorMessage = error.message;  
-      console.log(errorMessage) 
-  });
-  }
+
+  
 
 
   return (
@@ -66,7 +45,7 @@ const ContainerRegisterParticular3 = ({
           </div>
 
           <div className={styles.buttons}>
-            <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
+            <button className={styles.button}>Finalizar</button>
             <button className={styles.button} onClick={handleAnterior}>Anterior</button>
           </div>
         </div>
