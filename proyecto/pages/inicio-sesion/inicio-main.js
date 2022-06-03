@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import ContainerInicioSesion from '../../components/InicioSesion/ContainerInicioSesion'
-import styles from '../../styles/InicioMain.module.css'
+import styles from '../../styles/InicioSesionMain.module.css'
 
 export default function InicioMain() {
 

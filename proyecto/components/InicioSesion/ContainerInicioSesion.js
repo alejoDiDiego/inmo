@@ -3,6 +3,7 @@ import styles from '../../styles/ContainerInicioSesion.module.css'
 import MyApp from '../../pages/_app'
 import {signInWithEmailAndPassword } from "firebase/auth";
 import {getAuth} from "firebase/auth";
+import Link from 'next/link'
 
 const ContainerInicioSesion = ({
   email,
@@ -32,18 +33,28 @@ const ContainerInicioSesion = ({
   return (
 
     <div className={styles.main_container}>
+      
       <div className={styles.inside_container}>
 
-        <div classname ={styles.fields}>
+        <h2 className={styles.h2}>Inicia <span className={styles.blue}>Sesion</span></h2>
+
+        <div className ={styles.fields}>
             <label>Email</label>
             <input value={email} onChange={e => setEmail(e.target.value)} type='email'/>
         </div>
 
-        <div classname ={styles.fields}>
+        <div className={styles.fields}>
             <label>Contraseña</label>
             <input value={password} onChange={e => setPassword(e.target.value)} type='text'/>
         </div>
-        <button onClick={handlerIniciarSesion}>Iniciar Sesion</button>
+
+        <div className={styles.div_p}>
+            <p className={styles.p}>Mantener sesion iniciada</p>   
+            <input type="checkbox" />
+        </div>
+      
+
+        <button onClick={handlerIniciarSesion} className={styles.button}>Iniciar Sesion</button>
       </div>
     </div>
   )
