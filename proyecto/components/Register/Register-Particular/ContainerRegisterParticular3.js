@@ -4,7 +4,7 @@ import styles from '../../../styles/ContainerRegisterParticular3.module.css'
 
 
 const ContainerRegisterParticular3 = ({
-
+  setVerdadero2
 }) => {
 
   const handleAnterior = () => {

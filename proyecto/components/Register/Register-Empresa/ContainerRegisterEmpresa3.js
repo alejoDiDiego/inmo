@@ -68,8 +68,8 @@ const ContainerRegisterEmpresa3 = ({
           </div>
 
           <div className={styles.buttons}>
-            <button onClick={handleAnterior}>Anterior</button>
-            <button onClick={handleRegister}>Registrarse</button>
+            <button onClick={handleAnterior}>Finalizar</button>
+            <button onClick={handleRegister}>Anterior</button>
           </div>
         </div>
       </div>

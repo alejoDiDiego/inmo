@@ -19,6 +19,22 @@ const ContainerRegisterEmpresa = ({
     setVerdadero(true)
   }
 
+  const handleRegistrar = () => {
+    const auth = getAuth(MyApp.app)
+    const emailAccount = email
+    const passwordAccount = password
+    createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
+      const user = userCredential.user
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+      const errorMessage = error.message;  
+      console.log(errorMessage) 
+  });
+  }
+
+
 
   return (
     <div className={styles.main_container}>
@@ -56,7 +72,7 @@ const ContainerRegisterEmpresa = ({
 
 
 
-          <button onClick={handleSiguiente}>Siguiente</button>
+          <button onClick={handleSiguiente}>Registrarse</button>
 
         </form>
       </div>

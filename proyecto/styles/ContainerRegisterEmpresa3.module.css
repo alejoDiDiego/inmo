@@ -36,7 +36,7 @@
 
 .form button{
     align-self: flex-end;
-    margin-top: 200px;
+    width: 100%;
     border: none;
     background-color: #38B6FF;
     color: #FFFFFF;
