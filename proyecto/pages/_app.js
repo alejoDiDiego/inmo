@@ -2,7 +2,8 @@ import '../styles/globals.css'
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getAuth} from "firebase/auth";
-
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 
 const firebaseConfig = {
@@ -25,9 +26,6 @@ const firebaseConfig = {
 
 //COMPONENTES FIREBASE MyApp.<nombre de la const> para llamarlos
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app)
-
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
