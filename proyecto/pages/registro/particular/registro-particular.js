@@ -14,6 +14,8 @@ export default function RegisterParticular() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmarPassword, setConfirmarPassword] = useState("")
+  const [name, setName] = useState("")
+  const [userCore, setUserCore] = useState({})
 
 
 
@@ -33,10 +35,20 @@ export default function RegisterParticular() {
         setPassword={setPassword} 
         confirmarPassword={confirmarPassword} 
         setConfirmarPassword={setConfirmarPassword} 
+        name={name}
+        setName={setName}
+        userCore={userCore}
+        setUserCore={setUserCore}
       /> 
       : 
       (
-        verdadero2 == false ? <ContainerRegisterParticular2 setVerdadero={setVerdadero} setVerdadero2={setVerdadero2} /> 
+        verdadero2 == false ? 
+        <ContainerRegisterParticular2 
+          setVerdadero={setVerdadero} 
+          setVerdadero2={setVerdadero2} 
+          userCore={userCore}
+          setUserCore={setUserCore}
+        /> 
         :
         <ContainerRegisterParticular3 
           setVerdadero2={setVerdadero2}
@@ -46,6 +58,8 @@ export default function RegisterParticular() {
           setPassword={setPassword} 
           confirmarPassword={confirmarPassword} 
           setConfirmarPassword={setConfirmarPassword} 
+          userCore={userCore}
+          setUserCore={setUserCore}
         /> 
       )}
     </div>

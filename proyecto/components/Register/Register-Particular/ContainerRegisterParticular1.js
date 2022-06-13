@@ -5,9 +5,10 @@ import MyApp from '../../../pages/_app';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, Firestore, getFirestore } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, Firestore, getFirestore } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { async } from '@firebase/util';
 
 
 const ContainerRegisterParticular1 = ({
@@ -17,7 +18,11 @@ const ContainerRegisterParticular1 = ({
   password,
   setPassword,
   confirmarPassword,
-  setConfirmarPassword
+  setConfirmarPassword,
+  name,
+  setName,
+  userCore,
+  setUserCore,
 }) => {
 
   const handleSiguiente = () => {
@@ -29,7 +34,19 @@ const ContainerRegisterParticular1 = ({
     const emailAccount = email
     const passwordAccount = password
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
+      
+      
       const user = userCredential.user
+      setUserCore(user);
+      
+      const firestore = getFirestore(MyApp.app)
+      setDoc(doc(firestore, "Usuarios", user.email), {
+        name : name,
+        uid : user.uid,
+        mail : user.email
+      })
+      setVerdadero(true)
+
     })
       .catch((error) => {
         const errorCode = error.code;
@@ -40,17 +57,6 @@ const ContainerRegisterParticular1 = ({
   }
 
 
-  const handlePrueba = async () => {
-    const firestore = getFirestore(MyApp.app)
-    const colUsuarios = collection(firestore,"Usuarios");
-    const datos = {
-        nombre: 'Franco lago',
-        email: 'fran080j9@gmail.com'
-    }
-
-    addDoc(colUsuarios,datos);
-
-  }
 
 
   return (
@@ -61,7 +67,7 @@ const ContainerRegisterParticular1 = ({
           <div className={styles.div_fields}>
             <div className={styles.fields}>
               <label>Nombre de usuario</label>
-              <input type='text' />
+              <input value={name} onChange={e => setName(e.target.value)} type='text' />
             </div>
 
             <div className={styles.fields}>
@@ -89,7 +95,7 @@ const ContainerRegisterParticular1 = ({
 
 
 
-          <button className={styles.button} onClick={handlePrueba}>Registrarse</button>
+          <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
 
         </div>
       </div>

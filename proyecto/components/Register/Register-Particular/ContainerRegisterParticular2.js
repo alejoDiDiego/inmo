@@ -1,9 +1,15 @@
+import { updateDoc } from 'firebase/firestore'
 import Link from 'next/link'
 import React from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
 
 
-const ContainerRegisterParticular2 = ({ setVerdadero, setVerdadero2 }) => {
+const ContainerRegisterParticular2 = ({
+    setVerdadero,
+    setVerdadero2,
+    userCore,
+    setUserCore,
+}) => {
 
 
     const handleAnterior = () => {
@@ -14,6 +20,7 @@ const ContainerRegisterParticular2 = ({ setVerdadero, setVerdadero2 }) => {
         setVerdadero2(true)
     }
 
+    
 
 
     return (
