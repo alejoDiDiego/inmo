@@ -12,6 +12,7 @@ export default function RegisterEmpresa() {
   const [verdadero, setVerdadero] = useState(false)
   const [verdadero2, setVerdadero2] = useState(false)
 
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmarPassword, setConfirmarPassword] = useState("")
@@ -25,7 +26,9 @@ export default function RegisterEmpresa() {
         <link rel="icon" href="/icono_inmo_corto.png" />
       </Head>
       {verdadero == false ? 
-      <ContainerRegisterEmpresa1 
+      <ContainerRegisterEmpresa1
+        name={name}
+        setName={setName} 
         email={email} 
         setEmail={setEmail} 
         password={password} 
@@ -38,6 +41,8 @@ export default function RegisterEmpresa() {
         verdadero2 == false ? <ContainerRegisterEmpresa2 setVerdadero={setVerdadero} setVerdadero2={setVerdadero2} /> 
         :
         <ContainerRegisterEmpresa3 
+          name={name}
+          setName={setName} 
           email={email} 
           setEmail={setEmail} 
           password={password} 

@@ -25,14 +25,14 @@ const ContainerRegisterEmpresa2 = ({setVerdadero, setVerdadero2}) => {
           <div>
             <label>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
             <div>
-              <button className={styles.btn_subir_imagen}>Subir Imagen</button>
+              <input type="file"  accept="image/png, image/jpeg, image/jpg" />
             </div>
           </div>
 
           <div>
             <label>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
             <div>
-              <button className={styles.btn_subir_imagen}>Subir Imagen</button>
+              <input type="file"  accept="image/png, image/jpeg, image/jpg" />
             </div>
           </div>
 

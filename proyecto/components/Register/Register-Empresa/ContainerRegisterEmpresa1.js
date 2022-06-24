@@ -2,10 +2,19 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Router from "next/router";
 import styles from '../../../styles/ContainerRegisterEmpresa1.module.css'
+import MyApp from '../../../pages/_app';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { addDoc, collection, doc, setDoc, Firestore, getFirestore } from "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import { async } from '@firebase/util';
 
 
-
-const ContainerRegisterEmpresa = ({
+const ContainerRegisterEmpresa1 = ({
+  name,
+  setName,
   setVerdadero,
   email ,
   setEmail ,
@@ -24,14 +33,26 @@ const ContainerRegisterEmpresa = ({
     const emailAccount = email
     const passwordAccount = password
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
+      
+      
       const user = userCredential.user
+      
+      const firestore = getFirestore(MyApp.app)
+      setDoc(doc(firestore, "Usuarios", user.email), {
+        name : name,
+        uid : user.uid,
+        mail : user.email,
+        type : "empresa"
+      })
+      setVerdadero(true)
+
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode)
-      const errorMessage = error.message;  
-      console.log(errorMessage) 
-  });
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode)
+        const errorMessage = error.message;
+        console.log(errorMessage)
+      });
   }
 
 
@@ -40,11 +61,11 @@ const ContainerRegisterEmpresa = ({
     <div className={styles.main_container}>
       <div className={styles.inside_container}>
         <h2>Registra <span className={styles.text_blue}>tu empresa</span></h2>
-        <form className={styles.form}>
+        <div className={styles.form}>
           <div className={styles.div_fields}>
             <div className={styles.fields}>
               <label>Nombre de la empresa</label>
-              <input type='text' />
+              <input value={name} onChange={e => setName(e.target.value)} type='text' />
             </div>
 
             <div className={styles.fields}>
@@ -72,12 +93,12 @@ const ContainerRegisterEmpresa = ({
 
 
 
-          <button onClick={handleSiguiente}>Registrarse</button>
+          <button onClick={handleRegistrar}>Registrarse</button>
 
-        </form>
+        </div>
       </div>
     </div>
   )
 }
 
-export default ContainerRegisterEmpresa
+export default ContainerRegisterEmpresa1

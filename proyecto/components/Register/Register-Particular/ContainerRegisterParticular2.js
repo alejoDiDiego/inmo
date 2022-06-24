@@ -31,12 +31,12 @@ const ContainerRegisterParticular2 = ({
                     <div className={styles.div_fields}>
                         <div className={styles.fields}>
                             <label>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
-                            <button className={styles.btn_subir_imagen}>Subir Imagen</button>
+                            <input type="file"  accept="image/png, image/jpeg, image/jpg" />
                         </div>
 
                         <div className={styles.fields}>
                             <label>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
-                            <button className={styles.btn_subir_imagen}>Subir Imagen</button>
+                            <input type="file"  accept="image/png, image/jpeg, image/jpg" />
                         </div>
 
                         <div className={styles.buttons}>

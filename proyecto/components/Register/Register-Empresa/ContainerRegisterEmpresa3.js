@@ -30,46 +30,46 @@ const ContainerRegisterEmpresa3 = ({
         <h2>Registra <span className={styles.text_blue}>tu empresa 3</span></h2>
         <div className={styles.form}>
           <p>Introduzca informacion de contacto para que los posibles clientes puedan contactarlo para consultar sobre sus publicaciones</p>
-          <div>
+          <div className={styles.fields}>
             <label>Direccion de su sede</label>
             <input type='text'></input>
           </div>
 
           <div>
-            <div>
+            <div className={styles.fields}>
               <label>Localidad</label>
               <input type='text'></input>
             </div>
-            <div>
+            <div className={styles.fields}>
               <label>Codigo postal</label>
               <input type='text'></input>
             </div>
           </div>
 
           <div>
-            <div>
+            <div className={styles.fields}>
               <label>Cod area</label>
               <input type='text'></input>
             </div>
-            <div>
+            <div className={styles.fields}>
               <label>Numero de celular</label>
               <input type='text'></input>
             </div>
           </div>
 
-          <div>
+          <div className={styles.fields}>
             <label>Numero telefonico</label>
             <input type='text'></input>
           </div>
 
-          <div>
+          <div className={styles.fields}>
             <label>Mail de contacto</label>
             <input type='text'></input>
           </div>
 
-          <div className={styles.buttons}>
-            <button onClick={handleAnterior}>Finalizar</button>
-            <button onClick={handleRegister}>Anterior</button>
+          <div className={styles.button}>
+            <button onClick={handleRegister}>Finalizar</button>
+            <button  onClick={handleAnterior}>Anterior</button>
           </div>
         </div>
       </div>

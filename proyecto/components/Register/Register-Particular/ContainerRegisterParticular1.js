@@ -43,9 +43,11 @@ const ContainerRegisterParticular1 = ({
       setDoc(doc(firestore, "Usuarios", user.email), {
         name : name,
         uid : user.uid,
-        mail : user.email
+        mail : user.email,
+        type : "particular"
       })
       setVerdadero(true)
+
 
     })
       .catch((error) => {
