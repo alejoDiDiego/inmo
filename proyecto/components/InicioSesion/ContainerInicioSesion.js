@@ -38,12 +38,12 @@ const ContainerInicioSesion = ({
 
         <h2 className={styles.h2}>Inicia <span className={styles.blue}>Sesion</span></h2>
 
-        <div className ={styles.fields}>
+        <div className ={styles.fields1}>
             <label>Email</label>
             <input value={email} onChange={e => setEmail(e.target.value)} type='email'/>
         </div>
 
-        <div className={styles.fields}>
+        <div className={styles.fields2}>
             <label>Contraseña</label>
             <input value={password} onChange={e => setPassword(e.target.value)} type='text'/>
         </div>

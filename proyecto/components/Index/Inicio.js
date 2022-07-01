@@ -15,7 +15,7 @@ const Inicio = () => {
             <Options />
             <div className={styles.div_about}>
                 <Image width={200} height={100} src="/icono_about.png"/>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                <p>El compromiso de Inmo es facilitar la busqueda de inmuebles para todo tipo de personas, ya sean inversores y empresarios que buscan encontrar su proxima oportunidad de expansion o personas que busquen encontrar su nuevo hogar.</p>
             </div>
             <Footer />
             

@@ -1,15 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import MyApp from '../../../pages/_app';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, setDoc, Firestore, getFirestore } from "firebase/firestore";
-import firebase from "firebase/compat/app";
+import { doc, Firestore, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
-import { async } from '@firebase/util';
-
+import { auth, db } from '../../../firebase/ControladorFirebase'
 
 const ContainerRegisterParticular1 = ({
   setVerdadero,
@@ -28,23 +23,20 @@ const ContainerRegisterParticular1 = ({
   const handleSiguiente = () => {
     setVerdadero(true)
   }
-
   const handleRegistrar = () => {
-    const auth = getAuth(MyApp.app)
     const emailAccount = email
     const passwordAccount = password
+    console.log(db)
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
-      
-      
+
+
       const user = userCredential.user
       setUserCore(user);
-      
-      const firestore = getFirestore(MyApp.app)
-      setDoc(doc(firestore, "Usuarios", user.email), {
-        name : name,
-        uid : user.uid,
-        mail : user.email,
-        type : "particular"
+      setDoc(doc(db, "Usuarios", user.email), {
+        name: name,
+        uid: user.uid,
+        mail: user.email,
+        type: "particular"
       })
       setVerdadero(true)
 

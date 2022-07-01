@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Router from "next/router";
 import styles from '../../../styles/ContainerRegisterEmpresa1.module.css'
 import MyApp from '../../../pages/_app';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, setDoc, Firestore, getFirestore } from "firebase/firestore";
-import firebase from "firebase/compat/app";
+import {doc, setDoc,  } from "firebase/firestore";
 import "firebase/compat/firestore";
-import { async } from '@firebase/util';
+import { auth, db } from '../../../firebase/ControladorFirebase'
+
 
 
 const ContainerRegisterEmpresa1 = ({
@@ -29,7 +27,6 @@ const ContainerRegisterEmpresa1 = ({
   }
 
   const handleRegistrar = () => {
-    const auth = getAuth(MyApp.app)
     const emailAccount = email
     const passwordAccount = password
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
@@ -37,8 +34,7 @@ const ContainerRegisterEmpresa1 = ({
       
       const user = userCredential.user
       
-      const firestore = getFirestore(MyApp.app)
-      setDoc(doc(firestore, "Usuarios", user.email), {
+      setDoc(doc(db, "Usuarios", user.email), {
         name : name,
         uid : user.uid,
         mail : user.email,

@@ -1,15 +1,17 @@
 .main_container{
+    margin-top: auto;
+    margin-bottom: auto;
     position: relative;
-    height: 100vh;
+    height: 50vh;
     width: 600px;
     background-color: #E8EFF4;
     margin-left: 200px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .h2{
+    margin-left: 50px;
     font-size: 40px;
     margin-right: 40px;
     line-height: 80px;
@@ -24,21 +26,43 @@
     height: 100%;
 }
 
-.fields{
+.fields1{
+    margin-top: 20px;
+    margin-left: 50px;
     display: flex;
     flex-direction: column;
-    margin: 20px;
 }
 
-.fields label{
+.fields2{
+    margin-top: 20px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.fields1 label{
     font-size: 20px;
     margin-top: 10px;
 }
 
-.fields input{
+.fields1 input{
     width: 400px;
     border: none;
+    height: 30px;
+    font-size: 18px;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.fields2 label{
+    font-size: 20px;
     margin-top: 10px;
+}
+
+.fields2 input{
+    width: 400px;
+    border: none;
     height: 30px;
     font-size: 18px;
     outline: none;
@@ -47,7 +71,8 @@
 }
 
 .main_container button{
-    margin-top: 50px;
+    margin-left: 50px;
+    margin-top: 30px;
     border: none;
     background-color: #38B6FF;
     color: #FFFFFF;
@@ -61,7 +86,8 @@
 }
 
 .div_p{
-    margin-left: 20px;
+    margin-top: 20px;
+    margin-left: 50px;
     display: flex;  
     align-items: center;
 }

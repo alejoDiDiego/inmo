@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { addDoc, collection, doc, setDoc, Firestore, updateDoc, getFirestore } from "firebase/firestore";
-import Link from 'next/link'
+import React, { useState} from 'react'
+import {doc, updateDoc, getFirestore } from "firebase/firestore";
 import styles from '../../../styles/ContainerRegisterParticular3.module.css'
 import MyApp from '../../../pages/_app';
 import "firebase/compat/firestore";
-import { async } from '@firebase/util';
+
 
 
 const ContainerRegisterParticular3 = ({
@@ -44,15 +43,6 @@ const ContainerRegisterParticular3 = ({
       const errorMessage = error.message;
       console.log(errorMessage)
     });
-
-    /*
-    const washingtonRef = doc(db, "cities", "DC");
-
-    // Set the "capital" field of the city 'DC'
-    await updateDoc(washingtonRef, {
-    capital: true
-    });
-    */
 }
 
 

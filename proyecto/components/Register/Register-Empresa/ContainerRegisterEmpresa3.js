@@ -18,10 +18,25 @@ const ContainerRegisterEmpresa3 = ({
   }
 
 
-  const handleRegister = () => {
+  const handleInfo = async () => {
+    const firestore = getFirestore(MyApp.app)
 
-  }
+    const ref = doc(firestore, "Usuarios", userCore.email)
 
+    updateDoc(ref, {
+        nombrePublico : nomPub,
+        codigoArea : codArea,
+        numeroCel : numCel,
+        numeroTel : numTel
+    })
+
+    .catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+      const errorMessage = error.message;
+      console.log(errorMessage)
+    });
+}
 
 
   return (
@@ -68,7 +83,7 @@ const ContainerRegisterEmpresa3 = ({
           </div>
 
           <div className={styles.button}>
-            <button onClick={handleRegister}>Finalizar</button>
+            <button onClick={handleInfo}>Finalizar</button>
             <button  onClick={handleAnterior}>Anterior</button>
           </div>
         </div>
