@@ -105,3 +105,18 @@
     color:  #FFFFFF;
 }
 
+.div_error {
+    display: flex;
+    align-items: flex-end;
+}
+
+.div_error p {
+    margin: 0;
+    margin-left: 15px;
+    font-size: 14px;
+    color: red;
+}
+
+.div_error label {
+    margin: 0;
+}

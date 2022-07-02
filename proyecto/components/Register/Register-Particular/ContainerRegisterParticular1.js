@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, Firestore, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { auth, db } from '../../../firebase/ControladorFirebase'
+
 
 const ContainerRegisterParticular1 = ({
   setVerdadero,
@@ -20,12 +21,31 @@ const ContainerRegisterParticular1 = ({
   setUserCore,
 }) => {
 
+  const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+  const [confirmarPasswordError, setConfirmarPasswordError] = useState(false)
+
+  const [emailExistsError, setEmailExistsError] = useState(false)
+
   const handleSiguiente = () => {
     setVerdadero(true)
   }
   const handleRegistrar = () => {
+    setNameError(false)
+    setEmailError(false)
+    setPasswordError(false)
+    setConfirmarPasswordError(false)
+    setEmailExistsError(true)
     const emailAccount = email
     const passwordAccount = password
+    if(name == null || name == "") {setNameError(true); }
+    if(email == null || email == "") {setEmailError(true); }
+    if(password == null || password == "") {setPasswordError(true); }
+    if(confirmarPassword != password) {setConfirmarPasswordError(true); }
+    if(nameError == true || emailError == true || passwordError == true || confirmarPasswordError == true) return;
+
+    
     console.log(db)
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
 
@@ -45,6 +65,7 @@ const ContainerRegisterParticular1 = ({
       .catch((error) => {
         const errorCode = error.code;
         console.log(errorCode)
+        if(errorCode = 'auth/email-already-in-use') setEmailExistsError(true)
         const errorMessage = error.message;
         console.log(errorMessage)
       });
@@ -60,23 +81,38 @@ const ContainerRegisterParticular1 = ({
         <div className={styles.form}>
           <div className={styles.div_fields}>
             <div className={styles.fields}>
-              <label>Nombre de usuario</label>
+              <div className={styles.div_error}>
+                <label >Nombre de usuario</label>
+                {nameError == true ? <p>Ingrese un nombre de usuario valido</p> : null}
+              </div>
               <input value={name} onChange={e => setName(e.target.value)} type='text' />
             </div>
 
             <div className={styles.fields}>
-              <label>Email</label>
+              <div className={styles.div_error}>
+                <label>Email</label>
+                {emailError == true ? <p>Ingrese un email valido</p> : null}
+                {emailExistsError == true ? <p>El mail ya existe</p> : null}
+              </div>
+              
               <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
             </div>
 
             <div className={styles.fields}>
-              <label>Constraseña</label>
+              <div className={styles.div_error}>
+                <label>Constraseña</label>
+                {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
+              </div>
+              
               <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
             </div>
 
             <div className={styles.fields}>
-              <label>Confirmar contraseña</label>
-              <input type='password' />
+              <div className={styles.div_error}>
+                <label>Confirmar contraseña</label>
+                {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
+              </div>
+              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' />
             </div>
           </div>
 
