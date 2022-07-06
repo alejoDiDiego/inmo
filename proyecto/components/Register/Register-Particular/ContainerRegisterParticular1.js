@@ -36,7 +36,7 @@ const ContainerRegisterParticular1 = ({
     setEmailError(false)
     setPasswordError(false)
     setConfirmarPasswordError(false)
-    setEmailExistsError(true)
+    setEmailExistsError(false)
     const emailAccount = email
     const passwordAccount = password
     if(name == null || name == "") {setNameError(true); }
