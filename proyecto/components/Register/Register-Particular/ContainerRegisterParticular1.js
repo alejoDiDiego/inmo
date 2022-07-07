@@ -65,7 +65,9 @@ const ContainerRegisterParticular1 = ({
       .catch((error) => {
         const errorCode = error.code;
         console.log(errorCode)
-        if(errorCode = 'auth/email-already-in-use') setEmailExistsError(true)
+        console.log(typeof errorCode)
+        if(errorCode == "auth/email-already-in-use") {setEmailExistsError(true)}
+        if(errorCode == "auth/invalid-email") {setEmailError(true)}
         const errorMessage = error.message;
         console.log(errorMessage)
       });
