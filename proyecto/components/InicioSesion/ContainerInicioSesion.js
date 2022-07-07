@@ -33,29 +33,34 @@ const ContainerInicioSesion = ({
   return (
 
     <div className={styles.main_container}>
-      
-      <div className={styles.inside_container}>
 
-        <h2 className={styles.h2}>Inicia <span className={styles.blue}>Sesion</span></h2>
+        <h2 className={styles.h2}>Bienvenido a <span className={styles.blue}>Inmo</span></h2>
 
-        <div className ={styles.fields1}>
-            <label>Email</label>
+          <div className ={styles.fieldsE}>
+            <label>Correo electronico</label>
             <input value={email} onChange={e => setEmail(e.target.value)} type='email'/>
-        </div>
+          </div>
 
-        <div className={styles.fields2}>
+          <div className={styles.fieldsC}>
             <label>Contraseña</label>
             <input value={password} onChange={e => setPassword(e.target.value)} type='text'/>
-        </div>
+          </div>
 
-        <div className={styles.div_p}>
-            <p className={styles.p}>Mantener sesion iniciada</p>   
-            <input type="checkbox" />
-        </div>
-      
+          <div className={styles.div_man}>
+            <p className={styles.man}>Mantener sesion iniciada</p>   
+            <input type="checkbox" /> 
+          </div>
+
+        <div className={styles.div_problemasInicio}>
+          <p className={styles.problemasInicio}> Problemas para inciar sesion?</p>
+          </div>
+
+          <div className={styles.div_crearCuenta}>
+          <p className={styles.crearCuenta}> Aun no estas regristrado en inmo?</p>
+          </div>
 
         <button onClick={handlerIniciarSesion} className={styles.button}>Iniciar Sesion</button>
-      </div>
+
     </div>
   )
 }
