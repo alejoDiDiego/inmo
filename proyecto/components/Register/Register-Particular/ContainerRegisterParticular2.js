@@ -19,13 +19,16 @@ const ContainerRegisterParticular2 = ({
     const [imageFondoUpload, setImageFondoUpload] = useState(null)
     const [imageFondoURL, setImageFondoURL] = useState([])
 
+    const [errorFalta, setErrorFalta] = useState(false)
 
-    const handleAnterior = () => {
-        setVerdadero(false)
+
+    const handleOmitir = () => {
+        setVerdadero2(true)
     }
 
     const handleSiguiente = () => {
         console.log(imagePerfilUpload)
+        setErrorFalta(false)
         if (imagePerfilUpload != null && imageFondoUpload != null) {
             const imagePerfRef = ref(storage, `usuarios/${userCore.email}/perfil`)
             uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
@@ -33,6 +36,7 @@ const ContainerRegisterParticular2 = ({
                     setImagePerfilURL((prev) => [...prev, url])
                 })
             })
+            
 
             const imageFondRef = ref(storage, `usuarios/${userCore.email}/fondo`)
             uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
@@ -43,7 +47,7 @@ const ContainerRegisterParticular2 = ({
 
             setVerdadero2(true)
         }else{
-            return
+            setErrorFalta(true)
         }
 
         
@@ -58,8 +62,12 @@ const ContainerRegisterParticular2 = ({
     return (
         <div className={styles.main_container}>
             <div className={styles.inside_container}>
-                <h2>Registra<span className={styles.text_blue}>te 2</span></h2>
+                <div className={styles.div_header}>
+                    <h2>Registra<span className={styles.text_blue}>te 2</span></h2> 
+                    {errorFalta == true ? <p>Debe subir la foto de perfil y de fondo</p> : null}
+                </div>
                 <div className={styles.form}>
+                   
                     <div className={styles.div_fields}>
                         <div className={styles.fields}>
                             <label>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
@@ -73,7 +81,7 @@ const ContainerRegisterParticular2 = ({
 
                         <div className={styles.buttons}>
                             <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
-                            <button className={styles.button} onClick={handleAnterior}>Anterior</button>
+                            <button className={styles.button} onClick={handleOmitir}>Omitir</button>
                         </div>
                     </div>
                 </div>

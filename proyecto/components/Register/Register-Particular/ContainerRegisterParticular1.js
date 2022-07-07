@@ -36,7 +36,8 @@ const ContainerRegisterParticular1 = ({
     setEmailError(false)
     setPasswordError(false)
     setConfirmarPasswordError(false)
-    setEmailExistsError(false)
+    
+
     const emailAccount = email
     const passwordAccount = password
     if(name == null || name == "") {setNameError(true); }
@@ -44,9 +45,8 @@ const ContainerRegisterParticular1 = ({
     if(password == null || password == "") {setPasswordError(true); }
     if(confirmarPassword != password) {setConfirmarPasswordError(true); }
     if(nameError == true || emailError == true || passwordError == true || confirmarPasswordError == true) return;
-
     
-    console.log(db)
+    
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
 
 
@@ -63,6 +63,7 @@ const ContainerRegisterParticular1 = ({
 
     })
       .catch((error) => {
+        setEmailExistsError(false)
         const errorCode = error.code;
         console.log(errorCode)
         console.log(typeof errorCode)

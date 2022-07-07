@@ -95,3 +95,15 @@
     color:  #FFFFFF;
 }
 
+.div_header{
+    display: flex;
+    align-items: flex-end;
+}
+
+.div_header p{
+    width: 220px;
+    font-size: 14px;
+    color: red;
+    margin: 0;
+    margin-bottom: 20px;
+}
