@@ -11,16 +11,13 @@ import { auth, db } from '../../../firebase/ControladorFirebase'
 
 
 const ContainerRegisterEmpresa1 = ({
-  name,
-  setName,
   setVerdadero,
-  email ,
-  setEmail ,
-  password ,
-  setPassword ,
-  confirmarPassword ,
-  setConfirmarPassword
 }) => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmarPassword, setConfirmarPassword] = useState("")
+  const [name, setName] = useState("")
 
   const handleSiguiente = () => {
     setVerdadero(true)

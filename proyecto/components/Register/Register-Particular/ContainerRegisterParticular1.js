@@ -6,20 +6,18 @@ import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore
 import "firebase/compat/firestore";
 import { auth, db } from '../../../firebase/ControladorFirebase'
 import Image from 'next/image'
+import { async } from '@firebase/util';
 
 const ContainerRegisterParticular1 = ({
   setVerdadero,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  confirmarPassword,
-  setConfirmarPassword,
-  name,
-  setName,
   userCore,
   setUserCore,
 }) => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmarPassword, setConfirmarPassword] = useState("")
+  const [name, setName] = useState("")
 
   const [nameError, setNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
@@ -52,16 +50,23 @@ const ContainerRegisterParticular1 = ({
     setConfirmarPasswordError(false)
     setEmailExistsError(false)
 
-
     let emailAccount = email
     let passwordAccount = password
+
+    let errorNameVar = false;
+    let errorEmailVar = false;
+    let errorPasswordVar = false;
+    let errorConfirmarPasswordVar = false;
     
-    if(name == null || name == "") {setNameError(true); }
-    if(email == null || email == "") {setEmailError(true); }
-    if(password == null || password == "") {setPasswordError(true); }
-    if(confirmarPassword != password) {setConfirmarPasswordError(true); }
-    if(nameError == true || emailError == true || passwordError == true || confirmarPasswordError == true) {
-      
+    if(name === null || name === "" || name.length == 0) {errorNameVar = true;}
+    if(email === null || email === "" || email.length == 0) {errorEmailVar = true; }
+    if(password === null || password === "" || password.length == 0) {errorPasswordVar = true; }
+    if(confirmarPassword != password) {errorConfirmarPasswordVar = true; }
+    setNameError(errorNameVar)
+    setEmailError(errorEmailVar)
+    setPasswordError(errorPasswordVar)
+    setConfirmarPasswordError(errorConfirmarPasswordVar)
+    if(errorNameVar == true || errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
       return;
     }
 
@@ -76,10 +81,6 @@ const ContainerRegisterParticular1 = ({
       return;
     }
 
-    
-    /*const isRegistered = userExists(email)
-    if(isRegistered == true) {setEmailExistsError(true);}
-    if(emailExistsError == true) return;*/
     
     
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
@@ -99,12 +100,8 @@ const ContainerRegisterParticular1 = ({
 
     })
       .catch((error) => {
-        //setEmailExistsError(false)
         const errorCode = error.code;
         console.log(errorCode)
-        //console.log(typeof errorCode)
-        //if(errorCode == "auth/email-already-in-use") {setEmailExistsError(true)}
-        //if(errorCode == "auth/invalid-email") {setEmailError(true)}
         const errorMessage = error.message;
         console.log(errorMessage)
       });
@@ -116,7 +113,6 @@ const ContainerRegisterParticular1 = ({
 
   return (
     <div className={styles.main_container}>
-      {/*<img src='/Logo prueba inmo.png' height={300} width={400} />*/}
       <div className={styles.inside_container}>
         <h2>Registra<span className={styles.text_blue}>te</span></h2>
         <div className={styles.form}>
