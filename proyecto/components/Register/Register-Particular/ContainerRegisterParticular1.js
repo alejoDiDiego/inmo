@@ -25,6 +25,7 @@ const ContainerRegisterParticular1 = ({
   const [confirmarPasswordError, setConfirmarPasswordError] = useState(false)
 
   const [emailExistsError, setEmailExistsError] = useState(false)
+  const [passwordShort, setPassswordShort] = useState(false)
 
   const handleSiguiente = () => {
     setVerdadero(true)
@@ -57,16 +58,27 @@ const ContainerRegisterParticular1 = ({
     let errorEmailVar = false;
     let errorPasswordVar = false;
     let errorConfirmarPasswordVar = false;
+    let errorPasswordShortVar = false;
     
     if(name === null || name === "" || name.length == 0) {errorNameVar = true;}
     if(email === null || email === "" || email.length == 0) {errorEmailVar = true; }
     if(password === null || password === "" || password.length == 0) {errorPasswordVar = true; }
     if(confirmarPassword != password) {errorConfirmarPasswordVar = true; }
+
+    
+
     setNameError(errorNameVar)
     setEmailError(errorEmailVar)
     setPasswordError(errorPasswordVar)
     setConfirmarPasswordError(errorConfirmarPasswordVar)
+    
     if(errorNameVar == true || errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
+      return;
+    }
+
+    if(password.length < 6) {errorPasswordShortVar = true}
+    setPassswordShort(errorPasswordShortVar)
+    if(passwordShort){
       return;
     }
 
@@ -139,6 +151,7 @@ const ContainerRegisterParticular1 = ({
               <div className={styles.div_error}>
                 <label>Constraseña</label>
                 {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
+                {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
               </div>
               
               <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
