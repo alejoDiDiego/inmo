@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { confirmPasswordReset, createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
@@ -32,8 +32,9 @@ const ContainerRegisterParticular1 = ({
 
   const handleGoogle = () => {
     signInWithPopup(auth, providerGoogle).then((result) => {
-    setVerdadero(true)
+      setVerdadero(true)
     })
+    
   }
 
 
@@ -131,6 +132,7 @@ const ContainerRegisterParticular1 = ({
   const handleSignOut = () => {
     signOut(auth).then(() => {
       console.log("Sign-out successful.")
+      console.log(auth)
     }).catch((error) => {
       console.log("No se deslogueo")
     });
