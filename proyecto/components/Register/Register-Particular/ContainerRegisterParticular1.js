@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
-import { auth, db } from '../../../firebase/ControladorFirebase'
-import Image from 'next/image'
-import { async } from '@firebase/util';
+import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
+
+
+
 
 const ContainerRegisterParticular1 = ({
   setVerdadero,
@@ -27,8 +28,12 @@ const ContainerRegisterParticular1 = ({
   const [emailExistsError, setEmailExistsError] = useState(false)
   const [passwordShort, setPassswordShort] = useState(false)
 
-  const handleSiguiente = () => {
+
+
+  const handleGoogle = () => {
+    signInWithPopup(auth, providerGoogle).then((result) => {
     setVerdadero(true)
+    })
   }
 
 
@@ -123,6 +128,18 @@ const ContainerRegisterParticular1 = ({
 
 
 
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      console.log("Sign-out successful.")
+    }).catch((error) => {
+      console.log("No se deslogueo")
+    });
+    
+  }
+
+  console.log(auth)
+
+
   return (
     <div className={styles.main_container}>
       <div className={styles.inside_container}>
@@ -174,9 +191,12 @@ const ContainerRegisterParticular1 = ({
 
 
 
-
-          <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
-
+          <div>
+            <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
+            <button className={styles.button} onClick={handleGoogle}>Google</button>
+            <button className={styles.button} onClick={handleSignOut}>Salir de la cuenta</button>
+          </div>
+          
         </div>
       </div>
     </div>

@@ -3,6 +3,8 @@
   import { getStorage} from "firebase/storage";
   import { getFirestore, collection, getDocs } from 'firebase/firestore'
   import "firebase/compat/firestore";
+  import { GoogleAuthProvider } from "firebase/auth";
+  
   
   
   
@@ -29,10 +31,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app)
+auth.languageCode = 'it';
 
 const storage = getStorage(app)
 
 const db = getFirestore(app)
 
+const providerGoogle = new GoogleAuthProvider();
 
-export {app, storage, auth, db} 
+
+export {app, storage, auth, db, providerGoogle} 

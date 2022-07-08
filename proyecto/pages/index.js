@@ -8,7 +8,7 @@ export default function Home() {
       <Head>
         <title>Inmo</title>
         <meta name="description" content="Generated" />
-        <link rel="icon" href="/icono_inmo_corto.png" />
+        <link rel="icon" href="/Logo_inmo_new.png" />
       </Head>
       <Inicio />
 
