@@ -18,9 +18,7 @@ const ContainerRegisterParticular1 = ({
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmarPassword, setConfirmarPassword] = useState("")
-  const [name, setName] = useState("")
 
-  const [nameError, setNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [confirmarPasswordError, setConfirmarPasswordError] = useState(false)
@@ -30,28 +28,38 @@ const ContainerRegisterParticular1 = ({
 
 
 
-  const handleGoogle = () => {
+  const handleGoogle = async () => {
     signInWithPopup(auth, providerGoogle).then((result) => {
-      setVerdadero(true)
+      setTimeout(() => {
+        const user = auth.currentUser
+        setDoc(doc(db, "Usuarios", user.email), {
+          uid: user.uid,
+          mail: user.email,
+          type: "particular"
+        })
+        setVerdadero(true)
+      }, 600)
+      
+      
+      
     })
-    
+
   }
 
 
   const userExists = async (email) => {
-      const docRef = doc(db, "Usuarios", email)
-      console.log("docRef")
-      console.log(docRef)
-      const res = await getDoc(docRef)
-      console.log(res)
-      return res.exists()
+    const docRef = doc(db, "Usuarios", email)
+    console.log("docRef")
+    console.log(docRef)
+    const res = await getDoc(docRef)
+    console.log(res)
+    return res.exists()
   }
 
 
 
 
   const handleRegistrar = async () => {
-    setNameError(false)
     setEmailError(false)
     setPasswordError(false)
     setConfirmarPasswordError(false)
@@ -60,31 +68,28 @@ const ContainerRegisterParticular1 = ({
     let emailAccount = email
     let passwordAccount = password
 
-    let errorNameVar = false;
     let errorEmailVar = false;
     let errorPasswordVar = false;
     let errorConfirmarPasswordVar = false;
     let errorPasswordShortVar = false;
-    
-    if(name === null || name === "" || name.length == 0) {errorNameVar = true;}
-    if(email === null || email === "" || email.length == 0) {errorEmailVar = true; }
-    if(password === null || password === "" || password.length == 0) {errorPasswordVar = true; }
-    if(confirmarPassword != password) {errorConfirmarPasswordVar = true; }
 
-    
+    if (email === null || email === "" || email.length == 0) { errorEmailVar = true; }
+    if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }
+    if (confirmarPassword != password) { errorConfirmarPasswordVar = true; }
 
-    setNameError(errorNameVar)
+
+
     setEmailError(errorEmailVar)
     setPasswordError(errorPasswordVar)
     setConfirmarPasswordError(errorConfirmarPasswordVar)
-    
-    if(errorNameVar == true || errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
+
+    if (errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
       return;
     }
 
-    if(password.length < 6) {errorPasswordShortVar = true}
+    if (password.length < 6) { errorPasswordShortVar = true }
     setPassswordShort(errorPasswordShortVar)
-    if(passwordShort){
+    if (passwordShort) {
       return;
     }
 
@@ -94,26 +99,25 @@ const ContainerRegisterParticular1 = ({
       return r;
     })
     console.log(isRegistered)
-    if(isRegistered == true) {
-      setEmailExistsError(true); 
+    if (isRegistered == true) {
+      setEmailExistsError(true);
       return;
     }
 
-    
-    
+
+
     createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
 
 
       const user = userCredential.user
       setUserCore(user);
       setDoc(doc(db, "Usuarios", user.email), {
-        name: name,
         uid: user.uid,
         mail: user.email,
         type: "particular"
       })
       setVerdadero(true)
-      
+
 
 
     })
@@ -123,7 +127,7 @@ const ContainerRegisterParticular1 = ({
         const errorMessage = error.message;
         console.log(errorMessage)
       });
-      return;
+    return;
   }
 
 
@@ -137,7 +141,7 @@ const ContainerRegisterParticular1 = ({
       console.log("No se deslogueo")
     });
     window.location.reload()
-    
+
   }
 
 
@@ -148,13 +152,13 @@ const ContainerRegisterParticular1 = ({
         <h2>Registra<span className={styles.text_blue}>te</span></h2>
         <div className={styles.form}>
           <div className={styles.div_fields}>
-            <div className={styles.fields}>
+            {/*<div className={styles.fields}>
               <div className={styles.div_error}>
                 <label >Nombre de usuario</label>
                 {nameError == true ? <p>Ingrese un nombre de usuario valido</p> : null}
               </div>
               <input value={name} onChange={e => setName(e.target.value)} type='text' />
-            </div>
+            </div>*/}
 
             <div className={styles.fields}>
               <div className={styles.div_error}>
@@ -162,7 +166,7 @@ const ContainerRegisterParticular1 = ({
                 {emailError == true ? <p>Ingrese un email valido</p> : null}
                 {emailExistsError == true ? <p>El mail ya existe</p> : null}
               </div>
-              
+
               <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
             </div>
 
@@ -172,7 +176,7 @@ const ContainerRegisterParticular1 = ({
                 {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
                 {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
               </div>
-              
+
               <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
             </div>
 
@@ -198,7 +202,7 @@ const ContainerRegisterParticular1 = ({
             <button className={styles.button} onClick={handleGoogle}>Google</button>
             <button className={styles.button} onClick={handleSignOut}>Salir de la cuenta</button>
           </div>
-          
+
         </div>
       </div>
     </div>
