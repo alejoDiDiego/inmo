@@ -25,15 +25,7 @@ export const Header = ({logged, setLogged}) => {
 
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (auth.currentUser == null) {
-                setLogged(false)
-            } else {
-                setLogged(true)
-            }
-        }, 600)
-    }, [])
+
 
 
 

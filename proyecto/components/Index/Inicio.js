@@ -8,9 +8,9 @@ import styles from '../../styles/Inicio.module.css'
 
 
 
-const Inicio = () => {
+const Inicio = ({logged, setLogged}) => {
 
-    const [logged, setLogged] = useState(false)
+    
 
 
 

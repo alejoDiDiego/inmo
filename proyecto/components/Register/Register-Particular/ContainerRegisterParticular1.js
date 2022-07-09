@@ -6,7 +6,7 @@ import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore
 import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
 import { Route, useRouter } from 'next/router'
-useRouter
+
 
 
 
