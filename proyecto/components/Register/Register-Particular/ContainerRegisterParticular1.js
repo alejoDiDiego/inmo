@@ -136,10 +136,10 @@ const ContainerRegisterParticular1 = ({
     }).catch((error) => {
       console.log("No se deslogueo")
     });
+    window.location.reload()
     
   }
 
-  console.log(auth)
 
 
   return (

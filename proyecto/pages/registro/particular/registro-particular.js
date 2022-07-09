@@ -19,11 +19,20 @@ export default function RegisterParticular() {
 
 
   useEffect(() => {
-    if(auth.currentUser != null) {
-      setVerdadero(true)
-      console.log("si")
-    }
-  }, [])
+    setTimeout(() => {
+      if(auth.currentUser == null) {
+        
+        console.log("no")
+        console.log(auth.currentUser)
+        setVerdadero(false)
+      } else{
+        setVerdadero(true)
+        console.log("si")
+        console.log(auth.currentUser)
+      }
+      
+    },600)
+  }, [auth.currentUser])
 
 
 

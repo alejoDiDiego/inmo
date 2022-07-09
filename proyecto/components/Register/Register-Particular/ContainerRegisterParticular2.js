@@ -2,8 +2,11 @@ import { updateDoc } from 'firebase/firestore'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
-import { storage } from '../../../firebase/ControladorFirebase'
+import { auth, storage } from '../../../firebase/ControladorFirebase'
 import { ref, uploadBytes, getDownloadURL, listAll, list } from "firebase/storage";
+import { signOut } from 'firebase/auth'
+
+
 
 
 const ContainerRegisterParticular2 = ({
@@ -55,6 +58,19 @@ const ContainerRegisterParticular2 = ({
 
 
 
+    const handleSignOut = () => {
+        signOut(auth).then(() => {
+          console.log("Sign-out successful.")
+          console.log(auth)
+        }).catch((error) => {
+          console.log("No se deslogueo")
+          
+        });
+        window.location.reload()
+      }
+
+
+
 
 
 
@@ -82,6 +98,7 @@ const ContainerRegisterParticular2 = ({
                         <div className={styles.buttons}>
                             <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
                             <button className={styles.button} onClick={handleOmitir}>Omitir</button>
+                            <button className={styles.button} onClick={handleSignOut}>Salir de la cuenta</button>
                         </div>
                     </div>
                 </div>
