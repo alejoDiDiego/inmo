@@ -50,9 +50,7 @@ const ContainerRegisterParticular1 = ({
   const userExists = async (email) => {
     const docRef = doc(db, "Usuarios", email)
     console.log("docRef")
-    console.log(docRef)
     const res = await getDoc(docRef)
-    console.log(res)
     return res.exists()
   }
 
@@ -84,6 +82,9 @@ const ContainerRegisterParticular1 = ({
     setConfirmarPasswordError(errorConfirmarPasswordVar)
 
     if (errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
+      console.log("errorEmailVar" + errorEmailVar)
+      console.log("errorPasswordVar" + errorPasswordVar)
+      console.log("errorConfirmarPasswordVar" + errorConfirmarPasswordVar)
       return;
     }
 
@@ -92,6 +93,9 @@ const ContainerRegisterParticular1 = ({
     if (passwordShort) {
       return;
     }
+
+
+
 
     let isRegistered = false
     console.log("llega")
