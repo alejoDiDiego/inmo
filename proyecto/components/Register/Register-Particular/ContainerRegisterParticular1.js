@@ -5,7 +5,8 @@ import { confirmPasswordReset, createUserWithEmailAndPassword, signInWithPopup, 
 import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
-
+import { Route, useRouter } from 'next/router'
+useRouter
 
 
 
@@ -14,6 +15,8 @@ const ContainerRegisterParticular1 = ({
   userCore,
   setUserCore,
 }) => {
+
+  const router = useRouter()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -30,7 +33,17 @@ const ContainerRegisterParticular1 = ({
 
   const handleGoogle = async () => {
     signInWithPopup(auth, providerGoogle).then((result) => {
-      setTimeout(() => {
+      
+      setTimeout(async () => {
+
+        let isRegistered = await userExists(auth.currentUser.email).then((r) => {return r})
+
+        if(isRegistered == true) {
+          
+          router.push('/')
+          return
+        }
+
         const user = auth.currentUser
         setDoc(doc(db, "Usuarios", user.email), {
           uid: user.uid,
@@ -39,9 +52,6 @@ const ContainerRegisterParticular1 = ({
         })
         setVerdadero(true)
       }, 600)
-      
-      
-      
     })
 
   }
