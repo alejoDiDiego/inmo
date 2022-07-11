@@ -82,10 +82,19 @@
     cursor: pointer;
 }
 
+.div_link{
+    margin-top: -15px;
+}
+
+.div_buttons{
+    margin-top: 200px;
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 .form button{
     align-self: flex-end;
-    margin-top: 200px;
     border: none;
     background-color: #38B6FF;
     color: #FFFFFF;
@@ -96,6 +105,7 @@
     cursor: pointer;
     transition: ease-in-out 0.3s;
     border-radius: 3px;
+    margin-left: 20px;
 }
 
 

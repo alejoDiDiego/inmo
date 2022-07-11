@@ -42,9 +42,14 @@
     margin-bottom: 20px;
 }
 
-.fields label{
+.label_desc1{
     font-size: 20px;
     margin-top: 10px;
+}
+
+.label_desc2{
+    font-size: 20px;
+    margin-top: 30px;
 }
 
 
@@ -68,7 +73,7 @@
 
 .buttons{
     width: 100%;
-    margin-top: 200px;
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -90,7 +95,7 @@
 }
 
 
-.button:hover, .btn_subir_imagen:hover{
+.button:hover, .btn_subir_imagen:hover, .label:hover{
     background-color: black;
     color:  #FFFFFF;
 }
@@ -107,3 +112,44 @@
     margin: 0;
     margin-bottom: 20px;
 }
+
+
+.div_input_img{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+
+
+.fields input[type="file"]{
+    display: none;
+}
+
+.img_empty{
+    width: 200px;
+    height: 150px;
+    background-color: lightgray;
+}
+
+.label{
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #38B6FF;
+    color: #FFFFFF;
+    padding: 10px;
+    margin-left: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div_input_img img{
+    width: 300px;
+}
+

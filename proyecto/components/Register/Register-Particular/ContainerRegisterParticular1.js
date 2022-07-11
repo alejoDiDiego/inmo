@@ -33,13 +33,13 @@ const ContainerRegisterParticular1 = ({
 
   const handleGoogle = async () => {
     signInWithPopup(auth, providerGoogle).then((result) => {
-      
+
       setTimeout(async () => {
 
-        let isRegistered = await userExists(auth.currentUser.email).then((r) => {return r})
+        let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
 
-        if(isRegistered == true) {
-          
+        if (isRegistered == true) {
+
           router.push('/')
           return
         }
@@ -211,10 +211,9 @@ const ContainerRegisterParticular1 = ({
 
 
 
-          <div>
-            <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
+          <div className={styles.div_buttons}>
             <button className={styles.button} onClick={handleGoogle}>Google</button>
-            <button className={styles.button} onClick={handleSignOut}>Salir de la cuenta</button>
+            <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
           </div>
 
         </div>
