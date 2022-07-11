@@ -53,6 +53,11 @@ const ContainerRegisterParticular1 = ({
         })
         setVerdadero(true)
       }, 600)
+    }).catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+      const errorMessage = error.message;
+      console.log(errorMessage)
     })
 
   }
@@ -91,7 +96,6 @@ const ContainerRegisterParticular1 = ({
     setEmailError(errorEmailVar)
     setPasswordError(errorPasswordVar)
     setConfirmarPasswordError(errorConfirmarPasswordVar)
-
     if (errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
       console.log("errorEmailVar" + errorEmailVar)
       console.log("errorPasswordVar" + errorPasswordVar)
@@ -101,13 +105,13 @@ const ContainerRegisterParticular1 = ({
 
     if (password.length < 6) { errorPasswordShortVar = true }
     setPassswordShort(errorPasswordShortVar)
-    if (passwordShort) {
+    if (errorPasswordShortVar) {
       return;
     }
 
 
 
-
+    
     let isRegistered = false
     console.log("llega")
     isRegistered = await userExists(email).then(r => {
@@ -125,7 +129,6 @@ const ContainerRegisterParticular1 = ({
 
 
       const user = userCredential.user
-      setUserCore(user);
       setDoc(doc(db, "Usuarios", user.email), {
         uid: user.uid,
         mail: user.email,

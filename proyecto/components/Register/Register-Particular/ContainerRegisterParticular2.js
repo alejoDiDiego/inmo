@@ -50,7 +50,7 @@ const ContainerRegisterParticular2 = ({
         console.log(imagePerfilUpload)
         setErrorFalta(false)
         if (imagePerfilUpload != null && imageFondoUpload != null) {
-            const imagePerfRef = ref(storage, `usuarios/${userCore.email}/perfil`)
+            const imagePerfRef = ref(storage, `usuarios/${auth.currentUser.email}/perfil`)
             uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setImagePerfilURL((prev) => [...prev, url])
@@ -58,7 +58,7 @@ const ContainerRegisterParticular2 = ({
             })
 
 
-            const imageFondRef = ref(storage, `usuarios/${userCore.email}/fondo`)
+            const imageFondRef = ref(storage, `usuarios/${auth.currentUser.email}/fondo`)
             uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setImageFondoURL((prev) => [...prev, url])
