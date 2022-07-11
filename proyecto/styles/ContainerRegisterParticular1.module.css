@@ -87,9 +87,16 @@
 }
 
 .div_buttons{
-    margin-top: 200px;
+    margin-top: 415px;
     display: flex;
     justify-content: flex-end;
+}
+
+.div_spinner{
+    margin-top: 415px;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15px;
 }
 
 

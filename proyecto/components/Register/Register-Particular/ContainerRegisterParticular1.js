@@ -7,6 +7,8 @@ import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
 import { Route, useRouter } from 'next/router'
 import Image from 'next/image'
+import Spinner from '../../Spinner/Spinner';
+
 
 
 
@@ -30,35 +32,45 @@ const ContainerRegisterParticular1 = ({
   const [emailExistsError, setEmailExistsError] = useState(false)
   const [passwordShort, setPassswordShort] = useState(false)
 
+  const [loading, setLoading] = useState(false)
+
+  let load = false
+
+
 
 
   const handleGoogle = async () => {
-    signInWithPopup(auth, providerGoogle).then((result) => {
+    setLoading(true)
+    setTimeout(() => {
+      signInWithPopup(auth, providerGoogle).then((result) => {
 
-      setTimeout(async () => {
-
-        let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
-
-        if (isRegistered == true) {
-
-          router.push('/')
-          return
-        }
-
-        const user = auth.currentUser
-        setDoc(doc(db, "Usuarios", user.email), {
-          uid: user.uid,
-          mail: user.email,
-          type: "particular"
-        })
-        setVerdadero(true)
-      }, 600)
-    }).catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode)
-      const errorMessage = error.message;
-      console.log(errorMessage)
-    })
+        setTimeout(async () => {
+  
+          let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
+  
+          if (isRegistered == true) {
+  
+            router.push('/')
+            return
+          }
+  
+          const user = auth.currentUser
+          setDoc(doc(db, "Usuarios", user.email), {
+            uid: user.uid,
+            mail: user.email,
+            type: "particular"
+          })
+          setVerdadero(true)
+          setLoading(false)
+        }, 600)
+      }).catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode)
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        setLoading(false)
+      })
+    }, 500)
 
   }
 
@@ -111,7 +123,7 @@ const ContainerRegisterParticular1 = ({
 
 
 
-    
+
     let isRegistered = false
     console.log("llega")
     isRegistered = await userExists(email).then(r => {
@@ -124,28 +136,38 @@ const ContainerRegisterParticular1 = ({
     }
 
 
+    setLoading(true)
+    setTimeout(() => {
+      console.log(loading)
+      createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
 
-    createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
 
 
-      const user = userCredential.user
-      setDoc(doc(db, "Usuarios", user.email), {
-        uid: user.uid,
-        mail: user.email,
-        type: "particular"
+
+        const user = userCredential.user
+        setDoc(doc(db, "Usuarios", user.email), {
+          uid: user.uid,
+          mail: user.email,
+          type: "particular"
+        })
+        setVerdadero(true)
+        setLoading(false)
+
+
+
       })
-      setVerdadero(true)
+        .catch((error) => {
+          const errorCode = error.code;
+          console.log(errorCode)
+          const errorMessage = error.message;
+          console.log(errorMessage)
+        });
+      
+      return;
+    }, 2000)
 
 
 
-    })
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log(errorCode)
-        const errorMessage = error.message;
-        console.log(errorMessage)
-      });
-    return;
   }
 
 
@@ -190,7 +212,7 @@ const ContainerRegisterParticular1 = ({
 
             <div className={styles.fields}>
               <div className={styles.div_error}>
-                <label>Constraseña</label>
+                <label>Contraseña</label>
                 {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
                 {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
               </div>
@@ -215,10 +237,19 @@ const ContainerRegisterParticular1 = ({
 
 
 
-          <div className={styles.div_buttons}>
-            <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
-            <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
-          </div>
+          {
+            loading == false ?
+              <div className={styles.div_buttons}>
+                <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
+                <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
+              </div>
+              :
+              <div className={styles.div_spinner}>
+                <Spinner />
+              </div>
+
+
+          }
 
         </div>
       </div>
