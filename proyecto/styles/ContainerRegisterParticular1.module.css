@@ -1,9 +1,47 @@
-.main_container{
+.div_supremo{
     position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+
+.div_detalle{
+    position: relative;
+    height: 300px;
+    width: 60%;
+    margin: auto 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/*
+.div_detalle:before{
+    position: absolute;
+    content: '';
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: black;
+    background-size: cover;
+    opacity: 0.6;
+}
+*/
+
+.div_inside_detalle p{
+    margin: auto;
+    color: #FFFFFF;
+}
+
+
+
+
+
+.main_container{
+    
     height: 100%;
     width: 600px;
     background-color: #E8EFF4;
-    margin-left: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,6 +128,7 @@
     margin-top: 415px;
     display: flex;
     justify-content: flex-end;
+    gap: 15px;
 }
 
 .div_spinner{
@@ -113,7 +152,7 @@
     cursor: pointer;
     transition: ease-in-out 0.3s;
     border-radius: 3px;
-    margin-left: 20px;
+
 }
 
 .buttonGoogle{
@@ -139,11 +178,12 @@
     margin-right: 6px;
 }
 
+.buttonGoogle:hover{
+    background-color: #ffffff6e;
+}
 
-
-.form button:hover{
-    background-color: black;
-    color:  #FFFFFF;
+.button:hover{
+    background-color: #228cca;
 }
 
 .div_error {

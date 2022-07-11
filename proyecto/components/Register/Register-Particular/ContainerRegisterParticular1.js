@@ -45,15 +45,15 @@ const ContainerRegisterParticular1 = ({
       signInWithPopup(auth, providerGoogle).then((result) => {
 
         setTimeout(async () => {
-  
+
           let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
-  
+
           if (isRegistered == true) {
-  
+
             router.push('/')
             return
           }
-  
+
           const user = auth.currentUser
           setDoc(doc(db, "Usuarios", user.email), {
             uid: user.uid,
@@ -64,11 +64,12 @@ const ContainerRegisterParticular1 = ({
           setLoading(false)
         }, 600)
       }).catch((error) => {
+        setLoading(false)
         const errorCode = error.code;
         console.log(errorCode)
         const errorMessage = error.message;
         console.log(errorMessage)
-        setLoading(false)
+
       })
     }, 500)
 
@@ -162,7 +163,7 @@ const ContainerRegisterParticular1 = ({
           const errorMessage = error.message;
           console.log(errorMessage)
         });
-      
+
       return;
     }, 2000)
 
@@ -187,12 +188,13 @@ const ContainerRegisterParticular1 = ({
 
 
   return (
-    <div className={styles.main_container}>
-      <div className={styles.inside_container}>
-        <h2>Registra<span className={styles.text_blue}>te</span></h2>
-        <div className={styles.form}>
-          <div className={styles.div_fields}>
-            {/*<div className={styles.fields}>
+    <div className={styles.div_supremo}>
+      <div className={styles.main_container}>
+        <div className={styles.inside_container}>
+          <h2>Registra<span className={styles.text_blue}>te</span></h2>
+          <div className={styles.form}>
+            <div className={styles.div_fields}>
+              {/*<div className={styles.fields}>
               <div className={styles.div_error}>
                 <label >Nombre de usuario</label>
                 {nameError == true ? <p>Ingrese un nombre de usuario valido</p> : null}
@@ -200,58 +202,64 @@ const ContainerRegisterParticular1 = ({
               <input value={name} onChange={e => setName(e.target.value)} type='text' />
             </div>*/}
 
-            <div className={styles.fields}>
-              <div className={styles.div_error}>
-                <label>Email</label>
-                {emailError == true ? <p>Ingrese un email valido</p> : null}
-                {emailExistsError == true ? <p>El mail ya existe</p> : null}
+              <div className={styles.fields}>
+                <div className={styles.div_error}>
+                  <label>Email</label>
+                  {emailError == true ? <p>Ingrese un email valido</p> : null}
+                  {emailExistsError == true ? <p>El mail ya existe</p> : null}
+                </div>
+
+                <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
               </div>
 
-              <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
-            </div>
+              <div className={styles.fields}>
+                <div className={styles.div_error}>
+                  <label>Contraseña</label>
+                  {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
+                  {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
+                </div>
 
-            <div className={styles.fields}>
-              <div className={styles.div_error}>
-                <label>Contraseña</label>
-                {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
-                {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
+                <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
               </div>
 
-              <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
+              <div className={styles.fields}>
+                <div className={styles.div_error}>
+                  <label>Confirmar contraseña</label>
+                  {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
+                </div>
+                <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' />
+              </div>
             </div>
 
-            <div className={styles.fields}>
-              <div className={styles.div_error}>
-                <label>Confirmar contraseña</label>
-                {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
-              </div>
-              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' />
+
+            <div className={styles.div_link}>
+              <label className={styles.label_link}>Permito que utilizen mi informacion segun estos terminos: <Link href='/'><a>www.link.com</a></Link></label>
+              <input type='checkbox' />
             </div>
+
+
+
+            {
+              loading == false ?
+                <div className={styles.div_buttons}>
+                  <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
+                  <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
+                </div>
+                :
+                <div className={styles.div_spinner}>
+                  <Spinner />
+                </div>
+
+
+            }
+
           </div>
-
-
-          <div className={styles.div_link}>
-            <label className={styles.label_link}>Permito que utilizen mi informacion segun estos terminos: <Link href='/'><a>www.link.com</a></Link></label>
-            <input type='checkbox' />
-          </div>
-
-
-
-          {
-            loading == false ?
-              <div className={styles.div_buttons}>
-                <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
-                <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
-              </div>
-              :
-              <div className={styles.div_spinner}>
-                <Spinner />
-              </div>
-
-
-          }
-
         </div>
+      </div>
+      <div className={styles.div_detalle}>
+            <div className={styles.div_inside_detalle}>
+              <p>dqweqwqwqwe</p>
+            </div>
       </div>
     </div>
   )

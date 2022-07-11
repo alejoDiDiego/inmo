@@ -96,13 +96,14 @@ const ContainerRegisterParticular2 = ({
         <div className={styles.main_container}>
             <div className={styles.inside_container}>
                 <div className={styles.div_header}>
-                    <h2>Registra<span className={styles.text_blue}>te 2</span></h2>
+                    <h2>Crea tu cuenta en <span className={styles.text_blue}>Inmo</span></h2>
                     {errorFalta == true ? <p>Debe subir la foto de perfil y de fondo</p> : null}
                 </div>
                 <div className={styles.form}>
 
                     <div className={styles.div_fields}>
                         <div className={styles.fields}>
+                            <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                             <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
                             <div className={styles.div_input_img}>
                                 {imgPerfil == false ?
@@ -116,6 +117,7 @@ const ContainerRegisterParticular2 = ({
                         </div>
 
                         <div className={styles.fields}>
+                            <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                             <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
                             <div className={styles.div_input_img}>
                                 {imageFondoUpload == null ? 
@@ -131,8 +133,9 @@ const ContainerRegisterParticular2 = ({
                         </div>
 
                         <div className={styles.buttons}>
-                            <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
+                            
                             <button className={styles.button} onClick={handleOmitir}>Omitir</button>
+                            <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
                         </div>
                     </div>
                 </div>
