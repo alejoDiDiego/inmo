@@ -6,6 +6,7 @@ import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore
 import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
 import { Route, useRouter } from 'next/router'
+import Image from 'next/image'
 
 
 
@@ -212,7 +213,7 @@ const ContainerRegisterParticular1 = ({
 
 
           <div className={styles.div_buttons}>
-            <button className={styles.button} onClick={handleGoogle}>Google</button>
+            <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
             <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
           </div>
 
