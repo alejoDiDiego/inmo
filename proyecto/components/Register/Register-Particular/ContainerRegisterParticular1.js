@@ -87,6 +87,7 @@ const ContainerRegisterParticular1 = ({
 
 
   const handleRegistrar = async () => {
+    setLoading(true)
     setEmailError(false)
     setPasswordError(false)
     setConfirmarPasswordError(false)
@@ -103,13 +104,14 @@ const ContainerRegisterParticular1 = ({
     if (email === null || email === "" || email.length == 0) { errorEmailVar = true; }
     if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }
     if (confirmarPassword != password) { errorConfirmarPasswordVar = true; }
-
+    
 
 
     setEmailError(errorEmailVar)
     setPasswordError(errorPasswordVar)
     setConfirmarPasswordError(errorConfirmarPasswordVar)
     if (errorEmailVar == true || errorPasswordVar == true || errorConfirmarPasswordVar == true) {
+      setLoading(false)
       console.log("errorEmailVar" + errorEmailVar)
       console.log("errorPasswordVar" + errorPasswordVar)
       console.log("errorConfirmarPasswordVar" + errorConfirmarPasswordVar)
@@ -119,6 +121,7 @@ const ContainerRegisterParticular1 = ({
     if (password.length < 6) { errorPasswordShortVar = true }
     setPassswordShort(errorPasswordShortVar)
     if (errorPasswordShortVar) {
+      setLoading(false)
       return;
     }
 
