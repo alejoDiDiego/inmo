@@ -15,23 +15,33 @@ export default function RegisterParticular() {
   const [verdadero2, setVerdadero2] = useState(false)
 
   const [omitir, setOmitir] = useState(false)
+  const [CRP2Terminado, setCRP2Terminado] = useState(false)
 
 
   const [userCore, setUserCore] = useState({})
 
+  //localStorage.setItem('CRP2Terminado', false)
+  //console.log(localStorage.getItem('CRP2Terminado') + "localStorage")
+
 
   useEffect(() => {
     setTimeout(() => {
-      if(auth.currentUser == null) {
-        
-        console.log("no")
-        console.log(auth.currentUser)
-        setVerdadero(false)
-      } else{
+      if(CRP2Terminado == true){
         setVerdadero(true)
-        console.log("si")
-        console.log(auth.currentUser)
+        setVerdadero2(true)
+      } else {
+          if(auth.currentUser == null) {
+          
+            console.log("no")
+            console.log(auth.currentUser)
+            setVerdadero(false)
+          } else{
+            setVerdadero(true)
+            console.log("si")
+            console.log(auth.currentUser)
+          }
       }
+      console.log("CRP2Terminado" + CRP2Terminado)
       
     },600)
   }, [auth.currentUser])
@@ -62,6 +72,8 @@ export default function RegisterParticular() {
           setUserCore={setUserCore}
           omitir={omitir}
           setOmitir={setOmitir}
+          CRP2Terminado={CRP2Terminado}
+          setCRP2Terminado={setCRP2Terminado}
         /> 
         :
         <ContainerRegisterParticular3 

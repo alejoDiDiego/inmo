@@ -11,7 +11,7 @@ const ContainerRegisterParticular3 = ({
   userCore,
   setUserCore,
   omitir,
-  setOmitir
+  setOmitir,
 }) => {
 
   const [nomPub, setNomPub] = useState("")
