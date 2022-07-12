@@ -13,6 +13,8 @@ const ContainerRegisterParticular2 = ({
     setVerdadero2,
     userCore,
     setUserCore,
+    omitir,
+    setOmitir
 }) => {
 
 
@@ -43,13 +45,14 @@ const ContainerRegisterParticular2 = ({
 
 
     const handleOmitir = () => {
+        setOmitir(true)
         setVerdadero2(true)
     }
 
     const handleSiguiente = () => {
         console.log(imagePerfilUpload)
         setErrorFalta(false)
-        if (imagePerfilUpload != null && imageFondoUpload != null) {
+        if (imagePerfilUpload != null && (imageFondoUpload != null || imageFondoUpload == null)) {
             const imagePerfRef = ref(storage, `usuarios/${auth.currentUser.email}/perfil`)
             uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
@@ -57,7 +60,7 @@ const ContainerRegisterParticular2 = ({
                 })
             })
 
-
+            if(imageFondoUpload == null){setOmitir(false);setVerdadero2(true); return;}
             const imageFondRef = ref(storage, `usuarios/${auth.currentUser.email}/fondo`)
             uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
@@ -66,6 +69,7 @@ const ContainerRegisterParticular2 = ({
             })
 
             setVerdadero2(true)
+            setOmitir(false)
         } else {
             setErrorFalta(true)
         }
@@ -97,7 +101,7 @@ const ContainerRegisterParticular2 = ({
             <div className={styles.inside_container}>
                 <div className={styles.div_header}>
                     <h2>Crea tu cuenta en <span className={styles.text_blue}>Inmo</span></h2>
-                    {errorFalta == true ? <p>Debe subir la foto de perfil y de fondo</p> : null}
+                    
                 </div>
                 <div className={styles.form}>
 
@@ -131,6 +135,10 @@ const ContainerRegisterParticular2 = ({
 
 
                         </div>
+
+                        {errorFalta == true ? <p className={styles.p_error}>Debe subir la foto de perfil</p> : 
+                        <div className={styles.div_error_vacio}></div>
+                        }
 
                         <div className={styles.buttons}>
                             

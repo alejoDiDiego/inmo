@@ -77,7 +77,7 @@
 
 .buttons{
     width: 100%;
-    margin-top: 70px;
+    margin-top: 100px;
     display: flex;
     justify-content: flex-end;
     gap: 15px;
@@ -85,7 +85,6 @@
 
 
 .button{
-    margin-top: 90px;
     width: 150px;
     border: none;
     background-color: #38B6FF;
@@ -106,15 +105,19 @@
 
 .div_header{
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
 
-.div_header p{
-    width: 220px;
+.p_error{
     font-size: 14px;
     color: red;
     margin: 0;
-    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.div_error_vacio{
+    height: 17px;
+    margin-top: 40px;
 }
 
 

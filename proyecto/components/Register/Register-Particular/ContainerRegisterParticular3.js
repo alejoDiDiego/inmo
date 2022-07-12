@@ -10,6 +10,8 @@ const ContainerRegisterParticular3 = ({
   setVerdadero2,
   userCore,
   setUserCore,
+  omitir,
+  setOmitir
 }) => {
 
   const [nomPub, setNomPub] = useState("")
@@ -81,7 +83,11 @@ const ContainerRegisterParticular3 = ({
 
           <div className={styles.buttons}>
             <button className={styles.button} onClick={handleInfo}>Finalizar</button>
-            <button className={styles.button} onClick={handleAnterior}>Anterior</button>
+            {omitir == true ? 
+              <button className={styles.button} onClick={handleAnterior}>Anterior</button>  
+              :
+              null
+            }
           </div>
         </div>
       </div>

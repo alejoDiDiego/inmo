@@ -14,6 +14,8 @@ export default function RegisterParticular() {
   const [verdadero, setVerdadero] = useState(false)
   const [verdadero2, setVerdadero2] = useState(false)
 
+  const [omitir, setOmitir] = useState(false)
+
 
   const [userCore, setUserCore] = useState({})
 
@@ -58,12 +60,16 @@ export default function RegisterParticular() {
           setVerdadero2={setVerdadero2} 
           userCore={userCore}
           setUserCore={setUserCore}
+          omitir={omitir}
+          setOmitir={setOmitir}
         /> 
         :
         <ContainerRegisterParticular3 
           setVerdadero2={setVerdadero2}
           userCore={userCore}
           setUserCore={setUserCore}
+          omitir={omitir}
+          setOmitir={setOmitir}
         /> 
       )}
     </div>
