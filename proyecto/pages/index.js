@@ -15,7 +15,7 @@ export default function Home() {
         } else {
             setLogged(true)
         }
-    }, 600)
+    }, 1000)
 }, [])
 
 

@@ -142,9 +142,6 @@ const ContainerRegisterParticular1 = ({
       console.log(loading)
       createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
 
-
-
-
         const user = userCredential.user
         setDoc(doc(db, "Usuarios", user.email), {
           uid: user.uid,
@@ -258,7 +255,8 @@ const ContainerRegisterParticular1 = ({
       </div>
       <div className={styles.div_detalle}>
             <div className={styles.div_inside_detalle}>
-              <p>dqweqwqwqwe</p>
+              <p>Ninguno de tus datos sera utilizado para fines fuera de esta pagina.</p>
+              <img src="/icono_about.png" />
             </div>
       </div>
     </div>

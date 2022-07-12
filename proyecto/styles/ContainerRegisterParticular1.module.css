@@ -12,25 +12,27 @@
     width: 60%;
     margin: auto 0;
     background: rgba(0, 0, 0, 0.5);
+    
 }
 
-/*
-.div_detalle:before{
-    position: absolute;
-    content: '';
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background-color: black;
-    background-size: cover;
-    opacity: 0.6;
+.div_inside_detalle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 100px;
+    gap: 200px;
 }
-*/
 
 .div_inside_detalle p{
     margin: auto;
     color: #FFFFFF;
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.div_inside_detalle img{
+    margin-right: 100px;
 }
 
 
