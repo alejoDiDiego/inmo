@@ -7,16 +7,22 @@ import { auth } from '../firebase/ControladorFirebase'
 export default function Home() {
 
   const [logged, setLogged] = useState(false)
+  
 
   useEffect(() => {
+    localStorage.setItem('siguienteCRP2', false)
+    console.log(auth.currentUser)
+    console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
     setTimeout(() => {
         if (auth.currentUser == null) {
             setLogged(false)
         } else {
             setLogged(true)
         }
-    }, 1000)
-}, [])
+        console.log(auth.currentUser)
+    }, 800)
+    
+}, [auth])
 
 
 

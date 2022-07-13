@@ -19,8 +19,6 @@ const ContainerRegisterParticular3 = ({
   const [numCel, setNumCel] = useState(0)
   const [numTel, setNumTel] = useState(0)
 
-  console.log(userCore.email)
-
   
 
   const handleAnterior = () => {

@@ -135,6 +135,7 @@ const ContainerRegisterParticular1 = ({
     })
     console.log(isRegistered)
     if (isRegistered == true) {
+      setLoading(false)
       setEmailExistsError(true);
       return;
     }
