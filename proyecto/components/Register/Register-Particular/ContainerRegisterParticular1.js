@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import { confirmPasswordReset, createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut } from "firebase/auth";
 import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
 import { Route, useRouter } from 'next/router'
 import Image from 'next/image'
 import Spinner from '../../Spinner/Spinner';
+
 
 
 
