@@ -31,7 +31,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app)
-auth.languageCode = 'it';
+auth.languageCode = 'es_419';
+auth.useDeviceLanguage();
 
 const storage = getStorage(app)
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import { confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut } from "firebase/auth";
+import { applyActionCode, confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendSignInLinkToEmail, signInWithPopup, signOut } from "firebase/auth";
 import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
@@ -105,7 +105,7 @@ const ContainerRegisterParticular1 = ({
     if (email === null || email === "" || email.length == 0) { errorEmailVar = true; }
     if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }
     if (confirmarPassword != password) { errorConfirmarPasswordVar = true; }
-    
+
 
 
     setEmailError(errorEmailVar)
@@ -145,14 +145,32 @@ const ContainerRegisterParticular1 = ({
     setLoading(true)
     setTimeout(() => {
       console.log(loading)
-      createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then((userCredential) => {
+      createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then(async (userCredential) => {
+
 
         const user = userCredential.user
+
+        const actionCodeSettings = {
+          url: 'http://localhost:3000/registro/particular/registro-particular',
+          handleCodeInApp: true,
+        };
+
+
+        sendEmailVerification(user, actionCodeSettings).then(() => {
+          console.log("se mando")
+        })
+
+
+
+
+
+
         setDoc(doc(db, "Usuarios", user.email), {
           uid: user.uid,
           mail: user.email,
           type: "particular"
         })
+        alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
         setVerdadero(true)
         setLoading(false)
 
@@ -195,8 +213,8 @@ const ContainerRegisterParticular1 = ({
         <div className={styles.inside_container}>
           <h2>Registra<span className={styles.text_blue}>te</span></h2>
           <div className={styles.form}>
-            <div className={styles.div_fields}>
-              {/*<div className={styles.fields}>
+
+            {/*<div className={styles.fields}>
               <div className={styles.div_error}>
                 <label >Nombre de usuario</label>
                 {nameError == true ? <p>Ingrese un nombre de usuario valido</p> : null}
@@ -204,34 +222,34 @@ const ContainerRegisterParticular1 = ({
               <input value={name} onChange={e => setName(e.target.value)} type='text' />
             </div>*/}
 
-              <div className={styles.fields}>
-                <div className={styles.div_error}>
-                  <label>Email</label>
-                  {emailError == true ? <p>Ingrese un email valido</p> : null}
-                  {emailExistsError == true ? <p>El mail ya existe</p> : null}
-                </div>
-
-                <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
+            <div className={styles.fields}>
+              <div className={styles.div_error}>
+                <label>Email</label>
+                {emailError == true ? <p>Ingrese un email valido</p> : null}
+                {emailExistsError == true ? <p>El mail ya existe</p> : null}
               </div>
 
-              <div className={styles.fields}>
-                <div className={styles.div_error}>
-                  <label>Contraseña</label>
-                  {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
-                  {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
-                </div>
-
-                <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
-              </div>
-
-              <div className={styles.fields}>
-                <div className={styles.div_error}>
-                  <label>Confirmar contraseña</label>
-                  {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
-                </div>
-                <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' />
-              </div>
+              <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
             </div>
+
+            <div className={styles.fields}>
+              <div className={styles.div_error}>
+                <label>Contraseña</label>
+                {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
+                {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
+              </div>
+
+              <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
+            </div>
+
+            <div className={styles.fields}>
+              <div className={styles.div_error}>
+                <label>Confirmar contraseña</label>
+                {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
+              </div>
+              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' />
+            </div>
+
 
 
             <div className={styles.div_link}>
@@ -259,10 +277,10 @@ const ContainerRegisterParticular1 = ({
         </div>
       </div>
       <div className={styles.div_detalle}>
-            <div className={styles.div_inside_detalle}>
-              <p>Ninguno de tus datos sera utilizado para fines fuera de esta pagina.</p>
-              <img src="/icono_about.png" />
-            </div>
+        <div className={styles.div_inside_detalle}>
+          <p>Ninguno de tus datos sera utilizado para fines fuera de esta pagina.</p>
+          <img src="/icono_about.png" />
+        </div>
       </div>
     </div>
   )
