@@ -23,7 +23,6 @@ export default function RegisterParticular() {
   useEffect(() => {
     setTimeout(() => {
       if(auth.currentUser == null) {
-        
         console.log("no")
         console.log(auth.currentUser)
         setVerdadero(false)
@@ -31,10 +30,17 @@ export default function RegisterParticular() {
         setVerdadero(true)
         console.log("si")
         console.log(auth.currentUser)
+        if(localStorage.getItem('siguienteCRP2') === 'true'){
+          setVerdadero2(true)
+        } else{
+          console.log('no localStorage')
+          console.log(localStorage.getItem('siguienteCRP2'))
+          console.log(typeof localStorage.getItem('siguienteCRP2'))
+        }
       }
       
     },600)
-  }, [auth.currentUser])
+  }, [])
 
 
 

@@ -60,14 +60,21 @@ const ContainerRegisterParticular2 = ({
                 })
             })
 
-            if(imageFondoUpload == null){setOmitir(false);setVerdadero2(true); return;}
+            if(imageFondoUpload == null){
+                localStorage.setItem('siguienteCRP2', true)
+                console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
+                setOmitir(false);
+                setVerdadero2(true); 
+                return;
+            }
             const imageFondRef = ref(storage, `usuarios/${auth.currentUser.email}/fondo`)
             uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setImageFondoURL((prev) => [...prev, url])
                 })
             })
-
+            localStorage.setItem('siguienteCRP2', true)
+            console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
             setVerdadero2(true)
             setOmitir(false)
         } else {
@@ -114,7 +121,7 @@ const ContainerRegisterParticular2 = ({
                                     <div className={styles.img_empty}></div> :
                                     <img src={imagePerfilURL}></img>
                                 }
-                                <label className={styles.label} for='perfil'>Elija una imagen</label>
+                                <label className={styles.label} htmlFor='perfil'>Elija una imagen</label>
                                 <input id='perfil' type="file" onChange={e => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/jpeg, image/jpg" />
 
                             </div>
@@ -128,7 +135,7 @@ const ContainerRegisterParticular2 = ({
                                     <div className={styles.img_empty}></div> :
                                     <img src={imageFondoURL}></img>
                                 }
-                                <label className={styles.label} for='fondo'>Elija una imagen</label>
+                                <label className={styles.label} htmlFor='fondo'>Elija una imagen</label>
                                 <input id='fondo' type="file" onChange={e => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/jpeg, image/jpg" />
 
                             </div>
