@@ -14,9 +14,7 @@ const ContainerRegisterParticular2 = ({
     userCore,
     setUserCore,
     omitir,
-    setOmitir,
-    CRP2Terminado,
-    setCRP2Terminado
+    setOmitir
 }) => {
 
 
@@ -61,15 +59,8 @@ const ContainerRegisterParticular2 = ({
                     setImagePerfilURL((prev) => [...prev, url])
                 })
             })
-            setCRP2Terminado(true); 
 
-            if(imageFondoUpload == null){
-                setOmitir(false);
-                setVerdadero2(true); 
-                
-                console.log("CRP2Terminado"+CRP2Terminado)
-                return;
-            }
+            if(imageFondoUpload == null){setOmitir(false);setVerdadero2(true); return;}
             const imageFondRef = ref(storage, `usuarios/${auth.currentUser.email}/fondo`)
             uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
@@ -77,10 +68,8 @@ const ContainerRegisterParticular2 = ({
                 })
             })
 
-            
             setVerdadero2(true)
             setOmitir(false)
-            setCRP2Terminado(true)
         } else {
             setErrorFalta(true)
         }
