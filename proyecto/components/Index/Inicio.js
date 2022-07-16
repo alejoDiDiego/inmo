@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from './Footer'
 import { Header } from './Header'
 import Options from './Options'
@@ -8,10 +8,15 @@ import styles from '../../styles/Inicio.module.css'
 
 
 
-const Inicio = () => {
+const Inicio = ({logged, setLogged}) => {
+
+    
+
+
+
     return (
         <div>
-            <Header />
+            <Header logged={logged} setLogged={setLogged} />
             <Options />
             <div className={styles.div_about}>
                 <Image width={200} height={100} src="/icono_about.png"/>

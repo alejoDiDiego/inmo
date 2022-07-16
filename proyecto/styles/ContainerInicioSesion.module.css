@@ -2,12 +2,13 @@
     margin-top: auto;
     margin-bottom: auto;
     position: relative;
-    height: 50vh;
+    height: 600px;
     width: 600px;
     background-color: #E8EFF4;
     margin-left: 200px;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
 }
 
 .h2{
@@ -22,30 +23,27 @@
     color: #38B6FF;
 }
 
-.inside_container{
-    height: 100%;
-}
-
-.fields1{
+.fieldsE{
     margin-top: 20px;
     margin-left: 50px;
     display: flex;
     flex-direction: column;
 }
 
-.fields2{
+.fieldsC{
     margin-top: 20px;
     margin-left: 50px;
     display: flex;
     flex-direction: column;
 }
 
-.fields1 label{
+.fieldsE label{
     font-size: 20px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.fields1 input{
+.fieldsE input{
     width: 400px;
     border: none;
     height: 30px;
@@ -55,12 +53,13 @@
     padding-left: 10px;
 }
 
-.fields2 label{
+.fieldsC label{
     font-size: 20px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.fields2 input{
+.fieldsC input{
     width: 400px;
     border: none;
     height: 30px;
@@ -71,8 +70,9 @@
 }
 
 .main_container button{
-    margin-left: 50px;
-    margin-top: 30px;
+    width: 190px;
+    margin-left: 390px;
+    margin-top: 60px;
     border: none;
     background-color: #38B6FF;
     color: #FFFFFF;
@@ -85,8 +85,20 @@
     border-radius: 3px;
 }
 
-.div_p{
+.div_man{
+    margin-left: 50px;
+    display: flex;  
+    align-items: center;
+}
+
+.div_problemasInicio{
     margin-top: 20px;
+    margin-left: 50px;  
+    display: flex;  
+    align-items: center;
+}
+
+.div_crearCuenta{
     margin-left: 50px;
     display: flex;  
     align-items: center;
@@ -105,8 +117,6 @@
     transition: ease-in-out 0.3s;
     border-radius: 3px;
 }
-
-
 
 .button:hover{
     background-color: black;
