@@ -108,3 +108,44 @@
     outline: none;
     border-radius: 5px;
 }
+
+
+
+.div_error {
+    display: flex;
+    align-items: flex-end;
+}
+
+.div_error p {
+    margin: 0;
+    margin-left: 15px;
+    font-size: 14px;
+    color: red;
+}
+
+.div_error label {
+    margin: 0;
+}
+
+
+
+
+
+
+
+.div_error_tel {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.div_error_tel p {
+    margin: 0;
+    font-size: 14px;
+    color: red;
+}
+
+.div_error_tel label {
+    margin: 0;
+}
+

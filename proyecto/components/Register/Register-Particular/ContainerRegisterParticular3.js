@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { doc, updateDoc, getFirestore } from "firebase/firestore";
 import styles from '../../../styles/ContainerRegisterParticular3.module.css'
 import MyApp from '../../../pages/_app';
@@ -22,11 +22,25 @@ const ContainerRegisterParticular3 = ({
   const [numTel, setNumTel] = useState('')
 
   const [errorNomUsu, setErrorNomUsu] = useState(false)
-  const [errorCodArea, setErrorCodArea] = useState(false)
-  const [errorNumCel, setErrorNumCel] = useState(false)
-  const [errorNumTel, setErrorNumTel] = useState(false)
+  const [errorNumCelCodArea, setErrorNumCelCodArea] = useState(false)
+  const [errorCodAreaNumCel, setErrorCodAreaNumCel] = useState(false)
 
   const [loading, setLoading] = useState(false)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -119,17 +133,32 @@ const ContainerRegisterParticular3 = ({
 
 
   const handleSubmit = () => {
+    setErrorNomUsu(false)
+    setErrorNumCelCodArea(false)
+    setErrorCodAreaNumCel(false)
     setLoading(true)
 
-    // if(nomUsu == ''){
-    //   errorNomUsu(true)
-    // }
-    // errorNomUsu
-    // errorCodArea
-    // errorNumCel
-    // errorNumTel
+
+    if(nomUsu == '' || nomUsu == null || nomUsu.length == 0) {
+      setErrorNomUsu(true)
+      return
+    }
 
     
+    if((numCel.length > 0 || numCel != '') && (codArea.length == 0 || codArea == '')){
+      setErrorNumCelCodArea(true)
+      return;
+    }  
+
+
+    if((codArea.length > 0 || codArea != '') && (numCel.length == 0 || numCel == '')){
+      setErrorCodAreaNumCel(true)
+      return;
+    }    
+
+
+    // falta hacer if para dependiendo que informacion subio (si solo subio el nombre, el nombre con el cel, etc)
+
     const user = auth.currentUser
     updateDoc(doc(db, "Usuarios", user.email), {
       nombreUsuario: nomUsu,
@@ -154,17 +183,30 @@ const ContainerRegisterParticular3 = ({
             <div className={styles.div_fields}>
 
               <div className={styles.fields}>
-                <label>Nombre de usuario</label>
+                <div className={styles.div_error}>
+                  <label>Nombre de usuario*</label> 
+                  {errorNomUsu == true ? <p>El nombre es obligatorio</p> : null}
+                </div>
+                
                 <input value={nomUsu} onChange={e => setNomUsu(e.target.value)} type='text' />
               </div>
 
               <div className={styles.fields}>
-                <label>Cod Area</label>
-                <input value={codArea} onChange={handleCodArea} type='text' placeholder='Ej. 54' />
+                <div className={styles.div_error_tel}>
+                  <label>Cod Area</label>
+                  {errorNumCelCodArea == true ? <p>Si ingresa un num de celular, complete el codigo de area</p> : null}
+                </div>
+                  <input value={codArea} onChange={handleCodArea} type='text' placeholder='Ej. 54' />
+                
+                
               </div>
 
               <div className={styles.fields}>
-                <label>Numero de celular</label>
+                <div className={styles.div_error_tel}>
+                  <label>Numero de celular</label> 
+                  {errorCodAreaNumCel == true ? <p>Si ingresa un codigo de area, complete el num de celular</p> : null}
+                </div>
+
                 <input value={numCel} onChange={handleNumCel} type='text' placeholder='Ej. 12341234' />
               </div>
 
@@ -187,7 +229,7 @@ const ContainerRegisterParticular3 = ({
       </div>
       <div className={styles.div_detalle}>
         <div className={styles.div_inside_detalle}>
-          <p>No es obligatorio que indique su telefono fijo, pero los demas datos si son requeridos.</p>
+          <p>Por el momento, el unico dato obligatorio es el nombre de usuario.</p>
           <img src="/icono_about.png" />
         </div>
       </div>
