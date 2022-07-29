@@ -160,12 +160,30 @@ const ContainerRegisterParticular3 = ({
     // falta hacer if para dependiendo que informacion subio (si solo subio el nombre, el nombre con el cel, etc)
 
     const user = auth.currentUser
-    updateDoc(doc(db, "Usuarios", user.email), {
-      nombreUsuario: nomUsu,
-      numeroCel: numCel,
-      numeroTel: numTel
-    })
-    alert("Bienvenido, cuenta totalmente creada")
+
+    if((codArea.length > 0 || codArea != '') && (numCel.length > 0 || numCel != '') && (numTel.length > 0 || numTel != '')){
+      updateDoc(doc(db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+        codigoArea: codArea,
+        numeroCel: numCel,
+        numeroTel: numTel
+      })
+      alert("Nombre, Cod Area, Num Celu, Num Tel")
+    } else if((codArea.length > 0 || codArea != '') && (numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
+      updateDoc(doc(db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+        codigoArea: codArea,
+        numeroCel: numCel,
+      })
+      alert("Nombre, Cod Area, Num Celu")
+    } else {
+      updateDoc(doc(db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+      })
+      alert("Nombre")
+    }
+
+    //alert("Bienvenido, cuenta totalmente creada")
   }
 
 
@@ -196,7 +214,7 @@ const ContainerRegisterParticular3 = ({
                   <label>Cod Area</label>
                   {errorNumCelCodArea == true ? <p>Si ingresa un num de celular, complete el codigo de area</p> : null}
                 </div>
-                  <input value={codArea} onChange={handleCodArea} type='text' placeholder='Ej. 54' />
+                  <input value={codArea} onChange={handleCodArea} type='text' placeholder='Ej. 11' />
                 
                 
               </div>
