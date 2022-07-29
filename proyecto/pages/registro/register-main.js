@@ -1,23 +1,36 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ContainerRegister from '../../components/Register/Register-Main/ContainerRegister'
 import { auth } from '../../firebase/ControladorFirebase'
 import styles from '../../styles/RegisterMain.module.css'
 import { Route, useRouter } from 'next/router'
 
+
 export default function RegisterMain() {
 
   const router = useRouter()
+  const isMounted = useRef(false)
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (auth.currentUser == null) { console.log('uchiha'); return; }
+
+  //     console.log('uchiha si')
+  //     router.push('/')
+
+  //   },600)
+  // }, [])
+
 
   useEffect(() => {
-    setTimeout(() => {
-      if (auth.currentUser == null) { console.log('uchiha'); return; }
-
-      console.log('uchiha si')
+    if(isMounted.current == true) {
+      if (auth.currentUser == null) { console.log('uchiha no hay user'); return; }
+      console.log('uchiha si hay user')
       router.push('/')
-
-    },600)
-  }, [])
+    } else {
+      isMounted.current = true
+    }
+  }, [auth])
 
 
 
