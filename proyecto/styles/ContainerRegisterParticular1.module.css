@@ -40,10 +40,11 @@
 
 
 .main_container{
-    
+    position: relative;
     height: 100%;
     width: 600px;
     background-color: #E8EFF4;
+    margin-left: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
