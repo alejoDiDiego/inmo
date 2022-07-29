@@ -22,7 +22,8 @@ export const Header = ({logged, setLogged}) => {
             localStorage.setItem('authAux', JSON.stringify({}))
 
             console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
-            console.log(localStorage.getItem('authAux') +' localStorage authAux')
+            console.log('localStorage authAux abajo')
+            console.log(JSON.parse(localStorage.getItem('authAux')))
         }).catch((error) => {
             console.log("No se deslogueo")
         });

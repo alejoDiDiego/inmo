@@ -1,7 +1,10 @@
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Inicio from '../components/Index/Inicio'
-import { auth } from '../firebase/ControladorFirebase'
+import { auth, db } from '../firebase/ControladorFirebase'
+
+
 
 
 export default function Home() {
@@ -27,7 +30,8 @@ export default function Home() {
 
 useEffect(() => {
   console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
-  console.log(localStorage.getItem('authAux') +' localStorage authAux')
+  console.log('localStorage authAux abajo')
+  console.log(JSON.parse(localStorage.getItem('authAux')))
 
   localStorage.setItem('siguienteCRP2', false)
   console.log(auth.currentUser)
@@ -35,6 +39,21 @@ useEffect(() => {
 
   if(localStorage.getItem('isLogged') == 'true'){
     setLogged(true)
+
+    getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+      console.log(docSnap.data())
+
+      if(docSnap.data().isRegistering == true){
+        updateDoc(doc(db, "Usuarios", auth.currentUser.email), {
+          isRegistering: false
+        })
+      }
+      
+    }).catch(err => {
+      console.log(err)
+    })
+
+    
   }  
 
   

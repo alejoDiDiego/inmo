@@ -167,6 +167,7 @@ const ContainerRegisterParticular1 = ({
 
 
         setDoc(doc(db, "Usuarios", user.email), {
+          isRegistering: true,
           uid: user.uid,
           mail: user.email,
           type: "particular"

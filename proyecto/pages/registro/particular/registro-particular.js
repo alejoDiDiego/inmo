@@ -1,10 +1,15 @@
+import { doc, getDoc } from 'firebase/firestore'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ContainerRegisterParticular1 from '../../../components/Register/Register-Particular/ContainerRegisterParticular1'
 import ContainerRegisterParticular2 from '../../../components/Register/Register-Particular/ContainerRegisterParticular2'
 import ContainerRegisterParticular3 from '../../../components/Register/Register-Particular/ContainerRegisterParticular3'
-import { auth } from '../../../firebase/ControladorFirebase'
+import { auth, db } from '../../../firebase/ControladorFirebase'
 import styles from '../../../styles/RegisterParticular.module.css'
+
+
+
 
 
 
@@ -19,15 +24,38 @@ export default function RegisterParticular() {
 
   const [userCore, setUserCore] = useState({})
 
+  const router = useRouter()
 
 
+  // Si el usuario ya subio una foto, que no pueda acceder a esta seccion
 
   useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem('authAux')))
+    if(JSON.parse(localStorage.getItem('authAux')) == {}){
+      console.log(JSON.parse(localStorage.getItem('authAux')).currentUser.email)
+    }
+    console.log('user posta')
     console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
     if(localStorage.getItem('isLogged') == 'true'){
-      setVerdadero(true)
-      console.log('si')
-      if(localStorage.getItem('siguienteCRP2') === 'true'){ setVerdadero2(true) }
+      getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+        console.log(docSnap.data())
+
+        if(docSnap.data().isRegistering == true){
+          setVerdadero(true)
+          console.log('si')
+          if(localStorage.getItem('siguienteCRP2') === 'true'){ setVerdadero2(true) }
+        } else {
+          router.push('/')
+          console.log('no puede acceder')
+        }
+        
+      }).catch(err => {
+        router.push('/')
+      })
+
+      
+
+      
     } 
     else {
       console.log('no')
