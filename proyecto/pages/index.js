@@ -9,20 +9,44 @@ export default function Home() {
   const [logged, setLogged] = useState(false)
   
 
-  useEffect(() => {
-    localStorage.setItem('siguienteCRP2', false)
-    console.log(auth.currentUser)
-    console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
-    setTimeout(() => {
-        if (auth.currentUser == null) {
-            setLogged(false)
-        } else {
-            setLogged(true)
-        }
-        console.log(auth.currentUser)
-    }, 800)
+//   useEffect(() => {
+//     localStorage.setItem('siguienteCRP2', false)
+//     console.log(auth.currentUser)
+//     console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
+//     setTimeout(() => {
+//         if (auth.currentUser == null) {
+//             setLogged(false)
+//         } else {
+//             setLogged(true)
+//         }
+//         console.log(auth.currentUser)
+//     }, 800)
     
-}, [auth])
+// }, [auth])
+
+
+useEffect(() => {
+  // Agregar un loading o que no aparezca nada ya que aparece un flash de los botones
+
+  let aux = true
+  localStorage.setItem('siguienteCRP2', false)
+  console.log(auth.currentUser)
+  console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
+
+  while(aux == true){
+    if('currentUser' in auth){
+      console.log('si')
+      setLogged(true)
+      aux = false
+    }
+    else{
+        console.log('no')
+        setLogged(false)
+        aux = false
+    }
+    console.log('a')
+  }
+}, [])
 
 
 
