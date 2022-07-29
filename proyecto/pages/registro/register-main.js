@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import ContainerRegister from '../../components/Register/Register-Main/ContainerRegister'
 import { auth } from '../../firebase/ControladorFirebase'
 import styles from '../../styles/RegisterMain.module.css'
-import { Route, useRouter } from 'next/router'
+import { Route, useRouter, withRouter } from 'next/router'
 
 
 export default function RegisterMain() {
@@ -21,16 +21,29 @@ export default function RegisterMain() {
   //   },600)
   // }, [])
 
+useEffect(() => {
+  let aux = true
 
-  useEffect(() => {
-    if(isMounted.current == true) {
-      if (auth.currentUser == null) { console.log('uchiha no hay user'); return; }
-      console.log('uchiha si hay user')
+  while(aux == true){
+    if('currentUser' in auth){
       router.push('/')
-    } else {
-      isMounted.current = true
+      console.log('si')
+      aux = false
     }
-  }, [auth])
+    else{
+        console.log('no')
+        aux = false
+    }
+    console.log('a')
+  }
+}, [])
+
+
+
+
+
+
+
 
 
 
