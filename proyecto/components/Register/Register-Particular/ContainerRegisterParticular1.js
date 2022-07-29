@@ -57,13 +57,19 @@ const ContainerRegisterParticular1 = ({
 
           const user = auth.currentUser
           setDoc(doc(db, "Usuarios", user.email), {
+            isRegistering: true,
             uid: user.uid,
             mail: user.email,
             type: "particular"
           })
+
+          localStorage.setItem('isLogged', true)
+          localStorage.setItem('authAux', JSON.stringify(auth))
+          console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
+          console.log(localStorage.getItem('authAux') +' localStorage authAux')
+
           setVerdadero(true)
           setLoading(false)
-          localStorage.setItem('isLogged', false)
         }, 600)
       }).catch((error) => {
         setLoading(false)
