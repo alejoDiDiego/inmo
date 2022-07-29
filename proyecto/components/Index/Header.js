@@ -17,10 +17,11 @@ export const Header = ({logged, setLogged}) => {
         signOut(auth).then(() => {
             console.log("Sign-out successful.")
             console.log(auth)
+            setLogged(false)
         }).catch((error) => {
             console.log("No se deslogueo")
         });
-        window.location.reload()
+        
 
 
     }

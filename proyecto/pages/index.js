@@ -34,7 +34,7 @@ useEffect(() => {
   console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
 
   while(aux == true){
-    if('currentUser' in auth){
+    if(auth.currentUser != null){
       console.log('si')
       setLogged(true)
       aux = false
