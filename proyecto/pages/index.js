@@ -26,27 +26,21 @@ export default function Home() {
 
 
 useEffect(() => {
-  // Agregar un loading o que no aparezca nada ya que aparece un flash de los botones
+  console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
+  console.log(localStorage.getItem('authAux') +' localStorage authAux')
 
-  let aux = true
   localStorage.setItem('siguienteCRP2', false)
   console.log(auth.currentUser)
   console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
 
-  while(aux == true){
-    if(auth.currentUser != null){
-      console.log('si')
-      setLogged(true)
-      aux = false
-    }
-    else{
-        console.log('no')
-        setLogged(false)
-        aux = false
-    }
-    console.log('a')
-  }
+  if(localStorage.getItem('isLogged') == 'true'){
+    setLogged(true)
+  }  
+
+  
 }, [])
+
+
 
 
 

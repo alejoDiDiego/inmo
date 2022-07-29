@@ -20,26 +20,21 @@ export default function RegisterParticular() {
   const [userCore, setUserCore] = useState({})
 
 
+
+
   useEffect(() => {
-    setTimeout(() => {
-      if(auth.currentUser == null) {
-        console.log("no")
-        console.log(auth.currentUser)
-        setVerdadero(false)
-      } else{
-        setVerdadero(true)
-        console.log("si")
-        console.log(auth.currentUser)
-        if(localStorage.getItem('siguienteCRP2') === 'true'){
-          setVerdadero2(true)
-        } else{
-          console.log('no localStorage')
-          console.log(localStorage.getItem('siguienteCRP2'))
-          console.log(typeof localStorage.getItem('siguienteCRP2'))
-        }
-      }
-      
-    },600)
+    console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
+    if(localStorage.getItem('isLogged') == 'true'){
+      setVerdadero(true)
+      console.log('si')
+      if(localStorage.getItem('siguienteCRP2') === 'true'){ setVerdadero2(true) }
+    } 
+    else {
+      console.log('no')
+      setVerdadero(false)
+    }
+  
+    
   }, [])
 
 

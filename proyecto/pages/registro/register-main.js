@@ -21,27 +21,23 @@ export default function RegisterMain() {
   //   },600)
   // }, [])
 
+
+
+
+
+
 useEffect(() => {
-  let aux = true
-
-  while(aux == true){
-    if('currentUser' in auth){
-      router.push('/')
-      console.log('si')
-      aux = false
-    }
-    else{
-        console.log('no')
-        aux = false
-    }
-    console.log('a')
+  console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
+  if(localStorage.getItem('isLogged') == 'true'){
+    router.push('/')
+    console.log('si')
+  } 
+  else {
+    console.log('no')
   }
+
+  
 }, [])
-
-
-
-
-
 
 
 

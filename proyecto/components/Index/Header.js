@@ -18,6 +18,11 @@ export const Header = ({logged, setLogged}) => {
             console.log("Sign-out successful.")
             console.log(auth)
             setLogged(false)
+            localStorage.setItem('isLogged', false)
+            localStorage.setItem('authAux', JSON.stringify({}))
+
+            console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
+            console.log(localStorage.getItem('authAux') +' localStorage authAux')
         }).catch((error) => {
             console.log("No se deslogueo")
         });

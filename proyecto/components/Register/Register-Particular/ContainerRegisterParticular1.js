@@ -63,6 +63,7 @@ const ContainerRegisterParticular1 = ({
           })
           setVerdadero(true)
           setLoading(false)
+          localStorage.setItem('isLogged', false)
         }, 600)
       }).catch((error) => {
         setLoading(false)
@@ -171,6 +172,10 @@ const ContainerRegisterParticular1 = ({
           type: "particular"
         })
         alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
+        localStorage.setItem('isLogged', true)
+        localStorage.setItem('authAux', JSON.stringify(auth))
+        console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
+        console.log(localStorage.getItem('authAux') +' localStorage authAux')
         setVerdadero(true)
         setLoading(false)
 
