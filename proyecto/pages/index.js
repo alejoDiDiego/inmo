@@ -39,7 +39,6 @@ useEffect(() => {
 
   if(localStorage.getItem('isLogged') == 'true'){
     setLogged(true)
-
     getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
       console.log(docSnap.data())
 

@@ -55,7 +55,9 @@ const ContainerRegisterParticular1 = ({
           let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
 
           if (isRegistered == true) {
-
+            localStorage.setItem('isLogged', true)
+            localStorage.setItem('authAux', JSON.stringify(auth))
+            console.log("pal lobby")
             router.push('/')
             return
           }
