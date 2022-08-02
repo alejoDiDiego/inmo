@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styles from '../../styles/Header.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import { auth } from '../../firebase/ControladorFirebase'
-import { signOut } from 'firebase/auth'
+import { auth, handleSignOut } from '../../firebase/ControladorFirebase'
+
 
 
 
@@ -13,24 +13,7 @@ export const Header = ({logged, setLogged}) => {
     
 
 
-    const handleSignOut = () => {
-        signOut(auth).then(() => {
-            console.log("Sign-out successful.")
-            console.log(auth)
-            setLogged(false)
-            localStorage.setItem('isLogged', false)
-            localStorage.setItem('authAux', JSON.stringify({}))
 
-            console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
-            console.log('localStorage authAux abajo')
-            console.log(JSON.parse(localStorage.getItem('authAux')))
-        }).catch((error) => {
-            console.log("No se deslogueo")
-        });
-        
-
-
-    }
 
 
 
@@ -58,7 +41,7 @@ export const Header = ({logged, setLogged}) => {
                                 <Link href="/registro/register-main"><a className={styles.link_registro}>Registrarse</a></Link>
                             </div>
                             :
-                            <button onClick={handleSignOut}>Desloguear</button>
+                            <button onClick={() => handleSignOut()}>Desloguear</button>
 
                     }
 

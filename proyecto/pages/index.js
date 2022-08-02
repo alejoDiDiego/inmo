@@ -2,7 +2,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Inicio from '../components/Index/Inicio'
-import { auth, db } from '../firebase/ControladorFirebase'
+import { auth, db, handleSignOut } from '../firebase/ControladorFirebase'
 
 
 
@@ -29,6 +29,12 @@ export default function Home() {
 
 
 useEffect(() => {
+  if(JSON.parse(localStorage.getItem('authAux')) == {} || localStorage.getItem('authAux') == null){
+    handleSignOut()
+    localStorage.setItem('isLogged', false)
+    localStorage.setItem('siguienteCRP2', false)
+  }
+
   console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
   console.log('localStorage authAux abajo')
   console.log(JSON.parse(localStorage.getItem('authAux')))

@@ -33,6 +33,12 @@ export default function RegisterParticular() {
   // Si el usuario ya subio una foto, que no pueda acceder a esta seccion
 
   useEffect(() => {
+    if(JSON.parse(localStorage.getItem('authAux')) == {} || localStorage.getItem('authAux') == null){
+      handleSignOut()
+      localStorage.setItem('isLogged', false)
+      localStorage.setItem('siguienteCRP2', false)
+    }
+    
     console.log(JSON.parse(localStorage.getItem('authAux')))
     if (JSON.parse(localStorage.getItem('authAux')) == {}) {
       console.log(JSON.parse(localStorage.getItem('authAux')).currentUser.email)

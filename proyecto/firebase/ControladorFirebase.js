@@ -1,5 +1,5 @@
   import { initializeApp } from 'firebase/app';
-  import { getAuth} from "firebase/auth";
+  import { getAuth, signOut} from "firebase/auth";
   import { getStorage} from "firebase/storage";
   import { getFirestore, collection, getDocs } from 'firebase/firestore'
   import "firebase/compat/firestore";
@@ -41,4 +41,21 @@ const db = getFirestore(app)
 const providerGoogle = new GoogleAuthProvider();
 
 
-export {app, storage, auth, db, providerGoogle} 
+const handleSignOut = () => {
+  signOut(auth).then(() => {
+      console.log("Sign-out successful.")
+      console.log(auth)
+      localStorage.setItem('isLogged', false)
+      localStorage.setItem('authAux', JSON.stringify({}))
+      console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
+      console.log('localStorage authAux abajo')
+      console.log(JSON.parse(localStorage.getItem('authAux')))
+      window.location.reload()
+  }).catch((error) => {
+      console.log("No se deslogueo")
+  });
+  
+}
+
+
+export {app, storage, auth, db, providerGoogle, handleSignOut} 

@@ -27,6 +27,12 @@ export default function RegisterMain() {
 
 
 useEffect(() => {
+  if(JSON.parse(localStorage.getItem('authAux')) == {} || localStorage.getItem('authAux') == null){
+    handleSignOut()
+    localStorage.setItem('isLogged', false)
+    localStorage.setItem('siguienteCRP2', false)
+  }
+  
   console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
   if(localStorage.getItem('isLogged') == 'true'){
     router.push('/')
