@@ -149,3 +149,9 @@
     margin: 0;
 }
 
+.div_spinner{
+    margin-top: 385px;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15px;
+}
