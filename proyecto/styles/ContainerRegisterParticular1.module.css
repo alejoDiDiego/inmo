@@ -208,6 +208,17 @@
     margin: 0;
 }
 
+.div_input{
+    display: flex;
+    align-items: center;
+}
+
+.div_input i{
+    margin: 0;
+    margin-top: 10px;
+    margin-left: -30px;
+    cursor: pointer;
+}
 
 
 

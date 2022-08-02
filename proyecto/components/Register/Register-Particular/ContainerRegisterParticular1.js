@@ -33,9 +33,14 @@ const ContainerRegisterParticular1 = ({
   const [emailExistsError, setEmailExistsError] = useState(false)
   const [passwordShort, setPassswordShort] = useState(false)
 
+  const [viewPassword, setViewPassword] = useState(false)
+  const [viewConfirmarPassword, setViewConfirmarPassword] = useState(false)
+
   const [loading, setLoading] = useState(false)
 
   let load = false
+
+
 
 
 
@@ -219,6 +224,7 @@ const ContainerRegisterParticular1 = ({
 
 
 
+
   return (
     <div className={styles.div_supremo}>
       <div className={styles.main_container}>
@@ -251,7 +257,10 @@ const ContainerRegisterParticular1 = ({
                 {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
               </div>
 
-              <input value={password} onChange={e => setPassword(e.target.value)} type='password' readOnly={loading} />
+              <div className={styles.div_input}>
+                <input value={password} id="password" onChange={e => setPassword(e.target.value)} type={viewPassword == true ? "text" : "password"} readOnly={loading} />
+                <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+              </div>
             </div>
 
             <div className={styles.fields}>
@@ -259,7 +268,11 @@ const ContainerRegisterParticular1 = ({
                 <label>Confirmar contraseña</label>
                 {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
               </div>
-              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' readOnly={loading} />
+              <div className={styles.div_input}>
+                <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} />
+                <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+              </div>
+              
             </div>
 
 
