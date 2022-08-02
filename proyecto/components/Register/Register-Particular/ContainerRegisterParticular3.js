@@ -203,7 +203,7 @@ const ContainerRegisterParticular3 = ({
                   {errorNomUsu == true ? <p>El nombre es obligatorio</p> : null}
                 </div>
 
-                <input value={nomUsu} onChange={e => setNomUsu(e.target.value)} type='text' />
+                <input value={nomUsu} onChange={e => setNomUsu(e.target.value)} type='text' readOnly={loading} />
               </div>
 
               <div className={styles.fields}>
@@ -211,12 +211,12 @@ const ContainerRegisterParticular3 = ({
                   <label>Numero de celular</label>
                 </div>
 
-                <input value={numCel} onChange={handleNumCel} type='text' placeholder='Ej. 5491122223333' />
+                <input value={numCel} onChange={handleNumCel} type='text' placeholder='Ej. 5491122223333' readOnly={loading} />
               </div>
 
               <div className={styles.fields}>
                 <label>Numero de telefono <span>(Opcional)</span></label>
-                <input value={numTel} onChange={handleNumTel} type='text' placeholder='Ej. 541122223333' />
+                <input value={numTel} onChange={handleNumTel} type='text' placeholder='Ej. 541122223333' readOnly={loading} />
               </div>
             </div>
 

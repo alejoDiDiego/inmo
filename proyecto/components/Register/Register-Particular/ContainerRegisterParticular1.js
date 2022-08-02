@@ -235,13 +235,13 @@ const ContainerRegisterParticular1 = ({
             </div>*/}
 
             <div className={styles.fields}>
-              <div className={styles.div_error}>
+              <div className={styles.div_error} >
                 <label>Email</label>
                 {emailError == true ? <p>Ingrese un email valido</p> : null}
                 {emailExistsError == true ? <p>El mail ya existe</p> : null}
               </div>
 
-              <input value={email} onChange={e => setEmail(e.target.value)} type='email' />
+              <input value={email} onChange={e => setEmail(e.target.value)} type='email' readOnly={loading} />
             </div>
 
             <div className={styles.fields}>
@@ -251,7 +251,7 @@ const ContainerRegisterParticular1 = ({
                 {passwordShort == true ? <p>La contraseña debe tener mas de 6 digitos</p> : null}
               </div>
 
-              <input value={password} onChange={e => setPassword(e.target.value)} type='password' />
+              <input value={password} onChange={e => setPassword(e.target.value)} type='password' readOnly={loading} />
             </div>
 
             <div className={styles.fields}>
@@ -259,7 +259,7 @@ const ContainerRegisterParticular1 = ({
                 <label>Confirmar contraseña</label>
                 {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
               </div>
-              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' />
+              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type='password' readOnly={loading} />
             </div>
 
 
