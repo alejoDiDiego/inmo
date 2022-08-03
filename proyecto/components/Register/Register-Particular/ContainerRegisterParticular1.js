@@ -4,7 +4,7 @@ import styles from '../../../styles/ContainerRegisterParticular1.module.css'
 import { applyActionCode, confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendSignInLinkToEmail, signInWithPopup, signOut } from "firebase/auth";
 import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
-import { auth, db, providerGoogle } from '../../../firebase/ControladorFirebase'
+import { auth, db, handleSignOut, providerGoogle } from '../../../firebase/ControladorFirebase'
 import { Route, useRouter } from 'next/router'
 import Image from 'next/image'
 import Spinner from '../../Spinner/Spinner';
@@ -55,6 +55,11 @@ const ContainerRegisterParticular1 = ({
           let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
 
           if (isRegistered == true) {
+
+
+
+            
+            
             localStorage.setItem('isLogged', true)
             localStorage.setItem('authAux', JSON.stringify(auth))
             console.log("pal lobby")
@@ -213,16 +218,6 @@ const ContainerRegisterParticular1 = ({
 
 
 
-  const handleSignOut = () => {
-    signOut(auth).then(() => {
-      console.log("Sign-out successful.")
-      console.log(auth)
-    }).catch((error) => {
-      console.log("No se deslogueo")
-    });
-    window.location.reload()
-
-  }
 
 
 
@@ -289,6 +284,7 @@ const ContainerRegisterParticular1 = ({
             {
               loading == false ?
                 <div className={styles.div_buttons}>
+                  <button onClick={() => handleSignOut()}>Desloguear</button>
                   <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
                   <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
                 </div>

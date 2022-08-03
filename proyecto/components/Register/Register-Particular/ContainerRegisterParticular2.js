@@ -2,9 +2,11 @@ import { updateDoc } from 'firebase/firestore'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
-import { auth, storage } from '../../../firebase/ControladorFirebase'
+import { auth, handleSignOut, storage } from '../../../firebase/ControladorFirebase'
 import { ref, uploadBytes, getDownloadURL, listAll, list } from "firebase/storage";
 import { sendEmailVerification, signOut } from 'firebase/auth'
+import { useRouter } from 'next/router'
+
 
 
 
@@ -30,6 +32,7 @@ const ContainerRegisterParticular2 = ({
     const [imgFondo, setImgFondo] = useState(false)
 
     const [errorFalta, setErrorFalta] = useState(false)
+
 
 
     useEffect(() => {
@@ -86,17 +89,6 @@ const ContainerRegisterParticular2 = ({
     }
 
 
-
-    const handleSignOut = () => {
-        signOut(auth).then(() => {
-            console.log("Sign-out successful.")
-            console.log(auth)
-        }).catch((error) => {
-            console.log("No se deslogueo")
-
-        });
-        window.location.reload()
-    }
 
 
 
@@ -160,7 +152,7 @@ const ContainerRegisterParticular2 = ({
                             }
 
                             <div className={styles.buttons}>
-
+                                <button onClick={() => handleSignOut()}>Desloguear</button>
                                 <button className={styles.button} onClick={handleOmitir}>Omitir</button>
                                 <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
                             </div>

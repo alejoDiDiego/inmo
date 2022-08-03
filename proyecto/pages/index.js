@@ -3,13 +3,15 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Inicio from '../components/Index/Inicio'
 import { auth, db, handleSignOut } from '../firebase/ControladorFirebase'
-
+import { useRouter } from 'next/router'
 
 
 
 export default function Home() {
 
   const [logged, setLogged] = useState(false)
+
+  const router = useRouter()
   
 
 //   useEffect(() => {
@@ -29,15 +31,17 @@ export default function Home() {
 
 
 useEffect(() => {
-  if(JSON.parse(localStorage.getItem('authAux')) == {} || localStorage.getItem('authAux') == null){
-    handleSignOut()
-    localStorage.setItem('isLogged', false)
-    localStorage.setItem('siguienteCRP2', false)
-  }
+    let authAuxVar = localStorage.getItem('authAux')
+    let isLoggedVar = localStorage.getItem('isLogged')
+    if(authAuxVar == null || isLoggedVar == null){
+      handleSignOut()
+    }
+
 
   console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
   console.log('localStorage authAux abajo')
-  console.log(JSON.parse(localStorage.getItem('authAux')))
+  
+  console.log(authAuxVar)
 
   localStorage.setItem('siguienteCRP2', false)
   console.log(auth.currentUser)
@@ -47,11 +51,8 @@ useEffect(() => {
     setLogged(true)
     getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
       console.log(docSnap.data())
-
       if(docSnap.data().isRegistering == true){
-        updateDoc(doc(db, "Usuarios", auth.currentUser.email), {
-          isRegistering: false
-        })
+        router.push('/registro/particular/registro-particular')
       }
       
     }).catch(err => {

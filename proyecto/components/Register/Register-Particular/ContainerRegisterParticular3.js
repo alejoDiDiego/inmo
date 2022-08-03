@@ -176,6 +176,10 @@ const ContainerRegisterParticular3 = ({
       alert("Nombre")
     }
 
+    updateDoc(doc(db, "Usuarios", user.email), {
+      isRegistering: false
+    })
+
     setTimeout(() => {
       router.push('/')
     }, 3000)

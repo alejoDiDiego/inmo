@@ -6,7 +6,7 @@ import ContainerRegisterParticular1 from '../../../components/Register/Register-
 import ContainerRegisterParticular2 from '../../../components/Register/Register-Particular/ContainerRegisterParticular2'
 import ContainerRegisterParticular3 from '../../../components/Register/Register-Particular/ContainerRegisterParticular3'
 import ContainerSpinnerParticular from '../../../components/Register/Register-Particular/ContainerSpinnerParticular'
-import { auth, db } from '../../../firebase/ControladorFirebase'
+import { auth, db, handleSignOut } from '../../../firebase/ControladorFirebase'
 import styles from '../../../styles/RegisterParticular.module.css'
 
 
@@ -33,13 +33,12 @@ export default function RegisterParticular() {
   // Si el usuario ya subio una foto, que no pueda acceder a esta seccion
 
   useEffect(() => {
-    if(JSON.parse(localStorage.getItem('authAux')) == {} || localStorage.getItem('authAux') == null){
+    let authAuxVar = localStorage.getItem('authAux')
+    let isLoggedVar = localStorage.getItem('isLogged')
+    if(authAuxVar == null || isLoggedVar == null){
       handleSignOut()
-      localStorage.setItem('isLogged', false)
-      localStorage.setItem('siguienteCRP2', false)
     }
-    
-    console.log(JSON.parse(localStorage.getItem('authAux')))
+
     if (JSON.parse(localStorage.getItem('authAux')) == {}) {
       console.log(JSON.parse(localStorage.getItem('authAux')).currentUser.email)
     }
@@ -50,7 +49,7 @@ export default function RegisterParticular() {
       getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
         console.log(docSnap.data())
 
-        if (docSnap.data().isRegistering == true) {
+        if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
           setVerdadero(true)
           console.log('si')
           setLoadingBig(false)
@@ -61,6 +60,7 @@ export default function RegisterParticular() {
         }
 
       }).catch(err => {
+        console.log("error")
         router.push('/')
       })
 
