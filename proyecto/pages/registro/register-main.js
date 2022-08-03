@@ -30,41 +30,47 @@ export default function RegisterMain() {
 
 
 
-useEffect(() => {
-  
-  let authAuxVar = localStorage.getItem('authAux')
-  let isLoggedVar = localStorage.getItem('isLogged')
-  if(authAuxVar == null || isLoggedVar == null){
-    handleSignOut()
-  }
+  useEffect(() => {
+
+    let authAuxVar = localStorage.getItem('authAux')
+    let isLoggedVar = localStorage.getItem('isLogged')
+    if (authAuxVar == null || isLoggedVar == null) {
+      handleSignOut()
+    }
 
 
 
-  console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
-  if(localStorage.getItem('isLogged') == 'true'){
-    
-    getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-      console.log(docSnap.data())
-      if(docSnap.data().isRegistering == true){
-        router.push('/registro/particular/registro-particular')
-        return
-      } else{
-        router.push('/')
-      }
-      
-    }).catch(err => {
-      console.log("error")
-      console.log(err)
-    })
-    
-  } 
-  else {
-    setLoading(false)
-    console.log('no')
-  }
+    console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
+    if (localStorage.getItem('isLogged') == 'true') {
 
-  
-}, [])
+      getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+        console.log(docSnap.data())
+        if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
+          setTimeout(() => {
+            router.push('/registro/particular/registro-particular')
+            setLoading(false)
+          }, 1000)
+          return
+        } else {
+          router.push('/')
+          setLoading(false)
+        }
+
+      }).catch(err => {
+        console.log("error")
+        console.log(err)
+      })
+
+    }
+    else {
+      setTimeout(() => {
+        setLoading(false)
+        console.log('no')
+      }, 2000)
+    }
+
+
+  }, [])
 
 
 

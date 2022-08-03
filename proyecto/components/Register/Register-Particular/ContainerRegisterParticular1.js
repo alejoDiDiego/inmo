@@ -57,14 +57,26 @@ const ContainerRegisterParticular1 = ({
           if (isRegistered == true) {
 
 
+            getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+              console.log(docSnap.data())
+              if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
+                setVerdadero(true)
+                setLoading(false)
+                return
+              } else {
+                localStorage.setItem('isLogged', true)
+                localStorage.setItem('authAux', JSON.stringify(auth))
+                console.log("pal lobby")
+                router.push('/')
+                setLoading(false)
+                return
+              }
 
-            
-            
-            localStorage.setItem('isLogged', true)
-            localStorage.setItem('authAux', JSON.stringify(auth))
-            console.log("pal lobby")
-            router.push('/')
-            return
+            }).catch(err => {
+              console.log("error")
+              console.log(err)
+              setLoading(false)
+            })
           }
 
           const user = auth.currentUser
@@ -77,8 +89,8 @@ const ContainerRegisterParticular1 = ({
 
           localStorage.setItem('isLogged', true)
           localStorage.setItem('authAux', JSON.stringify(auth))
-          console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
-          console.log(localStorage.getItem('authAux') +' localStorage authAux')
+          console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
+          console.log(localStorage.getItem('authAux') + ' localStorage authAux')
 
           setVerdadero(true)
           setLoading(false)
@@ -193,8 +205,8 @@ const ContainerRegisterParticular1 = ({
         alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
         localStorage.setItem('isLogged', true)
         localStorage.setItem('authAux', JSON.stringify(auth))
-        console.log(localStorage.getItem('isLogged') +' localStorage isLogged')
-        console.log(localStorage.getItem('authAux') +' localStorage authAux')
+        console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
+        console.log(localStorage.getItem('authAux') + ' localStorage authAux')
         setVerdadero(true)
         setLoading(false)
 
@@ -269,7 +281,7 @@ const ContainerRegisterParticular1 = ({
                 <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} />
                 <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               </div>
-              
+
             </div>
 
 

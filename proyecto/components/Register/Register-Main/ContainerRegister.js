@@ -53,7 +53,9 @@ const ContainerRegister = ({ loading }) => {
                         </Link>
                     </div>
                     :
-                    <Spinner />
+                    <div className={styles.div_spinner}>
+                        <Spinner />
+                    </div>
             }
         </div>
 
