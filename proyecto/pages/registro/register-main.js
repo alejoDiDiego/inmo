@@ -52,8 +52,9 @@ export default function RegisterMain() {
           }, 1000)
           return
         } else {
+          console.log("volvio al index")
           router.push('/')
-          setLoading(false)
+          
         }
 
       }).catch(err => {

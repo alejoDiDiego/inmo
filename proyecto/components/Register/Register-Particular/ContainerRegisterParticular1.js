@@ -53,7 +53,7 @@ const ContainerRegisterParticular1 = ({
         setTimeout(async () => {
 
           let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
-
+          localStorage.setItem('authAux', JSON.stringify(auth))
           if (isRegistered == true) {
 
 

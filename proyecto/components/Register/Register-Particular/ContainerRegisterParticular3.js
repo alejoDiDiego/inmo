@@ -152,33 +152,34 @@ const ContainerRegisterParticular3 = ({
       updateDoc(doc(db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroCel: numCel,
-        numeroTel: numTel
+        numeroTel: numTel,
+        isRegistering: false
       })
       alert("Nombre, Num Celu, Num Tel")
     } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
       updateDoc(doc(db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroCel: numCel,
+        isRegistering: false
       })
       alert("Nombre, Num Celu")
     }
     else if ((numTel.length > 0 || numTel != '') && (numCel.length == 0 || numCel == '')) {
       updateDoc(doc(db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
-        numeroTel: numTel
+        numeroTel: numTel,
+        isRegistering: false
       })
       alert("Nombre, Num Tel")
     }
     else {
       updateDoc(doc(db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
+        isRegistering: false
       })
       alert("Nombre")
     }
 
-    updateDoc(doc(db, "Usuarios", user.email), {
-      isRegistering: false
-    })
 
     setTimeout(() => {
       router.push('/')
