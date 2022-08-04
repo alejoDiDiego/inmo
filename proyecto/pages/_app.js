@@ -1,8 +1,23 @@
 import '../styles/globals.css'
 import '../styles/Spinner.css'
 
+import firebase, { FirebaseContext } from '../firebase';
+
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+
+  return (
+    <FirebaseContext
+      value={{
+        firebase
+      }}
+    >
+
+      <Component {...pageProps} />
+
+    </FirebaseContext>
+
+
+  )
 }
 
 

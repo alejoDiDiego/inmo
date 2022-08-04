@@ -9,6 +9,8 @@ import { Route, useRouter } from 'next/router'
 import Image from 'next/image'
 import Spinner from '../../Spinner/Spinner';
 
+import firebase from '../../../firebase';
+
 
 
 
@@ -44,66 +46,65 @@ const ContainerRegisterParticular1 = ({
 
 
 
-
   const handleGoogle = async () => {
-    setLoading(true)
-    setTimeout(() => {
-      signInWithPopup(auth, providerGoogle).then((result) => {
 
-        setTimeout(async () => {
-
-          let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
-          localStorage.setItem('authAux', JSON.stringify(auth))
-          if (isRegistered == true) {
+    try {
+      setLoading(true)
+      await firebase.registrarGoogle();
+      let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
+      localStorage.setItem('authAux', JSON.stringify(auth))
+      if (isRegistered == true) {
 
 
-            getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-              console.log(docSnap.data())
-              if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
-                setVerdadero(true)
-                setLoading(false)
-                return
-              } else {
-                localStorage.setItem('isLogged', true)
-                localStorage.setItem('authAux', JSON.stringify(auth))
-                console.log("pal lobby")
-                router.push('/')
-                setLoading(false)
-                return
-              }
-
-            }).catch(err => {
-              console.log("error")
-              console.log(err)
-              setLoading(false)
-            })
+        await getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+          console.log(docSnap.data())
+          if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
+            setVerdadero(true)
+            setLoading(false)
+            return
+          } else {
+            localStorage.setItem('isLogged', true)
+            localStorage.setItem('authAux', JSON.stringify(auth))
+            console.log("pal lobby")
+            router.push('/')
+            setLoading(false)
+            return
           }
 
-          const user = auth.currentUser
-          setDoc(doc(db, "Usuarios", user.email), {
-            isRegistering: true,
-            uid: user.uid,
-            mail: user.email,
-            type: "particular"
-          })
-
-          localStorage.setItem('isLogged', true)
-          localStorage.setItem('authAux', JSON.stringify(auth))
-          console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
-          console.log(localStorage.getItem('authAux') + ' localStorage authAux')
-
-          setVerdadero(true)
+        }).catch(err => {
+          console.log("error")
+          console.log(err)
           setLoading(false)
-        }, 600)
-      }).catch((error) => {
-        setLoading(false)
-        const errorCode = error.code;
-        console.log(errorCode)
-        const errorMessage = error.message;
-        console.log(errorMessage)
+        })
+      }
 
+
+
+      const user = auth.currentUser
+      setDoc(doc(db, "Usuarios", user.email), {
+        isRegistering: true,
+        uid: user.uid,
+        mail: user.email,
+        type: "particular"
       })
-    }, 500)
+
+      localStorage.setItem('isLogged', true)
+      localStorage.setItem('authAux', JSON.stringify(auth))
+      console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
+      console.log(localStorage.getItem('authAux') + ' localStorage authAux')
+
+      setVerdadero(true)
+      setLoading(false)
+    }
+
+    catch (error) {
+      setLoading(false)
+      const errorCode = error.code;
+      console.log(errorCode)
+      const errorMessage = error.message;
+      console.log(errorMessage)
+
+    }
 
   }
 
@@ -174,56 +175,36 @@ const ContainerRegisterParticular1 = ({
 
 
     setLoading(true)
-    setTimeout(() => {
-      console.log(loading)
-      createUserWithEmailAndPassword(auth, emailAccount, passwordAccount).then(async (userCredential) => {
 
+    try {
 
-        const user = userCredential.user
+      await firebase.registrar(email, password)
 
-        const actionCodeSettings = {
-          url: 'http://localhost:3000/registro/particular/registro-particular',
-          handleCodeInApp: true,
-        };
+      const user = userCredential.user
 
-
-        sendEmailVerification(user, actionCodeSettings).then(() => {
-          console.log("se mando")
-        })
-
-
-
-
-
-
-        setDoc(doc(db, "Usuarios", user.email), {
-          isRegistering: true,
-          uid: user.uid,
-          mail: user.email,
-          type: "particular"
-        })
-        alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
-        localStorage.setItem('isLogged', true)
-        localStorage.setItem('authAux', JSON.stringify(auth))
-        console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
-        console.log(localStorage.getItem('authAux') + ' localStorage authAux')
-        setVerdadero(true)
-        setLoading(false)
-
-
-
+      setDoc(doc(db, "Usuarios", user.email), {
+        isRegistering: true,
+        uid: user.uid,
+        mail: user.email,
+        type: "particular"
       })
-        .catch((error) => {
-          const errorCode = error.code;
-          console.log(errorCode)
-          const errorMessage = error.message;
-          console.log(errorMessage)
-        });
+      
+      alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
+      localStorage.setItem('isLogged', true)
+      localStorage.setItem('authAux', JSON.stringify(auth))
+      console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
+      console.log(localStorage.getItem('authAux') + ' localStorage authAux')
+      setVerdadero(true)
+      setLoading(false)
+    }
 
-      return;
-    }, 2000)
+    catch (error) {
+      const errorMessage = error.message;
+      console.log(errorMessage)
+      setLoading(false)
+    };
 
-
+    return;
 
   }
 
