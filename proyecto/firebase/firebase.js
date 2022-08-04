@@ -33,9 +33,9 @@ class Firebase {
     }
 
     handleSignOut = () => {
-        signOut(auth).then(() => {
+        signOut(this.auth).then(() => {
           console.log("Sign-out successful.")
-          console.log(auth)
+          console.log(this.auth)
           localStorage.setItem('isLogged', false)
           localStorage.setItem('authAux', JSON.stringify({}))
           localStorage.setItem('siguienteCRP2', false)

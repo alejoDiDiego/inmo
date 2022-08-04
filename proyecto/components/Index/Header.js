@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styles from '../../styles/Header.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import { auth, handleSignOut } from '../../firebase/ControladorFirebase'
+import firebase from '../../firebase'
+
 
 
 
@@ -41,7 +42,7 @@ export const Header = ({logged, setLogged}) => {
                                 <Link href="/registro/register-main"><a className={styles.link_registro}>Registrarse</a></Link>
                             </div>
                             :
-                            <button onClick={() => handleSignOut()}>Desloguear</button>
+                            <button onClick={() => firebase.handleSignOut()}>Desloguear</button>
 
                     }
 
