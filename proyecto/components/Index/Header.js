@@ -31,10 +31,6 @@ export const Header = ({usuario}) => {
                     }
 
 
-
-
-
-
                     <div className={styles.div_search}>
                         <form className={styles.form_search} onSubmit={null}>
                             <input type="text" className={styles.search} placeholder='Direccion, ubicacion, codigo postal' />

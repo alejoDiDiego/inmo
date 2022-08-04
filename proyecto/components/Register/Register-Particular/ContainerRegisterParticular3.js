@@ -7,7 +7,7 @@ import Spinner from '../../Spinner/Spinner';
 import { useRouter } from 'next/router';
 import firebase from '../../../firebase';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { sendEmailVerification } from "firebase/auth";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 
 
@@ -110,7 +110,19 @@ const ContainerRegisterParticular3 = ({
 
     if (imagePerfilUpload != null) {
       const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
-      await uploadBytes(imagePerfRef, imagePerfilUpload) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
+      const snapshot = await uploadBytes(imagePerfRef, imagePerfilUpload) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
+      console.log("url")
+      const url = await getDownloadURL(snapshot.ref)
+      console.log(url)
+      await updateProfile(user, {
+        photoURL: url
+      }).then(() => {
+        console.log("se actualizo la foto de display")
+      }).catch((error) => {
+        console.log(error.message)
+        console.log("hubo un errror actualizando la foto de display")
+      });
+
     }
 
     if (imageFondoUpload != null) {
@@ -148,6 +160,14 @@ const ContainerRegisterParticular3 = ({
       alert("Nombre")
     }
 
+    await updateProfile(user, {
+      displayName: nomUsu
+    }).then(() => {
+      console.log("se actualizo el nombre de display")
+    }).catch((error) => {
+      console.log(error.message)
+      console.log("hubo un errror actualizando el nombre de display")
+    });
     
 
 
