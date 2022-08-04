@@ -25,7 +25,7 @@ export default function RegisterParticular() {
 
   const [loadingBig, setLoadingBig] = useState(false)
 
-
+  
   const [userCore, setUserCore] = useState({})
 
   const router = useRouter()
@@ -97,6 +97,7 @@ export default function RegisterParticular() {
               setVerdadero={setVerdadero}
               userCore={userCore}
               setUserCore={setUserCore}
+
             />
             :
             (
@@ -108,6 +109,7 @@ export default function RegisterParticular() {
                   setUserCore={setUserCore}
                   omitir={omitir}
                   setOmitir={setOmitir}
+
                 />
                 :
                 <ContainerRegisterParticular3
@@ -116,6 +118,7 @@ export default function RegisterParticular() {
                   setUserCore={setUserCore}
                   omitir={omitir}
                   setOmitir={setOmitir}
+
                 />
             )
 

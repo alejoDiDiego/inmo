@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import { sendEmailVerification} from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Spinner from '../../Spinner/Spinner';
-
 import firebase from '../../../firebase';
 
 
@@ -18,7 +16,7 @@ import firebase from '../../../firebase';
 const ContainerRegisterParticular1 = ({
   setVerdadero,
   userCore,
-  setUserCore,
+  setUserCore
 }) => {
 
   const router = useRouter()
@@ -52,50 +50,17 @@ const ContainerRegisterParticular1 = ({
       const user = await firebase.registrarGoogle();
       let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
       localStorage.setItem('authAux', JSON.stringify(firebase.auth))
-      if (isRegistered == true) {
-
-
-        await getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-          console.log(docSnap.data())
-          if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
-            setVerdadero(true)
-            setLoading(false)
-            return
-          } else {
-            localStorage.setItem('isLogged', true)
-            localStorage.setItem('authAux', JSON.stringify(firebase.auth))
-            console.log("pal lobby")
-            router.push('/')
-            setLoading(false)
-            return
-          }
-
-        }).catch(err => {
-          console.log("error")
-          console.log(err)
-          setLoading(false)
+      if (isRegistered == false) {
+        setDoc(doc(firebase.db, "Usuarios", user.email), {
+          uid: user.uid,
+          mail: user.email,
+          type: "particular"
         })
       }
-
-
-      
-
-      setDoc(doc(firebase.db, "Usuarios", user.email), {
-        isRegistering: true,
-        uid: user.uid,
-        mail: user.email,
-        type: "particular"
-      })
-
-      localStorage.setItem('isLogged', true)
-      localStorage.setItem('authAux', JSON.stringify(firebase.auth))
-      console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
-      console.log(localStorage.getItem('authAux') + ' localStorage authAux')
-
-      setVerdadero(true)
       setLoading(false)
-    }
+      router.push('/')
 
+    }
     catch (error) {
       setLoading(false)
       const errorCode = error.code;
@@ -124,9 +89,6 @@ const ContainerRegisterParticular1 = ({
     setPasswordError(false)
     setConfirmarPasswordError(false)
     setEmailExistsError(false)
-
-    let emailAccount = email
-    let passwordAccount = password
 
     let errorEmailVar = false;
     let errorPasswordVar = false;
@@ -158,7 +120,7 @@ const ContainerRegisterParticular1 = ({
     }
 
 
-
+    setLoading(true)
 
     let isRegistered = false
     console.log("llega")
@@ -172,44 +134,52 @@ const ContainerRegisterParticular1 = ({
       return;
     }
 
-    setLoading(true)
-
-    try {
-
-      const user = await firebase.registrar(firebase.auth, email, password)
 
 
-      const actionCodeSettings = {
-        url: 'http://localhost:3000/registro/particular/registro-particular',
-        handleCodeInApp: true,
-      };
+    setUserCore({
+      email,
+      password,
+    })
+
+    setLoading(false)
+    setVerdadero(true)
+
+    // try {
+
+    //   const user = await firebase.registrar(firebase.auth, email, password)
 
 
-      sendEmailVerification(user, actionCodeSettings).then(() => {
-        console.log("se mando")
-      })
+    //   const actionCodeSettings = {
+    //     url: 'http://localhost:3000/registro/particular/registro-particular',
+    //     handleCodeInApp: true,
+    //   };
 
-      setDoc(doc(firebase.db, "Usuarios", user.email), {
-        isRegistering: true,
-        uid: user.uid,
-        mail: user.email,
-        type: "particular"
-      })
-      
-      alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
-      localStorage.setItem('isLogged', true)
-      localStorage.setItem('authAux', JSON.stringify(firebase.auth))
-      console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
-      console.log(localStorage.getItem('authAux') + ' localStorage authAux')
-      setVerdadero(true)
-      setLoading(false)
-    }
 
-    catch (error) {
-      const errorMessage = error.message;
-      console.log(errorMessage)
-      setLoading(false)
-    };
+    //   sendEmailVerification(user, actionCodeSettings).then(() => {
+    //     console.log("se mando")
+    //   })
+
+    //   setDoc(doc(firebase.db, "Usuarios", user.email), {
+    //     isRegistering: true,
+    //     uid: user.uid,
+    //     mail: user.email,
+    //     type: "particular"
+    //   })
+
+    //   alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
+    //   localStorage.setItem('isLogged', true)
+    //   localStorage.setItem('authAux', JSON.stringify(firebase.auth))
+    //   console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
+    //   console.log(localStorage.getItem('authAux') + ' localStorage authAux')
+    //   setVerdadero(true)
+    //   setLoading(false)
+    // }
+
+    // catch (error) {
+    //   const errorMessage = error.message;
+    //   console.log(errorMessage)
+    //   setLoading(false)
+    // };
 
     return;
 

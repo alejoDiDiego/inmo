@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { doc, updateDoc, getFirestore } from "firebase/firestore";
+import { doc, updateDoc, getFirestore, setDoc } from "firebase/firestore";
 import styles from '../../../styles/ContainerRegisterParticular3.module.css'
 import MyApp from '../../../pages/_app';
 import "firebase/compat/firestore";
 import Spinner from '../../Spinner/Spinner';
 import { useRouter } from 'next/router';
 import firebase from '../../../firebase';
-
-
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { sendEmailVerification } from "firebase/auth";
 
 
 
@@ -102,8 +102,6 @@ const ContainerRegisterParticular3 = ({
   const handleSubmit = async () => {
     setErrorNomUsu(false)
 
-
-
     if (nomUsu == '' || nomUsu == null || nomUsu.length == 0) {
       setErrorNomUsu(true)
       return
@@ -111,25 +109,49 @@ const ContainerRegisterParticular3 = ({
 
     setLoading(true)
 
+    const { email, password, imagePerfilUpload, imageFondoUpload } = userCore
+
+    const user = await firebase.registrar(firebase.auth, email, password)
+
+    const actionCodeSettings = {
+      url: 'http://localhost:3000/registro/particular/registro-particular',
+      handleCodeInApp: true,
+    };
+
+    await sendEmailVerification(user, actionCodeSettings)
+    console.log("se mando")
+
+    alert("Se mando el mail, fijese en su casilla de Spam si no le llego")
+
+    setDoc(doc(firebase.db, "Usuarios", user.email), {
+      uid: user.uid,
+      mail: user.email,
+      type: "particular"
+    })
+
+    if (imagePerfilUpload != null) {
+      const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
+      await uploadBytes(imagePerfRef, imagePerfilUpload) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
+    }
+
+    if (imageFondoUpload != null) {
+      const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
+      await uploadBytes(imageFondRef, imageFondoUpload)
+    }
 
 
-    // falta hacer if para dependiendo que informacion subio (si solo subio el nombre, el nombre con el cel, etc)
-
-    const user = firebase.auth.currentUser
 
     if ((numCel.length > 0 || numCel != '') && (numTel.length > 0 || numTel != '')) {
       await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroCel: numCel,
         numeroTel: numTel,
-        isRegistering: false
       })
       alert("Nombre, Num Celu, Num Tel")
     } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
       await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroCel: numCel,
-        isRegistering: false
       })
       alert("Nombre, Num Celu")
     }
@@ -137,14 +159,12 @@ const ContainerRegisterParticular3 = ({
       await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroTel: numTel,
-        isRegistering: false
       })
       alert("Nombre, Num Tel")
     }
     else {
       await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
-        isRegistering: false
       })
       alert("Nombre")
     }

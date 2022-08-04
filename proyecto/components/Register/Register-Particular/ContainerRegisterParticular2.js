@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
-import { ref, uploadBytes, getDownloadURL} from "firebase/storage";
-import firebase from '../../../firebase'
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
@@ -9,7 +8,6 @@ import firebase from '../../../firebase'
 
 
 const ContainerRegisterParticular2 = ({
-    setVerdadero,
     setVerdadero2,
     userCore,
     setUserCore,
@@ -28,7 +26,6 @@ const ContainerRegisterParticular2 = ({
     const [imageFondoURL, setImageFondoURL] = useState([])
     const [imgFondo, setImgFondo] = useState(false)
 
-    const [errorFalta, setErrorFalta] = useState(false)
 
 
 
@@ -45,42 +42,50 @@ const ContainerRegisterParticular2 = ({
     }, [imageFondoUpload])
 
 
-    const handleOmitir = () => {
-        setOmitir(true)
-        setVerdadero2(true)
-    }
 
     const handleSiguiente = () => {
         console.log(imagePerfilUpload)
-        setErrorFalta(false)
-        if (imagePerfilUpload != null && (imageFondoUpload != null || imageFondoUpload == null)) {
-            const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
-            uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    setImagePerfilURL((prev) => [...prev, url])
-                })
-            })
+        setUserCore({
+            ...userCore,
+            imagePerfilUpload,
+            imageFondoUpload
+        })
 
-            if (imageFondoUpload == null) {
-                localStorage.setItem('siguienteCRP2', true)
-                console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
-                setOmitir(false);
-                setVerdadero2(true);
-                return;
-            }
-            const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
-            uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    setImageFondoURL((prev) => [...prev, url])
-                })
-            })
-            localStorage.setItem('siguienteCRP2', true)
-            console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
-            setVerdadero2(true)
-            setOmitir(false)
-        } else {
-            setErrorFalta(true)
-        }
+        setVerdadero2(true)
+
+
+
+
+
+
+        // if (imagePerfilUpload != null && (imageFondoUpload != null || imageFondoUpload == null)) {
+        //     const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
+        //     uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
+        //         getDownloadURL(snapshot.ref).then((url) => {
+        //             setImagePerfilURL((prev) => [...prev, url])
+        //         })
+        //     })
+
+        //     if (imageFondoUpload == null) {
+        //         localStorage.setItem('siguienteCRP2', true)
+        //         console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
+        //         setOmitir(false);
+        //         setVerdadero2(true);
+        //         return;
+        //     }
+        //     const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
+        //     uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
+        //         getDownloadURL(snapshot.ref).then((url) => {
+        //             setImageFondoURL((prev) => [...prev, url])
+        //         })
+        //     })
+        //     localStorage.setItem('siguienteCRP2', true)
+        //     console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
+        //     setVerdadero2(true)
+        //     setOmitir(false)
+        // } else {
+        //     setErrorFalta(true)
+        // }
 
 
     }
@@ -117,7 +122,7 @@ const ContainerRegisterParticular2 = ({
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
                                 <div className={styles.div_input_img}>
-                                    {imageFondoUpload == null ?
+                                    {imgFondo == false ?
                                         <div className={styles.img_empty}></div> :
                                         <img src={imageFondoURL}></img>
                                     }
@@ -129,13 +134,9 @@ const ContainerRegisterParticular2 = ({
 
                             </div>
 
-                            {errorFalta == true ? <p className={styles.p_error}>Debe subir la foto de perfil</p> :
-                                <div className={styles.div_error_vacio}></div>
-                            }
+
 
                             <div className={styles.buttons}>
-                                <button onClick={() => firebase.handleSignOut()}>Desloguear</button>
-                                <button className={styles.button} onClick={handleOmitir}>Omitir</button>
                                 <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
                             </div>
                         </div>
