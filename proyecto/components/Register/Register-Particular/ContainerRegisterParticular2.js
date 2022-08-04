@@ -5,8 +5,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
-
-
 const ContainerRegisterParticular2 = ({
     setVerdadero2,
     userCore,
@@ -54,38 +52,6 @@ const ContainerRegisterParticular2 = ({
         setVerdadero2(true)
 
 
-
-
-
-
-        // if (imagePerfilUpload != null && (imageFondoUpload != null || imageFondoUpload == null)) {
-        //     const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
-        //     uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
-        //         getDownloadURL(snapshot.ref).then((url) => {
-        //             setImagePerfilURL((prev) => [...prev, url])
-        //         })
-        //     })
-
-        //     if (imageFondoUpload == null) {
-        //         localStorage.setItem('siguienteCRP2', true)
-        //         console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
-        //         setOmitir(false);
-        //         setVerdadero2(true);
-        //         return;
-        //     }
-        //     const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
-        //     uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
-        //         getDownloadURL(snapshot.ref).then((url) => {
-        //             setImageFondoURL((prev) => [...prev, url])
-        //         })
-        //     })
-        //     localStorage.setItem('siguienteCRP2', true)
-        //     console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
-        //     setVerdadero2(true)
-        //     setOmitir(false)
-        // } else {
-        //     setErrorFalta(true)
-        // }
 
 
     }

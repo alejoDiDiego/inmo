@@ -7,25 +7,7 @@ import firebase from '../../firebase'
 
 
 
-
-
-export const Header = ({logged, setLogged, usuario}) => {
-
-    
-
-    useEffect(() => {
-        console.log(usuario)
-    }, [usuario])
-
-
-
-
-
-
-
-
-
-
+export const Header = ({usuario}) => {
 
 
     return (

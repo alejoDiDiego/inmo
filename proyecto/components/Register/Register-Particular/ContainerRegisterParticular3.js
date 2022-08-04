@@ -37,16 +37,6 @@ const ContainerRegisterParticular3 = ({
   }
 
 
-
-
-  // const isNumberCodArea = (str) => {
-  //   if (str.trim() === '') {
-  //     if (codArea.length == 1) { return !isNaN(str) }
-  //     return false
-  //   }
-  //   return !isNaN(str)
-  // }
-
   const isNumberNumCel = (str) => {
     if (str.trim() === '') {
       if (numCel.length == 1) { return !isNaN(str) }
@@ -63,17 +53,6 @@ const ContainerRegisterParticular3 = ({
     return !isNaN(str)
   }
 
-
-  // const handleCodArea = (e) => {
-  //   if (isNumberCodArea(e.target.value)) {
-  //     setCodArea(e.target.value)
-  //     console.log("valido")
-  //     //
-  //   } else {
-  //     console.log("no valido")
-  //     //return
-  //   }
-  // }
 
   const handleNumCel = (e) => {
     if (isNumberNumCel(e.target.value)) {
@@ -168,6 +147,9 @@ const ContainerRegisterParticular3 = ({
       })
       alert("Nombre")
     }
+
+    
+
 
 
     setTimeout(() => {

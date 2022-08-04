@@ -52,6 +52,7 @@ const ContainerRegisterParticular1 = ({
       localStorage.setItem('authAux', JSON.stringify(firebase.auth))
       if (isRegistered == false) {
         setDoc(doc(firebase.db, "Usuarios", user.email), {
+          nombreUsuario: user.displayName,
           uid: user.uid,
           mail: user.email,
           type: "particular"
@@ -144,42 +145,6 @@ const ContainerRegisterParticular1 = ({
     setLoading(false)
     setVerdadero(true)
 
-    // try {
-
-    //   const user = await firebase.registrar(firebase.auth, email, password)
-
-
-    //   const actionCodeSettings = {
-    //     url: 'http://localhost:3000/registro/particular/registro-particular',
-    //     handleCodeInApp: true,
-    //   };
-
-
-    //   sendEmailVerification(user, actionCodeSettings).then(() => {
-    //     console.log("se mando")
-    //   })
-
-    //   setDoc(doc(firebase.db, "Usuarios", user.email), {
-    //     isRegistering: true,
-    //     uid: user.uid,
-    //     mail: user.email,
-    //     type: "particular"
-    //   })
-
-    //   alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
-    //   localStorage.setItem('isLogged', true)
-    //   localStorage.setItem('authAux', JSON.stringify(firebase.auth))
-    //   console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
-    //   console.log(localStorage.getItem('authAux') + ' localStorage authAux')
-    //   setVerdadero(true)
-    //   setLoading(false)
-    // }
-
-    // catch (error) {
-    //   const errorMessage = error.message;
-    //   console.log(errorMessage)
-    //   setLoading(false)
-    // };
 
     return;
 
@@ -199,13 +164,6 @@ const ContainerRegisterParticular1 = ({
           <h2>Registra<span className={styles.text_blue}>te</span></h2>
           <div className={styles.form}>
 
-            {/*<div className={styles.fields}>
-              <div className={styles.div_error}>
-                <label >Nombre de usuario</label>
-                {nameError == true ? <p>Ingrese un nombre de usuario valido</p> : null}
-              </div>
-              <input value={name} onChange={e => setName(e.target.value)} type='text' />
-            </div>*/}
 
             <div className={styles.fields}>
               <div className={styles.div_error} >
