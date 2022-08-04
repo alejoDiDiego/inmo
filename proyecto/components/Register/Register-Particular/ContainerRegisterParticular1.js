@@ -176,7 +176,7 @@ const ContainerRegisterParticular1 = ({
 
     try {
 
-      const user = await firebase.registrar(email, password)
+      const user = await firebase.registrar(firebase.auth, email, password)
 
 
       const actionCodeSettings = {

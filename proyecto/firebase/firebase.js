@@ -23,8 +23,8 @@ class Firebase {
         this.providerGoogle = new GoogleAuthProvider();
     }
 
-    async registrar(email, password) {
-        const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email, password)
+    async registrar(auth, email, password) {
+        const nuevoUsuario = await createUserWithEmailAndPassword(auth, email, password)
         return nuevoUsuario.user
     }
 
