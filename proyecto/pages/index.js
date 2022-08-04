@@ -42,7 +42,7 @@ useEffect(() => {
   
   console.log(authAuxVar)
 
-  localStorage.setItem('siguienteCRP2', false)
+  
   console.log(firebase.auth.currentUser)
   console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
 
@@ -57,9 +57,9 @@ useEffect(() => {
     }).catch(err => {
       console.log(err)
     })
-
-    
-  }  
+  } else{
+    localStorage.setItem('siguienteCRP2', false)
+  }
 
   
 }, [])
