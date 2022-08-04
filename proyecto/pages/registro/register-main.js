@@ -1,84 +1,38 @@
 import Head from 'next/head'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ContainerRegister from '../../components/Register/Register-Main/ContainerRegister'
 import styles from '../../styles/RegisterMain.module.css'
 import { useRouter } from 'next/router'
 import { doc, getDoc } from 'firebase/firestore'
-import firebase from '../../firebase'
+import firebase, { FirebaseContext } from '../../firebase'
+
 
 
 export default function RegisterMain() {
 
 
+  const { usuario } = useContext(FirebaseContext)
   const [loading, setLoading] = useState(true)
 
   const router = useRouter()
-  const isMounted = useRef(false)
-
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (auth.currentUser == null) { console.log('uchiha'); return; }
-
-  //     console.log('uchiha si')
-  //     router.push('/')
-
-  //   },600)
-  // }, [])
-
-
-
 
 
 
   useEffect(() => {
-
-    let authAuxVar = localStorage.getItem('authAux')
-    let isLoggedVar = localStorage.getItem('isLogged')
-    if (authAuxVar == null || isLoggedVar == null) {
-      firebase.handleSignOut()
-    }
-
-
-
-    console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
-    if (localStorage.getItem('isLogged') == 'true') {
-      console.log("entra")
-      const usuarioRegistrado = async () => {
-        console.log("dentro de la funcion")
-        await getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-          console.log(docSnap.data())
-          if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
-              router.push('/registro/particular/registro-particular')
-            
-            return
-          } else {
-            console.log("volvio al index")
-            router.push('/')
-            
-          }
-  
-        }).catch(err => {
-          console.log("error")
-          console.log(err)
-        })
-
-        
-      }
-
-      console.log("usuarioRegistrado")
-      usuarioRegistrado()
-
+    console.log(usuario)
+    if (usuario != null) {
+        console.log("el usuario ya existe")
+        router.push('/')
     }
     else {
       setTimeout(() => {
         setLoading(false)
         console.log('no')
-      }, 2000)
+      }, 1500)
     }
 
 
-  }, [])
+  }, [usuario])
 
 
 

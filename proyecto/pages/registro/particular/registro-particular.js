@@ -1,13 +1,14 @@
 import { doc, getDoc } from 'firebase/firestore'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ContainerRegisterParticular1 from '../../../components/Register/Register-Particular/ContainerRegisterParticular1'
 import ContainerRegisterParticular2 from '../../../components/Register/Register-Particular/ContainerRegisterParticular2'
 import ContainerRegisterParticular3 from '../../../components/Register/Register-Particular/ContainerRegisterParticular3'
 import ContainerSpinnerParticular from '../../../components/Register/Register-Particular/ContainerSpinnerParticular'
-import firebase from '../../../firebase'
+import firebase, { FirebaseContext } from '../../../firebase'
 import styles from '../../../styles/RegisterParticular.module.css'
+
 
 
 
@@ -23,60 +24,40 @@ export default function RegisterParticular() {
 
   const [omitir, setOmitir] = useState(false)
 
-  const [loadingBig, setLoadingBig] = useState(false)
+  const [loadingBig, setLoadingBig] = useState(true)
 
   
   const [userCore, setUserCore] = useState({})
 
   const router = useRouter()
 
+  const { usuario } = useContext(FirebaseContext)
+
 
   // Si el usuario ya subio una foto, que no pueda acceder a esta seccion
 
   useEffect(() => {
-    let authAuxVar = localStorage.getItem('authAux')
-    let isLoggedVar = localStorage.getItem('isLogged')
-    if (authAuxVar == null || isLoggedVar == null) {
-      firebase.handleSignOut()
-    }
-
-    if (JSON.parse(localStorage.getItem('authAux')) == {}) {
-      console.log(JSON.parse(localStorage.getItem('authAux')).currentUser.email)
-    }
-    console.log('user posta')
-    console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
-    if (localStorage.getItem('isLogged') == 'true') {
-      const usuarioRegistrado = async () => {
-        setLoadingBig(true)
-        await getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-          console.log(docSnap.data())
-
-          if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
-            setVerdadero(true)
-            console.log('si')
-            setLoadingBig(false)
-            if (localStorage.getItem('siguienteCRP2') === 'true') { setVerdadero2(true) }
-          } else {
-            router.push('/')
-            console.log('no puede acceder')
-          }
-
-        }).catch(err => {
-          console.log("error")
-          router.push('/')
-        })
+    console.log(usuario)
+    if (usuario != null) {
+      if(usuario.displayName != null){
+        console.log("el usuario ya existe")
+        router.push('/')
       }
-      usuarioRegistrado()
-
-
+      else{
+        console.log("waiting")
+      }
+        
     }
     else {
-      console.log('no')
-      setVerdadero(false)
+      setTimeout(() => {
+        setLoadingBig(false)
+        console.log('no')
+      }, 1500)
     }
 
 
-  }, [])
+  }, [usuario])
+
 
 
 
