@@ -12,7 +12,7 @@ const ContainerRegister = ({ loading }) => {
                     <div className={styles.no_spinner}>
                         <h2 className={styles.h2}>¿Que tipo de cuenta se adapta mas a <span className={styles.text_blue}>ti?</span></h2>
 
-                        <Link href='/registro/empresa/registro-empresa' >
+                        <Link href='/registro/empresa' >
                             <a className={styles.link}>
                                 <div className={styles.containers}>
                                     <div className={styles.inside}>
@@ -33,7 +33,7 @@ const ContainerRegister = ({ loading }) => {
                             </a>
                         </Link>
 
-                        <Link href='/registro/particular/registro-particular' >
+                        <Link href='/registro/particular' >
                             <a className={styles.link}>
                                 <div className={styles.containers}>
                                     <div className={styles.inside}>

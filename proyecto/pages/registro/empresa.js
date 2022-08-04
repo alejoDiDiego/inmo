@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import ContainerRegisterEmpresa1 from '../../../components/Register/Register-Empresa/ContainerRegisterEmpresa1.js'
-import ContainerRegisterEmpresa2 from '../../../components/Register/Register-Empresa/ContainerRegisterEmpresa2.js'
-import ContainerRegisterEmpresa3 from '../../../components/Register/Register-Empresa/ContainerRegisterEmpresa3.js'
-import styles from '../../../styles/RegisterEmpresa.module.css'
+import ContainerRegisterEmpresa1 from '../../components/Register/Register-Empresa/ContainerRegisterEmpresa1.js'
+import ContainerRegisterEmpresa2 from '../../components/Register/Register-Empresa/ContainerRegisterEmpresa2.js'
+import ContainerRegisterEmpresa3 from '../../components/Register/Register-Empresa/ContainerRegisterEmpresa3.js'
+import styles from '../../styles/RegisterEmpresa.module.css'
 
 
 
