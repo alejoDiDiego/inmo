@@ -1,16 +1,23 @@
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Inicio from '../components/Index/Inicio'
 import { useRouter } from 'next/router'
-import firebase from '../firebase'
+import firebase, { FirebaseContext } from '../firebase'
+
+
 
 
 export default function Home() {
 
   const [logged, setLogged] = useState(false)
 
-  const router = useRouter()
+  const {usuario} = useContext(FirebaseContext)
+  console.log("usuario Index")
+  console.log(usuario)
+
+
+
 
 
   //   useEffect(() => {
@@ -29,18 +36,6 @@ export default function Home() {
   // }, [auth])
 
 
-  useEffect(() => {
-    console.log(firebase.auth.currentUser)
-    if(firebase.auth.currentUser != null){
-      setLogged(true)
-      return
-    }
-    setLogged(false)
-  }, [])
-
-
-
-
 
 
   return (
@@ -50,7 +45,7 @@ export default function Home() {
         <meta name="description" content="Generated" />
         <link rel="icon" href="/Logo_inmo_new.png" />
       </Head>
-      <Inicio logged={logged} setLogged={setLogged} />
+      <Inicio usuario={usuario} logged={logged} setLogged={setLogged} />
 
 
     </div>

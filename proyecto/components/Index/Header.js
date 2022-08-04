@@ -9,11 +9,13 @@ import firebase from '../../firebase'
 
 
 
-export const Header = ({logged, setLogged}) => {
+export const Header = ({logged, setLogged, usuario}) => {
 
     
 
-
+    useEffect(() => {
+        console.log(usuario)
+    }, [usuario])
 
 
 
@@ -36,7 +38,7 @@ export const Header = ({logged, setLogged}) => {
                 <div className={styles.div_right}>
 
                     {
-                        logged == false ?
+                        usuario == null ?
                             <div className={styles.div_button}>
                                 <Link href="/inicio-sesion/inicio-main"><a className={styles.link_inicio}>Iniciar Sesion</a></Link>
                                 <Link href="/registro/register-main"><a className={styles.link_registro}>Registrarse</a></Link>

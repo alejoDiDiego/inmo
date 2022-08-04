@@ -8,7 +8,7 @@ import styles from '../../styles/Inicio.module.css'
 
 
 
-const Inicio = ({logged, setLogged}) => {
+const Inicio = ({logged, setLogged, usuario}) => {
 
     
 
@@ -16,7 +16,7 @@ const Inicio = ({logged, setLogged}) => {
 
     return (
         <div>
-            <Header logged={logged} setLogged={setLogged} />
+            <Header usuario={usuario} logged={logged} setLogged={setLogged} />
             <Options />
             <div className={styles.div_about}>
                 <Image width={200} height={100} src="/icono_about.png"/>

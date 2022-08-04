@@ -1,14 +1,18 @@
 import '../styles/globals.css'
 import '../styles/Spinner.css'
-
 import firebase, { FirebaseContext } from '../firebase';
+import useAutentication from '../hooks/useAutentication';
 
 function MyApp({ Component, pageProps }) {
+  const usuario = useAutentication();
+  console.log(usuario);
+
 
   return (
     <FirebaseContext.Provider
       value={{
-        firebase
+        firebase,
+        usuario
       }}
     >
 
