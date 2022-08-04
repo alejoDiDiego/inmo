@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/ContainerRegisterParticular1.module.css'
-import { applyActionCode, confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendSignInLinkToEmail, signInWithPopup, signOut } from "firebase/auth";
-import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { sendEmailVerification} from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
-import { auth, db, handleSignOut, providerGoogle } from '../../../firebase/ControladorFirebase'
-import { Route, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Spinner from '../../Spinner/Spinner';
 
@@ -50,13 +49,13 @@ const ContainerRegisterParticular1 = ({
 
     try {
       setLoading(true)
-      await firebase.registrarGoogle();
-      let isRegistered = await userExists(auth.currentUser.email).then((r) => { return r })
-      localStorage.setItem('authAux', JSON.stringify(auth))
+      const user = await firebase.registrarGoogle();
+      let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
+      localStorage.setItem('authAux', JSON.stringify(firebase.auth))
       if (isRegistered == true) {
 
 
-        await getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+        await getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
           console.log(docSnap.data())
           if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
             setVerdadero(true)
@@ -64,7 +63,7 @@ const ContainerRegisterParticular1 = ({
             return
           } else {
             localStorage.setItem('isLogged', true)
-            localStorage.setItem('authAux', JSON.stringify(auth))
+            localStorage.setItem('authAux', JSON.stringify(firebase.auth))
             console.log("pal lobby")
             router.push('/')
             setLoading(false)
@@ -79,9 +78,9 @@ const ContainerRegisterParticular1 = ({
       }
 
 
+      
 
-      const user = auth.currentUser
-      setDoc(doc(db, "Usuarios", user.email), {
+      setDoc(doc(firebase.db, "Usuarios", user.email), {
         isRegistering: true,
         uid: user.uid,
         mail: user.email,
@@ -89,7 +88,7 @@ const ContainerRegisterParticular1 = ({
       })
 
       localStorage.setItem('isLogged', true)
-      localStorage.setItem('authAux', JSON.stringify(auth))
+      localStorage.setItem('authAux', JSON.stringify(firebase.auth))
       console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
       console.log(localStorage.getItem('authAux') + ' localStorage authAux')
 
@@ -110,7 +109,7 @@ const ContainerRegisterParticular1 = ({
 
 
   const userExists = async (email) => {
-    const docRef = doc(db, "Usuarios", email)
+    const docRef = doc(firebase.db, "Usuarios", email)
     console.log("docRef")
     const res = await getDoc(docRef)
     return res.exists()
@@ -173,16 +172,24 @@ const ContainerRegisterParticular1 = ({
       return;
     }
 
-
     setLoading(true)
 
     try {
 
-      await firebase.registrar(email, password)
+      const user = await firebase.registrar(email, password)
 
-      const user = userCredential.user
 
-      setDoc(doc(db, "Usuarios", user.email), {
+      const actionCodeSettings = {
+        url: 'http://localhost:3000/registro/particular/registro-particular',
+        handleCodeInApp: true,
+      };
+
+
+      sendEmailVerification(user, actionCodeSettings).then(() => {
+        console.log("se mando")
+      })
+
+      setDoc(doc(firebase.db, "Usuarios", user.email), {
         isRegistering: true,
         uid: user.uid,
         mail: user.email,
@@ -191,7 +198,7 @@ const ContainerRegisterParticular1 = ({
       
       alert("Revise su casilla para verificar su mail\n(fijese en Spam si no encuentra el mail)")
       localStorage.setItem('isLogged', true)
-      localStorage.setItem('authAux', JSON.stringify(auth))
+      localStorage.setItem('authAux', JSON.stringify(firebase.auth))
       console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
       console.log(localStorage.getItem('authAux') + ' localStorage authAux')
       setVerdadero(true)
@@ -277,7 +284,7 @@ const ContainerRegisterParticular1 = ({
             {
               loading == false ?
                 <div className={styles.div_buttons}>
-                  <button onClick={() => handleSignOut()}>Desloguear</button>
+                  <button onClick={() => firebase.handleSignOut()}>Desloguear</button>
                   <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
                   <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
                 </div>

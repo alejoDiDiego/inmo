@@ -3,9 +3,10 @@ import { doc, updateDoc, getFirestore } from "firebase/firestore";
 import styles from '../../../styles/ContainerRegisterParticular3.module.css'
 import MyApp from '../../../pages/_app';
 import "firebase/compat/firestore";
-import { auth, db } from '../../../firebase/ControladorFirebase';
 import Spinner from '../../Spinner/Spinner';
 import { useRouter } from 'next/router';
+import firebase from '../../../firebase';
+
 
 
 
@@ -31,40 +32,10 @@ const ContainerRegisterParticular3 = ({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   const handleAnterior = () => {
     setVerdadero2(false)
   }
 
-  const handleInfo = async () => {
-    const firestore = getFirestore(MyApp.app)
-
-    const ref = doc(firestore, "Usuarios", userCore.email)
-
-    updateDoc(ref, {
-      nombrePublico: nomPub,
-      numeroCel: numCel,
-      numeroTel: numTel
-    })
-
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log(errorCode)
-        const errorMessage = error.message;
-        console.log(errorMessage)
-      });
-  }
 
 
 
@@ -91,8 +62,6 @@ const ContainerRegisterParticular3 = ({
     }
     return !isNaN(str)
   }
-
-
 
 
   // const handleCodArea = (e) => {
@@ -130,7 +99,7 @@ const ContainerRegisterParticular3 = ({
 
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setErrorNomUsu(false)
 
 
@@ -146,10 +115,10 @@ const ContainerRegisterParticular3 = ({
 
     // falta hacer if para dependiendo que informacion subio (si solo subio el nombre, el nombre con el cel, etc)
 
-    const user = auth.currentUser
+    const user = firebase.auth.currentUser
 
     if ((numCel.length > 0 || numCel != '') && (numTel.length > 0 || numTel != '')) {
-      updateDoc(doc(db, "Usuarios", user.email), {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroCel: numCel,
         numeroTel: numTel,
@@ -157,7 +126,7 @@ const ContainerRegisterParticular3 = ({
       })
       alert("Nombre, Num Celu, Num Tel")
     } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
-      updateDoc(doc(db, "Usuarios", user.email), {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroCel: numCel,
         isRegistering: false
@@ -165,7 +134,7 @@ const ContainerRegisterParticular3 = ({
       alert("Nombre, Num Celu")
     }
     else if ((numTel.length > 0 || numTel != '') && (numCel.length == 0 || numCel == '')) {
-      updateDoc(doc(db, "Usuarios", user.email), {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         numeroTel: numTel,
         isRegistering: false
@@ -173,7 +142,7 @@ const ContainerRegisterParticular3 = ({
       alert("Nombre, Num Tel")
     }
     else {
-      updateDoc(doc(db, "Usuarios", user.email), {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
         nombreUsuario: nomUsu,
         isRegistering: false
       })

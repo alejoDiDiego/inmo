@@ -6,7 +6,7 @@ import firebase, { FirebaseContext } from '../firebase';
 function MyApp({ Component, pageProps }) {
 
   return (
-    <FirebaseContext
+    <FirebaseContext.Provider
       value={{
         firebase
       }}
@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
 
       <Component {...pageProps} />
 
-    </FirebaseContext>
+    </FirebaseContext.Provider>
 
 
   )

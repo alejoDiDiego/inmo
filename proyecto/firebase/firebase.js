@@ -1,29 +1,35 @@
-import app from 'firebase/app';
-
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithPopup, signOut } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+import { getFirestore } from 'firebase/firestore'
+import { GoogleAuthProvider } from "firebase/auth";
+import "firebase/compat/firestore";
 import firebaseConfig from './config';
+
+
 
 class Firebase {
     constructor() {
-        if (!app.getApps().length) {
-            app.initializeApp(firebaseConfig);
-        }
-        this.auth = getAuth(app)
-        auth.languageCode = 'es_419';
-        auth.useDeviceLanguage();
+        this.app = initializeApp(firebaseConfig);
+        this.auth = getAuth(this.app)
+        this.auth.languageCode = 'es_419';
+        this.auth.useDeviceLanguage();
 
-        this.storage = getStorage(app)
+        this.storage = getStorage(this.app)
 
-        this.db = getFirestore(app)
+        this.db = getFirestore(this.app)
 
         this.providerGoogle = new GoogleAuthProvider();
     }
 
     async registrar(email, password) {
         const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email, password)
+        return nuevoUsuario.user
     }
 
     async registrarGoogle() {
         const nuevoUsuario = await signInWithPopup(this.auth, this.providerGoogle)
+        return nuevoUsuario.user 
     }
 
     handleSignOut = () => {

@@ -2,9 +2,8 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Inicio from '../components/Index/Inicio'
-import { auth, db, handleSignOut } from '../firebase/ControladorFirebase'
 import { useRouter } from 'next/router'
-
+import firebase from '../firebase'
 
 
 export default function Home() {
@@ -34,7 +33,7 @@ useEffect(() => {
     let authAuxVar = localStorage.getItem('authAux')
     let isLoggedVar = localStorage.getItem('isLogged')
     if(authAuxVar == null || isLoggedVar == null){
-      handleSignOut()
+      firebase.handleSignOut()
     }
 
 
@@ -44,12 +43,12 @@ useEffect(() => {
   console.log(authAuxVar)
 
   localStorage.setItem('siguienteCRP2', false)
-  console.log(auth.currentUser)
+  console.log(firebase.auth.currentUser)
   console.log('localStorage ' + localStorage.getItem('siguienteCRP2'))
 
   if(localStorage.getItem('isLogged') == 'true'){
     setLogged(true)
-    getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+    getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
       console.log(docSnap.data())
       if(docSnap.data().isRegistering == true){
         router.push('/registro/particular/registro-particular')

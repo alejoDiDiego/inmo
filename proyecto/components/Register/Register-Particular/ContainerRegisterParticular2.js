@@ -1,11 +1,8 @@
-import { updateDoc } from 'firebase/firestore'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
-import { auth, handleSignOut, storage } from '../../../firebase/ControladorFirebase'
-import { ref, uploadBytes, getDownloadURL, listAll, list } from "firebase/storage";
-import { sendEmailVerification, signOut } from 'firebase/auth'
-import { useRouter } from 'next/router'
+import { ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import firebase from '../../../firebase'
+
 
 
 
@@ -57,7 +54,7 @@ const ContainerRegisterParticular2 = ({
         console.log(imagePerfilUpload)
         setErrorFalta(false)
         if (imagePerfilUpload != null && (imageFondoUpload != null || imageFondoUpload == null)) {
-            const imagePerfRef = ref(storage, `usuarios/${auth.currentUser.email}/perfil`)
+            const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
             uploadBytes(imagePerfRef, imagePerfilUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setImagePerfilURL((prev) => [...prev, url])
@@ -71,7 +68,7 @@ const ContainerRegisterParticular2 = ({
                 setVerdadero2(true);
                 return;
             }
-            const imageFondRef = ref(storage, `usuarios/${auth.currentUser.email}/fondo`)
+            const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
             uploadBytes(imageFondRef, imageFondoUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setImageFondoURL((prev) => [...prev, url])
@@ -88,21 +85,6 @@ const ContainerRegisterParticular2 = ({
 
     }
 
-
-
-
-
-    const handleEnviar = () => {
-        const actionCodeSettings = {
-            url: 'http://localhost:3000/registro/particular/registro-particular',
-            handleCodeInApp: true,
-        };
-
-
-        sendEmailVerification(auth.currentUser, actionCodeSettings).then(() => {
-            console.log("se re mando")
-        })
-    }
 
 
 
@@ -152,7 +134,7 @@ const ContainerRegisterParticular2 = ({
                             }
 
                             <div className={styles.buttons}>
-                                <button onClick={() => handleSignOut()}>Desloguear</button>
+                                <button onClick={() => firebase.handleSignOut()}>Desloguear</button>
                                 <button className={styles.button} onClick={handleOmitir}>Omitir</button>
                                 <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
                             </div>

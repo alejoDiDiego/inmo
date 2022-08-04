@@ -6,8 +6,9 @@ import ContainerRegisterParticular1 from '../../../components/Register/Register-
 import ContainerRegisterParticular2 from '../../../components/Register/Register-Particular/ContainerRegisterParticular2'
 import ContainerRegisterParticular3 from '../../../components/Register/Register-Particular/ContainerRegisterParticular3'
 import ContainerSpinnerParticular from '../../../components/Register/Register-Particular/ContainerSpinnerParticular'
-import { auth, db, handleSignOut } from '../../../firebase/ControladorFirebase'
+import firebase from '../../../firebase'
 import styles from '../../../styles/RegisterParticular.module.css'
+
 
 
 
@@ -35,8 +36,8 @@ export default function RegisterParticular() {
   useEffect(() => {
     let authAuxVar = localStorage.getItem('authAux')
     let isLoggedVar = localStorage.getItem('isLogged')
-    if(authAuxVar == null || isLoggedVar == null){
-      handleSignOut()
+    if (authAuxVar == null || isLoggedVar == null) {
+      firebase.handleSignOut()
     }
 
     if (JSON.parse(localStorage.getItem('authAux')) == {}) {
@@ -45,26 +46,27 @@ export default function RegisterParticular() {
     console.log('user posta')
     console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
     if (localStorage.getItem('isLogged') == 'true') {
-      setLoadingBig(true)
-      getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-        console.log(docSnap.data())
+      const usuarioRegistrado = async () => {
+        setLoadingBig(true)
+        await getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+          console.log(docSnap.data())
 
-        if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
-          setVerdadero(true)
-          console.log('si')
-          setLoadingBig(false)
-          if (localStorage.getItem('siguienteCRP2') === 'true') { setVerdadero2(true) }
-        } else {
+          if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
+            setVerdadero(true)
+            console.log('si')
+            setLoadingBig(false)
+            if (localStorage.getItem('siguienteCRP2') === 'true') { setVerdadero2(true) }
+          } else {
+            router.push('/')
+            console.log('no puede acceder')
+          }
+
+        }).catch(err => {
+          console.log("error")
           router.push('/')
-          console.log('no puede acceder')
-        }
-
-      }).catch(err => {
-        console.log("error")
-        router.push('/')
-      })
-
-
+        })
+      }
+      usuarioRegistrado()
 
 
     }

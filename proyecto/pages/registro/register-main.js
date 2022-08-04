@@ -2,9 +2,10 @@ import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 import ContainerRegister from '../../components/Register/Register-Main/ContainerRegister'
 import styles from '../../styles/RegisterMain.module.css'
-import { Route, useRouter, withRouter } from 'next/router'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
-import { auth, db, handleSignOut } from '../../firebase/ControladorFirebase'
+import { useRouter } from 'next/router'
+import { doc, getDoc } from 'firebase/firestore'
+import firebase from '../../firebase'
+
 
 export default function RegisterMain() {
 
@@ -35,32 +36,38 @@ export default function RegisterMain() {
     let authAuxVar = localStorage.getItem('authAux')
     let isLoggedVar = localStorage.getItem('isLogged')
     if (authAuxVar == null || isLoggedVar == null) {
-      handleSignOut()
+      firebase.handleSignOut()
     }
 
 
 
     console.log(localStorage.getItem('isLogged') + 'localStorage isLogged register-main')
     if (localStorage.getItem('isLogged') == 'true') {
+      console.log("entra")
+      const usuarioRegistrado = async () => {
+        console.log("dentro de la funcion")
+        await getDoc(doc(firebase.db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
+          console.log(docSnap.data())
+          if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
+              router.push('/registro/particular/registro-particular')
+            
+            return
+          } else {
+            console.log("volvio al index")
+            router.push('/')
+            
+          }
+  
+        }).catch(err => {
+          console.log("error")
+          console.log(err)
+        })
 
-      getDoc(doc(db, "Usuarios", JSON.parse(localStorage.getItem('authAux')).currentUser.email)).then(docSnap => {
-        console.log(docSnap.data())
-        if (docSnap.data().isRegistering !== null && docSnap.data().isRegistering == true) {
-          setTimeout(() => {
-            router.push('/registro/particular/registro-particular')
-            setLoading(false)
-          }, 1000)
-          return
-        } else {
-          console.log("volvio al index")
-          router.push('/')
-          
-        }
+        
+      }
 
-      }).catch(err => {
-        console.log("error")
-        console.log(err)
-      })
+      console.log("usuarioRegistrado")
+      usuarioRegistrado()
 
     }
     else {
