@@ -214,7 +214,6 @@ const ContainerRegisterParticular1 = ({
             {
               loading == false ?
                 <div className={styles.div_buttons}>
-                  <button onClick={() => firebase.handleSignOut()}>Desloguear</button>
                   <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
                   <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
                 </div>

@@ -93,7 +93,7 @@ const ContainerRegisterParticular3 = ({
     const user = await firebase.registrar(firebase.auth, email, password)
 
     const actionCodeSettings = {
-      url: 'http://localhost:3000/registro/particular/registro-particular',
+      url: 'http://localhost:3000/',
       handleCodeInApp: true,
     };
 
