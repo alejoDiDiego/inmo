@@ -49,17 +49,19 @@ const ContainerRegisterParticular1 = ({
       setLoading(true)
       const user = await firebase.registrarGoogle();
       let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
-      localStorage.setItem('authAux', JSON.stringify(firebase.auth))
       if (isRegistered == false) {
-        setDoc(doc(firebase.db, "Usuarios", user.email), {
+        await setDoc(doc(firebase.db, "Usuarios", user.email), {
           nombreUsuario: user.displayName,
           uid: user.uid,
           mail: user.email,
           type: "particular"
         })
+        console.log('creado nuevo usuario')
       }
       setLoading(false)
+      console.log('el usuario existe')
       router.push('/')
+      
 
     }
     catch (error) {

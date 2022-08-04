@@ -23,7 +23,7 @@ export const Header = ({usuario}) => {
                         usuario == null ?
                             <div className={styles.div_button}>
                                 <Link href="/inicio-sesion/inicio-main"><a className={styles.link_inicio}>Iniciar Sesion</a></Link>
-                                <Link href="/registro/register-main"><a className={styles.link_registro}>Registrarse</a></Link>
+                                <Link href="/registro/registro-principal"><a className={styles.link_registro}>Registrarse</a></Link>
                             </div>
                             :
                             <button onClick={() => firebase.handleSignOut()}>Desloguear</button>
