@@ -1,10 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithPopup, signOut } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import { GoogleAuthProvider } from "firebase/auth";
 import "firebase/compat/firestore";
 import firebaseConfig from './config';
+
 
 
 
