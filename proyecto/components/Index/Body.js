@@ -19,7 +19,17 @@ const Body = () => {
                             </Link>
 
 
-                            <div className={styles.square}>
+                            <div className={styles.div_square_chico}>
+                                <Link href='/'>
+                                    <div className={styles.square_chico}>
+
+                                    </div>
+                                </Link>
+                                <Link href='/'>
+                                    <div className={styles.square_chico}>
+
+                                    </div>
+                                </Link>
 
                             </div>
                         </div>
