@@ -7,7 +7,7 @@ const Layout = props => {
     return (
         <div className={styles.layout}>
             <div className={styles.header}>
-                <Header />
+                <Header usuario={props.usuario} />
             </div>
             {props.children}
             <div className={styles.footer}>

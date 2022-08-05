@@ -27,7 +27,7 @@ export default function Home() {
         <meta name="description" content="Generated" />
         <link rel="icon" href="/Logo_inmo_new.png" />
       </Head>
-      <Layout>
+      <Layout usuario={usuario}>
         <Body />
       </Layout>
 
