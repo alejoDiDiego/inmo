@@ -4,6 +4,10 @@
     height: 100vh;
 }
 
+.header{
+    margin-bottom: 52px;
+}
+
 .footer{
     margin-top: auto;
 }
