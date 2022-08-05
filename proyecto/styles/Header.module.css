@@ -87,15 +87,16 @@
 
 .inside_hidden_menu{
     position: absolute;
+    display: flex;
     height: 100%;
-    display: none;
+    visibility: hidden;
     flex-direction: column;
     overflow: hidden;
-    
+    transition: all 0.3 linear;
 }
 
 .inside_hidden_menu.active{
-    display: flex;
+    visibility: visible;
     
 }
 
