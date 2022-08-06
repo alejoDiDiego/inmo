@@ -5,7 +5,6 @@ import { getFirestore } from 'firebase/firestore'
 import { GoogleAuthProvider } from "firebase/auth";
 import "firebase/compat/firestore";
 import firebaseConfig from './config';
-import { useRouter } from 'next/router';
 
 
 
