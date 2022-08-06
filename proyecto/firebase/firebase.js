@@ -5,11 +5,15 @@ import { getFirestore } from 'firebase/firestore'
 import { GoogleAuthProvider } from "firebase/auth";
 import "firebase/compat/firestore";
 import firebaseConfig from './config';
+import { useRouter } from 'next/router';
 
 
 
 
 class Firebase {
+
+    
+
     constructor() {
         this.app = initializeApp(firebaseConfig);
         this.auth = getAuth(this.app)
@@ -21,6 +25,8 @@ class Firebase {
         this.db = getFirestore(this.app)
 
         this.providerGoogle = new GoogleAuthProvider();
+
+
     }
 
     async registrar(auth, email, password) {
@@ -37,12 +43,6 @@ class Firebase {
         signOut(this.auth).then(() => {
           console.log("Sign-out successful.")
           console.log(this.auth)
-          localStorage.setItem('isLogged', false)
-          localStorage.setItem('authAux', JSON.stringify({}))
-          localStorage.setItem('siguienteCRP2', false)
-          console.log(localStorage.getItem('isLogged') + ' localStorage isLogged')
-          console.log('localStorage authAux abajo')
-          console.log(JSON.parse(localStorage.getItem('authAux')))
           window.location.href = "http://localhost:3000//";
         }).catch((error) => {
           console.log("No se deslogueo")

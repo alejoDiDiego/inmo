@@ -9,13 +9,16 @@ import Image from 'next/image'
 const Header = ({ usuario }) => {
 
     const [active, setActive] = useState(false)
+    console.log(usuario)
 
 
     return (
         <div className={styles.header}>
-            <div className={styles.div_img}>
-                <Image layout="fill" src="/icono_about.png" />
-            </div>
+            <Link href='/'>
+                <div className={styles.div_img}>
+                    <Image layout="fill" src="/icono_about.png" />
+                </div>
+            </Link>
 
             <div className={styles.derecha}>
 
@@ -32,16 +35,22 @@ const Header = ({ usuario }) => {
             </div>
 
             <div className={`${styles.hidden_menu} ${active == true ? styles.active : null}`}>
-                
-                    <div className={`${styles.inside_hidden_menu} ${active == true ? styles.active : null}`}>
-                        <p>ohalaa</p>
-                        <p>ohalaa</p>
-                        <p>ohalaa</p>
-                        <p>ohalaa</p>
-                        <p>ohalaa</p>
-                        <p>ohalaa</p>
-                    </div>
-                
+
+                <div className={styles.inside_hidden_menu}>
+                    {
+                        usuario == null ?
+                            <div>
+                                <Link href='/inicio-sesion/principal'><button>Iniciar Sesion</button></Link>
+                                <Link href='/registro/principal'><button>Registrarse</button></Link>
+                            </div>
+                            :
+                            <div>
+                                <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
+                            </div>
+                    }
+
+                </div>
+
             </div>
 
 
