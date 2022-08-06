@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import { useDropzone } from 'react-dropzone';
 
 
 
@@ -14,30 +14,113 @@ const ContainerRegisterParticular2 = ({
 }) => {
 
 
-
-
-    const [imagePerfilUpload, setImagePerfilUpload] = useState(null)
-    const [imagePerfilURL, setImagePerfilURL] = useState([])
+    const [imagePerfilUpload, setImagePerfilUpload] = useState([])
+    const [imagePerfilURL, setImagePerfilURL] = useState("")
     const [imgPerfil, setImgPerfil] = useState(false)
 
-    const [imageFondoUpload, setImageFondoUpload] = useState(null)
-    const [imageFondoURL, setImageFondoURL] = useState([])
+    const [imageFondoUpload, setImageFondoUpload] = useState([])
+    const [imageFondoURL, setImageFondoURL] = useState("")
     const [imgFondo, setImgFondo] = useState(false)
 
 
 
+    const baseStyle = {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        borderWidth: 2,
+        borderRadius: 2,
+        borderColor: '#eeeeee',
+        borderStyle: 'dashed',
+        backgroundColor: '#fafafa',
+        color: '#bdbdbd',
+        outline: 'none',
+        transition: 'border .24s ease-in-out'
+    };
+
+    const focusedStyle = {
+        borderColor: '#2196f3'
+    };
+
+    const acceptStyle = {
+        borderColor: '#00e676'
+    };
+
+    const rejectStyle = {
+        borderColor: '#ff1744'
+    };
+
+
+
+    function Basic(props) {
+        const { acceptedFiles,
+            getRootProps,
+            getInputProps,
+            isFocused,
+            isDragAccept,
+            isDragReject,
+        } = useDropzone({ accept: { 'image/*': [] } });
+
+        const style = useMemo(() => ({
+            ...baseStyle,
+            ...(isFocused ? focusedStyle : {}),
+            ...(isDragAccept ? acceptStyle : {}),
+            ...(isDragReject ? rejectStyle : {})
+        }), [
+            isFocused,
+            isDragAccept,
+            isDragReject
+        ]);
+
+
+        const files = acceptedFiles.map(file => (
+            props.setImages([file])
+        ));
+
+        return (
+            <div className="container">
+                <div {...getRootProps({ style })}>
+                    <input {...getInputProps()} />
+                    <p>Drag 'n' drop some files here, or click to select files</p>
+                </div>
+            </div>
+        );
+    }
+
+
+
+
+
+    // useEffect(() => {
+    //     if (imagePerfilUpload == null) { setImgPerfil(false); return; }
+    //     setImagePerfilURL(URL.createObjectURL(new Blob(imagePerfilUpload, {type: "image/*"})))
+    //     setImgPerfil(true)
+    // }, [imagePerfilUpload])
+
+    // useEffect(() => {
+    //     if (imageFondoUpload == null) { setImgFondo(false); return; }
+    //     setImageFondoURL(URL.createObjectURL(imageFondoUpload))
+    //     setImgFondo(true)
+    // }, [imageFondoUpload])
 
     useEffect(() => {
-        if (imagePerfilUpload == null) { setImgPerfil(false); return; }
-        setImagePerfilURL(URL.createObjectURL(imagePerfilUpload))
+        if (imagePerfilUpload.length < 1) { return; }
+        const newImageUrls = [];
+        imagePerfilUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
+        setImagePerfilURL(newImageUrls);
         setImgPerfil(true)
-    }, [imagePerfilUpload])
+    }, [imagePerfilUpload]);
 
     useEffect(() => {
-        if (imageFondoUpload == null) { setImgFondo(false); return; }
-        setImageFondoURL(URL.createObjectURL(imageFondoUpload))
+        if (imageFondoUpload.length < 1) return;
+        const newImageUrls = [];
+        imageFondoUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
+        setImageFondoURL(newImageUrls);
         setImgFondo(true)
-    }, [imageFondoUpload])
+    }, [imageFondoUpload]);
+
 
 
 
@@ -50,10 +133,19 @@ const ContainerRegisterParticular2 = ({
         })
 
         setVerdadero2(true)
+    }
 
 
+    const handleEliminarImgPerfil = () => {
+        setImagePerfilUpload([])
+        setImagePerfilURL("")
+        setImgPerfil(false)
+    }
 
-
+    const handleEliminarImgFondo = () => {
+        setImageFondoUpload([])
+        setImageFondoURL("")
+        setImgFondo(false)
     }
 
 
@@ -73,29 +165,30 @@ const ContainerRegisterParticular2 = ({
                             <div className={styles.fields}>
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                                 <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
-                                <div className={styles.div_input_img}>
-                                    {imgPerfil == false ?
-                                        <div className={styles.img_empty}></div> :
-                                        <img src={imagePerfilURL}></img>
-                                    }
-                                    <label className={styles.label} htmlFor='perfil'>Elija una imagen</label>
-                                    <input id='perfil' type="file" onChange={e => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/jpeg, image/jpg" />
+                                <Basic setImages={setImagePerfilUpload} />
+                                {
+                                    imgPerfil &&
+                                    <div>
+                                        <img src={imagePerfilURL} />
+                                        <button onClick={handleEliminarImgPerfil}>Eliminar img perfil</button>
+                                    </div>
 
-                                </div>
+                                }
+
                             </div>
 
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
-                                <div className={styles.div_input_img}>
-                                    {imgFondo == false ?
-                                        <div className={styles.img_empty}></div> :
-                                        <img src={imageFondoURL}></img>
-                                    }
-                                    <label className={styles.label} htmlFor='fondo'>Elija una imagen</label>
-                                    <input id='fondo' type="file" onChange={e => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/jpeg, image/jpg" />
+                                <Basic setImages={setImageFondoUpload} />
+                                {
+                                    imgFondo &&
+                                    <div>
+                                        <img src={imageFondoURL} />
+                                        <button onClick={handleEliminarImgFondo}>Eliminar img perfil</button>
+                                    </div>
 
-                                </div>
+                                }
 
 
                             </div>
