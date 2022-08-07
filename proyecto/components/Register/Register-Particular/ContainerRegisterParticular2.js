@@ -190,6 +190,22 @@ const ContainerRegisterParticular2 = ({
                                 onZoomChange={setZoom}
                             />
                         </div>
+                        <div className={styles.controls}>
+                            <input
+                                type="range"
+                                value={zoom}
+                                min={1}
+                                max={3}
+                                step={0.1}
+                                aria-labelledby="Zoom"
+                                onChange={(e) => {
+                                    setZoom(e.target.value)
+                                }}
+                                className={styles.zoom_range}
+                            />
+                        </div>
+
+                        <button>Recortar</button>
 
                     </div>
                 </div>
