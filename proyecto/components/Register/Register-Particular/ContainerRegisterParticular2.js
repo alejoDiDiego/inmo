@@ -117,6 +117,7 @@ const ContainerRegisterParticular2 = ({
         console.log("corte boton")
         console.log(corteActual)
         setResultado(true)
+        setModal(false)
 
     }
 
@@ -142,11 +143,7 @@ const ContainerRegisterParticular2 = ({
         };
 
         return (
-            <div
-                className={styles.output}
-                style={{ paddingBottom: `${100 / CROP_AREA_ASPECT}%` }}
-            >
-                <p>se ve</p>
+            <div className={styles.output}>
                 <img src={imagePerfilURL} alt="" style={imageStyle} />
             </div>
         );
@@ -157,7 +154,6 @@ const ContainerRegisterParticular2 = ({
         console.log(croppedArea)
         return(
           <div>
-          <p>se ve</p>
           <div>{croppedArea && <Output corteActual={corteActual} />}</div>
           </div>
         )
@@ -179,10 +175,20 @@ const ContainerRegisterParticular2 = ({
     // }, [imageFondoUpload])
 
     useEffect(() => {
-        if (imagePerfilUpload.length < 1) { return; }
+        if (imagePerfilUpload.length < 1) { 
+            setImagePerfilUploaduseState([])
+            setImagePerfilURL("")
+            setImgPerfil(false)
+            return; 
+        }
         const newImageUrls = [];
         imagePerfilUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
         setImagePerfilURL(newImageUrls);
+        setResultado(false)
+        setCrop({ x: 0, y: 0 })
+        setZoom(1)
+        setCroppedArea(null);
+        setCorteActual(null)
         setImgPerfil(true)
         setModal(true)
     }, [imagePerfilUpload]);
@@ -192,6 +198,11 @@ const ContainerRegisterParticular2 = ({
         const newImageUrls = [];
         imageFondoUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
         setImageFondoURL(newImageUrls);
+        setResultado(false)
+        setCrop({ x: 0, y: 0 })
+        setZoom(1)
+        setCroppedArea(null);
+        setCorteActual(null)
         setImgFondo(true)
         setModal(true)
     }, [imageFondoUpload]);
@@ -288,9 +299,9 @@ const ContainerRegisterParticular2 = ({
                                 <Basic setImages={setImagePerfilUpload} />
                                 {
                                     resultado &&
-                                    <div className={styles.mostrar_corte}>
+                                    
                                         <MostrarCorte />
-                                    </div>
+                                    
                                 }
                             </div>
 
