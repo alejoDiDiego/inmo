@@ -30,10 +30,16 @@ const ContainerRegisterParticular2 = ({
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [zoom, setZoom] = useState(1)
     const [croppedArea, setCroppedArea] = useState(null);
+    const [corteActual, setCorteActual] = useState(null)
+    const [resultado, setResultado] = useState(false)
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         console.log(croppedArea, croppedAreaPixels)
         setCroppedArea(croppedArea)
     }, [])
+
+
+
+    const CROP_AREA_ASPECT = 1 / 1;
 
 
 
@@ -102,6 +108,60 @@ const ContainerRegisterParticular2 = ({
         );
     }
 
+
+    let aux = {}
+
+    const handleCrop = () => {
+        aux = croppedArea
+        setCorteActual(aux);
+        console.log("corte boton")
+        console.log(corteActual)
+        setResultado(true)
+
+    }
+
+
+
+
+
+    const Output = ({ corteActual }) => {
+        console.log(corteActual)
+        const scale = 100 / corteActual.width;
+        const transform = {
+            x: `${-corteActual.x * scale}%`,
+            y: `${-corteActual.y * scale}%`,
+            scale,
+            width: "calc(100% + 0.5px)",
+            height: "auto"
+        };
+
+        const imageStyle = {
+            transform: `translate3d(${transform.x}, ${transform.y}, 0) scale3d(${transform.scale},${transform.scale},1)`,
+            width: transform.width,
+            height: transform.height
+        };
+
+        return (
+            <div
+                className={styles.output}
+                style={{ paddingBottom: `${100 / CROP_AREA_ASPECT}%` }}
+            >
+                <p>se ve</p>
+                <img src={imagePerfilURL} alt="" style={imageStyle} />
+            </div>
+        );
+    };
+
+
+    function MostrarCorte() {
+        console.log(croppedArea)
+        return(
+          <div>
+          <p>se ve</p>
+          <div>{croppedArea && <Output corteActual={corteActual} />}</div>
+          </div>
+        )
+      }
 
 
 
@@ -184,7 +244,7 @@ const ContainerRegisterParticular2 = ({
                                 image={imagePerfilURL}
                                 crop={crop}
                                 zoom={zoom}
-                                aspect={3 / 3}
+                                aspect={1/1}
                                 onCropChange={setCrop}
                                 onCropComplete={onCropComplete}
                                 onZoomChange={setZoom}
@@ -205,7 +265,7 @@ const ContainerRegisterParticular2 = ({
                             />
                         </div>
 
-                        <button>Recortar</button>
+                        <button onClick={handleCrop}>Recortar</button>
 
                     </div>
                 </div>
@@ -226,6 +286,12 @@ const ContainerRegisterParticular2 = ({
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                                 <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
                                 <Basic setImages={setImagePerfilUpload} />
+                                {
+                                    resultado &&
+                                    <div className={styles.mostrar_corte}>
+                                        <MostrarCorte />
+                                    </div>
+                                }
                             </div>
 
                             <div className={styles.fields}>
