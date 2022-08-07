@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import styles from '../../../styles/ContainerRegisterParticular2.module.css'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDropzone } from 'react-dropzone';
+import Cropper from 'react-easy-crop'
 
 
 
@@ -21,6 +22,18 @@ const ContainerRegisterParticular2 = ({
     const [imageFondoUpload, setImageFondoUpload] = useState([])
     const [imageFondoURL, setImageFondoURL] = useState("")
     const [imgFondo, setImgFondo] = useState(false)
+
+
+    const [modal, setModal] = useState(false)
+
+
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+    const [croppedArea, setCroppedArea] = useState(null);
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        console.log(croppedArea, croppedAreaPixels)
+        setCroppedArea(croppedArea)
+    }, [])
 
 
 
@@ -111,6 +124,7 @@ const ContainerRegisterParticular2 = ({
         imagePerfilUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
         setImagePerfilURL(newImageUrls);
         setImgPerfil(true)
+        setModal(true)
     }, [imagePerfilUpload]);
 
     useEffect(() => {
@@ -119,6 +133,7 @@ const ContainerRegisterParticular2 = ({
         imageFondoUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
         setImageFondoURL(newImageUrls);
         setImgFondo(true)
+        setModal(true)
     }, [imageFondoUpload]);
 
 
@@ -153,6 +168,35 @@ const ContainerRegisterParticular2 = ({
 
     return (
         <div className={styles.div_supremo}>
+
+
+            {
+                modal &&
+                <div className={styles.modal_crop}>
+                    <div className={styles.modal_crop_inside}>
+                        <div className={styles.menu} onClick={() => setModal(false)}>
+                            <div className={styles.bar}></div>
+                            <div className={styles.bar}></div>
+                            <div className={styles.bar}></div>
+                        </div>
+                        <div className={styles.div_cropper}>
+                            <Cropper
+                                image={imagePerfilURL}
+                                crop={crop}
+                                zoom={zoom}
+                                aspect={3 / 3}
+                                onCropChange={setCrop}
+                                onCropComplete={onCropComplete}
+                                onZoomChange={setZoom}
+                            />
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+
             <div className={styles.main_container}>
                 <div className={styles.inside_container}>
                     <div className={styles.div_header}>
@@ -166,31 +210,12 @@ const ContainerRegisterParticular2 = ({
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                                 <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
                                 <Basic setImages={setImagePerfilUpload} />
-                                {
-                                    imgPerfil &&
-                                    <div>
-                                        <img src={imagePerfilURL} />
-                                        <button onClick={handleEliminarImgPerfil}>Eliminar img perfil</button>
-                                    </div>
-
-                                }
-
                             </div>
 
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
                                 <Basic setImages={setImageFondoUpload} />
-                                {
-                                    imgFondo &&
-                                    <div>
-                                        <img src={imageFondoURL} />
-                                        <button onClick={handleEliminarImgFondo}>Eliminar img perfil</button>
-                                    </div>
-
-                                }
-
-
                             </div>
 
 
