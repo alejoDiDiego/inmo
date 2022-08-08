@@ -219,6 +219,22 @@ const CRP21 = ({
     }
 
 
+    
+    const handleSiguiente = async () => {
+        console.log(imagePerfilUpload)
+        let blobPerfil = await fetch(croppedImagePerfil).then(r => r.blob());
+        let blobFondo = await fetch(croppedImagePerfil).then(r => r.blob());
+
+        setUserCore({
+            ...userCore,
+            imagePerfilUpload : blobPerfil,
+            imageFondoUpload : blobFondo
+        })
+
+        setVerdadero2(true)
+    }
+
+
 
 
 
@@ -358,11 +374,11 @@ const CRP21 = ({
                         <div className={styles.div_fields}>
                             <div className={styles.fields}>
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
-                                <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
+                                <label className={styles.label_desc}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
                                 <Basic setImages={setImagePerfilUpload} />
                                 {
                                     resultadoPerfil &&
-                                    <div className={styles.div_img}>
+                                    <div className={styles.div_img_perfil}>
                                         <img src={croppedImagePerfil} />
                                     </div>
                                 }
@@ -371,11 +387,11 @@ const CRP21 = ({
 
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
-                                <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
+                                <label className={styles.label_desc}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
                                 <Basic setImages={setImageFondoUpload} />
                                 {
                                     resultadoFondo &&
-                                    <div className={styles.div_img}>
+                                    <div className={styles.div_img_fondo}>
                                         <img src={croppedImageFondo} />
                                     </div>
                                 }
@@ -385,7 +401,7 @@ const CRP21 = ({
 
 
                             <div className={styles.buttons}>
-                                {/* <button className={styles.button} onClick={handleSiguiente}>Siguiente</button> */}
+                                <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
                             </div>
                         </div>
                     </div>

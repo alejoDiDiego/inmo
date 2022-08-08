@@ -24,7 +24,7 @@
     gap: 50px;
 }
 
-.derecha input{
+.header input{
     width: 500px;
     height: 30px;
     border-radius: 5px;
@@ -36,7 +36,7 @@
     border: 1px solid transparent;
 }
 
-.derecha input:focus{
+.header input:focus{
     border: 1px solid #38B6FF;
     box-shadow: 0 0 5px 0 #38B6FF;
 }
@@ -97,3 +97,10 @@
     transition: all 0.3 linear;
 }
 
+
+
+.div_img_user{
+    position: relative;
+    width: 30px;
+    height: 30px;
+}

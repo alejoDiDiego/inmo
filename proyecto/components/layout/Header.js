@@ -20,9 +20,14 @@ const Header = ({ usuario }) => {
                 </div>
             </Link>
 
+            <input placeholder='Direccion, localidad, provincia, vendedor' />
+
             <div className={styles.derecha}>
 
-                <input placeholder='Direccion, localidad, provincia, vendedor' />
+                <div className={styles.div_img_user}>
+                    <Image layout='fill' src='/user.png' />
+                    {/*https://iconscout.com/icon/user-1851010  User Icon by IconScout Store */}
+                </div>
 
 
                 <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => setActive(!active)}>

@@ -86,7 +86,7 @@ export default function RegisterParticular() {
             :
             (
               verdadero2 == false ?
-                <CRP21
+                <ContainerRegisterParticular2
                   setVerdadero={setVerdadero}
                   setVerdadero2={setVerdadero2}
                   userCore={userCore}

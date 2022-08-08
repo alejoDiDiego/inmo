@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .main_container h2{
@@ -82,15 +83,14 @@
     
 }
 
-.label_desc1{
+.label_desc{
     font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 
 }
 
-.label_desc2{
-    font-size: 20px;
 
-}
 
 .h3{
     margin-top: 30px;
@@ -309,44 +309,39 @@
 
 
 
-.mostrar_corte{
-    width: 300px;
-    height: 300px;
-}
 
 
 
-.output {
+
+
+  .div_img_perfil{
     position: relative;
     width: 200px;
     height: 200px;
     align-items: center;
-    align-self: center;
     overflow: hidden;
+    margin-top: 10px;
+  }
+
+
+  .div_img_perfil img{
+    height: 200px;
+    width: 200px;
+    margin-top: 10px;
+  }
+
+
+  .div_img_fondo{
+    position: relative;
+    width: 400px;
+    height: 200px;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 10px;
   }
   
-  .output img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: top left;
-  }
-
-
-
-
-
-  .div_img{
-    position: relative;
-    width: 200px;
+  .div_img_fondo img{
     height: 200px;
-    align-items: center;
-    align-self: center;
-    overflow: hidden;
-  }
-
-
-  .div_img img{
-    height: 100px;
-    width: 100px;
+    width: 400px;
+    margin-top: 10px;
   }
