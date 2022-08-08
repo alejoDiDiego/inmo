@@ -4,16 +4,13 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-easy-crop'
 
-
-
-const ContainerRegisterParticular2 = ({
+const CRP2 = ({
     setVerdadero2,
     userCore,
     setUserCore,
     omitir,
     setOmitir
 }) => {
-
 
     const [imagePerfilUpload, setImagePerfilUpload] = useState([])
     const [imagePerfilURL, setImagePerfilURL] = useState("")
@@ -24,52 +21,13 @@ const ContainerRegisterParticular2 = ({
     const [imgFondo, setImgFondo] = useState(false)
 
 
-    const [modal, setModal] = useState(false)
+    const [imgPerfilStyle, setImgPerfilStyle] = useState({})
+    const [imgFondoStyle, setImgFondoStyle] = useState({})
 
 
-    const [crop, setCrop] = useState({ x: 0, y: 0 })
-    const [zoom, setZoom] = useState(1)
-    const [croppedArea, setCroppedArea] = useState(null);
-    const [corteActual, setCorteActual] = useState(null)
-    const [resultado, setResultado] = useState(false)
-    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-        console.log(croppedArea, croppedAreaPixels)
-        setCroppedArea(croppedArea)
-    }, [])
-
-
-
-    const CROP_AREA_ASPECT = 1 / 1;
-
-
-
-    const baseStyle = {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px',
-        borderWidth: 2,
-        borderRadius: 2,
-        borderColor: '#eeeeee',
-        borderStyle: 'dashed',
-        backgroundColor: '#fafafa',
-        color: '#bdbdbd',
-        outline: 'none',
-        transition: 'border .24s ease-in-out'
-    };
-
-    const focusedStyle = {
-        borderColor: '#2196f3'
-    };
-
-    const acceptStyle = {
-        borderColor: '#00e676'
-    };
-
-    const rejectStyle = {
-        borderColor: '#ff1744'
-    };
+    useEffect(() => {
+        console.log(imgPerfilStyle)
+    }, [imgPerfilStyle])
 
 
 
@@ -108,24 +66,109 @@ const ContainerRegisterParticular2 = ({
         );
     }
 
+    const baseStyle = {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        borderWidth: 2,
+        borderRadius: 2,
+        borderColor: '#eeeeee',
+        borderStyle: 'dashed',
+        backgroundColor: '#fafafa',
+        color: '#bdbdbd',
+        outline: 'none',
+        transition: 'border .24s ease-in-out'
+    };
 
-    let aux = {}
+    const focusedStyle = {
+        borderColor: '#2196f3'
+    };
 
-    const handleCrop = () => {
-        aux = croppedArea
-        setCorteActual(aux);
-        console.log("corte boton")
-        console.log(corteActual)
-        setResultado(true)
-        setModal(false)
+    const acceptStyle = {
+        borderColor: '#00e676'
+    };
+
+    const rejectStyle = {
+        borderColor: '#ff1744'
+    };
+
+
+
+
+
+
+    const [resultadoPerfil, setResultadoPerfil] = useState(false)
+    const [resultadoFondo, setResultadoFondo] = useState(false)
+
+    const [modalPerfil, setModalPerfil] = useState(false)
+    const [modalFondo, setModalFondo] = useState(false)
+
+    const [modal, setModal] = useState(false)
+
+
+    const CROP_AREA_ASPECT = 1 / 1;
+
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+    const [croppedArea, setCroppedArea] = useState(null);
+    const [corteActual, setCorteActual] = useState({})
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        console.log(croppedArea, croppedAreaPixels)
+        setCroppedArea(croppedArea)
+    }, [])
+
+
+
+
+
+
+    const handleCrop = (setResultado) => {
+        // let aux = {}
+        // console.log(croppedArea)
+        // aux = croppedArea
+        // console.log("aux")
+        // console.log(aux)
+        // let aux2 = aux
+        // setCorteActual(aux2);
+        // console.log("corte boton")
+        // console.log(corteActual)
+        // if(modalPerfil == true && modalFondo == false){
+        //     setResultadoPerfil(true)
+        //     cropFunction(corteActual, "perfil")
+        //     setModalPerfil(false)
+        // } else if(modalFondo == true && modalPerfil == false){
+        //     setResultadoFondo(true)
+        //     cropFunction(corteActual, "fondo")
+        //     setModalFondo(false)
+        // }
+
+
+        setCorteActual(croppedArea)
+        setCorteActual((state) => {
+            console.log(state)
+            console.log("corte boton")
+            console.log(corteActual)
+            if(modalPerfil == true && modalFondo == false){
+                setResultadoPerfil(true)
+                cropFunction(state, "perfil")
+                setModalPerfil(false)
+            } else if(modalFondo == true && modalPerfil == false){
+                setResultadoFondo(true)
+                cropFunction(state, "fondo")
+                setModalFondo(false)
+            }
+            
+        })
+    
+        
 
     }
 
 
+    const cropFunction = ( corteActual, tipo ) => {
 
-
-
-    const Output = ({ corteActual }) => {
         console.log(corteActual)
         const scale = 100 / corteActual.width;
         const transform = {
@@ -142,46 +185,30 @@ const ContainerRegisterParticular2 = ({
             height: transform.height
         };
 
-        return (
-            <div className={styles.output}>
-                <img src={imagePerfilURL} alt="" style={imageStyle} />
-            </div>
-        );
-    };
 
 
-    function MostrarCorte() {
-        console.log(croppedArea)
-        return(
-          <div>
-          <div>{croppedArea && <Output corteActual={corteActual} />}</div>
-          </div>
-        )
-      }
+        if(tipo == "perfil"){
+            setImgPerfilStyle(imageStyle)
+        } else if(modalFondo == true && modalPerfil == false){
+            setImgFondoStyle(imageStyle)
+        }
+
+    }
 
 
 
 
-    // useEffect(() => {
-    //     if (imagePerfilUpload == null) { setImgPerfil(false); return; }
-    //     setImagePerfilURL(URL.createObjectURL(new Blob(imagePerfilUpload, {type: "image/*"})))
-    //     setImgPerfil(true)
-    // }, [imagePerfilUpload])
 
-    // useEffect(() => {
-    //     if (imageFondoUpload == null) { setImgFondo(false); return; }
-    //     setImageFondoURL(URL.createObjectURL(imageFondoUpload))
-    //     setImgFondo(true)
-    // }, [imageFondoUpload])
 
     useEffect(() => {
         if (imagePerfilUpload.length < 1) return;
         const newImageUrls = [];
         imagePerfilUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
         setImagePerfilURL(newImageUrls);
-        setResultado(false)
+        setResultadoPerfil(false)
         setImgPerfil(true)
-        setModal(true)
+        setModalPerfil(true)
+        console.log("llega")
     }, [imagePerfilUpload]);
 
     useEffect(() => {
@@ -189,11 +216,10 @@ const ContainerRegisterParticular2 = ({
         const newImageUrls = [];
         imageFondoUpload.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
         setImageFondoURL(newImageUrls);
-        setResultado(false)
+        setResultadoFondo(false)
         setImgFondo(true)
-        setModal(true)
+        setModalFondo(true)
     }, [imageFondoUpload]);
-
 
 
 
@@ -209,17 +235,8 @@ const ContainerRegisterParticular2 = ({
     }
 
 
-    const handleEliminarImgPerfil = () => {
-        setImagePerfilUpload([])
-        setImagePerfilURL("")
-        setImgPerfil(false)
-    }
 
-    const handleEliminarImgFondo = () => {
-        setImageFondoUpload([])
-        setImageFondoURL("")
-        setImgFondo(false)
-    }
+
 
 
 
@@ -229,10 +246,10 @@ const ContainerRegisterParticular2 = ({
 
 
             {
-                modal &&
+                modalPerfil  &&
                 <div className={styles.modal_crop}>
                     <div className={styles.modal_crop_inside}>
-                        <div className={styles.menu} onClick={() => setModal(false)}>
+                        <div className={styles.menu} onClick={() => modalPerfil == true ? setModalPerfil(false) : modalFondo == true ? setModalFondo(false) : null}>
                             <div className={styles.bar}></div>
                             <div className={styles.bar}></div>
                             <div className={styles.bar}></div>
@@ -242,7 +259,7 @@ const ContainerRegisterParticular2 = ({
                                 image={imagePerfilURL}
                                 crop={crop}
                                 zoom={zoom}
-                                aspect={1/1}
+                                aspect={1 / 1}
                                 onCropChange={setCrop}
                                 onCropComplete={onCropComplete}
                                 onZoomChange={setZoom}
@@ -263,7 +280,7 @@ const ContainerRegisterParticular2 = ({
                             />
                         </div>
 
-                        <button onClick={handleCrop}>Recortar</button>
+                        <button onClick={() => {handleCrop(modalPerfil == true ? setResultadoPerfil : modalFondo == true ? setResultadoFondo : null)}}>Recortar</button>
 
                     </div>
                 </div>
@@ -285,17 +302,22 @@ const ContainerRegisterParticular2 = ({
                                 <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
                                 <Basic setImages={setImagePerfilUpload} />
                                 {
-                                    resultado &&
-                                    
-                                        <MostrarCorte />
-                                    
+                                    resultadoPerfil &&
+                                    <div className={styles.div_img_perfil}>
+                                        <img src={imagePerfilURL} style={imgPerfilStyle} />
+                                    </div>
+
                                 }
                             </div>
 
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
-                                <Basic setImages={setImageFondoUpload} />
+                                {
+                                    resultadoFondo &&
+                                    <img src={imageFondoURL} style={imgFondoStyle} />
+
+                                }
                             </div>
 
 
@@ -317,4 +339,4 @@ const ContainerRegisterParticular2 = ({
     )
 }
 
-export default ContainerRegisterParticular2
+export default CRP2

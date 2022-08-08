@@ -331,3 +331,24 @@
     left: 0;
     transform-origin: top left;
   }
+
+
+
+
+
+  .div_img_perfil{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    align-items: center;
+    align-self: center;
+    overflow: hidden;
+  }
+
+
+  .div_img_perfil img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
