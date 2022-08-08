@@ -124,7 +124,7 @@ const CRP2 = ({
 
 
 
-    const handleCrop = (setResultado) => {
+    const handleCrop = () => {
         // let aux = {}
         // console.log(croppedArea)
         // aux = croppedArea
@@ -150,24 +150,24 @@ const CRP2 = ({
             console.log(state)
             console.log("corte boton")
             console.log(corteActual)
-            if(modalPerfil == true && modalFondo == false){
+            if (modalPerfil == true && modalFondo == false) {
                 setResultadoPerfil(true)
                 cropFunction(state, "perfil")
                 setModalPerfil(false)
-            } else if(modalFondo == true && modalPerfil == false){
+            } else if (modalFondo == true && modalPerfil == false) {
                 setResultadoFondo(true)
                 cropFunction(state, "fondo")
                 setModalFondo(false)
             }
-            
+
         })
-    
-        
+
+
 
     }
 
 
-    const cropFunction = ( corteActual, tipo ) => {
+    const cropFunction = (corteActual, tipo) => {
 
         console.log(corteActual)
         const scale = 100 / corteActual.width;
@@ -187,9 +187,9 @@ const CRP2 = ({
 
 
 
-        if(tipo == "perfil"){
+        if (tipo == "perfil") {
             setImgPerfilStyle(imageStyle)
-        } else if(modalFondo == true && modalPerfil == false){
+        } else if (modalFondo == true && modalPerfil == false) {
             setImgFondoStyle(imageStyle)
         }
 
@@ -209,6 +209,7 @@ const CRP2 = ({
         setImgPerfil(true)
         setModalPerfil(true)
         console.log("llega")
+        console.log(modalPerfil)
     }, [imagePerfilUpload]);
 
     useEffect(() => {
@@ -246,17 +247,17 @@ const CRP2 = ({
 
 
             {
-                modalPerfil  &&
+                modalPerfil == true || modalFondo == true ?
                 <div className={styles.modal_crop}>
                     <div className={styles.modal_crop_inside}>
-                        <div className={styles.menu} onClick={() => modalPerfil == true ? setModalPerfil(false) : modalFondo == true ? setModalFondo(false) : null}>
+                        <div className={styles.menu} onClick={() => {modalPerfil ? setModalPerfil(false) : modalFondo ? setModalFondo(false) : null}}>
                             <div className={styles.bar}></div>
                             <div className={styles.bar}></div>
                             <div className={styles.bar}></div>
                         </div>
                         <div className={styles.div_cropper}>
                             <Cropper
-                                image={imagePerfilURL}
+                                image={modalPerfil ? imagePerfilURL : modalFondo ? imageFondoURL : null}
                                 crop={crop}
                                 zoom={zoom}
                                 aspect={1 / 1}
@@ -280,11 +281,14 @@ const CRP2 = ({
                             />
                         </div>
 
-                        <button onClick={() => {handleCrop(modalPerfil == true ? setResultadoPerfil : modalFondo == true ? setResultadoFondo : null)}}>Recortar</button>
+                        <button onClick={handleCrop}>Recortar</button>
 
                     </div>
                 </div>
+                : null
             }
+
+
 
 
 
@@ -303,7 +307,7 @@ const CRP2 = ({
                                 <Basic setImages={setImagePerfilUpload} />
                                 {
                                     resultadoPerfil &&
-                                    <div className={styles.div_img_perfil}>
+                                    <div className={styles.div_img}>
                                         <img src={imagePerfilURL} style={imgPerfilStyle} />
                                     </div>
 
@@ -313,9 +317,13 @@ const CRP2 = ({
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
+                                <Basic setImages={setImageFondoUpload} />
                                 {
                                     resultadoFondo &&
-                                    <img src={imageFondoURL} style={imgFondoStyle} />
+                                    <div className={styles.div_img}>
+                                        <img src={imageFondoURL} style={imgFondoStyle} />
+                                    </div>
+
 
                                 }
                             </div>

@@ -336,7 +336,7 @@
 
 
 
-  .div_img_perfil{
+  .div_img{
     position: relative;
     width: 200px;
     height: 200px;
@@ -346,7 +346,7 @@
   }
 
 
-  .div_img_perfil img{
+  .div_img img{
     position: absolute;
     top: 0;
     left: 0;
