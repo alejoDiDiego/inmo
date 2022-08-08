@@ -14,23 +14,30 @@ const CRP21 = ({
     setOmitir
 }) => {
 
-    const [imageUpload, setImageUpload] = useState([])
     const [imageSrc, setImageSrc] = React.useState(null)
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-    const [croppedImage, setCroppedImage] = useState(null)
 
-    const [modal, setModal] = useState(false)
-    const [resultado, setResultado] = useState(false)
+    const [croppedImagePerfil, setCroppedImagePerfil] = useState(null)
+    const [croppedImageFondo, setCroppedImageFondo] = useState(null)
+
+    const [modalPerfil, setModalPerfil] = useState(false)
+    const [modalFondo, setModalFondo] = useState(false)
+
+    const [imagePerfilUpload, setImagePerfilUpload] = useState(false)
+    const [imageFondoUpload, setImageFondoUpload] = useState(false)
+
+    const [resultadoPerfil, setResultadoPerfil] = useState(false)
+    const [resultadoFondo, setResultadoFondo] = useState(false)
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
-      }, [])
+    }, [])
 
 
-    const showCroppedImage = useCallback(async () => {
+    const showCroppedImagePerfil = useCallback(async () => {
         try {
             const croppedImage = await getCroppedImg(
                 imageSrc,
@@ -38,12 +45,58 @@ const CRP21 = ({
                 rotation
             )
             console.log('donee', { croppedImage })
-            setCroppedImage(croppedImage)
-            setResultado(true)
+
+
+            setCroppedImagePerfil(croppedImage)
+            setResultadoPerfil(true)
+
+            setImageSrc(null)
+            setCrop({ x: 0, y: 0 })
+            setRotation(0)
+            setZoom(1)
+            setCroppedAreaPixels(null)
+            setModalPerfil(false)
+            setImagePerfilUpload(false)
+            setImageFondoUpload(false)
+        
+
         } catch (e) {
             console.error(e)
         }
     }, [imageSrc, croppedAreaPixels, rotation])
+
+
+
+
+    const showCroppedImageFondo = useCallback(async () => {
+        try {
+            const croppedImage = await getCroppedImg(
+                imageSrc,
+                croppedAreaPixels,
+                rotation
+            )
+            console.log('donee', { croppedImage })
+
+
+            setCroppedImageFondo(croppedImage)
+            setResultadoFondo(true)
+
+            setImageSrc(null)
+            setCrop({ x: 0, y: 0 })
+            setRotation(0)
+            setZoom(1)
+            setCroppedAreaPixels(null)
+            setModalFondo(false)
+            setImagePerfilUpload(false)
+            setImageFondoUpload(false)
+
+        } catch (e) {
+            console.error(e)
+        }
+    }, [imageSrc, croppedAreaPixels, rotation])
+
+
+
 
 
 
@@ -121,16 +174,39 @@ const CRP21 = ({
 
 
     useEffect(() => {
-        if (imageUpload.length < 1) return;
-        const change = async () => {
-            const file = imageUpload[0]
-            let imageDataUrl = await readFile(file)
-            
-            setImageSrc(imageDataUrl)
-            setModal(true)
+        if (imagePerfilUpload.length >= 1) {
+            const change = async () => {
+                const file = imagePerfilUpload[0]
+                console.log("llega1")
+                let imageDataUrl = await readFile(file)
+
+                setImageSrc(imageDataUrl)
+                setModalPerfil(true)
+                console.log("llega2")
+            }
+            change()
+            return
         }
-        change()
-    }, [imageUpload]);
+    }, [imagePerfilUpload]);
+
+
+
+    useEffect(() => {
+        if (imageFondoUpload.length >= 1) {
+            const change = async () => {
+                const file = imageFondoUpload[0]
+                let imageDataUrl = await readFile(file)
+
+                setImageSrc(imageDataUrl)
+                setModalFondo(true)
+            }
+
+            change()
+            return
+        }
+
+
+    }, [imageFondoUpload]);
 
 
 
@@ -152,10 +228,10 @@ const CRP21 = ({
 
 
             {
-                modal ?
+                modalPerfil ?
                     <div className={styles.modal_crop}>
                         <div className={styles.modal_crop_inside}>
-                            <div className={styles.menu} onClick={() => setModal(false)}>
+                            <div className={styles.menu} onClick={() => setModalPerfil(false)}>
                                 <div className={styles.bar}></div>
                                 <div className={styles.bar}></div>
                                 <div className={styles.bar}></div>
@@ -188,6 +264,7 @@ const CRP21 = ({
                                 />
 
                                 <input
+                                    type="range"
                                     value={rotation}
                                     min={0}
                                     max={360}
@@ -202,7 +279,66 @@ const CRP21 = ({
 
                             </div>
 
-                            <button onClick={showCroppedImage}>Recortar</button>
+                            <button onClick={showCroppedImagePerfil}>Recortar</button>
+
+                        </div>
+                    </div>
+                    : null
+            }
+
+            {
+                modalFondo ?
+                    <div className={styles.modal_crop}>
+                        <div className={styles.modal_crop_inside}>
+                            <div className={styles.menu} onClick={() => setModalFondo(false)}>
+                                <div className={styles.bar}></div>
+                                <div className={styles.bar}></div>
+                                <div className={styles.bar}></div>
+                            </div>
+                            <div className={styles.div_cropper}>
+                                <Cropper
+                                    image={imageSrc}
+                                    crop={crop}
+                                    rotation={rotation}
+                                    zoom={zoom}
+                                    aspect={2 / 1}
+                                    onCropChange={setCrop}
+                                    onRotationChange={setRotation}
+                                    onCropComplete={onCropComplete}
+                                    onZoomChange={setZoom}
+                                />
+                            </div>
+                            <div className={styles.controls}>
+                                <input
+                                    type="range"
+                                    value={zoom}
+                                    min={1}
+                                    max={3}
+                                    step={0.1}
+                                    aria-labelledby="Zoom"
+                                    onChange={(e) => {
+                                        setZoom(e.target.value)
+                                    }}
+                                    className={styles.zoom_range}
+                                />
+
+                                <input
+                                    type="range"
+                                    value={rotation}
+                                    min={0}
+                                    max={360}
+                                    step={1}
+                                    aria-labelledby="Rotation"
+                                    onChange={(e) => {
+                                        setRotation(e.target.value)
+                                    }}
+                                    className={styles.zoom_range}
+                                />
+
+
+                            </div>
+
+                            <button onClick={showCroppedImageFondo}>Recortar</button>
 
                         </div>
                     </div>
@@ -223,11 +359,11 @@ const CRP21 = ({
                             <div className={styles.fields}>
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                                 <label className={styles.label_desc1}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
-                                <Basic setImages={setImageUpload} />
+                                <Basic setImages={setImagePerfilUpload} />
                                 {
-                                    resultado &&
+                                    resultadoPerfil &&
                                     <div className={styles.div_img}>
-                                        <img src={croppedImage} />
+                                        <img src={croppedImagePerfil} />
                                     </div>
                                 }
 
@@ -236,7 +372,13 @@ const CRP21 = ({
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc2}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
-                                {/* <Basic setImages={setImageFondoUpload} /> */}
+                                <Basic setImages={setImageFondoUpload} />
+                                {
+                                    resultadoFondo &&
+                                    <div className={styles.div_img}>
+                                        <img src={croppedImageFondo} />
+                                    </div>
+                                }
 
                             </div>
 
