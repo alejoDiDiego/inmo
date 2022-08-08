@@ -9,6 +9,7 @@ import Image from 'next/image'
 const Header = ({ usuario }) => {
 
     const [active, setActive] = useState(false)
+    const [activeUserMenu, setActiveUserMenu] = useState(false)
     console.log(usuario)
 
 
@@ -24,13 +25,13 @@ const Header = ({ usuario }) => {
 
             <div className={styles.derecha}>
 
-                <div className={styles.div_img_user}>
+                <div className={styles.div_img_user} onClick={() => {setActiveUserMenu(!activeUserMenu); setActive(false)}}>
                     <Image layout='fill' src='/user (3).png' />
                     {/*https://iconscout.com/icon/user-532  User Icon by Dalpat Prajapati on IconScout */}
                 </div>
 
 
-                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => setActive(!active)}>
+                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => {setActive(!active); setActiveUserMenu(false)}}>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
@@ -40,8 +41,14 @@ const Header = ({ usuario }) => {
             </div>
 
             <div className={`${styles.hidden_menu} ${active == true ? styles.active : null}`}>
-
                 <div className={styles.inside_hidden_menu}>
+                    wqeqwe
+
+                </div>
+            </div>
+
+            <div className={`${styles.hidden_menu_user} ${activeUserMenu == true ? styles.active : null}`}>
+                <div className={styles.inside_hidden_menu_user}>
                     {
                         usuario == null ?
                             <div>
@@ -55,8 +62,9 @@ const Header = ({ usuario }) => {
                     }
 
                 </div>
+            </div>        
 
-            </div>
+
 
 
 
