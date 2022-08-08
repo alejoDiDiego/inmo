@@ -25,8 +25,8 @@ const Header = ({ usuario }) => {
             <div className={styles.derecha}>
 
                 <div className={styles.div_img_user}>
-                    <Image layout='fill' src='/user.png' />
-                    {/*https://iconscout.com/icon/user-1851010  User Icon by IconScout Store */}
+                    <Image layout='fill' src='/user (3).png' />
+                    {/*https://iconscout.com/icon/user-532  User Icon by Dalpat Prajapati on IconScout */}
                 </div>
 
 
