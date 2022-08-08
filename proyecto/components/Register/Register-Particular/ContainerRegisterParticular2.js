@@ -6,7 +6,7 @@ import Cropper from 'react-easy-crop'
 import { getCroppedImg, getRotatedImage } from '../../../crop/auxCrop'
 
 
-const CRP21 = ({
+const ContainerRegisterParticular2 = ({
     setVerdadero2,
     userCore,
     setUserCore,
@@ -225,11 +225,34 @@ const CRP21 = ({
         let blobPerfil = await fetch(croppedImagePerfil).then(r => r.blob());
         let blobFondo = await fetch(croppedImageFondo).then(r => r.blob());
 
-        setUserCore({
-            ...userCore,
-            imagePerfilUpload : blobPerfil,
-            imageFondoUpload : blobFondo
-        })
+
+
+        if(croppedImagePerfil == null && croppedImageFondo == null){
+            setUserCore({
+                ...userCore,
+            })
+        }
+
+        if(croppedImagePerfil != null && croppedImageFondo == null){
+            setUserCore({
+                ...userCore,
+                imagePerfilUpload : blobPerfil,
+            })
+        }
+
+        if(croppedImagePerfil == null && croppedImageFondo != null){
+            setUserCore({
+                ...userCore,
+                imageFondoUpload : blobFondo
+            })
+        }
+        if(croppedImagePerfil != null && croppedImageFondo != null){
+            setUserCore({
+                ...userCore,
+                imagePerfilUpload : blobPerfil,
+                imageFondoUpload : blobFondo
+            })
+        }
 
         setVerdadero2(true)
     }
@@ -417,4 +440,4 @@ const CRP21 = ({
     )
 }
 
-export default CRP21
+export default ContainerRegisterParticular2

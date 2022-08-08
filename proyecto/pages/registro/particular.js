@@ -9,7 +9,7 @@ import ContainerSpinnerParticular from '../../components/Register/Register-Parti
 import CRP2 from '../../components/Register/Register-Particular/CRP2'
 import firebase, { FirebaseContext } from '../../firebase'
 import styles from '../../styles/RegisterParticular.module.css'
-import CRP21 from '../../components/Register/Register-Particular/CRP21'
+
 
 
 

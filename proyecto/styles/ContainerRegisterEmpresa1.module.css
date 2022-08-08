@@ -1,3 +1,44 @@
+.div_supremo{
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+
+.div_detalle{
+    position: relative;
+    height: 300px;
+    width: 60%;
+    margin: auto 0;
+    background: rgba(0, 0, 0, 0.5);
+    
+}
+
+.div_inside_detalle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 100px;
+    gap: 200px;
+}
+
+.div_inside_detalle p{
+    margin: auto;
+    color: #FFFFFF;
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.div_inside_detalle img{
+    margin-right: 100px;
+}
+
+
+
+
+
 .main_container{
     position: relative;
     height: 100%;
@@ -8,6 +49,9 @@
     flex-direction: column;
     align-items: center;
 }
+
+
+
 
 .main_container h2{
     font-size: 40px;
@@ -57,7 +101,6 @@
     font-size: 18px;
     outline: none;
     border-radius: 5px;
-    padding-left: 10px;
 }
 
 
@@ -83,9 +126,28 @@
     cursor: pointer;
 }
 
+.div_link{
+    margin-top: -15px;
+}
 
-.form button{
-    margin-top: 200px;
+.div_buttons{
+    margin-top: 385px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.div_spinner{
+    margin-top: 385px;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15px;
+}
+
+
+.button{
+    align-self: flex-end;
+    height: 100%;
     border: none;
     background-color: #38B6FF;
     color: #FFFFFF;
@@ -96,12 +158,104 @@
     cursor: pointer;
     transition: ease-in-out 0.3s;
     border-radius: 3px;
+
+}
+
+.buttonGoogle{
+    align-self: flex-end;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    background-color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    border-radius: 3px;
+    margin-left: 20px;
+    padding: 9px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonGoogle span{
+    margin-right: 6px;
+}
+
+.buttonGoogle:hover{
+    background-color: #ffffff6e;
+}
+
+.button:hover{
+    background-color: #228cca;
+}
+
+.div_error {
+    display: flex;
+    align-items: flex-end;
+}
+
+.div_error p {
+    margin: 0;
+    margin-left: 15px;
+    font-size: 14px;
+    color: red;
+}
+
+.div_error label {
+    margin: 0;
+}
+
+.div_input{
+    display: flex;
+    align-items: center;
+}
+
+.div_input i{
+    margin: 0;
+    margin-top: 10px;
+    margin-left: -30px;
+    cursor: pointer;
 }
 
 
 
-.form button:hover{
-    background-color: black;
-    color:  #FFFFFF;
-}
 
+
+@media only screen and (max-width: 1919px) {
+    .div_detalle{
+        height: 300px;
+        width: 60%;
+    }
+
+    .main_container{
+        width: 450px;
+    }
+    
+
+    .fields input{
+        width: 350px;
+    }
+
+    .inside_container{
+        width: 90%;
+        
+    }
+
+    .fields label{
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .div_buttons{
+        margin-top: 375px;
+    }
+    
+    .div_spinner{
+        margin-top: 365px;
+    }
+
+
+  }
