@@ -90,85 +90,90 @@ const ContainerRegisterEmpresa3 = ({
 
     const { email, password, imagePerfilUpload, imageFondoUpload } = userCore
 
-    const user = await firebase.registrar(firebase.auth, email, password)
+    try {
+      const user = await firebase.registrar(firebase.auth, email, password)
 
-    const actionCodeSettings = {
-      url: 'http://localhost:3000/',
-      handleCodeInApp: true,
-    };
+      const actionCodeSettings = {
+        url: 'http://localhost:3000/',
+        handleCodeInApp: true,
+      };
 
-    await sendEmailVerification(user, actionCodeSettings)
-    console.log("se mando")
+      await sendEmailVerification(user, actionCodeSettings)
+      console.log("se mando")
 
-    alert("Se mando el mail, fijese en su casilla de Spam si no le llego")
+      alert("Se mando el mail, fijese en su casilla de Spam si no le llego")
 
-    setDoc(doc(firebase.db, "Usuarios", user.email), {
-      uid: user.uid,
-      mail: user.email,
-      type: "empresa"
-    })
+      setDoc(doc(firebase.db, "Usuarios", user.email), {
+        uid: user.uid,
+        mail: user.email,
+        type: "empresa"
+      })
 
-    if (imagePerfilUpload != null) {
-      const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
-      const snapshot = await uploadBytes(imagePerfRef, imagePerfilUpload) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
-      console.log("url")
-      const url = await getDownloadURL(snapshot.ref)
-      console.log(url)
+      if (imagePerfilUpload != null) {
+        const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
+        const snapshot = await uploadBytes(imagePerfRef, imagePerfilUpload) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
+        console.log("url")
+        const url = await getDownloadURL(snapshot.ref)
+        console.log(url)
+        await updateProfile(user, {
+          photoURL: url
+        }).then(() => {
+          console.log("se actualizo la foto de display")
+        }).catch((error) => {
+          console.log(error.message)
+          console.log("hubo un errror actualizando la foto de display")
+        });
+
+      }
+
+      if (imageFondoUpload != null) {
+        const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
+        await uploadBytes(imageFondRef, imageFondoUpload)
+      }
+
+
+
+      if ((numCel.length > 0 || numCel != '') && (numTel.length > 0 || numTel != '')) {
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          nombreUsuario: nomUsu,
+          numeroCel: numCel,
+          numeroTel: numTel,
+        })
+        alert("Nombre, Num Celu, Num Tel")
+      } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          nombreUsuario: nomUsu,
+          numeroCel: numCel,
+        })
+        alert("Nombre, Num Celu")
+      }
+      else if ((numTel.length > 0 || numTel != '') && (numCel.length == 0 || numCel == '')) {
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          nombreUsuario: nomUsu,
+          numeroTel: numTel,
+        })
+        alert("Nombre, Num Tel")
+      }
+      else {
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          nombreUsuario: nomUsu,
+        })
+        alert("Nombre")
+      }
+
       await updateProfile(user, {
-        photoURL: url
+        displayName: nomUsu
       }).then(() => {
-        console.log("se actualizo la foto de display")
+        console.log("se actualizo el nombre de display")
       }).catch((error) => {
         console.log(error.message)
-        console.log("hubo un errror actualizando la foto de display")
+        console.log("hubo un errror actualizando el nombre de display")
       });
-
+    } catch (err) {
+      setLoading(false)
+      console.log(err)
     }
 
-    if (imageFondoUpload != null) {
-      const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
-      await uploadBytes(imageFondRef, imageFondoUpload)
-    }
-
-
-
-    if ((numCel.length > 0 || numCel != '') && (numTel.length > 0 || numTel != '')) {
-      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
-        nombreUsuario: nomUsu,
-        numeroCel: numCel,
-        numeroTel: numTel,
-      })
-      alert("Nombre, Num Celu, Num Tel")
-    } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
-      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
-        nombreUsuario: nomUsu,
-        numeroCel: numCel,
-      })
-      alert("Nombre, Num Celu")
-    }
-    else if ((numTel.length > 0 || numTel != '') && (numCel.length == 0 || numCel == '')) {
-      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
-        nombreUsuario: nomUsu,
-        numeroTel: numTel,
-      })
-      alert("Nombre, Num Tel")
-    }
-    else {
-      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
-        nombreUsuario: nomUsu,
-      })
-      alert("Nombre")
-    }
-
-    await updateProfile(user, {
-      displayName: nomUsu
-    }).then(() => {
-      console.log("se actualizo el nombre de display")
-    }).catch((error) => {
-      console.log(error.message)
-      console.log("hubo un errror actualizando el nombre de display")
-    });
-    
 
 
 
