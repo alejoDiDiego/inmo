@@ -1,91 +1,245 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Router from "next/router";
-import styles from '../../../styles/ContainerRegisterEmpresa3.module.css'
+import { doc, updateDoc, getFirestore, setDoc } from "firebase/firestore";
+import styles from '../../../styles/ContainerRegisterParticular3.module.css'
+import MyApp from '../../../pages/_app';
+import "firebase/compat/firestore";
+import Spinner from '../../Spinner/Spinner';
+import { useRouter } from 'next/router';
+import firebase from '../../../firebase';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 
 
 const ContainerRegisterEmpresa3 = ({
   setVerdadero2,
-  email,
-  password ,
-  confirmarPassword,
-
+  userCore,
+  setUserCore,
+  omitir,
+  setOmitir
 }) => {
+
+  const [nomUsu, setNomUsu] = useState('')
+  const [numCel, setNumCel] = useState('')
+  const [numTel, setNumTel] = useState('')
+
+  const [errorNomUsu, setErrorNomUsu] = useState(false)
+
+  const [loading, setLoading] = useState(false)
+
+
+  const router = useRouter()
+
+
 
   const handleAnterior = () => {
     setVerdadero2(false)
   }
 
 
-  const handleInfo = async () => {
-    const firestore = getFirestore(MyApp.app)
+  const isNumberNumCel = (str) => {
+    if (str.trim() === '') {
+      if (numCel.length == 1) { return !isNaN(str) }
+      return false
+    }
+    return !isNaN(str)
+  }
 
-    const ref = doc(firestore, "Usuarios", userCore.email)
+  const isNumberNumTel = (str) => {
+    if (str.trim() === '') {
+      if (numTel.length == 1) { return !isNaN(str) }
+      return false
+    }
+    return !isNaN(str)
+  }
 
-    updateDoc(ref, {
-        nombrePublico : nomPub,
-        codigoArea : codArea,
-        numeroCel : numCel,
-        numeroTel : numTel
+
+  const handleNumCel = (e) => {
+    if (isNumberNumCel(e.target.value)) {
+      setNumCel(e.target.value)
+      console.log("valido")
+      //
+    } else {
+      console.log("no valido")
+      //return
+    }
+  }
+
+  const handleNumTel = (e) => {
+    if (isNumberNumTel(e.target.value)) {
+      setNumTel(e.target.value)
+      console.log("valido")
+      //
+    } else {
+      console.log("no valido")
+      //return
+    }
+  }
+
+
+
+  const handleSubmit = async () => {
+    setErrorNomUsu(false)
+
+    if (nomUsu == '' || nomUsu == null || nomUsu.length == 0) {
+      setErrorNomUsu(true)
+      return
+    }
+
+    setLoading(true)
+
+    const { email, password, imagePerfilUpload, imageFondoUpload } = userCore
+
+    const user = await firebase.registrar(firebase.auth, email, password)
+
+    const actionCodeSettings = {
+      url: 'http://localhost:3000/',
+      handleCodeInApp: true,
+    };
+
+    await sendEmailVerification(user, actionCodeSettings)
+    console.log("se mando")
+
+    alert("Se mando el mail, fijese en su casilla de Spam si no le llego")
+
+    setDoc(doc(firebase.db, "Usuarios", user.email), {
+      uid: user.uid,
+      mail: user.email,
+      type: "empresa"
     })
 
-    .catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode)
-      const errorMessage = error.message;
-      console.log(errorMessage)
+    if (imagePerfilUpload != null) {
+      const imagePerfRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/perfil`)
+      const snapshot = await uploadBytes(imagePerfRef, imagePerfilUpload) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
+      console.log("url")
+      const url = await getDownloadURL(snapshot.ref)
+      console.log(url)
+      await updateProfile(user, {
+        photoURL: url
+      }).then(() => {
+        console.log("se actualizo la foto de display")
+      }).catch((error) => {
+        console.log(error.message)
+        console.log("hubo un errror actualizando la foto de display")
+      });
+
+    }
+
+    if (imageFondoUpload != null) {
+      const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
+      await uploadBytes(imageFondRef, imageFondoUpload)
+    }
+
+
+
+    if ((numCel.length > 0 || numCel != '') && (numTel.length > 0 || numTel != '')) {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+        numeroCel: numCel,
+        numeroTel: numTel,
+      })
+      alert("Nombre, Num Celu, Num Tel")
+    } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+        numeroCel: numCel,
+      })
+      alert("Nombre, Num Celu")
+    }
+    else if ((numTel.length > 0 || numTel != '') && (numCel.length == 0 || numCel == '')) {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+        numeroTel: numTel,
+      })
+      alert("Nombre, Num Tel")
+    }
+    else {
+      await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+        nombreUsuario: nomUsu,
+      })
+      alert("Nombre")
+    }
+
+    await updateProfile(user, {
+      displayName: nomUsu
+    }).then(() => {
+      console.log("se actualizo el nombre de display")
+    }).catch((error) => {
+      console.log(error.message)
+      console.log("hubo un errror actualizando el nombre de display")
     });
-}
+    
+
+
+
+    setTimeout(() => {
+      router.push('/')
+    }, 3000)
+
+    //alert("Bienvenido, cuenta totalmente creada")
+  }
+
+
+
+
 
 
   return (
-    <div className={styles.main_container}>
-      <div className={styles.inside_container}>
-        <h2>Registra <span className={styles.text_blue}>tu empresa 3</span></h2>
-        <div className={styles.form}>
-          <p>Introduzca informacion de contacto para que los posibles clientes puedan contactarlo para consultar sobre sus publicaciones</p>
-          <div className={styles.fields}>
-            <label>Direccion de su sede</label>
-            <input type='text'></input>
-          </div>
+    <div className={styles.div_supremo}>
+      <div className={styles.main_container}>
+        <div className={styles.inside_container}>
+          <h2>Registra<span className={styles.text_blue}>te 3</span></h2>
+          <div className={styles.form}>
+            <p>Introduzca informacion de contacto para que los otros usuarios de la plataforma puedan contactar con usted</p>
+            <div className={styles.div_fields}>
 
-          <div>
-            <div className={styles.fields}>
-              <label>Localidad</label>
-              <input type='text'></input>
+              <div className={styles.fields}>
+                <div className={styles.div_error}>
+                  <label>Nombre de usuario*</label>
+                  {errorNomUsu == true ? <p>El nombre es obligatorio</p> : null}
+                </div>
+
+                <input value={nomUsu} onChange={e => setNomUsu(e.target.value)} type='text' readOnly={loading} />
+              </div>
+
+              <div className={styles.fields}>
+                <div className={styles.div_error_tel}>
+                  <label>Numero de celular</label>
+                </div>
+
+                <input value={numCel} onChange={handleNumCel} type='text' placeholder='Ej. 5491122223333' readOnly={loading} />
+              </div>
+
+              <div className={styles.fields}>
+                <label>Numero de telefono <span>(Opcional)</span></label>
+                <input value={numTel} onChange={handleNumTel} type='text' placeholder='Ej. 541122223333' readOnly={loading} />
+              </div>
             </div>
-            <div className={styles.fields}>
-              <label>Codigo postal</label>
-              <input type='text'></input>
-            </div>
-          </div>
 
-          <div>
-            <div className={styles.fields}>
-              <label>Cod area</label>
-              <input type='text'></input>
-            </div>
-            <div className={styles.fields}>
-              <label>Numero de celular</label>
-              <input type='text'></input>
-            </div>
-          </div>
+            {
+              loading == false ?
+                <div className={styles.buttons}>
+                  <button className={styles.button} onClick={handleSubmit}>Finalizar</button>
+                  {omitir == true ?
+                    <button className={styles.button} onClick={handleAnterior}>Anterior</button>
+                    :
+                    null
+                  }
+                </div>
+                :
+                <div className={styles.div_spinner}>
+                  <Spinner />
+                </div>
 
-          <div className={styles.fields}>
-            <label>Numero telefonico</label>
-            <input type='text'></input>
-          </div>
 
-          <div className={styles.fields}>
-            <label>Mail de contacto</label>
-            <input type='text'></input>
+            }
           </div>
-
-          <div className={styles.button}>
-            <button onClick={handleInfo}>Finalizar</button>
-            <button  onClick={handleAnterior}>Anterior</button>
-          </div>
+        </div>
+      </div>
+      <div className={styles.div_detalle}>
+        <div className={styles.div_inside_detalle}>
+          <p>Por el momento, el unico dato obligatorio es el nombre de usuario.</p>
+          <img src="/icono_about.png" />
         </div>
       </div>
     </div>
