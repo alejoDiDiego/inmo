@@ -5,8 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import ContainerRegisterParticular1 from '../../components/Register/Register-Particular/ContainerRegisterParticular1'
 import ContainerRegisterParticular2 from '../../components/Register/Register-Particular/ContainerRegisterParticular2'
 import ContainerRegisterParticular3 from '../../components/Register/Register-Particular/ContainerRegisterParticular3'
-import ContainerSpinnerParticular from '../../components/Register/Register-Particular/ContainerSpinnerParticular'
-import CRP2 from '../../components/Register/Register-Particular/CRP2'
+import ContainerSpinner from '../../components/Register/ContainerSpinner'
 import firebase, { FirebaseContext } from '../../firebase'
 import styles from '../../styles/RegisterParticular.module.css'
 
@@ -74,7 +73,7 @@ export default function RegisterParticular() {
       </Head>
       {
         loadingBig == true ?
-          <ContainerSpinnerParticular />
+          <ContainerSpinner />
           :
           verdadero == false ?
             <ContainerRegisterParticular1

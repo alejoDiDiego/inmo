@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { doc, updateDoc, getFirestore, setDoc } from "firebase/firestore";
-import styles from '../../../styles/ContainerRegisterParticular3.module.css'
+import styles from '../../../styles/ContainerRegisterGeneral3.module.css'
 import MyApp from '../../../pages/_app';
 import "firebase/compat/firestore";
 import Spinner from '../../Spinner/Spinner';

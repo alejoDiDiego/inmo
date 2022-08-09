@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import styles from '../../../styles/ContainerRegisterParticular1.module.css'
+import styles from '../../../styles/ContainerRegisterGeneral1.module.css'
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { useRouter } from 'next/router'
@@ -52,7 +52,7 @@ const ContainerRegisterEmpresa1 = ({
       let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
       if (isRegistered == false) {
         await setDoc(doc(firebase.db, "Usuarios", user.email), {
-          nombreEmpresa: user.displayName,
+          nombreUsuario: user.displayName,
           uid: user.uid,
           mail: user.email,
           type: "empresa"
@@ -131,7 +131,7 @@ const ContainerRegisterEmpresa1 = ({
     isRegistered = await userExists(email).then(r => {
       return r;
     })
-    console.log(isRegistered)
+    console.log("isRegistered " + isRegistered)
     if (isRegistered == true) {
       setLoading(false)
       setEmailExistsError(true);

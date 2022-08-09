@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react'
-import styles from '../../../styles/ContainerRegisterParticular2.module.css'
+import styles from '../../../styles/ContainerRegisterGeneral2.module.css'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-easy-crop'

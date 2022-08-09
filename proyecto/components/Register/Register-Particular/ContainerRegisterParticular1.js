@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import styles from '../../../styles/ContainerRegisterParticular1.module.css'
+import styles from '../../../styles/ContainerRegisterGeneral1.module.css'
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
 import { useRouter } from 'next/router'

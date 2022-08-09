@@ -6,7 +6,7 @@ import ContainerRegisterEmpresa2 from '../../components/Register/Register-Empres
 import ContainerRegisterEmpresa3 from '../../components/Register/Register-Empresa/ContainerRegisterEmpresa3.js'
 import styles from '../../styles/RegisterEmpresa.module.css'
 import firebase, { FirebaseContext } from '../../firebase'
-import ContainerSpinnerParticular from '../../components/Register/Register-Particular/ContainerSpinnerParticular.js'
+import ContainerSpinner from '../../components/Register/ContainerSpinner'
 
 
 
@@ -65,7 +65,7 @@ export default function RegisterEmpresa() {
       </Head>
       {
         loadingBig == true ?
-          <ContainerSpinnerParticular />
+          <ContainerSpinner />
           :
           verdadero == false ?
             <ContainerRegisterEmpresa1

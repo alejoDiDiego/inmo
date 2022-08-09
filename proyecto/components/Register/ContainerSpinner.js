@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../../styles/ContainerSpinnerParticular.module.css'
-import Spinner from '../../Spinner/Spinner';
+import styles from '../../styles/ContainerSpinner.module.css'
+import Spinner from '../Spinner/Spinner';
 
 
 
 
 
 
-const ContainerSpinnerParticular = ({
+const ContainerSpinner = ({
 
 }) => {
 
@@ -29,4 +29,4 @@ const ContainerSpinnerParticular = ({
     )
 }
 
-export default ContainerSpinnerParticular
+export default ContainerSpinner
