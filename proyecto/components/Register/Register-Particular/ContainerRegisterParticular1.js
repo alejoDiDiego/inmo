@@ -163,7 +163,7 @@ const ContainerRegisterParticular1 = ({
     <div className={styles.div_supremo}>
       <div className={styles.main_container}>
         <div className={styles.inside_container}>
-          <h2>Registra<span className={styles.text_blue}>te</span></h2>
+          <h2>Crea tu cuenta en <span className={styles.text_blue}>Inmo</span></h2>
           <div className={styles.form}>
 
 
