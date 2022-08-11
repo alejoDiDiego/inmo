@@ -32,7 +32,7 @@
     font-size: 40px;
     margin-right: 40px;
     line-height: 80px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .text_blue{
@@ -49,39 +49,13 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-left: 10px;
     gap: 20px;
-}
-
-.div_fields{
-    margin-bottom: 30px;
-}
-
-.fields{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.fields label{
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-
-
-.fields input{
-    width: 400px;
-    border: none;
-    height: 40px;
-    font-size: 18px;
-    outline: none;
     
-    
-    background-color: #E8EFF4;
-    border-bottom: 1px solid black;
 }
+
+
+
 
 
 
@@ -111,7 +85,7 @@
 }
 
 .div_buttons{
-    margin-top: 110px;
+    margin-top: 190px;
     display: flex;
     justify-content: flex-end;
     gap: 20px;
@@ -129,8 +103,8 @@
     align-self: flex-end;
     height: 100%;
     border: none;
-    background-color: #38B6FF;
-    color: #FFFFFF;
+    border-bottom: 5px #38B6FF solid;
+    color: black;
     padding: 10px;
     padding-left: 25px;
     padding-right: 25px;
@@ -145,8 +119,9 @@
     align-self: flex-end;
     height: 100%;
     border: none;
+    border-bottom: 5px white solid;
     padding: 10px;
-    background-color: white;
+    background-color: #E8EFF4;
     font-size: 20px;
     cursor: pointer;
     transition: ease-in-out 0.3s;
@@ -169,40 +144,114 @@
 }
 
 .button:hover{
-    background-color: #228cca;
+    color: white;
+    background-color: #38B6FF;
 }
 
-.div_error {
-    display: flex;
-    align-items: flex-end;
-}
 
-.div_error p {
-    margin: 0;
-    margin-left: 15px;
-    font-size: 14px;
-    color: red;
-}
 
-.div_error label {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom_field {
     position: relative;
-    
-    background-color: #E8EFF4;
+    font-size: 14px;
+    border-top: 20px solid transparent;
+    margin-bottom: 5px;
+    --field-padding: 12px;
 }
 
-.div_input{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+.custom_field input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: var(--field-padding);
+    border-radius: 3px;
+    width: 450px;
+    outline: none;
+    font-size: 14px;
 }
 
-.div_input i{
+.custom_field .placeholder {
     position: absolute;
-    margin: 0;
-    
-    margin-right: 10px;
+    left: var(--field-padding);
+    width: calc(100% - (var(--field-padding) * 2));
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 20px;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        color 0.3s ease,
+        font-size 0.3s ease;
+}
+
+.custom_field input.dirty+.placeholder,
+.custom_field input:focus+.placeholder,
+.custom_field input:not(:placeholder-shown)+.placeholder {
+    top: -10px;
+    font-size: 12px;
+    color: #222;
+}
+
+
+
+.custom_field.two input {
+    border-radius: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background:
+    linear-gradient(90deg, #222, #222) center bottom/0 0.15em no-repeat,
+    linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+    linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+    transition: background-size 0.3s ease;
+}
+
+.custom_field.two input.dirty,
+.custom_field.two input:not(:placeholder-shown),
+.custom_field.two input:focus {
+    background-size: 100% 0.15em, 100% 0.1em, 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom_field i{
+    position: relative;
+    margin-left: -30px;
     cursor: pointer;
 }
+
+
+
 
 
 

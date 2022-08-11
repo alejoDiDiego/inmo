@@ -1,4 +1,4 @@
-.div_supremo{
+.div_supremo {
     width: 100vw;
     height: 100%;
     display: flex;
@@ -8,7 +8,7 @@
 
 
 
-.main_container{
+.main_container {
     position: relative;
     height: 800px;
     width: 600px;
@@ -20,36 +20,36 @@
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.no_spinner{
+.no_spinner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.h2{
+.h2 {
     font-size: 38px;
     margin-left: 40px;
     margin-right: 40px;
     line-height: 70px;
     margin-bottom: 0;
-    
+
 }
 
-.text_blue{
+.text_blue {
     color: #38B6FF;
 }
 
 
-.link{
+.link {
     margin-top: 50px;
 }
 
-.link:hover{
+.link:hover {
     cursor: pointer;
 }
 
-.containers{
+.containers {
     min-height: 225px;
     width: 470px;
     min-width: 450px;
@@ -62,24 +62,24 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.inside{
+.inside {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-.texts{
+.texts {
     margin-left: 10px;
 }
 
-.texts h3{
+.texts h3 {
     margin-top: 5px;
     margin-bottom: 0;
     font-size: 18px;
     font-weight: 700;
 }
 
-.texts p{
+.texts p {
     margin-top: 10px;
     font-size: 18px;
     width: 400px;
@@ -87,7 +87,7 @@
 
 
 
-.blues{
+.blues {
     height: 100%;
     width: 40px;
     background-color: #38B6FF;
@@ -101,19 +101,19 @@
 
 
 
-.inside_info{
+.inside_info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 20px;
     margin-left: 10px;
-    
+
 
 }
 
 
 
-.div_spinner{
+.div_spinner {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,3 +121,25 @@
     height: 100%;
     width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

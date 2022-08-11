@@ -61,7 +61,7 @@ const ContainerRegisterParticular1 = ({
       setLoading(false)
       console.log('el usuario existe')
       router.push('/')
-      
+
 
     }
     catch (error) {
@@ -167,7 +167,7 @@ const ContainerRegisterParticular1 = ({
           <div className={styles.form}>
 
 
-            <div className={styles.fields}>
+            {/* <div className={styles.fields}>
               <div className={styles.div_error} >
                 <label>Email</label>
                 {emailError == true ? <p>Ingrese un email valido</p> : null}
@@ -175,9 +175,14 @@ const ContainerRegisterParticular1 = ({
               </div>
 
               <input value={email} onChange={e => setEmail(e.target.value)} type='email' readOnly={loading} />
-            </div>
+            </div> */}
 
-            <div className={styles.fields}>
+            <label className={`${styles.custom_field} ${styles.two}`}>
+              <input value={email} onChange={e => setEmail(e.target.value)} type='email' readOnly={loading} placeholder="&nbsp;" />
+              <span className={styles.placeholder}>Email</span>
+            </label>
+
+            {/* <div className={styles.fields}>
               <div className={styles.div_error}>
                 <label>Contraseña</label>
                 {passwordError == true ? <p>Ingrese una contraseña valida</p> : null}
@@ -188,9 +193,17 @@ const ContainerRegisterParticular1 = ({
                 <input value={password} id="password" onChange={e => setPassword(e.target.value)} type={viewPassword == true ? "text" : "password"} readOnly={loading} />
                 <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               </div>
-            </div>
+            </div> */}
 
-            <div className={styles.fields}>
+
+
+            <label className={`${styles.custom_field} ${styles.two}`}>
+              <input value={password} id="password" onChange={e => setPassword(e.target.value)} type={viewPassword == true ? "text" : "password"} readOnly={loading}  placeholder="&nbsp;" />
+              <span className={styles.placeholder}>Contraseña</span>
+              <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+            </label>
+
+            {/* <div className={styles.fields}>
               <div className={styles.div_error}>
                 <label>Confirmar contraseña</label>
                 {confirmarPasswordError == true ? <p>Ambas contraseñas deben coincidir</p> : null}
@@ -200,7 +213,14 @@ const ContainerRegisterParticular1 = ({
                 <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               </div>
 
-            </div>
+            </div> */}
+
+
+            <label className={`${styles.custom_field} ${styles.two}`}>
+              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
+              <span className={styles.placeholder}>Confirmar Contraseña</span>
+              <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+            </label>
 
 
 
