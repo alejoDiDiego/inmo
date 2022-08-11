@@ -28,13 +28,33 @@ const Header = ({ usuario, registroActive }) => {
 
             <div className={styles.derecha}>
 
-                <div className={styles.div_img_user} onClick={() => { setActiveUserMenu(!activeUserMenu); setActive(false) }}>
+                <div className={styles.div_img_user} onClick={() => { 
+                    if(active == true){
+                        setTimeout(() => {
+                            setActiveUserMenu(!activeUserMenu)
+                        }, 300); 
+                        setActive(false) 
+                    } else if(active == false){
+                        setActiveUserMenu(!activeUserMenu)
+                    }
+                    
+                }}>
                     <Image layout='fill' src='/user (3).png' />
                     {/*https://iconscout.com/icon/user-532  User Icon by Dalpat Prajapati on IconScout */}
                 </div>
 
 
-                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active); setActiveUserMenu(false) }}>
+                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { 
+                    if(activeUserMenu == true){
+                        setTimeout(() => {
+                            setActive(!active)
+                        },300); 
+                        setActiveUserMenu(false) 
+                    } else if(activeUserMenu == false) {
+                        setActive(!active)
+                    }
+                    
+                }}>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
@@ -57,6 +77,7 @@ const Header = ({ usuario, registroActive }) => {
                             <div>
                                 <Link href='/inicio-sesion/principal'><button>Iniciar Sesion</button></Link>
                                 <Link href='/registro/principal'><button>Registrarse</button></Link>
+                                made by juan
                             </div>
                             :
                             <div>
