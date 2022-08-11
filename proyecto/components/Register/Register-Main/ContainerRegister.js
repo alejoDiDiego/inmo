@@ -19,6 +19,7 @@ const ContainerRegister = ({ loading }) => {
                                     <div className={styles.inside}>
                                         <div className={styles.inside_info}>
                                             <div className={styles.images}>
+                                                {/*https://www.flaticon.com/premium-icon/account_2354573?term=user&page=1&position=18&page=1&position=18&related_id=2354573&origin=search */}
                                                 <Image src='/register_picture.png' width={80} height={80} />
                                                 <Image src='/register_picture.png' width={80} height={80} />
                                                 <Image src='/register_picture.png' width={80} height={80} />

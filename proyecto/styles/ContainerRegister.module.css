@@ -10,13 +10,13 @@
 
 .main_container{
     position: relative;
-    height: 850px;
+    height: 800px;
     width: 600px;
     background-color: #E8EFF4;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -28,11 +28,12 @@
 }
 
 .h2{
-    font-size: 40px;
-    margin-left: 50px;
+    font-size: 38px;
+    margin-left: 40px;
     margin-right: 40px;
-    line-height: 80px;
+    line-height: 70px;
     margin-bottom: 0;
+    
 }
 
 .text_blue{
@@ -49,11 +50,13 @@
 }
 
 .containers{
-    min-height: 250px;
-    min-width: 500px;
+    min-height: 225px;
+    width: 470px;
+    min-width: 450px;
     background-color: #FFFFFF;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    border-radius: 20px;
     display: flex;
     justify-content: flex-end;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -72,13 +75,13 @@
 .texts h3{
     margin-top: 5px;
     margin-bottom: 0;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 
 .texts p{
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 18px;
     width: 400px;
 }
 
@@ -86,8 +89,11 @@
 
 .blues{
     height: 100%;
-    width: 50px;
+    width: 40px;
     background-color: #38B6FF;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -100,6 +106,7 @@
     flex-direction: column;
     justify-content: center;
     margin-right: 20px;
+    margin-left: 10px;
     
 
 }

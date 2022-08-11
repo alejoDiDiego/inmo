@@ -28,33 +28,8 @@ const Header = ({ usuario, registroActive }) => {
 
             <div className={styles.derecha}>
 
-                <div className={styles.div_img_user} onClick={() => { 
-                    if(active == true){
-                        setTimeout(() => {
-                            setActiveUserMenu(!activeUserMenu)
-                        }, 300); 
-                        setActive(false) 
-                    } else if(active == false){
-                        setActiveUserMenu(!activeUserMenu)
-                    }
-                    
-                }}>
-                    <Image layout='fill' src='/user (3).png' />
-                    {/*https://iconscout.com/icon/user-532  User Icon by Dalpat Prajapati on IconScout */}
-                </div>
 
-
-                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { 
-                    if(activeUserMenu == true){
-                        setTimeout(() => {
-                            setActive(!active)
-                        },300); 
-                        setActiveUserMenu(false) 
-                    } else if(activeUserMenu == false) {
-                        setActive(!active)
-                    }
-                    
-                }}>
+                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active) }}>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
@@ -65,14 +40,7 @@ const Header = ({ usuario, registroActive }) => {
 
             <div className={`${styles.hidden_menu} ${active == true ? styles.active : null}`}>
                 <div className={styles.inside_hidden_menu}>
-                    wqeqwe
-
-                </div>
-            </div>
-
-            <div className={`${styles.hidden_menu_user} ${activeUserMenu == true ? styles.active : null}`}>
-                <div className={styles.inside_hidden_menu_user}>
-                    {
+                {
                         usuario == null ?
                             <div>
                                 <Link href='/inicio-sesion/principal'><button>Iniciar Sesion</button></Link>
@@ -87,6 +55,8 @@ const Header = ({ usuario, registroActive }) => {
 
                 </div>
             </div>
+
+
 
 
 
