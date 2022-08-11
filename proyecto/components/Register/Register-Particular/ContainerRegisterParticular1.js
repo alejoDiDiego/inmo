@@ -98,11 +98,13 @@ const ContainerRegisterParticular1 = ({
     let errorConfirmarPasswordVar = false;
     let errorPasswordShortVar = false;
 
-    if (email === null || email === "" || email.length == 0) { errorEmailVar = true; }
+    let test = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
+
+    if (email === null || email === "" || email.length == 0 || test == false) { errorEmailVar = true; }
     if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }
     if (confirmarPassword != password) { errorConfirmarPasswordVar = true; }
 
-
+    
 
     setEmailError(errorEmailVar)
     setPasswordError(errorPasswordVar)
@@ -178,7 +180,7 @@ const ContainerRegisterParticular1 = ({
             </div> */}
 
             <label className={`${styles.custom_field} ${styles.two}`}>
-              <input value={email} onChange={e => {setEmail(e.target.value); setEmailError(false)}} type='email' readOnly={loading} placeholder="&nbsp;" />
+              <input value={email} onChange={e => { setEmail(e.target.value); setEmailError(false) }} type="text" readOnly={loading} placeholder="&nbsp;" />
               <span className={styles.placeholder}>Email</span>
               {emailError == true ?
                 <div className={styles.div_error}>
@@ -209,7 +211,7 @@ const ContainerRegisterParticular1 = ({
 
 
             <label className={`${styles.custom_field} ${styles.two}`}>
-              <input value={password} id="password" onChange={e => {setPassword(e.target.value); setPassswordShort(false); setPasswordError(false)}} type={viewPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
+              <input value={password} id="password" onChange={e => { setPassword(e.target.value); setPassswordShort(false); setPasswordError(false) }} type={viewPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
               <span className={styles.placeholder}>Contraseña</span>
               <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               {passwordError == true ?
@@ -239,7 +241,7 @@ const ContainerRegisterParticular1 = ({
 
 
             <label className={`${styles.custom_field} ${styles.two}`}>
-              <input value={confirmarPassword} onChange={e => {setConfirmarPassword(e.target.value); setConfirmarPasswordError(false)}} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
+              <input value={confirmarPassword} onChange={e => { setConfirmarPassword(e.target.value); setConfirmarPasswordError(false) }} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
               <span className={styles.placeholder}>Confirmar Contraseña</span>
               <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               {confirmarPasswordError == true ?

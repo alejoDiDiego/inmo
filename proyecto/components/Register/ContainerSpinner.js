@@ -19,12 +19,6 @@ const ContainerSpinner = ({
             <div className={styles.main_container}>
                     <Spinner />
             </div>
-            <div className={styles.div_detalle}>
-                <div className={styles.div_inside_detalle}>
-                    <p></p>
-                    <img src="/icono_about.png" />
-                </div>
-            </div>
         </div>
     )
 }
