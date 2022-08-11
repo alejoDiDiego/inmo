@@ -1,7 +1,6 @@
 .div_supremo{
     display: flex;
     width: 100vw;
-    justify-content: flex-end;
     height: 100%;
     
 }

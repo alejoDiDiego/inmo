@@ -6,7 +6,8 @@ import Spinner from '../../Spinner/Spinner';
 
 const ContainerRegister = ({ loading }) => {
     return (
-        <div className={styles.main_container}>
+        <div className={styles.div_supremo}>
+            <div className={styles.main_container}>
             {
                 loading == false ?
                     <div className={styles.no_spinner}>
@@ -57,6 +58,7 @@ const ContainerRegister = ({ loading }) => {
                         <Spinner />
                     </div>
             }
+        </div>
         </div>
 
 

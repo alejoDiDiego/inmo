@@ -1,6 +1,6 @@
 .header{
     position: fixed;
-    height: 55px;
+    height: 45px;
     width: 100%;
     background-color: #0071b3;
     /*celeste: 1aabff   blue: 007cc3    blueMasOscuro: 0071b3   gris: 424243*/
@@ -13,8 +13,8 @@
 }
 
 .div_img{
-    height: 38px;
-    width: 72px;
+    height: 30px;
+    width: 60px;
     position: relative;
     cursor: pointer;
 }
@@ -72,7 +72,7 @@
 .hidden_menu{
     z-index: 1;
     right: 10px;
-    top: 65px;
+    top: 55px;
     position: absolute;
     height: 0px;
     width: 400px;
@@ -121,7 +121,7 @@
 .hidden_menu_user{
     z-index: 1;
     right: 10px;
-    top: 65px;
+    top: 55px;
     position: absolute;
     height: 0px;
     width: 400px;

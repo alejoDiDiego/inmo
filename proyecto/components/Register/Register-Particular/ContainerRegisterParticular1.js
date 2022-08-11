@@ -228,12 +228,6 @@ const ContainerRegisterParticular1 = ({
           </div>
         </div>
       </div>
-      <div className={styles.div_detalle}>
-        <div className={styles.div_inside_detalle}>
-          <p>Ninguno de tus datos sera utilizado para fines fuera de esta pagina.</p>
-          <img src="/icono_about.png" />
-        </div>
-      </div>
     </div>
   )
 }
