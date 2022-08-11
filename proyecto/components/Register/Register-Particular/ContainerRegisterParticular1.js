@@ -234,8 +234,15 @@ const ContainerRegisterParticular1 = ({
             {
               loading == false ?
                 <div className={styles.div_buttons}>
-                  <button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> {/*<a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
-                  <button className={styles.button} onClick={handleRegistrar}>Registrarse</button>
+                  {/*<button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> <a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
+                  <div className={styles.buttonGoogle} onClick={handleGoogle}>
+                    <div className={styles.buttonGoogle_back}></div>
+                    <div className={styles.buttonGoogle_content}><Image src='/google.png' width={25} height={25} /></div>
+                  </div>
+                  <div className={styles.button}>
+                    <div className={styles.button_back}></div>
+                    <div className={styles.button_content}><span>Siguiente</span></div>
+                  </div>
                 </div>
                 :
                 <div className={styles.div_spinner}>
