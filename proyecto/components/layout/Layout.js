@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styles from '../../styles/Layout.module.css'
 
-const Layout = props => {
+
+const Layout = ({ children, usuario, registro }) => {
+    const [registroActive, setRegistroActive] = useState(false)
+    
+    useEffect(() => {
+        if (registro != null) {
+            setRegistroActive(true)
+        }
+    })
+
     return (
         <div className={styles.layout}>
             <div className={styles.header}>
-                <Header usuario={props.usuario} />
+                <Header usuario={usuario} registroActive={registroActive} />
             </div>
-            {props.children}
-            <div className={styles.footer}>
-                <Footer />
-            </div>
+            {children}
+            {
+                !registroActive &&
+                <div className={styles.footer}>
+                    <Footer />
+                </div>
+            }
+
         </div>
     )
 }

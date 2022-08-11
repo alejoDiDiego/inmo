@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 
 
-const Header = ({ usuario }) => {
+const Header = ({ usuario, registroActive }) => {
 
     const [active, setActive] = useState(false)
     const [activeUserMenu, setActiveUserMenu] = useState(false)
@@ -20,18 +20,21 @@ const Header = ({ usuario }) => {
                     <Image layout="fill" src="/icono_about.png" />
                 </div>
             </Link>
+            {
+                !registroActive &&
+                <input placeholder='Direccion, localidad, provincia, vendedor' />
+            }
 
-            <input placeholder='Direccion, localidad, provincia, vendedor' />
 
             <div className={styles.derecha}>
 
-                <div className={styles.div_img_user} onClick={() => {setActiveUserMenu(!activeUserMenu); setActive(false)}}>
+                <div className={styles.div_img_user} onClick={() => { setActiveUserMenu(!activeUserMenu); setActive(false) }}>
                     <Image layout='fill' src='/user (3).png' />
                     {/*https://iconscout.com/icon/user-532  User Icon by Dalpat Prajapati on IconScout */}
                 </div>
 
 
-                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => {setActive(!active); setActiveUserMenu(false)}}>
+                <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active); setActiveUserMenu(false) }}>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
                     <div className={styles.bar}></div>
@@ -62,7 +65,7 @@ const Header = ({ usuario }) => {
                     }
 
                 </div>
-            </div>        
+            </div>
 
 
 
