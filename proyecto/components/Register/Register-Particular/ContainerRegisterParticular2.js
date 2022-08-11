@@ -58,7 +58,7 @@ const ContainerRegisterParticular2 = ({
             setModalPerfil(false)
             setImagePerfilUpload(false)
             setImageFondoUpload(false)
-        
+
 
         } catch (e) {
             console.error(e)
@@ -172,7 +172,6 @@ const ContainerRegisterParticular2 = ({
 
 
 
-
     useEffect(() => {
         if (imagePerfilUpload.length >= 1) {
             const change = async () => {
@@ -219,7 +218,7 @@ const ContainerRegisterParticular2 = ({
     }
 
 
-    
+
     const handleSiguiente = async () => {
         console.log(imagePerfilUpload)
         let blobPerfil = await fetch(croppedImagePerfil).then(r => r.blob());
@@ -227,30 +226,30 @@ const ContainerRegisterParticular2 = ({
 
 
 
-        if(croppedImagePerfil == null && croppedImageFondo == null){
+        if (croppedImagePerfil == null && croppedImageFondo == null) {
             setUserCore({
                 ...userCore,
             })
         }
 
-        if(croppedImagePerfil != null && croppedImageFondo == null){
+        if (croppedImagePerfil != null && croppedImageFondo == null) {
             setUserCore({
                 ...userCore,
-                imagePerfilUpload : blobPerfil,
+                imagePerfilUpload: blobPerfil,
             })
         }
 
-        if(croppedImagePerfil == null && croppedImageFondo != null){
+        if (croppedImagePerfil == null && croppedImageFondo != null) {
             setUserCore({
                 ...userCore,
-                imageFondoUpload : blobFondo
+                imageFondoUpload: blobFondo
             })
         }
-        if(croppedImagePerfil != null && croppedImageFondo != null){
+        if (croppedImagePerfil != null && croppedImageFondo != null) {
             setUserCore({
                 ...userCore,
-                imagePerfilUpload : blobPerfil,
-                imageFondoUpload : blobFondo
+                imagePerfilUpload: blobPerfil,
+                imageFondoUpload: blobFondo
             })
         }
 
@@ -423,17 +422,16 @@ const ContainerRegisterParticular2 = ({
 
 
 
-                            <div className={styles.buttons}>
-                                <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
-                            </div>
+                            
+                                
+                                <div className={styles.button} onClick={handleSiguiente}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Siguiente</span></div>
+                                </div>
+                            
+
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className={styles.div_detalle}>
-                <div className={styles.div_inside_detalle}>
-                    <p>Una buena imagen ilustrativa aporta mucho a la primera impresion de tu empresa dentro de la pagina.</p>
-                    <img src="/icono_about.png" />
                 </div>
             </div>
         </div>
