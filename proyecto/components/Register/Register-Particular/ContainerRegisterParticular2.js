@@ -130,7 +130,7 @@ const ContainerRegisterParticular2 = ({
             <div className="container">
                 <div {...getRootProps({ style })}>
                     <input {...getInputProps()} />
-                    <p>Drag 'n' drop some files here, or click to select files</p>
+                    <p>Arrastra una imagen o busca una en tu equipo.</p>
                 </div>
             </div>
         );
@@ -144,7 +144,7 @@ const ContainerRegisterParticular2 = ({
         padding: '20px',
         borderWidth: 2,
         borderRadius: 2,
-        borderColor: '#eeeeee',
+        borderColor: '#38B6FF',
         borderStyle: 'dashed',
         backgroundColor: '#fafafa',
         color: '#bdbdbd',

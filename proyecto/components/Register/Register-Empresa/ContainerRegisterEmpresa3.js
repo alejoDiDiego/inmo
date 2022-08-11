@@ -193,15 +193,14 @@ const ContainerRegisterEmpresa3 = ({
     <div className={styles.div_supremo}>
       <div className={styles.main_container}>
         <div className={styles.inside_container}>
-          <h2>Registra<span className={styles.text_blue}>te 3</span></h2>
+          <h2>Información <span className={styles.text_blue}>extra</span></h2>
           <div className={styles.form}>
-            <p>Introduzca informacion de contacto para que los otros usuarios de la plataforma puedan contactar con usted</p>
             <div className={styles.div_fields}>
 
               <div className={styles.fields}>
                 <div className={styles.div_error}>
                   <label>Nombre de usuario*</label>
-                  {errorNomUsu == true ? <p>El nombre es obligatorio</p> : null}
+                  {errorNomUsu == true ? <p>Dato obligatorio</p> : null}
                 </div>
 
                 <input value={nomUsu} onChange={e => setNomUsu(e.target.value)} type='text' readOnly={loading} />
@@ -243,7 +242,7 @@ const ContainerRegisterEmpresa3 = ({
       </div>
       <div className={styles.div_detalle}>
         <div className={styles.div_inside_detalle}>
-          <p>Por el momento, el unico dato obligatorio es el nombre de usuario.</p>
+          <p>Introduzca informacion de contacto para que los otros usuarios de la plataforma puedan contactar con usted.</p>
           <img src="/icono_about.png" />
         </div>
       </div>

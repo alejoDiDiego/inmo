@@ -132,10 +132,10 @@
 }
 
 .div_buttons{
-    margin-top: 200px;
+    margin-top: 240px;
     display: flex;
     justify-content: flex-end;
-    gap: 15px;
+    gap: 20px;
 }
 
 .div_spinner{
