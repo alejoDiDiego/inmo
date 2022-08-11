@@ -4,6 +4,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-easy-crop'
 import { getCroppedImg, getRotatedImage } from '../../../crop/auxCrop'
+import Image from 'next/image';
+
 
 
 const ContainerRegisterParticular2 = ({
@@ -261,6 +263,11 @@ const ContainerRegisterParticular2 = ({
 
 
 
+
+
+
+
+
     return (
         <div className={styles.div_supremo}>
 
@@ -301,18 +308,22 @@ const ContainerRegisterParticular2 = ({
                                     className={styles.zoom_range}
                                 />
 
-                                <input
-                                    type="range"
-                                    value={rotation}
-                                    min={0}
-                                    max={360}
-                                    step={1}
-                                    aria-labelledby="Rotation"
-                                    onChange={(e) => {
-                                        setRotation(e.target.value)
-                                    }}
-                                    className={styles.zoom_range}
-                                />
+                                <div className={styles.div_rotate}>
+                                    <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
+
+                                        <Image height={30} width={30} src="/rotate-left.png" />
+
+                                        {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
+                                    </button>
+
+                                    <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
+
+                                        <Image height={30} width={30} src="/rotate-right.png" />
+
+
+                                        {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
+                                    </button>
+                                </div>
 
 
                             </div>
@@ -360,18 +371,18 @@ const ContainerRegisterParticular2 = ({
                                     className={styles.zoom_range}
                                 />
 
-                                <input
-                                    type="range"
-                                    value={rotation}
-                                    min={0}
-                                    max={360}
-                                    step={1}
-                                    aria-labelledby="Rotation"
-                                    onChange={(e) => {
-                                        setRotation(e.target.value)
-                                    }}
-                                    className={styles.zoom_range}
-                                />
+                                <div className={styles.div_rotate}>
+                                    <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
+                                        <Image layout='fill' src="/rotate-left.png" />
+                                        {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
+                                    </button>
+
+                                    <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
+                                        <Image layout='fill' src="/rotate-right.png" />
+                                        {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
+                                    </button>
+                                </div>
+
 
 
                             </div>
@@ -422,13 +433,13 @@ const ContainerRegisterParticular2 = ({
 
 
 
-                            
-                                
-                                <div className={styles.button} onClick={handleSiguiente}>
-                                    <div className={styles.button_back}></div>
-                                    <div className={styles.button_content}><span>Siguiente</span></div>
-                                </div>
-                            
+
+
+                            <div className={styles.button} onClick={handleSiguiente}>
+                                <div className={styles.button_back}></div>
+                                <div className={styles.button_content}><span>Siguiente</span></div>
+                            </div>
+
 
                         </div>
                     </div>
