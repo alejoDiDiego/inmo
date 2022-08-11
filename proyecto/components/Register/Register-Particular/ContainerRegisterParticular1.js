@@ -178,8 +178,18 @@ const ContainerRegisterParticular1 = ({
             </div> */}
 
             <label className={`${styles.custom_field} ${styles.two}`}>
-              <input value={email} onChange={e => setEmail(e.target.value)} type='email' readOnly={loading} placeholder="&nbsp;" />
+              <input value={email} onChange={e => {setEmail(e.target.value); setEmailError(false)}} type='email' readOnly={loading} placeholder="&nbsp;" />
               <span className={styles.placeholder}>Email</span>
+              {emailError == true ?
+                <div className={styles.div_error}>
+                  <p>Ingrese un email valido</p>
+                </div>
+                : null}
+              {emailExistsError == true ?
+                <div className={styles.div_error}>
+                  <p>El mail ya existe</p>
+                </div>
+                : null}
             </label>
 
             {/* <div className={styles.fields}>
@@ -197,11 +207,23 @@ const ContainerRegisterParticular1 = ({
 
 
 
+
             <label className={`${styles.custom_field} ${styles.two}`}>
-              <input value={password} id="password" onChange={e => setPassword(e.target.value)} type={viewPassword == true ? "text" : "password"} readOnly={loading}  placeholder="&nbsp;" />
+              <input value={password} id="password" onChange={e => {setPassword(e.target.value); setPassswordShort(false); setPasswordError(false)}} type={viewPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
               <span className={styles.placeholder}>Contraseña</span>
               <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+              {passwordError == true ?
+                <div className={styles.div_error}>
+                  <p>Ingrese una contraseña valida</p>
+                </div>
+                : null}
+              {passwordShort == true ?
+                <div className={styles.div_error}>
+                  <p>La contraseña debe tener mas de 6 digitos</p>
+                </div>
+                : null}
             </label>
+
 
             {/* <div className={styles.fields}>
               <div className={styles.div_error}>
@@ -217,9 +239,14 @@ const ContainerRegisterParticular1 = ({
 
 
             <label className={`${styles.custom_field} ${styles.two}`}>
-              <input value={confirmarPassword} onChange={e => setConfirmarPassword(e.target.value)} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
+              <input value={confirmarPassword} onChange={e => {setConfirmarPassword(e.target.value); setConfirmarPasswordError(false)}} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
               <span className={styles.placeholder}>Confirmar Contraseña</span>
               <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+              {confirmarPasswordError == true ?
+                <div className={styles.div_error}>
+                  <p>Ambas contraseñas deben coincidir</p>
+                </div>
+                : null}
             </label>
 
 
@@ -239,7 +266,7 @@ const ContainerRegisterParticular1 = ({
                     <div className={styles.buttonGoogle_back}></div>
                     <div className={styles.buttonGoogle_content}><Image src='/google.png' width={25} height={25} /></div>
                   </div>
-                  <div className={styles.button}>
+                  <div className={styles.button} onClick={handleRegistrar}>
                     <div className={styles.button_back}></div>
                     <div className={styles.button_content}><span>Siguiente</span></div>
                   </div>

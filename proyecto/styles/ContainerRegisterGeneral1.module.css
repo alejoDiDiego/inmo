@@ -50,7 +50,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-    gap: 20px;
+    gap: 30px;
     
 }
 
@@ -85,7 +85,7 @@
 }
 
 .div_buttons{
-    margin-top: 190px;
+    margin-top: 170px;
     display: flex;
     justify-content: flex-end;
     gap: 20px;
@@ -208,6 +208,7 @@
     width: 120px;
     height: 50px;
     cursor: pointer;
+    margin-left: 10px;
     
 }
 
@@ -248,6 +249,10 @@
 .button:hover .button_back{
     transform: translate(-3px, 3px);
 }
+
+
+
+
 
 
 
@@ -345,13 +350,6 @@
 
 
 
-
-
-
-
-
-
-
 .custom_field i{
     position: relative;
     margin-left: -30px;
@@ -364,3 +362,20 @@
 
 
 
+.div_error{
+    position: absolute;
+    background-color: red;
+    width: 450px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.div_error p{
+    margin-left: 12px;
+    color: white;
+    
+    font-size: 12px;
+}
