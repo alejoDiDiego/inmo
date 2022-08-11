@@ -69,6 +69,7 @@
 
 
 .hidden_menu{
+    z-index: 1;
     right: 0;
     top: 55px;
     position: absolute;
@@ -85,10 +86,12 @@
 
 .hidden_menu.active{
     height: 700px;
+    z-index: 1;
     
 }
 
 .inside_hidden_menu{
+    z-index: 1;
     position: absolute;
     display: flex;
     height: 100%;
@@ -110,6 +113,7 @@
 
 
 .hidden_menu_user{
+    z-index: 1;
     right: 0;
     top: 55px;
     position: absolute;
@@ -125,11 +129,13 @@
 
 
 .hidden_menu_user.active{
+    z-index: 1;
     height: 300px;
     
 }
 
 .inside_hidden_menu_user{
+    z-index: 1;
     position: absolute;
     display: flex;
     height: 100%;

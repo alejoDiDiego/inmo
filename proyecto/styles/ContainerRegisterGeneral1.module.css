@@ -1,13 +1,13 @@
 .div_supremo{
-    position: relative;
     display: flex;
-    width: 100%;
+    width: 100vw;
     justify-content: flex-end;
+    height: 100%;
+    
 }
 
 
 .div_detalle{
-    position: relative;
     height: 300px;
     width: 60%;
     margin: auto 0;
@@ -132,14 +132,14 @@
 }
 
 .div_buttons{
-    margin-top: 300px;
+    margin-top: 200px;
     display: flex;
     justify-content: flex-end;
     gap: 15px;
 }
 
 .div_spinner{
-    margin-top: 385px;
+    margin-top: 180px;
     display: flex;
     justify-content: flex-start;
     margin-left: 15px;
@@ -224,39 +224,3 @@
 
 
 
-
-@media only screen and (max-width: 1919px) {
-    .div_detalle{
-        height: 300px;
-        width: 60%;
-    }
-
-    .main_container{
-        width: 450px;
-    }
-    
-
-    .fields input{
-        width: 350px;
-    }
-
-    .inside_container{
-        width: 90%;
-        
-    }
-
-    .fields label{
-        font-size: 16px;
-        margin-top: 10px;
-    }
-
-    .div_buttons{
-        margin-top: 375px;
-    }
-    
-    .div_spinner{
-        margin-top: 365px;
-    }
-
-
-  }

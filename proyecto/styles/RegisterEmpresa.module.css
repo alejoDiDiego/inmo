@@ -1,21 +1,19 @@
+
 .body{
     position: relative;
     height: 100vh;
     display: flex;
-    background-color: black;
-    width: 100vw;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    
 }
 
-.body:before {
-    content: '';
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
+.body_before{
+    
     background-image: url("https://images.unsplash.com/photo-1576049022257-675307c502c7?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631");
     background-size: cover;
-    opacity: 0.6;
+    
 }
+
 
 /*https://images.unsplash.com/photo-1528277708931-64b46a45a3ab?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170*/

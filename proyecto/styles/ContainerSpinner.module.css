@@ -1,8 +1,9 @@
 .div_supremo{
     position: relative;
     display: flex;
-    width: 100%;
+    width: 100vw;
     justify-content: flex-end;
+    height: 100%;
 }
 
 .main_container{

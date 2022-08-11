@@ -8,10 +8,10 @@ const Layout = ({ children, usuario, registro }) => {
     const [registroActive, setRegistroActive] = useState(false)
     
     useEffect(() => {
-        if (registro != null) {
+        if (registro == true || registro != null) {
             setRegistroActive(true)
         }
-    })
+    },)
 
     return (
         <div className={styles.layout}>

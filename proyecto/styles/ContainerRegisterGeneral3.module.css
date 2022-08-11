@@ -1,13 +1,12 @@
 .div_supremo{
-    position: relative;
     display: flex;
-    width: 100%;
+    width: 100vw;
     justify-content: flex-end;
+    height: 100%;
 }
 
 
 .div_detalle{
-    position: relative;
     height: 300px;
     width: 60%;
     margin: auto 0;
