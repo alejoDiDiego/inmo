@@ -328,7 +328,10 @@ const ContainerRegisterParticular2 = ({
 
                             </div>
 
-                            <button onClick={showCroppedImagePerfil}>Recortar</button>
+                            <div className={styles.button_recortar} onClick={showCroppedImagePerfil}>
+                                <div className={styles.button_back}></div>
+                                <div className={styles.button_content}><span>Recortar</span></div>
+                            </div>
 
                         </div>
                     </div>
@@ -387,7 +390,10 @@ const ContainerRegisterParticular2 = ({
 
                             </div>
 
-                            <button onClick={showCroppedImageFondo}>Recortar</button>
+                            <div className={styles.button_recortar} onClick={showCroppedImageFondo}>
+                                <div className={styles.button_back}></div>
+                                <div className={styles.button_content}><span>Recortar</span></div>
+                            </div>
 
                         </div>
                     </div>
