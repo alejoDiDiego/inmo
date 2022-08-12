@@ -414,7 +414,17 @@ const ContainerRegisterParticular2 = ({
                             <div className={styles.fields}>
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                                 <label className={styles.label_desc}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
-                                <Basic setImages={setImagePerfilUpload} />
+                                <div className={styles.div_basic}>
+                                    <Basic setImages={setImagePerfilUpload} />
+                                    {
+                                        resultadoPerfil &&
+                                        <div className={styles.button_eliminar} onClick={() => { setCroppedImagePerfil(null); setResultadoPerfil(false) }}>
+                                            <div className={styles.button_back}></div>
+                                            <div className={styles.button_content}><span>Eliminar</span></div>
+                                        </div>
+                                    }
+                                </div>
+
                                 {
                                     resultadoPerfil &&
                                     <div className={styles.div_img_perfil}>
@@ -422,18 +432,31 @@ const ContainerRegisterParticular2 = ({
                                     </div>
                                 }
 
+
                             </div>
 
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
-                                <Basic setImages={setImageFondoUpload} />
+                                <div className={styles.div_basic}>
+                                    <Basic setImages={setImageFondoUpload} />
+                                    {
+                                        resultadoFondo &&
+                                        <div className={styles.button_eliminar} onClick={() => { setCroppedImageFondo(null); setResultadoFondo(false) }}>
+                                            <div className={styles.button_back}></div>
+                                            <div className={styles.button_content}><span>Eliminar</span></div>
+                                        </div>
+                                    }
+                                </div>
                                 {
                                     resultadoFondo &&
                                     <div className={styles.div_img_fondo}>
                                         <img src={croppedImageFondo} />
                                     </div>
                                 }
+
+
+
 
                             </div>
 
