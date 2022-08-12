@@ -77,10 +77,15 @@ const ContainerRegisterParticular1 = ({
 
 
   const userExists = async (email) => {
-    const docRef = doc(firebase.db, "Usuarios", email)
-    console.log("docRef")
-    const res = await getDoc(docRef)
-    return res.exists()
+    try {
+      const docRef = doc(firebase.db, "Usuarios", email)
+      console.log("docRef")
+      const res = await getDoc(docRef)
+      return res.exists()
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
   }
 
 
@@ -104,7 +109,7 @@ const ContainerRegisterParticular1 = ({
     if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }
     if (confirmarPassword != password) { errorConfirmarPasswordVar = true; }
 
-    
+
 
     setEmailError(errorEmailVar)
     setPasswordError(errorPasswordVar)
