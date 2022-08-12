@@ -376,12 +376,17 @@ const ContainerRegisterParticular2 = ({
 
                                 <div className={styles.div_rotate}>
                                     <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
-                                        <Image layout='fill' src="/rotate-left.png" />
+
+                                        <Image height={30} width={30} src="/rotate-left.png" />
+
                                         {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
                                     </button>
 
                                     <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
-                                        <Image layout='fill' src="/rotate-right.png" />
+
+                                        <Image height={30} width={30} src="/rotate-right.png" />
+
+
                                         {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
                                     </button>
                                 </div>
