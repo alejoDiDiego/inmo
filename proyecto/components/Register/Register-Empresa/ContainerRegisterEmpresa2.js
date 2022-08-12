@@ -4,6 +4,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-easy-crop'
 import { getCroppedImg, getRotatedImage } from '../../../crop/auxCrop'
+import Image from 'next/image';
+
 
 
 const ContainerRegisterEmpresa2 = ({
@@ -11,7 +13,8 @@ const ContainerRegisterEmpresa2 = ({
     userCore,
     setUserCore,
     omitir,
-    setOmitir
+    setOmitir,
+    setVerdadero
 }) => {
 
     const [imageSrc, setImageSrc] = React.useState(null)
@@ -58,7 +61,7 @@ const ContainerRegisterEmpresa2 = ({
             setModalPerfil(false)
             setImagePerfilUpload(false)
             setImageFondoUpload(false)
-        
+
 
         } catch (e) {
             console.error(e)
@@ -144,7 +147,7 @@ const ContainerRegisterEmpresa2 = ({
         padding: '20px',
         borderWidth: 2,
         borderRadius: 2,
-        borderColor: '#eeeeee',
+        borderColor: '#38B6FF',
         borderStyle: 'dashed',
         backgroundColor: '#fafafa',
         color: '#bdbdbd',
@@ -163,7 +166,6 @@ const ContainerRegisterEmpresa2 = ({
     const rejectStyle = {
         borderColor: '#ff1744'
     };
-
 
 
 
@@ -210,6 +212,20 @@ const ContainerRegisterEmpresa2 = ({
 
 
 
+
+    useEffect(() => {
+        if (userCore.imageFondoUpload != null) {
+            setCroppedImageFondo(URL.createObjectURL(userCore.imageFondoUpload))
+            setResultadoFondo(true)
+        }
+        if (userCore.imagePerfilUpload != null) {
+            setCroppedImagePerfil(URL.createObjectURL(userCore.imagePerfilUpload))
+            setResultadoPerfil(true)
+        }
+    }, [])
+
+
+
     function readFile(file) {
         return new Promise((resolve) => {
             const reader = new FileReader()
@@ -219,43 +235,66 @@ const ContainerRegisterEmpresa2 = ({
     }
 
 
-    
+    const handleVolver = () => {
+        setCroppedImageFondo(null)
+        setCroppedImagePerfil(null)
+        setUserCore({})
+        setVerdadero(false)
+    }
+
+
+    const removeKey = () => {
+        const copy = userCore
+        delete copy["imageFondoUpload"]
+        delete copy["imagePerfilUpload"]
+        setUserCore(copy)
+        console.log(userCore)
+    }
+
+
+
     const handleSiguiente = async () => {
+        removeKey()
         console.log(imagePerfilUpload)
         let blobPerfil = await fetch(croppedImagePerfil).then(r => r.blob());
         let blobFondo = await fetch(croppedImageFondo).then(r => r.blob());
 
 
 
-        if(croppedImagePerfil == null && croppedImageFondo == null){
+        if (croppedImagePerfil == null && croppedImageFondo == null) {
             setUserCore({
                 ...userCore,
             })
         }
 
-        if(croppedImagePerfil != null && croppedImageFondo == null){
+        if (croppedImagePerfil != null && croppedImageFondo == null) {
             setUserCore({
                 ...userCore,
-                imagePerfilUpload : blobPerfil,
+                imagePerfilUpload: blobPerfil,
             })
         }
 
-        if(croppedImagePerfil == null && croppedImageFondo != null){
+        if (croppedImagePerfil == null && croppedImageFondo != null) {
             setUserCore({
                 ...userCore,
-                imageFondoUpload : blobFondo
+                imageFondoUpload: blobFondo
             })
         }
-        if(croppedImagePerfil != null && croppedImageFondo != null){
+        if (croppedImagePerfil != null && croppedImageFondo != null) {
             setUserCore({
                 ...userCore,
-                imagePerfilUpload : blobPerfil,
-                imageFondoUpload : blobFondo
+                imagePerfilUpload: blobPerfil,
+                imageFondoUpload: blobFondo
             })
         }
 
         setVerdadero2(true)
     }
+
+
+
+
+
 
 
 
@@ -286,39 +325,53 @@ const ContainerRegisterEmpresa2 = ({
                                     onRotationChange={setRotation}
                                     onCropComplete={onCropComplete}
                                     onZoomChange={setZoom}
+                                    style={{
+                                        containerStyle: {
+                                            backgroundColor: "white"
+                                        }
+                                    }}
                                 />
                             </div>
-                            <div className={styles.controls}>
-                                <input
-                                    type="range"
-                                    value={zoom}
-                                    min={1}
-                                    max={3}
-                                    step={0.1}
-                                    aria-labelledby="Zoom"
-                                    onChange={(e) => {
-                                        setZoom(e.target.value)
-                                    }}
-                                    className={styles.zoom_range}
-                                />
+                            <div className={styles.div_controls}>
+                                <div className={styles.controls}>
+                                    <input
+                                        type="range"
+                                        value={zoom}
+                                        min={1}
+                                        max={3}
+                                        step={0.1}
+                                        aria-labelledby="Zoom"
+                                        onChange={(e) => {
+                                            setZoom(e.target.value)
+                                        }}
+                                        className={styles.zoom_range}
+                                    />
 
-                                <input
-                                    type="range"
-                                    value={rotation}
-                                    min={0}
-                                    max={360}
-                                    step={1}
-                                    aria-labelledby="Rotation"
-                                    onChange={(e) => {
-                                        setRotation(e.target.value)
-                                    }}
-                                    className={styles.zoom_range}
-                                />
+                                    <div className={styles.div_rotate}>
+                                        <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
+
+                                            <Image height={30} width={30} src="/rotate-left.png" />
+
+                                            {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
+                                        </button>
+
+                                        <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
+
+                                            <Image height={30} width={30} src="/rotate-right.png" />
 
 
+                                            {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className={styles.button_recortar} onClick={showCroppedImagePerfil}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Recortar</span></div>
+                                </div>
                             </div>
 
-                            <button onClick={showCroppedImagePerfil}>Recortar</button>
+
 
                         </div>
                     </div>
@@ -345,39 +398,54 @@ const ContainerRegisterEmpresa2 = ({
                                     onRotationChange={setRotation}
                                     onCropComplete={onCropComplete}
                                     onZoomChange={setZoom}
+                                    style={{
+                                        containerStyle: {
+                                            backgroundColor: "white"
+                                        }
+                                    }}
                                 />
                             </div>
-                            <div className={styles.controls}>
-                                <input
-                                    type="range"
-                                    value={zoom}
-                                    min={1}
-                                    max={3}
-                                    step={0.1}
-                                    aria-labelledby="Zoom"
-                                    onChange={(e) => {
-                                        setZoom(e.target.value)
-                                    }}
-                                    className={styles.zoom_range}
-                                />
+                            <div className={styles.div_controls}>
+                                <div className={styles.controls}>
+                                    <input
+                                        type="range"
+                                        value={zoom}
+                                        min={1}
+                                        max={3}
+                                        step={0.1}
+                                        aria-labelledby="Zoom"
+                                        onChange={(e) => {
+                                            setZoom(e.target.value)
+                                        }}
+                                        className={styles.zoom_range}
+                                    />
 
-                                <input
-                                    type="range"
-                                    value={rotation}
-                                    min={0}
-                                    max={360}
-                                    step={1}
-                                    aria-labelledby="Rotation"
-                                    onChange={(e) => {
-                                        setRotation(e.target.value)
-                                    }}
-                                    className={styles.zoom_range}
-                                />
+                                    <div className={styles.div_rotate}>
+                                        <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
 
+                                            <Image height={30} width={30} src="/rotate-left.png" />
+
+                                            {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
+                                        </button>
+
+                                        <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
+
+                                            <Image height={30} width={30} src="/rotate-right.png" />
+
+
+                                            {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div className={styles.button_recortar} onClick={showCroppedImageFondo}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Recortar</span></div>
+                                </div>
 
                             </div>
 
-                            <button onClick={showCroppedImageFondo}>Recortar</button>
+
 
                         </div>
                     </div>
@@ -398,7 +466,17 @@ const ContainerRegisterEmpresa2 = ({
                             <div className={styles.fields}>
                                 <h3>Imagen de <span className={styles.text_blue}>Perfil:</span></h3>
                                 <label className={styles.label_desc}>Suba una imagen que represente su persona o empresa, la imagen se mostrara en su perfil y en sus publicaciones</label>
-                                <Basic setImages={setImagePerfilUpload} />
+                                <div className={styles.div_basic}>
+                                    <Basic setImages={setImagePerfilUpload} />
+                                    {
+                                        resultadoPerfil &&
+                                        <div className={styles.button_eliminar} onClick={() => { setCroppedImagePerfil(null); setResultadoPerfil(false) }}>
+                                            <div className={styles.button_back}></div>
+                                            <div className={styles.button_content}><span>Eliminar</span></div>
+                                        </div>
+                                    }
+                                </div>
+
                                 {
                                     resultadoPerfil &&
                                     <div className={styles.div_img_perfil}>
@@ -406,12 +484,22 @@ const ContainerRegisterEmpresa2 = ({
                                     </div>
                                 }
 
+
                             </div>
 
                             <div className={styles.fields}>
                                 <h3 className={styles.h3}>Imagen de <span className={styles.text_blue}>Portada:</span></h3>
                                 <label className={styles.label_desc}>Incluya una imagen representativa que aparecera de forma decorativa en su perfil</label>
-                                <Basic setImages={setImageFondoUpload} />
+                                <div className={styles.div_basic}>
+                                    <Basic setImages={setImageFondoUpload} />
+                                    {
+                                        resultadoFondo &&
+                                        <div className={styles.button_eliminar} onClick={() => { setCroppedImageFondo(null); setResultadoFondo(false) }}>
+                                            <div className={styles.button_back}></div>
+                                            <div className={styles.button_content}><span>Eliminar</span></div>
+                                        </div>
+                                    }
+                                </div>
                                 {
                                     resultadoFondo &&
                                     <div className={styles.div_img_fondo}>
@@ -419,21 +507,30 @@ const ContainerRegisterEmpresa2 = ({
                                     </div>
                                 }
 
+
+
+
                             </div>
 
 
 
-                            <div className={styles.buttons}>
-                                <button className={styles.button} onClick={handleSiguiente}>Siguiente</button>
+
+                            <div className={styles.div_buttons}>
+                                <div className={styles.button_volver} onClick={handleVolver}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Volver</span></div>
+                                </div>
+
+                                <div className={styles.button} onClick={handleSiguiente}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Siguiente</span></div>
+                                </div>
                             </div>
+
+
+
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className={styles.div_detalle}>
-                <div className={styles.div_inside_detalle}>
-                    <p>Una buena imagen ilustrativa aporta mucho a la primera impresion de tu empresa dentro de la pagina.</p>
-                    <img src="/icono_about.png" />
                 </div>
             </div>
         </div>
