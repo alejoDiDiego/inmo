@@ -186,6 +186,12 @@ const ContainerRegisterParticular3 = ({
 
 
 
+  const handleVolver = () => {
+    setVerdadero2(false)
+  }
+
+
+
 
 
 
@@ -197,38 +203,67 @@ const ContainerRegisterParticular3 = ({
           <div className={styles.form}>
             <div className={styles.div_fields}>
 
-              <div className={styles.fields}>
+              {/* <div className={styles.fields}>
                 <div className={styles.div_error}>
                   <label>Nombre de usuario*</label>
                   {errorNomUsu == true ? <p>Dato obligatorio</p> : null}
                 </div>
 
                 <input value={nomUsu} onChange={e => setNomUsu(e.target.value)} type='text' readOnly={loading} />
-              </div>
+              </div> */}
 
-              <div className={styles.fields}>
+
+              <label className={`${styles.custom_field} ${styles.two}`}>
+                <input value={nomUsu} onChange={e => { setNomUsu(e.target.value); setErrorNomUsu(false) }} type="text" readOnly={loading} placeholder="&nbsp;" />
+                <span className={styles.placeholder}>Nombre de Usuario*</span>
+                {errorNomUsu == true ?
+                  <div className={styles.div_error}>
+                    <p>Ingrese un nombre valido</p>
+                  </div>
+                  : null}
+              </label>
+
+
+
+
+
+              {/* <div className={styles.fields}>
                 <div className={styles.div_error_tel}>
                   <label>Numero de celular</label>
                 </div>
 
                 <input value={numCel} onChange={handleNumCel} type='text' placeholder='Ej. 5491122223333' readOnly={loading} />
-              </div>
+              </div> */}
 
-              <div className={styles.fields}>
+
+              <label className={`${styles.custom_field} ${styles.two}`}>
+                <input value={numCel} onChange={handleNumCel} type="text" readOnly={loading} placeholder="&nbsp;" />
+                <span className={styles.placeholder}>Numero de Celular</span>
+              </label>
+
+              {/* <div className={styles.fields}>
                 <label>Numero de telefono <span>(Opcional)</span></label>
                 <input value={numTel} onChange={handleNumTel} type='text' placeholder='Ej. 541122223333' readOnly={loading} />
-              </div>
+              </div> */}
+
+              <label className={`${styles.custom_field} ${styles.two}`}>
+                <input value={numTel} onChange={handleNumTel} type="text" readOnly={loading} placeholder="&nbsp;" />
+                <span className={styles.placeholder}>Numero de Telefono</span>
+              </label>
             </div>
 
             {
               loading == false ?
-                <div className={styles.buttons}>
-                  <button className={styles.button} onClick={handleSubmit}>Finalizar</button>
-                  {omitir == true ?
-                    <button className={styles.button} onClick={handleAnterior}>Anterior</button>
-                    :
-                    null
-                  }
+                <div className={styles.div_buttons}>
+                  <div className={styles.button_volver} onClick={handleVolver}>
+                    <div className={styles.button_back}></div>
+                    <div className={styles.button_content}><span>Volver</span></div>
+                  </div>
+
+                  <div className={styles.button} onClick={handleSubmit}>
+                    <div className={styles.button_back}></div>
+                    <div className={styles.button_content}><span>Finalizar</span></div>
+                  </div>
                 </div>
                 :
                 <div className={styles.div_spinner}>
@@ -238,12 +273,6 @@ const ContainerRegisterParticular3 = ({
 
             }
           </div>
-        </div>
-      </div>
-      <div className={styles.div_detalle}>
-        <div className={styles.div_inside_detalle}>
-          <p>Introduzca informacion de contacto para que los otros usuarios de la plataforma puedan contactar con usted.</p>
-          <img src="/icono_about.png" />
         </div>
       </div>
     </div>

@@ -165,7 +165,6 @@ const ContainerRegisterParticular1 = ({
 
 
 
-
   return (
     <div className={styles.div_supremo}>
       <div className={styles.main_container}>
@@ -186,7 +185,7 @@ const ContainerRegisterParticular1 = ({
 
             <label className={`${styles.custom_field} ${styles.two}`}>
               <input value={email} onChange={e => { setEmail(e.target.value); setEmailError(false) }} type="text" readOnly={loading} placeholder="&nbsp;" />
-              <span className={styles.placeholder}>Email</span>
+              <span className={styles.placeholder}>Email*</span>
               {emailError == true ?
                 <div className={styles.div_error}>
                   <p>Ingrese un email valido</p>
@@ -217,7 +216,7 @@ const ContainerRegisterParticular1 = ({
 
             <label className={`${styles.custom_field} ${styles.two}`}>
               <input value={password} id="password" onChange={e => { setPassword(e.target.value); setPassswordShort(false); setPasswordError(false) }} type={viewPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
-              <span className={styles.placeholder}>Contraseña</span>
+              <span className={styles.placeholder}>Contraseña*</span>
               <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               {passwordError == true ?
                 <div className={styles.div_error}>
@@ -247,7 +246,7 @@ const ContainerRegisterParticular1 = ({
 
             <label className={`${styles.custom_field} ${styles.two}`}>
               <input value={confirmarPassword} onChange={e => { setConfirmarPassword(e.target.value); setConfirmarPasswordError(false) }} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
-              <span className={styles.placeholder}>Confirmar Contraseña</span>
+              <span className={styles.placeholder}>Confirmar Contraseña*</span>
               <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
               {confirmarPasswordError == true ?
                 <div className={styles.div_error}>

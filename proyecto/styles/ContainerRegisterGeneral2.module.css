@@ -135,9 +135,9 @@
     width: 120px;
     height: 50px;
     cursor: pointer;
-    margin-left: 10px;
     position: relative;
     margin-bottom: 45px;
+    margin-right: 5px;
 
 }
 
@@ -179,6 +179,26 @@
 .button:hover .button_back {
     transform: translate(-3px, 3px);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -513,3 +533,79 @@
 .button_eliminar:hover .button_back {
     transform: translate(-3px, 3px);
 }
+
+
+
+
+
+
+
+
+
+
+
+.div_buttons{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+
+
+
+
+
+
+.button_volver {
+    margin-top: 30px;
+    width: 120px;
+    height: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+    position: relative;
+    margin-bottom: 45px;
+
+}
+
+.button_volver .button_back {
+    width: 120px;
+    height: 50px;
+    position: absolute;
+    background-color: #aaa;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    top: 0;
+
+}
+
+
+.button_volver .button_content{
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+    background-color: #E8EFF4;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid black;
+    top: 0;
+}
+
+.button_volver span {
+    font-weight: bold;
+}
+
+
+.button_volver:hover .button_content {
+    transform: translate(3px, -3px);
+
+}
+
+.button_volver:hover .button_back {
+    transform: translate(-3px, 3px);
+}
+

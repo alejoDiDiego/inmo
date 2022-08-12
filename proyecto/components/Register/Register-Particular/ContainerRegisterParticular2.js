@@ -13,7 +13,8 @@ const ContainerRegisterParticular2 = ({
     userCore,
     setUserCore,
     omitir,
-    setOmitir
+    setOmitir,
+    setVerdadero
 }) => {
 
     const [imageSrc, setImageSrc] = React.useState(null)
@@ -211,6 +212,20 @@ const ContainerRegisterParticular2 = ({
 
 
 
+
+    useEffect(() => {
+        if (userCore.imageFondoUpload != null) {
+            setCroppedImageFondo(URL.createObjectURL(userCore.imageFondoUpload))
+            setResultadoFondo(true)
+        }
+        if (userCore.imagePerfilUpload != null) {
+            setCroppedImagePerfil(URL.createObjectURL(userCore.imagePerfilUpload))
+            setResultadoPerfil(true)
+        }
+    }, [])
+
+
+
     function readFile(file) {
         return new Promise((resolve) => {
             const reader = new FileReader()
@@ -220,8 +235,26 @@ const ContainerRegisterParticular2 = ({
     }
 
 
+    const handleVolver = () => {
+        setCroppedImageFondo(null)
+        setCroppedImagePerfil(null)
+        setUserCore({})
+        setVerdadero(false)
+    }
+
+
+    const removeKey = () => {
+        const copy = userCore
+        delete copy["imageFondoUpload"]
+        delete copy["imagePerfilUpload"]
+        setUserCore(copy)
+        console.log(userCore)
+    }
+
+
 
     const handleSiguiente = async () => {
+        removeKey()
         console.log(imagePerfilUpload)
         let blobPerfil = await fetch(croppedImagePerfil).then(r => r.blob());
         let blobFondo = await fetch(croppedImageFondo).then(r => r.blob());
@@ -482,11 +515,18 @@ const ContainerRegisterParticular2 = ({
 
 
 
+                            <div className={styles.div_buttons}>
+                                <div className={styles.button_volver} onClick={handleVolver}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Volver</span></div>
+                                </div>
 
-                            <div className={styles.button} onClick={handleSiguiente}>
-                                <div className={styles.button_back}></div>
-                                <div className={styles.button_content}><span>Siguiente</span></div>
+                                <div className={styles.button} onClick={handleSiguiente}>
+                                    <div className={styles.button_back}></div>
+                                    <div className={styles.button_content}><span>Siguiente</span></div>
+                                </div>
                             </div>
+
 
 
                         </div>
