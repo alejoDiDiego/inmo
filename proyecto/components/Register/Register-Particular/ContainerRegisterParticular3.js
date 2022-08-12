@@ -239,6 +239,7 @@ const ContainerRegisterParticular3 = ({
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={numCel} onChange={handleNumCel} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Numero de Celular</span>
+                <i  class="fa-solid fa-circle-info"><span className={styles.span}>Ej: 5491112341234</span></i>
               </label>
 
               {/* <div className={styles.fields}>
@@ -249,6 +250,7 @@ const ContainerRegisterParticular3 = ({
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={numTel} onChange={handleNumTel} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Numero de Telefono</span>
+                <i  class="fa-solid fa-circle-info"><span className={styles.span2}>Ej: 12341234</span></i>
               </label>
             </div>
 
