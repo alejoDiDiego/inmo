@@ -103,7 +103,99 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     cursor: pointer;
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }   
+
+
+
+.square .image{
+    width: 110px;
+    height: 110px;
+}
+
+.square h3{
+    
+    font-size: 30px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+.square p{
+    width: 285px;
+    font-size: 23px;
+    line-height: 40px;
+    margin-left: 5px;
+}
+
+
+
+
+
+.div_square_chico{
+    height: 450px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.square_chico{
+    width: 100%;
+    height: 210px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    padding: 20px;
+}
+
+
+.square_chico_txt{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.square_chico_txt h3{
+    font-size: 23px;
+    margin-bottom: 0px;
+}
+
+.square_chico_txt p{
+    font-size: 16px;
+    width: 180px;
+    line-height: 25px;
+}
+
+
+
+.square_chico .image{
+    width: 110px;
+    height: 110px;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -161,20 +253,3 @@
 
 
 
-.div_square_chico{
-    height: 450px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-
-.square_chico{
-    width: 100%;
-    height: 210px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    cursor: pointer;
-}
