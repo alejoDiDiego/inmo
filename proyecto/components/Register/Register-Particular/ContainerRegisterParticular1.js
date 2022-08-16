@@ -103,7 +103,8 @@ const ContainerRegisterParticular1 = ({
     let errorConfirmarPasswordVar = false;
     let errorPasswordShortVar = false;
 
-    let test = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
+    // let test = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
+    let test = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
     if (email === null || email === "" || email.length == 0 || test == false) { errorEmailVar = true; }
     if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }

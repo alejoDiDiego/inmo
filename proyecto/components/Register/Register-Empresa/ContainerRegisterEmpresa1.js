@@ -106,8 +106,10 @@ const ContainerRegisterEmpresa1 = ({
     let errorConfirmarPasswordVar = false;
     let errorPasswordShortVar = false;
 
+    let test = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
-    if (email === null || email === "" || email.length == 0) { errorEmailVar = true; }
+
+    if (email === null || email === "" || email.length == 0 || test == false) { errorEmailVar = true; }
     if (password === null || password === "" || password.length == 0) { errorPasswordVar = true; }
     if (confirmarPassword != password) { errorConfirmarPasswordVar = true; }
 
