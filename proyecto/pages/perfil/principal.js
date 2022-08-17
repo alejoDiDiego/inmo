@@ -19,11 +19,13 @@ const principal = () => {
 
     const router = useRouter()
 
+    
+
 
 
     useEffect(() => {
         const check = async () => {
-            
+            if(usuario){
                 await usuario
                 const ls = JSON.parse(localStorage.getItem("fotosUsuario"))
                 console.log(usuario)
@@ -40,9 +42,13 @@ const principal = () => {
                 } else {
                     console.log("error")
                     setError(true)
-                    
                 }
-            
+            } else{
+                setTimeout(() => {
+                    setError(true)
+                }, 3000)
+                // agregar spinner
+            }
         }
 
 
