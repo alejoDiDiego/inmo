@@ -40,8 +40,6 @@ export default function Home() {
         localStorage.setItem("fotosUsuario", JSON.stringify({urlPerfil, urlFondo}))
         
         //Optimizar esto al cargarlo al localstorage en index en vez de repetir este proceso cada vez que se entre al perfil
-
-
       } else {
         console.log('no esta loggeado')
       }

@@ -19,40 +19,28 @@ const principal = () => {
 
     const router = useRouter()
 
-    
+
 
 
 
     useEffect(() => {
-        const check = async () => {
-            if(usuario){
-                await usuario
-                const ls = JSON.parse(localStorage.getItem("fotosUsuario"))
-                console.log(usuario)
-                console.log(ls)
-                if (usuario != null && ls != null) {
-    
-                    setPerfilFoto(ls.urlPerfil)
-                    setFondoFoto(ls.urlFondo)
-                    setError(false)
-                    setCargar(true)
-    
-                    //Optimizar esto al cargarlo al localstorage en index en vez de repetir este proceso cada vez que se entre al perfil
-    
-                } else {
-                    console.log("error")
-                    setError(true)
-                }
-            } else{
-                setTimeout(() => {
-                    setError(true)
-                }, 3000)
-                // agregar spinner
+        if (usuario != null) {
+            console.log(usuario)
+            if(Object.keys(usuario.fotos).length < 1) {
+                setError(true)
+                return
             }
+            usuario.fotos.then((fot) => {
+                console.log(fot.urlPerfil)
+                setPerfilFoto(fot.urlPerfil)
+                setFondoFoto(fot.urlFondo)
+                setError(false)
+                setCargar(true)
+            }).catch((err) => {
+                setError(true)
+                console.log(err)
+            })
         }
-
-
-        check()
 
 
 
@@ -66,18 +54,16 @@ const principal = () => {
         <div>
             {
                 cargar ?
-                <div>
-                    <h2>Perfil principal</h2>
-                    {usuario.email}
-                    {usuario.displayName}
-                    <Image width={50} height={50} src={perfilFoto} />
-                    <Image width={100} height={50} src={fondoFoto} />
-                    <Link href="/perfil/configuracion">Configuracion</Link>
-                    {/* Como cargar imagenes https://stackoverflow.com/questions/51679211/retrieving-user-profile-image-from-firebase-but-it-is-not-displaying-in-imagevie */}
-                </div> : error && 
-                <div>
-                    Error {/*  Insertar Spinner */}
-                </div>
+                    <div>
+                        <h2>Perfil principal</h2>
+                        {usuario.email}
+                        {usuario.displayName}
+                        <Image width={50} height={50} src={perfilFoto} />
+                        <Image width={100} height={50} src={fondoFoto} />
+                        <Link href="/perfil/configuracion">Configuracion</Link>
+                        {/* Como cargar imagenes https://stackoverflow.com/questions/51679211/retrieving-user-profile-image-from-firebase-but-it-is-not-displaying-in-imagevie */}
+                    </div> : error &&
+                    <p>error</p>
 
             }
 
