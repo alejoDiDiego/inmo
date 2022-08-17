@@ -10,7 +10,6 @@ const Header = ({ usuario, registroActive }) => {
 
     const [active, setActive] = useState(false)
     const [activeUserMenu, setActiveUserMenu] = useState(false)
-    console.log(usuario)
 
 
     return (

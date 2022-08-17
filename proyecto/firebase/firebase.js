@@ -42,6 +42,7 @@ class Firebase {
         signOut(this.auth).then(() => {
           console.log("Sign-out successful.")
           console.log(this.auth)
+          localStorage.removeItem("fotosUsuario")
           window.location.href = "http://localhost:3000//";
         }).catch((error) => {
           console.log("No se deslogueo")
