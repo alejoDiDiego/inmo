@@ -30,27 +30,23 @@ export default function RegisterEmpresa() {
 
 
   useEffect(() => {
-    console.log(usuario)
-    if (usuario != null) {
-      if (usuario.displayName != null) {
+    
+    setLoadingBig(true)
+    const check = async () => {
+      await usuario
+      if (usuario != null) {
         console.log("el usuario ya existe")
         router.push('/')
-      }
-      else {
-        console.log("waiting")
-      }
-
-    }
-    else {
-      setTimeout(() => {
+      } else {
         setLoadingBig(false)
         console.log('no')
-      }, 1500)
+      }
     }
+
+    check()
 
 
   }, [usuario])
-
 
 
 
