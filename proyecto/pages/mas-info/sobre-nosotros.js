@@ -6,8 +6,8 @@ const sobreNosotros = () => {
     return (
         <Layout>
             <div className={styles.body}>
-                <div className={styles.contenedorGrande}>
-                    <div className={styles.contenedorPrincipal}>
+                <div className={styles.contenedor_Grande}>
+                    <div className={styles.contenedor_Principal}>
 
                         <div className={styles.img}>
                             <h1 className={styles.h1}>Sobre <span className={styles.span}>nosostros</span></h1>
@@ -25,13 +25,13 @@ const sobreNosotros = () => {
                         </div>
                     </div>
 
-                    <div className={styles.contenedorSecundario}>
+                    <div className={styles.contenedor_Secundario}>
 
-                        <div className={styles.imgSec}>
+                        <div className={styles.img_Sec}>
 
                         </div>
 
-                        <div className={styles.textosSec}>
+                        <div className={styles.textos_Sec}>
 
                         </div>
 
