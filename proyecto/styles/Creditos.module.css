@@ -1,0 +1,60 @@
+.body{
+    margin: 0px;
+    margin-top: 45px; 
+}
+
+.contenedorPrincipal{
+    display: flex;
+    height: 568px;
+}
+
+.img{
+    margin-left: -15px;
+    width: 1075px;
+    height: 568px;
+    background-color: black;
+    border-radius: 20px;
+    background-image: url("");
+    background-size: cover;
+    background-position: 0%;
+}
+
+.h1{
+    font-family: 'Lato';
+    font-size: 50px;
+    color: white;
+    display: flex;
+    margin-top: 200px;
+    margin-left: 100px;
+}
+
+.textos{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 70px;
+}
+
+.titulo{
+    width: 400px;
+    font-family: 'Lato';
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.texto{
+    font-family: 'Lato';
+    margin-top: 50px;
+    font-size: 22px;
+    line-height: 35px;
+    width: 600px;
+}
+
+.span{
+    color: #38B6FF;
+}
+
+.contenedorSecundario{
+    height: 800px;
+}
