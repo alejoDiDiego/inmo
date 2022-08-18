@@ -14,7 +14,6 @@
     height: 568px;
     background-color: black;
     border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
     background-image: url("");
     background-size: cover;
     background-position: 0%;
@@ -56,6 +55,10 @@
     color: #38B6FF;
 }
 
+h2 .span{
+    margin-left: 10px;
+}
+
 .contenedor_Secundario{
     height: 100%;
     width: 100%;
@@ -68,11 +71,13 @@
     width: 10px;
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
-    margin-left: 70px;
+    margin-top: 170px;
+    margin-left: 130px;
 }
 
 .img_Sec{
+    margin-top: 150px;
+    margin-bottom: 150px;
     display: flex;
     align-self: center;
     width: 1075px;
