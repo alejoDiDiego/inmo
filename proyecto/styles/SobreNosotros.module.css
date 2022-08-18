@@ -3,16 +3,18 @@
 }
 
 .contenedor_Principal{
-    display: flex;
     height: 568px;
+    display: flex;
 }
 
 .img{
-    margin-left: -15px;
+    display: flex;
+    align-self: center;
     width: 1075px;
     height: 568px;
     background-color: black;
-    border-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
     background-image: url("");
     background-size: cover;
     background-position: 0%;
@@ -24,7 +26,7 @@
     color: white;
     display: flex;
     margin-top: 200px;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 .textos{
@@ -55,5 +57,46 @@
 }
 
 .contenedor_Secundario{
-    height: 800px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.textos_sec{
+    height: 100%;
+    width: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 70px;
+}
+
+.img_Sec{
+    display: flex;
+    align-self: center;
+    width: 1075px;
+    height: 450px;
+    background-color: black;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background-image: url("");
+    background-size: cover;
+    background-position: 0%;
+}
+
+
+.titulo_sec{
+    width: 500px;
+    font-family: 'Lato';
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.texto_sec{
+    font-family: 'Lato';
+    margin-top: 50px;
+    font-size: 22px;
+    line-height: 35px;
+    width: 550px;
 }
