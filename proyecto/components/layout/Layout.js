@@ -23,7 +23,7 @@ const Layout = ({ children, usuario, registro }) => {
     return (
         <div className={styles.layout}>
             <div className={styles.header}>
-                <Header usuario={usuario != null ? usuario : {usuario: {}} } registroActive={registroActive} />
+                <Header usuario={usuario != null ? usuario : {usuario: {}, document: {}, fotos: {}} } registroActive={registroActive} />
             </div>
             {children}
             {
