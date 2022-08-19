@@ -17,21 +17,21 @@ export default function RegisterMain() {
 
 
 
+
+
+
   useEffect(() => {
-    
-    setLoading(true)
-    const check = async () => {
-      await usuario
-      if (usuario != null) {
+    if (usuario != null) {
+      console.log(usuario)
+      if (Object.keys(usuario.usuario).length > 0) {
         console.log("el usuario ya existe")
         router.push('/')
-      } else {
-        setLoading(false)
-        console.log('no')
+        return
       }
+      setLoading(false)
+      console.log('no')
     }
 
-    check()
 
 
   }, [usuario])

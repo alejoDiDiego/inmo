@@ -40,7 +40,7 @@ const Header = ({ usuario, registroActive }) => {
             <div className={`${styles.hidden_menu} ${active == true ? styles.active : null}`}>
                 <div className={styles.inside_hidden_menu}>
                 {
-                        usuario == null ?
+                        Object.keys(usuario.usuario).length < 1 ?
                             <div>
                                 <Link href='/inicio-sesion/principal'><button>Iniciar Sesion</button></Link>
                                 <Link href='/registro/principal'><button>Registrarse</button></Link>

@@ -26,11 +26,11 @@ const principal = () => {
     useEffect(() => {
         if (usuario != null) {
             console.log(usuario)
-            if(Object.keys(usuario.fotos).length < 1) {
-                setError(true)
-                return
-            }
             usuario.fotos.then((fot) => {
+                if(fot.length < 1) {
+                    setError(true)
+                    return
+                }
                 console.log(fot.urlPerfil)
                 setPerfilFoto(fot.urlPerfil)
                 setFondoFoto(fot.urlFondo)

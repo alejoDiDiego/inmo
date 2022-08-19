@@ -39,21 +39,21 @@ export default function RegisterParticular() {
 
   // Si el usuario ya subio una foto, que no pueda acceder a esta seccion
 
+
+
+
   useEffect(() => {
-    
-    setLoadingBig(true)
-    const check = async () => {
-      await usuario
-      if (usuario != null) {
+    if (usuario != null) {
+      console.log(usuario)
+      if (Object.keys(usuario.usuario).length > 0) {
         console.log("el usuario ya existe")
         router.push('/')
-      } else {
-        setLoadingBig(false)
-        console.log('no')
+        return
       }
+      setLoadingBig(false)
+      console.log('no')
     }
 
-    check()
 
 
   }, [usuario])
