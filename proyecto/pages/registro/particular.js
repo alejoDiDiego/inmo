@@ -43,15 +43,28 @@ export default function RegisterParticular() {
 
 
   useEffect(() => {
+    // if (usuario != null) {
+    //   console.log(usuario)
+    //   if (Object.keys(usuario.usuario).length > 0) {
+    //     console.log("el usuario ya existe")
+    //     router.push('/')
+    //     return
+    //   }
+    //   setLoadingBig(false)
+    //   console.log('no')
+    // }
+
+
     if (usuario != null) {
       console.log(usuario)
       if (Object.keys(usuario.usuario).length > 0) {
-        console.log("el usuario ya existe")
+        console.log("el usuario esta loggeado")
         router.push('/')
         return
       }
       setLoadingBig(false)
       console.log('no')
+      return
     }
 
 

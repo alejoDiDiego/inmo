@@ -106,7 +106,7 @@ const ContainerRegisterParticular3 = ({
       setDoc(doc(firebase.db, "Usuarios", user.email), {
         uid: user.uid,
         mail: user.email,
-        type: "particular"
+        type: "particular",
       })
 
       if (imagePerfilUpload != null) {
@@ -124,11 +124,52 @@ const ContainerRegisterParticular3 = ({
           console.log("hubo un errror actualizando la foto de display")
         });
 
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          fotoPerfilURL: url
+        }).catch((error) => {
+          console.log(error)
+        })
+      } else {
+        const imagePerfRef = ref(firebase.storage, `imagenesDefault/perfilDefault.jpg`)
+        const url = await getDownloadURL(imagePerfRef)
+        await updateProfile(user, {
+          photoURL: url
+        }).then(() => {
+          console.log("se actualizo la foto de display")
+        }).catch((error) => {
+          console.log(error.message)
+          console.log("hubo un errror actualizando la foto de display")
+        });
+
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          fotoPerfilURL: url
+        }).catch((error) => {
+          console.log(error)
+        })
       }
+
+
+
 
       if (imageFondoUpload != null) {
         const imageFondRef = ref(firebase.storage, `usuarios/${firebase.auth.currentUser.email}/fondo`)
-        await uploadBytes(imageFondRef, imageFondoUpload)
+        const snapshot = await uploadBytes(imageFondRef, imageFondoUpload)
+        const url = await getDownloadURL(snapshot.ref)
+
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          fotoFondoURL: url
+        }).catch((error) => {
+          console.log(error)
+        })
+      } else{
+        const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
+        const url = await getDownloadURL(imageFondRef)
+        
+        await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+          fotoFondoURL: url
+        }).catch((error) => {
+          console.log(error)
+        })
       }
 
 
@@ -177,9 +218,6 @@ const ContainerRegisterParticular3 = ({
 
 
 
-    setTimeout(() => {
-      router.push('/')
-    }, 3000)
 
     //alert("Bienvenido, cuenta totalmente creada")
   }
@@ -239,7 +277,7 @@ const ContainerRegisterParticular3 = ({
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={numCel} onChange={handleNumCel} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Numero de Celular</span>
-                <i  class="fa-solid fa-circle-info"><span className={styles.span}>Ej: 5491112341234</span></i>
+                <i class="fa-solid fa-circle-info"><span className={styles.span}>Ej: 5491112341234</span></i>
               </label>
 
               {/* <div className={styles.fields}>
@@ -250,7 +288,7 @@ const ContainerRegisterParticular3 = ({
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={numTel} onChange={handleNumTel} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Numero de Telefono</span>
-                <i  class="fa-solid fa-circle-info"><span className={styles.span2}>Ej: 12341234</span></i>
+                <i class="fa-solid fa-circle-info"><span className={styles.span2}>Ej: 12341234</span></i>
               </label>
             </div>
 

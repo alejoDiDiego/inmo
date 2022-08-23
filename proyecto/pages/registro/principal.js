@@ -21,16 +21,31 @@ export default function RegisterMain() {
 
 
   useEffect(() => {
-    if (usuario != null) {
-      console.log(usuario)
-      if (Object.keys(usuario.usuario).length > 0) {
-        console.log("el usuario ya existe")
-        router.push('/')
+    // if (usuario != null) {
+    //   console.log(usuario)
+    //   if (Object.keys(usuario.usuario).length > 0) {
+    //     console.log("el usuario ya existe")
+    //     router.push('/')
+    //     return
+    //   }
+    //   setLoading(false)
+    //   console.log('no')
+    // }
+
+
+      if (usuario != null) {
+        console.log(usuario)
+        if (Object.keys(usuario.usuario).length > 0) {
+          console.log("el usuario esta loggeado")
+          router.push('/')
+          return
+        }
+        setLoading(false)
+        console.log('no')
         return
       }
-      setLoading(false)
-      console.log('no')
-    }
+
+
 
 
 

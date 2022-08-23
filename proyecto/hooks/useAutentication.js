@@ -10,33 +10,18 @@ const useAutentication = () => {
     useEffect(() => {
         const unsuscribe = firebase.auth.onAuthStateChanged(usuario => {
             if (usuario) {
-                const perfilRef = ref(firebase.storage, `usuarios/${usuario.email}/perfil`)
-                const fondoRef = ref(firebase.storage, `usuarios/${usuario.email}/fondo`)
-                const urlPerfil = ""
-                const urlFondo = ""
-                const func = async () => {
-                    if (perfilRef == null) {
-                        perfilRef = ref(firebase.storage, `imagenesDefault/perfilDefault.jpg`)
-                    }
-                    urlPerfil = await getDownloadURL(perfilRef)
-
-                    if (fondoRef == null) {
-                        fondoRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
-                    }
-                    urlFondo = await getDownloadURL(fondoRef)
-
-                    return { urlPerfil, urlFondo }
-                }
-
-                const fotos = func()
-
-
-
-
                 const check = async () => {
-                    const docRef = doc(firebase.db, "Usuarios", usuario.email)
-                    const docSnap = await getDoc(docRef)
-                    return docSnap.data()
+                    try {
+                        const docRef = doc(firebase.db, "Usuarios", usuario.email)
+                        const docSnap = await getDoc(docRef)
+                        return docSnap.data()
+                    } catch(err){
+                        console.log(err)
+                        console.log("a chekear")
+                        setTimeout(() => {
+                            check()
+                        }, 2000)
+                    }
                     //Optimizar esto al cargarlo al localstorage en index en vez de repetir este proceso cada vez que se entre al perfil
                 }
 
@@ -45,13 +30,9 @@ const useAutentication = () => {
 
 
 
-
-
-
-
-                guardarUsuarioAutenticado({ usuario, fotos, document })
+                guardarUsuarioAutenticado({ usuario, document })
             } else {
-                guardarUsuarioAutenticado({usuario : {}, fotos: {}, document: {}})
+                guardarUsuarioAutenticado({ usuario: {}, document: {} })
             }
         });
         return () => unsuscribe();
