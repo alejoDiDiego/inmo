@@ -5,6 +5,7 @@ import { getDownloadURL, ref } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '../../components/layout/Layout'
+import { doc, getDoc } from 'firebase/firestore'
 
 
 
@@ -17,8 +18,6 @@ const principal = () => {
     const [error, setError] = useState(false)
     const [info, setInfo] = useState(null)
 
-    const [perfilFoto, setPerfilFoto] = useState("")
-    const [fondoFoto, setFondoFoto] = useState("")
 
     const router = useRouter()
 
@@ -27,21 +26,40 @@ const principal = () => {
 
 
     useEffect(() => {
+
         const check = async () => {
             if (usuario != null) {
-                console.log(usuario)
-                let documento = await usuario.document
-                await documento
-                setCargar(false)
-                setInfo({ usuario: usuario.usuario, documento })
-            }
+                if(usuario == {}){
+                    router.push("/")
+                    return
+                }
+                try {
+                    const docRef = doc(firebase.db, "Usuarios", usuario.email)
+                    const docSnap = await getDoc(docRef)
+                    setCargar(false)
+                    setInfo(docSnap.data())
+                } catch (err) {
+                    console.log(err)
+                    console.log("a chekear")
+                    setTimeout(() => {
+                        check()
+                    }, 2000)
+                }
+            } 
         }
+
+        //Op
 
         check()
 
 
 
     }, [usuario])
+
+
+    useEffect(() => {
+        console.log(info)
+    },[info])
 
 
 
@@ -59,11 +77,11 @@ const principal = () => {
                     {
                         info != null ?
                             <div>
-                                <p>{info.documento.mail}</p>
-                                <p>{info.documento.nombreUsuario}</p>
-                                <p>{info.documento.type}</p>
-                                <img src={info.documento.fotoPerfilURL} />
-                                <img src={info.documento.fotoFondoURL} />
+                                <p>{info.mail}</p>
+                                <p>{info.nombreUsuario}</p>
+                                <p>{info.type}</p>
+                                <img src={info.fotoPerfilURL} />
+                                <img src={info.fotoFondoURL} />
                             </div>
                             : null
 

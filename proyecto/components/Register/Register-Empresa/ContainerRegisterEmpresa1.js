@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Spinner from '../../Spinner/Spinner';
 import firebase from '../../../firebase';
+import { updateProfile } from 'firebase/auth';
 
 
 
@@ -51,11 +52,23 @@ const ContainerRegisterEmpresa1 = ({
       const user = await firebase.registrarGoogle();
       let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
       if (isRegistered == false) {
+
+
+        const imagePerfRef = ref(firebase.storage, `imagenesDefault/perfilDefault.jpg`)
+        const urlPerf = await getDownloadURL(imagePerfRef)
+        const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
+        const urlFondo = await getDownloadURL(imageFondRef)
         await setDoc(doc(firebase.db, "Usuarios", user.email), {
           nombreUsuario: user.displayName,
           uid: user.uid,
           mail: user.email,
-          type: "empresa"
+          type: "empresa",
+          fotoPerfilURL: urlPerf,
+          fotoFondoURL: urlFondo
+        })
+        
+        await updateProfile(user, {
+          photoURL: urlPerf
         })
         console.log('creado nuevo usuario')
       }

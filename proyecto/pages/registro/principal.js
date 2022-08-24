@@ -35,7 +35,7 @@ export default function RegisterMain() {
 
       if (usuario != null) {
         console.log(usuario)
-        if (Object.keys(usuario.usuario).length > 0) {
+        if (Object.keys(usuario).length > 0) {
           console.log("el usuario esta loggeado")
           router.push('/')
           return

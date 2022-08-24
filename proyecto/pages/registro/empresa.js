@@ -46,7 +46,7 @@ export default function RegisterEmpresa() {
 
     if (usuario != null) {
       console.log(usuario)
-      if (Object.keys(usuario.usuario).length > 0) {
+      if (Object.keys(usuario).length > 0) {
         console.log("el usuario esta loggeado")
         router.push('/')
         return
@@ -55,8 +55,6 @@ export default function RegisterEmpresa() {
       console.log('no')
       return
     }
-
-    check()
 
 
 

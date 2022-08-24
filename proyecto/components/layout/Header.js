@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import firebase from '../../firebase'
 import styles from '../../styles/Header.module.css'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 
 
@@ -12,27 +13,12 @@ const Header = ({ usuario, registroActive }) => {
     const [activeUserMenu, setActiveUserMenu] = useState(false)
     const [foto, setFoto] = useState("")
 
-    const {document} = usuario
-
-    let documento = {}
 
 
     useEffect(() => {
+        setFoto(usuario.photoURL)
 
-
-        const check = async () => {
-            documento = await document
-            setFoto(documento.fotoPerfilURL)
-            console.log(documento)
-            console.log(foto)
-        }
-
-        check()
-        
-        
-    }, [document])
-
-
+    }, [usuario.photoURL])
 
 
     return (
@@ -50,14 +36,7 @@ const Header = ({ usuario, registroActive }) => {
 
             <div className={styles.derecha}>
 
-                {
-                    foto != "" ?
-                        <div className={styles.foto}>
-                            <img src={foto} />
-                        </div>
-                        :
-                        <p>aa</p>
-                }
+
 
                 <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active) }}>
                     <div className={styles.bar}></div>
@@ -71,7 +50,7 @@ const Header = ({ usuario, registroActive }) => {
             <div className={`${styles.hidden_menu} ${active == true ? styles.active : null}`}>
                 <div className={styles.inside_hidden_menu}>
                     {
-                        Object.keys(usuario.usuario).length < 1 ?
+                        Object.keys(usuario).length < 1 ?
                             <div>
                                 <Link href='/inicio-sesion/principal'><button>Iniciar Sesion</button></Link>
                                 <Link href='/registro/principal'><button>Registrarse</button></Link>
@@ -81,6 +60,14 @@ const Header = ({ usuario, registroActive }) => {
                             <div>
                                 <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
                                 <Link href='/perfil/principal'><button>Perfil</button></Link>
+                                {
+                                    foto != "" ?
+                                        <div className={styles.foto}>
+                                            <img src={foto} />
+                                        </div>
+                                        :
+                                        <p>aa</p>
+                                }
                             </div>
                     }
 
