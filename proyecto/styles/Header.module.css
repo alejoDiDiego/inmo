@@ -105,4 +105,15 @@
 }
 
 
+.foto{
+    width: 30px;
+    height: 30px;
+    
+}
+
+.foto img{
+    width: 100%;
+    border-radius: 5px;
+}
+
 

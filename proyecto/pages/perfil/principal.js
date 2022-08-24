@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { getDownloadURL, ref } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Layout from '../../components/layout/Layout'
+
 
 
 
@@ -11,8 +13,9 @@ const principal = () => {
 
     const { usuario } = useContext(FirebaseContext)
 
-    const [cargar, setCargar] = useState(false)
+    const [cargar, setCargar] = useState(true)
     const [error, setError] = useState(false)
+    const [info, setInfo] = useState(null)
 
     const [perfilFoto, setPerfilFoto] = useState("")
     const [fondoFoto, setFondoFoto] = useState("")
@@ -24,23 +27,17 @@ const principal = () => {
 
 
     useEffect(() => {
-        if (usuario != null) {
-            console.log(usuario)
-            usuario.fotos.then((fot) => {
-                if(fot.length < 1) {
-                    setError(true)
-                    return
-                }
-                console.log(fot.urlPerfil)
-                setPerfilFoto(fot.urlPerfil)
-                setFondoFoto(fot.urlFondo)
-                setError(false)
-                setCargar(true)
-            }).catch((err) => {
-                setError(true)
-                console.log(err)
-            })
+        const check = async () => {
+            if (usuario != null) {
+                console.log(usuario)
+                let documento = await usuario.document
+                await documento
+                setCargar(false)
+                setInfo({ usuario: usuario.usuario, documento })
+            }
         }
+
+        check()
 
 
 
@@ -48,27 +45,37 @@ const principal = () => {
 
 
 
+    if (cargar == true) {
+        return (
+            <Layout>
+                <p>cargando</p>
+            </Layout>
+
+        )
+    } else {
+        return (
+            <Layout usuario={usuario}>
+                <div>
+                    {
+                        info != null ?
+                            <div>
+                                <p>{info.documento.mail}</p>
+                                <p>{info.documento.nombreUsuario}</p>
+                                <p>{info.documento.type}</p>
+                                <img src={info.documento.fotoPerfilURL} />
+                                <img src={info.documento.fotoFondoURL} />
+                            </div>
+                            : null
+
+                    }
+
+                </div>
+            </Layout>
+
+        )
+    }
 
 
-    return (
-        <div>
-            {
-                cargar ?
-                    <div>
-                        <h2>Perfil principal</h2>
-                        {usuario.email}
-                        {usuario.displayName}
-                        <Image width={50} height={50} src={perfilFoto} />
-                        <Image width={100} height={50} src={fondoFoto} />
-                        <Link href="/perfil/configuracion">Configuracion</Link>
-                        {/* Como cargar imagenes https://stackoverflow.com/questions/51679211/retrieving-user-profile-image-from-firebase-but-it-is-not-displaying-in-imagevie */}
-                    </div> : error &&
-                    <p>error</p>
-
-            }
-
-        </div>
-    )
 }
 
 export default principal

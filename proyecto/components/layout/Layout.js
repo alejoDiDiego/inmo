@@ -8,13 +8,13 @@ const Layout = ({ children, usuario, registro }) => {
     const [registroActive, setRegistroActive] = useState(false)
     
 
-
     
-    useEffect(() => {
+    useEffect(() => {   
         if (registro == true || registro != null) {
             setRegistroActive(true)
         }
     })
+
 
 
 
