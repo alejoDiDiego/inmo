@@ -52,10 +52,6 @@ const ContainerRegisterEmpresa1 = ({
       const user = await firebase.registrarGoogle();
       let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
       if (isRegistered == false) {
-
-
-        const imagePerfRef = ref(firebase.storage, `imagenesDefault/perfilDefault.jpg`)
-        const urlPerf = await getDownloadURL(imagePerfRef)
         const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
         const urlFondo = await getDownloadURL(imageFondRef)
         await setDoc(doc(firebase.db, "Usuarios", user.email), {
@@ -63,13 +59,10 @@ const ContainerRegisterEmpresa1 = ({
           uid: user.uid,
           mail: user.email,
           type: "empresa",
-          fotoPerfilURL: urlPerf,
+          fotoPerfilURL: user.photoURL,
           fotoFondoURL: urlFondo
         })
         
-        await updateProfile(user, {
-          photoURL: urlPerf
-        })
         console.log('creado nuevo usuario')
       }
       setLoading(false)
