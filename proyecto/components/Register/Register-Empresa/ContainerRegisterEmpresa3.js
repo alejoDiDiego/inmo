@@ -101,7 +101,6 @@ const ContainerRegisterParticular3 = ({
       await sendEmailVerification(user, actionCodeSettings)
       console.log("se mando")
 
-      alert("Se mando el mail, fijese en su casilla de Spam si no le llego")
 
       setDoc(doc(firebase.db, "Usuarios", user.email), {
         uid: user.uid,
@@ -180,26 +179,22 @@ const ContainerRegisterParticular3 = ({
           numeroCel: numCel,
           numeroTel: numTel,
         })
-        alert("Nombre, Num Celu, Num Tel")
       } else if ((numCel.length > 0 || numCel != '') && (numTel.length == 0 || numTel == '')) {
         await updateDoc(doc(firebase.db, "Usuarios", user.email), {
           nombreUsuario: nomUsu,
           numeroCel: numCel,
         })
-        alert("Nombre, Num Celu")
       }
       else if ((numTel.length > 0 || numTel != '') && (numCel.length == 0 || numCel == '')) {
         await updateDoc(doc(firebase.db, "Usuarios", user.email), {
           nombreUsuario: nomUsu,
           numeroTel: numTel,
         })
-        alert("Nombre, Num Tel")
       }
       else {
         await updateDoc(doc(firebase.db, "Usuarios", user.email), {
           nombreUsuario: nomUsu,
         })
-        alert("Nombre")
       }
 
       await updateProfile(user, {

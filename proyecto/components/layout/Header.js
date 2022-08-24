@@ -74,15 +74,6 @@ const Header = ({ usuario, registroActive }) => {
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
         </div>
 
     )

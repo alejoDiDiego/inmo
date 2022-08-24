@@ -14,11 +14,6 @@ import { getDownloadURL, ref } from 'firebase/storage'
 
 export default function Home() {
 
-  const { usuario } = useContext(FirebaseContext)
-  console.log(usuario)
-
-
-
   return (
     <div>
       <Head>
@@ -26,7 +21,7 @@ export default function Home() {
         <meta name="description" content="Generated" />
         <link rel="icon" href="/Logo_inmo_new.png" />
       </Head>
-      <Layout usuario={usuario}>
+      <Layout>
         <Body />
       </Layout>
 

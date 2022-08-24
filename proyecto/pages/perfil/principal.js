@@ -72,7 +72,7 @@ const principal = () => {
         )
     } else {
         return (
-            <Layout usuario={usuario}>
+            <Layout>
                 <div>
                     {
                         info != null ?

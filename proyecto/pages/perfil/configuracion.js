@@ -20,49 +20,6 @@ const configuracion = () => {
     const router = useRouter()
 
 
-    useEffect(() => {
-        const check = async () => {
-            if (usuario) {
-                await usuario
-                const ls = JSON.parse(localStorage.getItem("fotosUsuario"))
-                console.log(usuario)
-                console.log(ls)
-                if (usuario != null && ls != null) {
-                    setPerfilFoto(ls.urlPerfil)
-                    setFondoFoto(ls.urlFondo)
-                    const docRef = doc(firebase.db, "Usuarios", usuario.email)
-                    const docSnap = await getDoc(docRef)
-                    console.log(docSnap.data())
-
-                    setError(false)
-                    setCargar(true)
-
-                    //Optimizar esto al cargarlo al localstorage en index en vez de repetir este proceso cada vez que se entre al perfil
-
-                } else {
-                    console.log("error")
-                    setError(true)
-                }
-            } else {
-                setTimeout(() => {
-                    setError(true)
-                }, 3000)
-                // agregar spinner
-            }
-        }
-
-
-        check()
-
-
-
-    }, [usuario])
-
-
-
-
-
-
 
     return (
         <div>

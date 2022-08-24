@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styles from '../../styles/Layout.module.css'
+import firebase, { FirebaseContext } from '../../firebase'
 
 
-const Layout = ({ children, usuario, registro }) => {
+const Layout = ({ children, registro }) => {
     const [registroActive, setRegistroActive] = useState(false)
     
 
@@ -14,6 +15,8 @@ const Layout = ({ children, usuario, registro }) => {
             setRegistroActive(true)
         }
     })
+
+    const { usuario } = useContext(FirebaseContext)
 
 
 
