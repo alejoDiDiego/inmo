@@ -62,9 +62,13 @@ const Header = ({ usuario, registroActive }) => {
                                 <Link href='/perfil/principal'><button>Perfil</button></Link>
                                 {
                                     foto != "" ?
-                                        <div className={styles.foto}>
-                                            <img src={foto} />
+                                        <div>
+                                            <div className={styles.foto}>
+                                                <img src={foto} />
+                                            </div>
+                                            <p>{usuario.displayName}</p>
                                         </div>
+
                                         :
                                         <p>aa</p>
                                 }

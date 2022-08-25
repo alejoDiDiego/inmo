@@ -13,7 +13,6 @@ import { updateProfile } from 'firebase/auth';
 
 
 
-
 const ContainerRegisterParticular1 = ({
   setVerdadero,
   userCore,
@@ -50,6 +49,7 @@ const ContainerRegisterParticular1 = ({
       setLoading(true)
       const user = await firebase.registrarGoogle();
       let isRegistered = await userExists(firebase.auth.currentUser.email).then((r) => { return r })
+      console.log(isRegistered)
       if (isRegistered == false) {
         const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
         const urlFondo = await getDownloadURL(imageFondRef)
@@ -61,12 +61,20 @@ const ContainerRegisterParticular1 = ({
           fotoPerfilURL: user.photoURL,
           fotoFondoURL: urlFondo
         })
-        
+
         console.log('creado nuevo usuario')
+      } else {
+        const docRef = doc(firebase.db, "Usuarios", user.email)
+        const docSnap = await getDoc(docRef)
+        const document = docSnap.data()
+        console.log(document)
+        updateProfile(user, {
+          photoURL: document.fotoPerfilURL
+        })
+        console.log('el usuario existe')
+        router.push('/')
       }
       setLoading(false)
-      console.log('el usuario existe')
-      router.push('/')
 
 
     }

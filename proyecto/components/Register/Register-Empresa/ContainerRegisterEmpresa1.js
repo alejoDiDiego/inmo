@@ -62,12 +62,19 @@ const ContainerRegisterEmpresa1 = ({
           fotoPerfilURL: user.photoURL,
           fotoFondoURL: urlFondo
         })
-        
+
         console.log('creado nuevo usuario')
+      } else {
+        const docRef = doc(firebase.db, "Usuarios", usuario.email)
+        const docSnap = await getDoc(docRef)
+        const document = await docSnap.data()
+        updateProfile(user, {
+          photoURL: document.fotoPerfilURL
+        })
+        console.log('el usuario existe')
+        router.push('/')
       }
       setLoading(false)
-      console.log('el usuario existe')
-      router.push('/')
 
 
     }
