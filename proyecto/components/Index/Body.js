@@ -93,14 +93,36 @@ const Body = () => {
 
                     <div className={styles.div_derecha}>
                         <div className={styles.inside_div_derecha}>
-                            <Link href='/'>
+                            <Link href='/mas-info/sobre-nosotros'>
                                 <div className={styles.square}>
+
+                                    <div className={styles.logo_nosotros}>
+                                        <img className={styles.img_nosotros} src="sobrenosotros.png" />
+                                    </div>
+
+                                    <div className={styles.txt_nosotros}>
+                                        <h3>Sobre Nosotros</h3>
+
+                                        <p>Conoce mas sobre quienes son las personas que hacen de inmo una realidad</p>
+
+                                    </div>
 
                                 </div>
                             </Link>
 
 
                             <div className={styles.square}>
+
+                                <div className={styles.logo_creditos}>
+                                    <img className={styles.img_creditos} src="Creditos.png" />
+                                </div>
+
+                                <div className={styles.txt_creditos}>
+                                    <h3>Creditos</h3>
+
+                                    <p>Quienes fueron los que nos ayudaron con este proyecto.</p>
+
+                                </div>
 
                             </div>
                         </div>

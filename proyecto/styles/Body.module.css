@@ -58,8 +58,6 @@
     align-items: center;
     margin-bottom: 100px;
     justify-content: center;
-
-
 }
 
 
@@ -181,6 +179,40 @@
     margin: auto;
 }
 
+.img_nosotros{
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 82px;
+    width: 68px;
+}
+
+.txt_nosotros{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.txt_nosotros h3{
+    font-size: 30px;
+}
+
+.txt_nosotros p{
+    font-size: 23px;
+    width: 350px;
+}
+
+.logo_creditos{
+    margin-left: 20px;
+}
+
+.img_creditos{
+    height: 125px;
+    width: 125px;
+}
+
+.txt_creditos{
+    margin-top: -3px;
+    margin-left: 20px ;
+}
 
 
 

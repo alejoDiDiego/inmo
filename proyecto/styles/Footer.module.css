@@ -26,9 +26,25 @@
 .footer{
     height: 100px;
     width: 100%;
-    background-color: black;
+    background-image: url("https://images.unsplash.com/photo-1462899006636-339e08d1844e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
 }
 
+.square{
+    display: flex;
+    margin-left: 100px;
+}
 
+.img_footer{
+    margin-top: 24px;
+    height: 50px;
+}
+
+.txt{
+    margin-top: 23px;
+    margin-left: 90px;
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+}
 /*Para el registro*/
 /*https://images.unsplash.com/photo-1556089175-54732507ad23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80*/

@@ -10,9 +10,11 @@ const sobreNosotros = () => {
                     <div className={styles.contenedor_Principal}>
 
                         <div className={styles.img}>
-                            <h2 className={styles.h1}>Sobre<span className={styles.span}>nosostros</span></h2>
+                            <div>
+                                <h2 className={styles.h1}>Sobre<span className={styles.span}>nosostros</span></h2>
 
-
+                                <img className={styles.img_footer} src="/icono_about.png" />
+                            </div>
 
                         </div>
 
@@ -38,7 +40,7 @@ const sobreNosotros = () => {
 
 
                         <div className={styles.img_Sec}>
-
+                            <h2 className={styles.h1_sec}>Quienes<span className={styles.span}>somos</span></h2>
                         </div>
 
 
