@@ -13,7 +13,7 @@ import { doc, getDoc } from 'firebase/firestore'
 const principal = () => {
 
     const { usuario } = useContext(FirebaseContext)
-
+    
     const [cargar, setCargar] = useState(true)
     const [error, setError] = useState(false)
     const [info, setInfo] = useState(null)
@@ -60,6 +60,8 @@ const principal = () => {
     useEffect(() => {
         console.log(info)
     },[info])
+
+
 
 
 

@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from 'react'
 import ContainerRegisterParticular1 from '../../components/Register/Register-Particular/ContainerRegisterParticular1'
 import ContainerRegisterParticular2 from '../../components/Register/Register-Particular/ContainerRegisterParticular2'
 import ContainerRegisterParticular3 from '../../components/Register/Register-Particular/ContainerRegisterParticular3'
-import ContainerSpinner from '../../components/Register/ContainerSpinner'
+import ContainerSpinner from '../Register/ContainerSpinner'
 import firebase, { FirebaseContext } from '../../firebase'
 import styles from '../../styles/RegisterParticular.module.css'
-import Layout from '../../components/layout/Layout'
+import Layout from '../layout/Layout'
 
 
 

@@ -17,6 +17,7 @@ const Layout = ({ children, registro }) => {
     })
 
     const { usuario } = useContext(FirebaseContext)
+    console.log(usuario)
 
 
 

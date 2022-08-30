@@ -6,8 +6,8 @@ import ContainerRegisterEmpresa2 from '../../components/Register/Register-Empres
 import ContainerRegisterEmpresa3 from '../../components/Register/Register-Empresa/ContainerRegisterEmpresa3.js'
 import styles from '../../styles/RegisterEmpresa.module.css'
 import firebase, { FirebaseContext } from '../../firebase'
-import ContainerSpinner from '../../components/Register/ContainerSpinner'
-import Layout from '../../components/layout/Layout'
+import ContainerSpinner from '../Register/ContainerSpinner'
+import Layout from '../layout/Layout'
 
 
 export default function RegisterEmpresa() {

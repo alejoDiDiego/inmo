@@ -14,6 +14,10 @@ import { getDownloadURL, ref } from 'firebase/storage'
 
 export default function Home() {
 
+
+  const {usuario} = useContext(FirebaseContext)
+  console.log(usuario)
+
   return (
     <div>
       <Head>

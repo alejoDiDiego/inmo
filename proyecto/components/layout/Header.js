@@ -13,6 +13,8 @@ const Header = ({ usuario, registroActive }) => {
     const [activeUserMenu, setActiveUserMenu] = useState(false)
     const [foto, setFoto] = useState("")
 
+    console.log(usuario)
+
 
 
     useEffect(() => {
@@ -61,7 +63,7 @@ const Header = ({ usuario, registroActive }) => {
                                 <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
                                 <Link href='/perfil/principal'><button>Perfil</button></Link>
                                 {
-                                    foto != "" ?
+                                    Object.keys(usuario).length > 0 ?
                                         <div>
                                             <div className={styles.foto}>
                                                 <img src={foto} />
