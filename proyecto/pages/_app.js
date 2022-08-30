@@ -5,7 +5,6 @@ import useAutentication from '../hooks/useAutentication';
 
 function MyApp({ Component, pageProps }) {
   const usuario = useAutentication();
-  console.log(usuario)
 
 
   return (

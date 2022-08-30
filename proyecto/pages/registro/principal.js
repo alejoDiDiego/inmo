@@ -21,40 +21,35 @@ export default function RegisterMain() {
 
 
   useEffect(() => {
-    // if (usuario != null) {
-    //   console.log(usuario)
-    //   if (Object.keys(usuario.usuario).length > 0) {
-    //     console.log("el usuario ya existe")
-    //     router.push('/')
-    //     return
-    //   }
-    //   setLoading(false)
-    //   console.log('no')
-    // }
 
-
-    if (usuario != null) {
-      console.log(usuario)
-      if (Object.keys(usuario).length > 0) {
-        setTimeout(() => {
-          console.log("el usuario esta loggeado")
-          router.push('/')
-          return
-        }, 3000)
-
+    const check = async () => {
+      if (usuario != null) {
+        console.log(usuario)
+        if (Object.keys(usuario).length > 0) {
+          console.log("volver al inciio usuario ya loggeado")
+          router.push("/")
+          return true
+        } else {
+          setLoading(false)
+          console.log('no')
+          return true
+        }
       } else {
-        setLoading(false)
-        console.log('no')
-        return
+        return false
       }
+    }
 
+    let prueba = check()
+    while(prueba == false) {
+      setInterval(() => {
+        prueba = check()
+        console.log("probando")
+      }, 200)
+      
     }
 
 
-
-
-
-  }, [usuario])
+  }, [])
 
 
 
@@ -71,7 +66,7 @@ export default function RegisterMain() {
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
         <Layout registro={true}>
-          <ContainerRegister loading={loading} />
+          <ContainerRegister loadingBig={loading} />
         </Layout>
 
       </div>

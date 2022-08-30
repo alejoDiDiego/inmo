@@ -13,7 +13,6 @@ const Header = ({ usuario, registroActive }) => {
     const [activeUserMenu, setActiveUserMenu] = useState(false)
     const [foto, setFoto] = useState("")
 
-    console.log(usuario)
 
 
 

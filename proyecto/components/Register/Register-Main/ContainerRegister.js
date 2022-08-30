@@ -15,9 +15,7 @@ import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 
 const ContainerRegister = ({
-    setVerdadero,
-    userCore,
-    setUserCore
+    loadingBig
 }) => {
 
     const router = useRouter()
@@ -178,6 +176,8 @@ const ContainerRegister = ({
             })
             // END IMAGENES
 
+            router.push("/")
+
         } catch (err) {
             console.log(err)
             setLoading(false)
@@ -274,121 +274,135 @@ const ContainerRegister = ({
 
 
 
+    if (loadingBig == true) {
+        return (
+            <div className={styles.div_supremo}>
+                <div className={styles.main_container}>
+                    <div className={styles.spinner_container}>
+                        <Spinner />
+                    </div>
+                </div>
 
-
-
-    return (
-        <div className={styles.div_supremo}>
-            <div className={styles.main_container}>
-                <div className={styles.inside_container}>
-                    <h2>Crea tu cuenta en <span className={styles.text_blue}>Inmo</span></h2>
-                    <div className={styles.form}>
-
-
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input value={email} onChange={e => { setEmail(e.target.value); setEmailError(false) }} type="text" readOnly={loading} placeholder="&nbsp;" />
-                            <span className={styles.placeholder}>Email*</span>
-                            {emailError == true ?
-                                <div className={styles.div_error}>
-                                    <p>Ingrese un email valido</p>
-                                </div>
-                                : null}
-                            {emailExistsError == true ?
-                                <div className={styles.div_error}>
-                                    <p>El mail ya existe</p>
-                                </div>
-                                : null}
-                        </label>
-
-
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input value={password} id="password" onChange={e => { setPassword(e.target.value); setPassswordShort(false); setPasswordError(false) }} type={viewPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
-                            <span className={styles.placeholder}>Contraseña*</span>
-                            <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
-                            {passwordError == true ?
-                                <div className={styles.div_error}>
-                                    <p>Ingrese una contraseña valida</p>
-                                </div>
-                                : null}
-                            {passwordShort == true ?
-                                <div className={styles.div_error}>
-                                    <p>La contraseña debe tener mas de 6 digitos</p>
-                                </div>
-                                : null}
-                        </label>
-
-
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input value={confirmarPassword} onChange={e => { setConfirmarPassword(e.target.value); setConfirmarPasswordError(false) }} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
-                            <span className={styles.placeholder}>Confirmar contraseña*</span>
-                            <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
-                            {confirmarPasswordError == true ?
-                                <div className={styles.div_error}>
-                                    <p>Ambas contraseñas deben coincidir</p>
-                                </div>
-                                : null}
-                        </label>
+            </div>
+        )
+    } else {
 
 
 
 
-
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input value={nomUsu} onChange={e => { setNomUsu(e.target.value); setErrorNomUsu(false) }} readOnly={loading} placeholder="&nbsp;" />
-                            <span className={styles.placeholder}>Nombre de usuario*</span>
-                            {errorNomUsu == true ?
-                                <div className={styles.div_error}>
-                                    <p>El nombre de usuario es obligatorio</p>
-                                </div>
-                                : null}
-                        </label>
+        return (
+            <div className={styles.div_supremo}>
+                <div className={styles.main_container}>
+                    <div className={styles.inside_container}>
+                        <h2>Crea tu cuenta en <span className={styles.text_blue}>Inmo</span></h2>
+                        <div className={styles.form}>
 
 
-
-
-                        <div className={styles.select}>
-                            <label>Tipo de cuenta</label>
-                            <select value={tipoCuenta} onChange={(e) => setTipoCuenta(e.target.value)}>
-                                <option value="particular">Particular</option>
-                                <option value="empresa">Empresa</option>
-                            </select>
-                        </div>
-
-
-
-
-
-
-
-
-                        <div className={styles.div_link}>
-                            <label className={styles.label_link}>Permito que utilizen mi informacion segun estos terminos: <Link href='/'><a>www.link.com</a></Link></label>
-                            <input type='checkbox' />
-                        </div>
-
-
-
-                        {
-                            loading == false ?
-                                <div className={styles.div_buttons}>
-                                    <div className={styles.button} onClick={handleRegistrar}>
-                                        <div className={styles.button_back}></div>
-                                        <div className={styles.button_content}><span>Crear cuenta</span></div>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input value={email} onChange={e => { setEmail(e.target.value); setEmailError(false) }} type="text" readOnly={loading} placeholder="&nbsp;" />
+                                <span className={styles.placeholder}>Email*</span>
+                                {emailError == true ?
+                                    <div className={styles.div_error}>
+                                        <p>Ingrese un email valido</p>
                                     </div>
-                                </div>
-                                :
-                                <div className={styles.div_spinner}>
-                                    <Spinner />
-                                </div>
+                                    : null}
+                                {emailExistsError == true ?
+                                    <div className={styles.div_error}>
+                                        <p>El mail ya existe</p>
+                                    </div>
+                                    : null}
+                            </label>
 
 
-                        }
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input value={password} id="password" onChange={e => { setPassword(e.target.value); setPassswordShort(false); setPasswordError(false) }} type={viewPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
+                                <span className={styles.placeholder}>Contraseña*</span>
+                                <i onClick={() => setViewPassword(!viewPassword)} class={viewPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+                                {passwordError == true ?
+                                    <div className={styles.div_error}>
+                                        <p>Ingrese una contraseña valida</p>
+                                    </div>
+                                    : null}
+                                {passwordShort == true ?
+                                    <div className={styles.div_error}>
+                                        <p>La contraseña debe tener mas de 6 digitos</p>
+                                    </div>
+                                    : null}
+                            </label>
 
+
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input value={confirmarPassword} onChange={e => { setConfirmarPassword(e.target.value); setConfirmarPasswordError(false) }} type={viewConfirmarPassword == true ? "text" : "password"} readOnly={loading} placeholder="&nbsp;" />
+                                <span className={styles.placeholder}>Confirmar contraseña*</span>
+                                <i onClick={() => setViewConfirmarPassword(!viewConfirmarPassword)} class={viewConfirmarPassword == true ? "fa-solid fa-eye" : "far fa-eye"}></i>
+                                {confirmarPasswordError == true ?
+                                    <div className={styles.div_error}>
+                                        <p>Ambas contraseñas deben coincidir</p>
+                                    </div>
+                                    : null}
+                            </label>
+
+
+
+
+
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input value={nomUsu} onChange={e => { setNomUsu(e.target.value); setErrorNomUsu(false) }} readOnly={loading} placeholder="&nbsp;" />
+                                <span className={styles.placeholder}>Nombre de usuario*</span>
+                                {errorNomUsu == true ?
+                                    <div className={styles.div_error}>
+                                        <p>El nombre de usuario es obligatorio</p>
+                                    </div>
+                                    : null}
+                            </label>
+
+
+
+
+                            <div className={styles.select}>
+                                <label>Tipo de cuenta</label>
+                                <select value={tipoCuenta} onChange={(e) => setTipoCuenta(e.target.value)}>
+                                    <option value="particular">Particular</option>
+                                    <option value="empresa">Empresa</option>
+                                </select>
+                            </div>
+
+
+
+
+
+
+
+
+                            <div className={styles.div_link}>
+                                <label className={styles.label_link}>Permito que utilizen mi informacion segun estos terminos: <Link href='/'><a>www.link.com</a></Link></label>
+                                <input type='checkbox' />
+                            </div>
+
+
+
+                            {
+                                loading == false ?
+                                    <div className={styles.div_buttons}>
+                                        <div className={styles.button} onClick={handleRegistrar}>
+                                            <div className={styles.button_back}></div>
+                                            <div className={styles.button_content}><span>Crear cuenta</span></div>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className={styles.div_spinner}>
+                                        <Spinner />
+                                    </div>
+
+
+                            }
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default ContainerRegister
