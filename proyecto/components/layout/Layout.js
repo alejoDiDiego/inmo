@@ -8,8 +8,6 @@ import firebase, { FirebaseContext } from '../../firebase'
 const Layout = ({ children, registro }) => {
     const [registroActive, setRegistroActive] = useState(false)
     
-
-    
     useEffect(() => {   
         if (registro == true || registro != null) {
             setRegistroActive(true)

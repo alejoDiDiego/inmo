@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, sendEmailVerification } from "firebase/auth";
-import { getStorage } from "firebase/storage";
-import { getFirestore } from 'firebase/firestore'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, sendEmailVerification, updateProfile } from "firebase/auth";
+import { getDownloadURL, getStorage } from "firebase/storage";
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
 import "firebase/compat/firestore";
 import firebaseConfig from './config';
 
@@ -31,9 +31,69 @@ class Firebase {
     return nuevoUsuario.user
   }
 
+  async docExists(email){
+    try {
+      const docRef = doc(firebase.db, "Usuarios", email)
+      console.log("docRef")
+      const res = await getDoc(docRef)
+      return res.exists()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   async registrarGoogle() {
     const nuevoUsuario = await signInWithPopup(this.auth, this.providerGoogle)
-    return nuevoUsuario.user
+    if (this.docExists(this.auth.currentUser.email)) {
+      const docRef = doc(firebase.db, "Usuarios", this.auth.currentUser.email)
+      const docSnap = await getDoc(docRef)
+      const docSnapData = docSnap.data()
+      await updateProfile(this.auth.currentUser, {
+        displayName: docSnapData.nombreUsuario,
+        photoURL: docSnapData.fotoPerfilURL
+      })
+      return
+    } else {
+      await setDoc(doc(firebase.db, "Usuarios", this.auth.currentUser.email), {
+        nombreUsuario: nomUsu,
+        uid: user.uid,
+        mail: user.email,
+        type: tipoCuenta,
+      })
+
+      // BEGIN IMAGENES
+      const imagePerfRef = ref(storage, `imagenesDefault/perfilDefault.jpg`)
+      const urlPerf = await getDownloadURL(imagePerfRef)
+      await updateProfile(user, {
+        photoURL: urlPerf
+      }).then(() => {
+        console.log("se actualizo la foto de display")
+      }).catch((error) => {
+        console.log(error.message)
+        console.log("hubo un errror actualizando la foto de display")
+      });
+
+      await updateDoc(doc(firebase.db, "Usuarios", this.auth.currentUser.email), {
+        fotoPerfilURL: urlPerf
+      }).catch((error) => {
+        console.log(error)
+      })
+
+
+
+      const imageFondRef = ref(storage, `imagenesDefault/fondoDefault.png`)
+      const urlFondo = await getDownloadURL(imageFondRef)
+
+      await updateDoc(doc(db, "Usuarios", this.auth.currentUser.email), {
+        fotoFondoURL: urlFondo
+      }).catch((error) => {
+        console.log(error)
+      })
+      // END IMAGENES
+      return
+    }
+
+
   }
 
   async iniciarSesion(email, password) {

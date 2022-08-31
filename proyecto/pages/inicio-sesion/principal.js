@@ -16,24 +16,34 @@ export default function InicioMain() {
   const [loadingBig, setLoadingBig] = useState(true)
 
   useEffect(() => {
-    if (usuario != null) {
-      console.log(usuario)
-      if (Object.keys(usuario).length > 0) {
-        setTimeout(() => {
-          console.log("el usuario esta loggeado")
-          router.push('/')
-          return
-        }, 3000)
 
+    const check = async () => {
+      if (usuario != null) {
+        console.log(usuario)
+        if (Object.keys(usuario).length > 0) {
+          console.log("volver al inciio usuario ya loggeado")
+          return true
+        } else {
+          setLoadingBig(false)
+          console.log('no')
+          return true
+        }
       } else {
-        console.log('no')
-        setLoadingBig(false)
-        return
+        return false
       }
-
     }
 
-  }, [usuario])
+    let prueba = check()
+    while(prueba == false) {
+      setInterval(() => {
+        prueba = check()
+        console.log("probando")
+      }, 200)
+      
+    }
+
+
+  })
 
 
   return (

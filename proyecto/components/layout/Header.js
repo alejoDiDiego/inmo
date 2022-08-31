@@ -12,6 +12,17 @@ const Header = ({ usuario, registroActive }) => {
     const [active, setActive] = useState(false)
     const [activeUserMenu, setActiveUserMenu] = useState(false)
     const [foto, setFoto] = useState("")
+    const [barraBusqueda, setBarraBusqueda] = useState(!registroActive)
+
+
+    useEffect(() => {
+        if(usuario.emailVerified == false){
+            setBarraBusqueda(false)
+        } else {
+            setBarraBusqueda(true)
+        }
+    }, [usuario])
+    
 
 
 
@@ -24,13 +35,13 @@ const Header = ({ usuario, registroActive }) => {
 
     return (
         <div className={styles.header}>
-            <Link href='/'>
+            <Link href={usuario.emailVerified ? '/': '/verificar'}>
                 <div className={styles.div_img}>
                     <Image layout="fill" src="/icono_about.png" />
                 </div>
             </Link>
             {
-                !registroActive &&
+                barraBusqueda &&
                 <input placeholder='Direccion, localidad, provincia, vendedor' />
             }
 
@@ -60,7 +71,7 @@ const Header = ({ usuario, registroActive }) => {
                             :
                             <div>
                                 <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
-                                <Link href='/perfil/principal'><button>Perfil</button></Link>
+                                <Link href={usuario.emailVerified ? '/perfil/principal': '/verificar'}><button>Perfil</button></Link>
                                 {
                                     Object.keys(usuario).length > 0 ?
                                         <div>

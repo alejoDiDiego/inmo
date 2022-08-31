@@ -25,12 +25,33 @@ const useAutentication = () => {
                         case "/inicio-sesion/principal":
                             console.log(router.pathname)
                             router.push("/")
+
+                        case "/verificar":
+                            console.log(router.pathname)
+                            router.push("/")
                     }
                 }
 
                 guardarUsuarioAutenticado(usuario)
 
             } else {
+                switch (router.pathname) {
+                    case "/registro/principal":
+                        console.log(router.pathname)
+                        router.push("/")
+
+                    case "/inicio-sesion/principal":
+                        console.log(router.pathname)
+                        router.push("/")
+
+                    case "/verificar":
+                        console.log(router.pathname)
+                        router.push("/")
+                }
+
+
+
+
                 guardarUsuarioAutenticado({})
             }
         });

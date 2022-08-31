@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Spinner from '../../components/Spinner/Spinner';
 import Image from 'next/image'
 import firebase from '../../firebase'
+import { useRouter } from 'next/router'
 
 
 const ContainerInicioSesion = ({ loadingBig }) => {
@@ -17,11 +18,14 @@ const ContainerInicioSesion = ({ loadingBig }) => {
 
   const [loading, setLoading] = useState(false)
 
+  const router = useRouter()
+
 
   const handleGoogle = async () => {
     try {
       setLoading(true)
       await firebase.registrarGoogle();
+      router.push("/")
       
     } catch(err) {
       console.log(err)
@@ -39,8 +43,9 @@ const ContainerInicioSesion = ({ loadingBig }) => {
       respuesta = await firebase.iniciarSesion(email, password)
       if(respuesta != ""){
         setLoading(false)
-        console.log(respuesta)
+        router.push("/")
       }
+      console.log(respuesta)
     } catch (err) {
       setLoading(false)
       console.log(err.code.message) 
