@@ -29,7 +29,7 @@ const configuracion = () => {
             if (usuario != null) {
                 try {
                     if(Object.keys(usuario).length > 0){
-                        const docRef = doc(firebase.db, "Usuarios", usuario.email)
+                        const docRef = doc(firebase.db, "Usuarios", usuario.uid)
                         const docSnap = await getDoc(docRef)
                         setCargar(false)
                         setInfo(docSnap.data())

@@ -137,7 +137,7 @@ const ContainerRegister = ({
 
 
 
-            setDoc(doc(firebase.db, "Usuarios", user.email), {
+            setDoc(doc(firebase.db, "Usuarios", user.uid), {
                 nombreUsuario: nomUsu,
                 uid: user.uid,
                 mail: user.email,
@@ -158,7 +158,7 @@ const ContainerRegister = ({
                 console.log("hubo un errror actualizando la foto de display")
             });
 
-            await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+            await updateDoc(doc(firebase.db, "Usuarios", user.uid), {
                 fotoPerfilURL: urlPerf
             }).catch((error) => {
                 console.log(error)
@@ -169,7 +169,7 @@ const ContainerRegister = ({
             const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
             const urlFondo = await getDownloadURL(imageFondRef)
 
-            await updateDoc(doc(firebase.db, "Usuarios", user.email), {
+            await updateDoc(doc(firebase.db, "Usuarios", user.uid), {
                 fotoFondoURL: urlFondo
             }).catch((error) => {
                 console.log(error)

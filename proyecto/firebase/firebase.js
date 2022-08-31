@@ -40,9 +40,9 @@ class Firebase {
 
 
 
-  async docExists(email) {
+  async docExists(uid) {
     try {
-      const docRef = doc(firebase.db, "Usuarios", email)
+      const docRef = doc(firebase.db, "Usuarios", uid)
       console.log("docRef")
       const res = await getDoc(docRef)
       return res.exists()
@@ -61,11 +61,11 @@ class Firebase {
 
   async registrarGoogle() {
     const nuevoUsuario = await signInWithPopup(this.auth, this.providerGoogle)
-    let isRegistered = await this.docExists(this.auth.currentUser.email).then((r) => {return r})
+    let isRegistered = await this.docExists(this.auth.currentUser.uid).then((r) => {return r})
     console.log(isRegistered)
     if (isRegistered == true) {
       console.log("adentro")
-      const docRef = doc(this.db, "Usuarios", this.auth.currentUser.email)
+      const docRef = doc(this.db, "Usuarios", this.auth.currentUser.uid)
       console.log(docRef)
       const docSnap = await getDoc(docRef)
       console.log(docSnap)
@@ -76,8 +76,11 @@ class Firebase {
         photoURL: docSnapData.fotoPerfilURL
       })
       return
-    } else {
-      await setDoc(doc(this.db, "Usuarios", this.auth.currentUser.email), {
+    } 
+    
+    
+    else {
+      await setDoc(doc(this.db, "Usuarios", this.auth.currentUser.uid), {
         nombreUsuario: this.auth.currentUser.displayName,
         uid: this.auth.currentUser.uid,
         mail: this.auth.currentUser.email,
@@ -96,7 +99,7 @@ class Firebase {
         console.log("hubo un errror actualizando la foto de display")
       });
 
-      await updateDoc(doc(this.db, "Usuarios", this.auth.currentUser.email), {
+      await updateDoc(doc(this.db, "Usuarios", this.auth.currentUser.uid), {
         fotoPerfilURL: urlPerf
       }).catch((error) => {
         console.log(error)
@@ -105,7 +108,7 @@ class Firebase {
       const imageFondRef = ref(this.storage, `imagenesDefault/fondoDefault.png`)
       const urlFondo = await getDownloadURL(imageFondRef)
 
-      await updateDoc(doc(this.db, "Usuarios", this.auth.currentUser.email), {
+      await updateDoc(doc(this.db, "Usuarios", this.auth.currentUser.uid), {
         fotoFondoURL: urlFondo
       }).catch((error) => {
         console.log(error)
