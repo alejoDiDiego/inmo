@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, sendEmailVerification, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, sendEmailVerification, updateProfile, sendPasswordResetEmail } from "firebase/auth";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
 import "firebase/compat/firestore";
@@ -26,10 +26,19 @@ class Firebase {
 
   }
 
+
+
+
+
   async registrar(auth, email, password) {
     const nuevoUsuario = await createUserWithEmailAndPassword(auth, email, password)
     return nuevoUsuario.user
   }
+
+
+
+
+
 
   async docExists(email) {
     try {
@@ -41,6 +50,14 @@ class Firebase {
       console.log(err)
     }
   }
+
+
+
+
+
+
+
+
 
   async registrarGoogle() {
     const nuevoUsuario = await signInWithPopup(this.auth, this.providerGoogle)
@@ -85,8 +102,6 @@ class Firebase {
         console.log(error)
       })
 
-
-
       const imageFondRef = ref(this.storage, `imagenesDefault/fondoDefault.png`)
       const urlFondo = await getDownloadURL(imageFondRef)
 
@@ -102,6 +117,11 @@ class Firebase {
 
   }
 
+
+
+
+
+
   async iniciarSesion(email, password) {
     signInWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
       const user = userCredential.user;
@@ -115,6 +135,10 @@ class Firebase {
     });
   }
 
+
+
+
+
   handleSignOut = () => {
     signOut(this.auth).then(() => {
       console.log("Sign-out successful.")
@@ -125,6 +149,11 @@ class Firebase {
     });
 
   }
+
+
+
+
+
 
   verificar = async () => {
     try {
@@ -139,6 +168,23 @@ class Firebase {
       console.log(err)
     }
   }
+
+
+
+  async reestablecerPassword(email){
+    try{
+      await sendPasswordResetEmail(this.auth, email)
+      console.log("enviado")
+      return email
+    } catch(err){
+      console.log(err)
+      return err
+    }
+  }
+
+
+
+
 }
 
 const firebase = new Firebase();

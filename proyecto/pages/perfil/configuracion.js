@@ -4,7 +4,8 @@ import Image from 'next/image'
 import { getDownloadURL, ref } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { doc, updateDoc, getFirestore, setDoc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from 'firebase/firestore'
+import Layout from '../../components/layout/Layout'
 
 const configuracion = () => {
 
@@ -14,21 +15,86 @@ const configuracion = () => {
     const [cargar, setCargar] = useState(false)
     const [error, setError] = useState(false)
 
-    const [perfilFoto, setPerfilFoto] = useState("")
-    const [fondoFoto, setFondoFoto] = useState("")
+    const [info, setInfo] = useState(null)
+
+    const [nuevoNombre, setNuevoNombre] = useState("")
 
     const router = useRouter()
 
 
 
-    return (
-        <div>
+    useEffect(() => {
+
+        const check = async () => {
+            if (usuario != null) {
+                try {
+                    if(Object.keys(usuario).length > 0){
+                        const docRef = doc(firebase.db, "Usuarios", usuario.email)
+                        const docSnap = await getDoc(docRef)
+                        setCargar(false)
+                        setInfo(docSnap.data())
+                    }
+                    return true
+                } catch (err) {
+                    console.log(err)
+                    console.log("a chekear")
+                    setTimeout(() => {
+                        check()
+                        return
+                    }, 2000)
+                }
+            } else {
+                return false
+            }
+        }
+
+        //Op
+
+        let prueba = check()
+        while (prueba == false) {
+            setInterval(() => {
+                prueba = check()
+                console.log("probando")
+            }, 200)
+
+        }
+
+
+
+    }, [usuario])
+
+
+    if (cargar == true) {
+        <Layout>
             <div>
-                <label>Nombre</label>
-                
+                <p>cargando</p>
             </div>
-        </div>
-    )
+        </Layout>
+    } else {
+        return (
+            <Layout>
+                {
+                    info != null ?
+                        (
+                            <div>
+                                <div>
+                                    <label>Nombre actual : {info.nombreUsuario}</label>
+                                    <input value={nuevoNombre} placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
+                                </div>
+
+                            </div>
+                        ) :
+                        (
+                            <p>cargando</p>
+                        )
+                }
+
+            </Layout>
+        )
+    }
+
+
+
 }
 
 export default configuracion

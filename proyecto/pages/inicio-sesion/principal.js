@@ -6,6 +6,7 @@ import firebase, { FirebaseContext } from '../../firebase'
 import { useRouter } from 'next/router'
 import Layout from '../../components/layout/Layout'
 
+
 export default function InicioMain() {
 
 

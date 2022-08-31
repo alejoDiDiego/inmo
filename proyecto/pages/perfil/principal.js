@@ -13,7 +13,7 @@ import { doc, getDoc } from 'firebase/firestore'
 const principal = () => {
 
     const { usuario } = useContext(FirebaseContext)
-    
+
     const [cargar, setCargar] = useState(true)
     const [error, setError] = useState(false)
     const [info, setInfo] = useState(null)
@@ -29,28 +29,38 @@ const principal = () => {
 
         const check = async () => {
             if (usuario != null) {
-                if(usuario == {}){
-                    router.push("/")
-                    return
-                }
                 try {
-                    const docRef = doc(firebase.db, "Usuarios", usuario.email)
-                    const docSnap = await getDoc(docRef)
-                    setCargar(false)
-                    setInfo(docSnap.data())
+                    if (Object.keys(usuario).length > 0) {
+                        const docRef = doc(firebase.db, "Usuarios", usuario.email)
+                        const docSnap = await getDoc(docRef)
+                        setCargar(false)
+                        setInfo(docSnap.data())
+                    }
+                    return true
+
                 } catch (err) {
                     console.log(err)
                     console.log("a chekear")
                     setTimeout(() => {
                         check()
+                        return
                     }, 2000)
                 }
-            } 
+            } else {
+                return false
+            }
         }
 
         //Op
 
-        check()
+        let prueba = check()
+        while(prueba == false) {
+          setInterval(() => {
+            prueba = check()
+            console.log("probando")
+          }, 200)
+          
+        }
 
 
 
@@ -59,7 +69,7 @@ const principal = () => {
 
     useEffect(() => {
         console.log(info)
-    },[info])
+    }, [info])
 
 
 
@@ -84,6 +94,9 @@ const principal = () => {
                                 <p>{info.type}</p>
                                 <img src={info.fotoPerfilURL} />
                                 <img src={info.fotoFondoURL} />
+                                <Link href="/perfil/configuracion">
+                                    <button>Configurar perfil</button>
+                                </Link>
                             </div>
                             : null
 

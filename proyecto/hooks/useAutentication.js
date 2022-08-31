@@ -13,6 +13,7 @@ const useAutentication = () => {
     useEffect(() => {
         const unsuscribe = firebase.auth.onAuthStateChanged(usuario => {
             if (usuario) {
+                console.log(usuario)
                 if (usuario.emailVerified == false) {
                     console.log("a")
                     router.push("/verificar")
@@ -45,6 +46,14 @@ const useAutentication = () => {
                         router.push("/")
 
                     case "/verificar":
+                        console.log(router.pathname)
+                        router.push("/")
+
+                    case "/perfil/principal":
+                        console.log(router.pathname)
+                        router.push("/")
+
+                    case "/perfil/configuracion":
                         console.log(router.pathname)
                         router.push("/")
                 }
