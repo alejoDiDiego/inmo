@@ -13,15 +13,21 @@ const useAutentication = () => {
     useEffect(() => {
         const unsuscribe = firebase.auth.onAuthStateChanged(usuario => {
             if (usuario) {
-                switch (router.pathname) {
-                    case "/registro/principal":
-                        console.log(router.pathname)
-                        router.push("/")
+                if (usuario.emailVerified == false) {
+                    console.log("a")
+                    router.push("/verificar")
+                } else {
+                    switch (router.pathname) {
+                        case "/registro/principal":
+                            console.log(router.pathname)
+                            router.push("/")
 
-                    case "/inicio-sesion/principal":
-                        console.log(router.pathname)
-                        router.push("/")
+                        case "/inicio-sesion/principal":
+                            console.log(router.pathname)
+                            router.push("/")
+                    }
                 }
+
                 guardarUsuarioAutenticado(usuario)
 
             } else {

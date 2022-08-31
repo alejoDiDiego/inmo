@@ -1,9 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, sendEmailVerification } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import "firebase/compat/firestore";
 import firebaseConfig from './config';
+
 
 
 class Firebase {
@@ -57,6 +58,16 @@ class Firebase {
       console.log("No se deslogueo")
     });
 
+  }
+
+  verificar = async () => {
+    const actionCodeSettings = {
+      url: 'http://localhost:3000/',
+      handleCodeInApp: true,
+    };
+
+    await sendEmailVerification(this.auth, actionCodeSettings)
+    console.log("se reenvio")
   }
 }
 
