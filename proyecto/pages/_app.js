@@ -7,7 +7,9 @@ function MyApp({ Component, pageProps }) {
   const usuario = useAutentication();
 
 
+
   return (
+
     <FirebaseContext.Provider
       value={{
         firebase,

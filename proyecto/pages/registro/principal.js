@@ -27,7 +27,6 @@ export default function RegisterMain() {
         console.log(usuario)
         if (Object.keys(usuario).length > 0) {
           console.log("volver al inciio usuario ya loggeado")
-          router.push("/")
           return true
         } else {
           setLoading(false)

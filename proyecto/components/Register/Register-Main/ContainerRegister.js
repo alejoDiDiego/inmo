@@ -108,13 +108,13 @@ const ContainerRegister = ({
             return;
         }
 
-        let isRegistered = false
-        isRegistered = await userExists(email).then(r => { return r; })
-        if (isRegistered == true) {
-            setLoading(false)
-            setEmailExistsError(true);
-            return
-        }
+        // let isRegistered = false
+        // isRegistered = await userExists(email).then(r => { return r; })
+        // if (isRegistered == true) {
+        //     setLoading(false)
+        //     setEmailExistsError(true);
+        //     return
+        // }
 
 
 
@@ -179,7 +179,11 @@ const ContainerRegister = ({
             router.push("/")
 
         } catch (err) {
-            console.log(err)
+            console.log(err.code)
+            let error = err.code
+            if(error.includes("auth/email-already-in-use")){
+                setEmailExistsError(true)
+            }
             setLoading(false)
         }
 

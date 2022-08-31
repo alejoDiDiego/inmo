@@ -22,7 +22,9 @@ const ContainerInicioSesion = ({ loadingBig }) => {
     try {
       setLoading(true)
       await firebase.registrarGoogle();
-    } catch {
+      
+    } catch(err) {
+      console.log(err)
       setLoading(false)
     }
 
