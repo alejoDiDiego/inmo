@@ -176,8 +176,6 @@ const ContainerRegister = ({
             })
             // END IMAGENES
 
-            router.push("/")
-
         } catch (err) {
             console.log(err.code)
             let error = err.code
