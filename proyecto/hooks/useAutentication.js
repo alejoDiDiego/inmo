@@ -37,14 +37,6 @@ const useAutentication = () => {
 
             } else {
                 switch (router.pathname) {
-                    case "/registro/principal":
-                        console.log(router.pathname)
-                        router.push("/")
-
-                    case "/inicio-sesion/principal":
-                        console.log(router.pathname)
-                        router.push("/")
-
                     case "/verificar":
                         console.log(router.pathname)
                         router.push("/")

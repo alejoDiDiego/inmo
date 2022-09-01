@@ -7,12 +7,15 @@ import Spinner from '../../components/Spinner/Spinner';
 import Image from 'next/image'
 import firebase from '../../firebase'
 import { useRouter } from 'next/router'
+import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
 
 
 const ContainerInicioSesion = ({ loadingBig }) => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errorEmail, setErrorEmail] = useState(false)
+  const [errorEmailMensaje, setErrorEmailMensaje] = useState("")
 
   const [viewPassword, setViewPassword] = useState(false)
 
@@ -22,6 +25,8 @@ const ContainerInicioSesion = ({ loadingBig }) => {
   const [reestablecerPassword, setReestablecerPassword] = useState(false)
   const [errorReestablecer, setErrorReestablecer] = useState(false)
   const [errorReestablecerMensaje, setErrorReestablecerMensaje] = useState("")
+
+  const [enviado, setEnviado] = useState(false)
 
   const router = useRouter()
 
@@ -42,39 +47,59 @@ const ContainerInicioSesion = ({ loadingBig }) => {
 
 
   const handleReestablecer = async () => {
-    if (emailReestablecer.length < 1 || emailReestablecer == "") {
-      console.log("ingrese un mail valido")
-      return
+    setErrorReestablecer(false)
+    setErrorReestablecerMensaje("")
+    setEnviado(false)
+    try {
+      await sendPasswordResetEmail(firebase.auth, emailReestablecer)
+      setEnviado(true)
+    } catch (error) {
+      const errorCode = error.code;
+      console.log(errorCode)
+      setErrorReestablecer(true)
+      if(errorCode.includes("auth/missing-email")){
+        setErrorReestablecerMensaje("Ingrese un email")
+
+      } else if(errorCode.includes("auth/invalid-email")){
+        setErrorReestablecerMensaje("Ingrese un email valido")
+
+      } else if(errorCode.includes("auth/user-not-found")){
+        setErrorReestablecerMensaje("Usuario no encontrado")
+
+      } else{
+        setErrorReestablecerMensaje(error.code)
+      }
     }
-
-    let resultado = await firebase.reestablecerPassword(emailReestablecer)
-
-    if (resultado != emailReestablecer) {
-
-    }
-
-
-
-
   }
 
 
 
   const handleIniciarSesion = async () => {
-    let respuesta
-    try {
-      setLoading(true)
-      respuesta = await firebase.iniciarSesion(email, password)
-      if (respuesta != "") {
-        setLoading(false)
-        router.push("/")
-      }
-      console.log(respuesta)
-    } catch (err) {
+    setLoading(true)
+    signInWithEmailAndPassword(firebase.auth, email, password).then((userCredential) => {
+      console.log(userCredential)
+    }).catch((error) => {
       setLoading(false)
-      console.log(err.code.message)
-    }
+      const errorCode = error.code;
+      console.log(errorCode)
+      setErrorEmail(true)
+      if (errorCode.includes("auth/invalid-email")) {
+        setErrorEmailMensaje("Email invalido")
+
+      } else if (errorCode.includes("auth/wrong-password")) {
+        setErrorEmailMensaje("Contraseña incorrecta")
+
+      } else if (errorCode.includes("auth/user-not-found")) {
+        setErrorEmailMensaje("Usuario no encontrado")
+      } else {
+        console.log(errorCode)
+        setErrorEmailMensaje("Error: " + errorCode)
+      }
+
+    });
   }
+
+
 
 
   if (reestablecerPassword == false) {
@@ -88,6 +113,12 @@ const ContainerInicioSesion = ({ loadingBig }) => {
               (
                 <div className={styles.inside_container}>
                   <h2>Inicia <span className={styles.text_blue}>Sesion</span></h2>
+                  {
+                    errorEmail &&
+                    (
+                      <p>{errorEmailMensaje}</p>
+                    )
+                  }
                   <div className={styles.form}>
 
                     <label className={`${styles.custom_field} ${styles.two}`}>
@@ -146,17 +177,21 @@ const ContainerInicioSesion = ({ loadingBig }) => {
         <div className={styles.main_container}>
           <div className={styles.inside_container}>
             <h2>Inicia <span className={styles.text_blue}>Sesion</span></h2>
+            {
+              errorReestablecer &&
+              <p>{errorReestablecerMensaje}</p>
+            }
+            {
+              enviado &&
+              <p>Mail de reestablecimiento de contraseña enviado a {emailReestablecer}</p>
+            }
             <div className={styles.form}>
-
 
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={emailReestablecer} onChange={e => { setEmailReestablecer(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Email</span>
               </label>
-              {
-                errorReestablecer &&
-                <p>{errorReestablecerMensaje}</p>
-              }
+
 
               <div className={styles.div_buttons}>
                 <div className={styles.button} onClick={handleReestablecer}>

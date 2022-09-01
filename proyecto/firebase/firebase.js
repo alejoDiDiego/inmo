@@ -125,22 +125,6 @@ class Firebase {
 
 
 
-  async iniciarSesion(email, password) {
-    signInWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
-      const user = userCredential.user;
-      return user
-    }).catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode)
-      const errorMessage = error.message;
-      console.log(errorMessage)
-      return errorMessage
-    });
-  }
-
-
-
-
 
   handleSignOut = () => {
     signOut(this.auth).then(() => {
@@ -172,18 +156,6 @@ class Firebase {
     }
   }
 
-
-
-  async reestablecerPassword(email){
-    try{
-      await sendPasswordResetEmail(this.auth, email)
-      console.log("enviado")
-      return email
-    } catch(err){
-      console.log(err)
-      return err
-    }
-  }
 
 
 
