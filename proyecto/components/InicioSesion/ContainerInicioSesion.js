@@ -78,6 +78,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
     setLoading(true)
     signInWithEmailAndPassword(firebase.auth, email, password).then((userCredential) => {
       console.log(userCredential)
+      router.push("/")
     }).catch((error) => {
       setLoading(false)
       const errorCode = error.code;
