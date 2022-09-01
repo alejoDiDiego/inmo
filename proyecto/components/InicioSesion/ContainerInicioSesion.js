@@ -197,12 +197,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={emailReestablecer} onChange={e => { setEmailReestablecer(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Email</span>
-                <input value={newPassword} onChange={e => { setNewPassword(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
-                <span className={styles.placeholder}>Nueva Contraseña</span>
-                <input value={confirmNewPassword} onChange={e => { setConfirmNewPassword(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
-                <span className={styles.placeholder}>Confirmar Nueva Contraseña</span>
-                <input value={establishCode} onChange={e => { setEstablishCode(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
-                <span className={styles.placeholder}>Codigo</span>
+
               </label>
 
 
