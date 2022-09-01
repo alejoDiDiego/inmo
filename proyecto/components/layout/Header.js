@@ -7,12 +7,17 @@ import { useRouter } from 'next/router'
 
 
 
-const Header = ({ usuario, registroActive }) => {
+
+const Header = ({ usuario, enRegistro}) => {
+
+    const router = useRouter()
 
     const [active, setActive] = useState(false)
     const [activeUserMenu, setActiveUserMenu] = useState(false)
     const [foto, setFoto] = useState("")
-    const [barraBusqueda, setBarraBusqueda] = useState(!registroActive)
+    const [barraBusqueda, setBarraBusqueda] = useState(true)
+
+
 
 
     useEffect(() => {
@@ -22,6 +27,20 @@ const Header = ({ usuario, registroActive }) => {
             setBarraBusqueda(true)
         }
     }, [usuario])
+
+    console.log(barraBusqueda)
+
+
+    useEffect(() =>{
+        console.log("barraBusqueda"+barraBusqueda)
+    }, [barraBusqueda])
+
+
+    useEffect(() => {
+        if(enRegistro == true){
+            setBarraBusqueda(false)
+        }
+    })
 
 
 

@@ -35,6 +35,7 @@ const principal = () => {
                         const docSnap = await getDoc(docRef)
                         setCargar(false)
                         setInfo(docSnap.data())
+                        console.log(typeof docSnap.data())
                     }
                     return true
 

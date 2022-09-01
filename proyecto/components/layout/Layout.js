@@ -3,19 +3,22 @@ import Header from './Header';
 import Footer from './Footer';
 import styles from '../../styles/Layout.module.css'
 import firebase, { FirebaseContext } from '../../firebase'
-
+import { useRouter } from 'next/router'
 
 const Layout = ({ children, registro }) => {
-    const [registroActive, setRegistroActive] = useState(false)
+
     
-    useEffect(() => {   
-        if (registro == true || registro != null) {
-            setRegistroActive(true)
+
+    const router = useRouter()
+    const { usuario } = useContext(FirebaseContext)
+    const [enRegistro,setEnRegistro] = useState(false)
+    console.log(router.pathname)
+
+    useEffect(() => {
+        if(registro){
+            setEnRegistro(true)
         }
     })
-
-    const { usuario } = useContext(FirebaseContext)
-
 
 
 
@@ -24,11 +27,11 @@ const Layout = ({ children, registro }) => {
     return (
         <div className={styles.layout}>
             <div className={styles.header}>
-                <Header usuario={usuario != null ? usuario : {usuario: {}} } registroActive={registroActive} />
+                <Header usuario={usuario != null ? usuario : {usuario: {}} } enRegistro={enRegistro} />
             </div>
             {children}
             {
-                !registroActive &&
+                !enRegistro &&
                 <div className={styles.footer}>
                     <Footer />
                 </div>

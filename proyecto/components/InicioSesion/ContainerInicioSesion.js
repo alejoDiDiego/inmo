@@ -13,6 +13,9 @@ import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPasswor
 const ContainerInicioSesion = ({ loadingBig }) => {
 
   const [email, setEmail] = useState("")
+  const [confirmNewPassword, setConfirmNewPassword] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [establishCode, setEstablishCode] = useState("")
   const [password, setPassword] = useState("")
   const [errorEmail, setErrorEmail] = useState(false)
   const [errorEmailMensaje, setErrorEmailMensaje] = useState("")
@@ -113,7 +116,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
             loadingBig == false ?
               (
                 <div className={styles.inside_container}>
-                  <h2>Inicia <span className={styles.text_blue}>Sesion</span></h2>
+                  <h2>Inicia sesion en <span className={styles.text_blue}>Inmo</span></h2>
                   {
                     errorEmail &&
                     (
@@ -134,20 +137,22 @@ const ContainerInicioSesion = ({ loadingBig }) => {
                     </label>
 
 
+                    <p className={styles.button_ir} onClick={() => { setReestablecerPassword(true) }}>¿Ha olvidado su contraseña?</p>
+
                     {
                       loading == false ?
                         <div className={styles.div_buttons}>
                           {/*<button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> <a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
-                          <div className={styles.buttonGoogle} onClick={handleGoogle}>
-                            <div className={styles.buttonGoogle_back}></div>
-                            <div className={styles.buttonGoogle_content}><span>Iniciar sesion con Google</span><Image src='/google.png' width={25} height={25} /></div>
-                          </div>
                           <div className={styles.button} onClick={handleIniciarSesion}>
                             <div className={styles.button_back}></div>
                             <div className={styles.button_content}><span>Iniciar Sesion</span></div>
                           </div>
+                          <div className={styles.buttonGoogle} onClick={handleGoogle}>
+                            <div className={styles.buttonGoogle_back}></div>
+                            <div className={styles.buttonGoogle_content}><span>Iniciar sesion con Google</span><Image src='/google.png' width={25} height={25} /></div>
+                          </div>
 
-                          <p style={{ cursor: 'pointer' }} onClick={() => { setReestablecerPassword(true) }}>¿Ha olvidado su contraseña?</p>
+                          
                         </div>
                         :
                         <div className={styles.div_spinner}>
@@ -177,35 +182,41 @@ const ContainerInicioSesion = ({ loadingBig }) => {
       <div className={styles.div_supremo}>
         <div className={styles.main_container}>
           <div className={styles.inside_container}>
-            <h2>Inicia <span className={styles.text_blue}>Sesion</span></h2>
+            <h2 className={styles.title}>Restablece tu <span className={styles.text_blue}>contraseña</span></h2>
+            
             {
               errorReestablecer &&
               <p>{errorReestablecerMensaje}</p>
             }
             {
               enviado &&
-              <p>Mail de reestablecimiento de contraseña enviado a {emailReestablecer}</p>
+              <p>Mail de restablecimiento de contraseña enviado a {emailReestablecer}</p>
             }
             <div className={styles.form}>
-
+            <p className={styles.subtitulo}>Se enviará un mensaje de verificación para restablecer tu contraseña.</p>
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={emailReestablecer} onChange={e => { setEmailReestablecer(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Email</span>
+                <input value={newPassword} onChange={e => { setNewPassword(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
+                <span className={styles.placeholder}>Nueva Contraseña</span>
+                <input value={confirmNewPassword} onChange={e => { setConfirmNewPassword(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
+                <span className={styles.placeholder}>Confirmar Nueva Contraseña</span>
+                <input value={establishCode} onChange={e => { setEstablishCode(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
+                <span className={styles.placeholder}>Codigo</span>
               </label>
 
 
               <div className={styles.div_buttons}>
-                <div className={styles.button} onClick={handleReestablecer}>
-                  <div className={styles.button_back}></div>
-                  <div className={styles.button_content}><span>Reestablecer contraseña</span></div>
+                <div className={`${styles.button} ${styles.button_reestablecer}`} onClick={handleReestablecer}>
+                  <div className={`${styles.button_back} ${styles.button_back_reestablecer}`}></div>
+                  <div className={`${styles.button_content} ${styles.button_content_reestablecer}`}><span>Restablecer contraseña</span></div>
                 </div>
-                <p style={{ cursor: 'pointer' }} onClick={() => { setReestablecerPassword(false) }}>Volver a iniciar sesion</p>
+                <p className={styles.buttonVolver} onClick={() => { setReestablecerPassword(false) }}>Volver a iniciar sesion</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     )
   }
 

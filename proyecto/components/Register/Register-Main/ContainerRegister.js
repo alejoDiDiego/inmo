@@ -362,7 +362,7 @@ const ContainerRegister = ({
 
 
                             <div className={styles.select}>
-                                <label>Tipo de cuenta</label>
+                                <label className='TipoCuenta'>Tipo de cuenta</label>
                                 <select value={tipoCuenta} onChange={(e) => setTipoCuenta(e.target.value)}>
                                     <option value="particular">Particular</option>
                                     <option value="empresa">Empresa</option>
@@ -395,8 +395,6 @@ const ContainerRegister = ({
                                     <div className={styles.div_spinner}>
                                         <Spinner />
                                     </div>
-
-
                             }
 
                         </div>

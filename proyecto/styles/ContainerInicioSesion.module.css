@@ -87,10 +87,11 @@
 .div_buttons{
     margin-top: 160px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    font-size: 15px;
+    gap: 30px;
 }
 
 .div_spinner{
@@ -185,7 +186,7 @@
 
 .buttonGoogle_content span{
     font-weight: bold;
-    width: 190px;
+    width: 180px;
 }
 
 
@@ -207,16 +208,16 @@
 
 
 .button{
-    width: 150px;
-    height: 50px;
+    width: 200px;
+    height: 60px;
     cursor: pointer;
     
     
 }
 
 .button_back{
-    width: 150px;
-    height: 50px;
+    width: 200px;
+    height: 60px;
     position: absolute;
     background-color: #0071b3;
     transition: all ease-in-out .2s;
@@ -230,8 +231,8 @@
     justify-content: center;
     align-items: center;
     
-    width: 150px;
-    height: 50px;
+    width: 200px;
+    height: 60px;
     background-color: #E8EFF4;
     transition: all ease-in-out .2s;
     border-bottom: 1px solid black;
@@ -380,4 +381,49 @@
     color: white;
     
     font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* restablecer contraseña*/
+.buttonVolver{
+    margin-top: 100px;
+    cursor: pointer 
+}
+
+.button_ir{
+    cursor: pointer 
+}
+
+.buttonVolver:hover, .button_ir:hover{
+    color: #0071b3;
+}
+.buttonVolver{
+    margin-top: 100px;
+    cursor: pointer 
+}
+.buttonVolver:hover{
+    color: #0071b3;
+}
+.button_content{
+    display: flex;
+    text-align:center;
+}
+
+.button_reestablecer, .button_back_reestablecer, .button_content_reestablecer{
+    height: 60px;
+    width: 200px;
+}
+
+.subtitulo{
+    padding-right: 40px;
+
 }
