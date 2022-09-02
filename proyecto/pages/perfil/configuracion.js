@@ -6,6 +6,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { doc, getDoc } from 'firebase/firestore'
 import Layout from '../../components/layout/Layout'
+import Configuracion from '../../components/Perfil/Configuracion'
+
 
 const configuracion = () => {
 
@@ -17,7 +19,6 @@ const configuracion = () => {
 
     const [info, setInfo] = useState(null)
 
-    const [nuevoNombre, setNuevoNombre] = useState("")
 
     const router = useRouter()
 
@@ -76,13 +77,7 @@ const configuracion = () => {
                 {
                     info != null ?
                         (
-                            <div>
-                                <div>
-                                    <label>Nombre actual : {info.nombreUsuario}</label>
-                                    <input value={nuevoNombre} placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
-                                </div>
-
-                            </div>
+                            <Configuracion info={info} />
                         ) :
                         (
                             <p>cargando</p>
