@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Axios from 'axios'
 
 
 const Configuracion = ({ info }) => {
@@ -7,116 +8,73 @@ const Configuracion = ({ info }) => {
     const [nuevoTipo, setNuevoTipo] = useState("no seleccionar")
     const [nuevoNumeroCelular, setNuevoNumeroCelular] = useState("")
     const [nuevoNumeroTelefono, setNuevoNumeroTelefono] = useState("")
+
+    const [provincias, setProvincias] = useState([])
+    const [municipios, setMunicipios] = useState([])
+    const [localidades, setLocalidades] = useState([])
+
+
     const [nuevaProvincia, setNuevaProvincia] = useState("")
     const [nuevoMunicipio, setNuevoMunicipio] = useState("")
     const [nuevaLocalidad, setNuevaLocalidad] = useState("")
 
 
-    const $d = document;
-    const $selectProvincias = $d.getElementById("selectProvincias");
-    const $selectMunicipios = $d.getElementById("selectMunicipios");
-    const $selectLocalidades = $d.getElementById("selectLocalidades");
 
 
 
     useEffect(() => {
         provincia()
-
     }, [])
 
+
     useEffect(() => {
-        if (nuevaProvincia.includes("Elige una provincia")) {
-            setNuevaProvincia("Elige una provincia")
-            setNuevoMunicipio("Elige un municipio")
-            setNuevaLocalidad("Elige una localidad")
-        }
-
         municipio(nuevaProvincia)
-
-
-
     }, [nuevaProvincia])
 
+
     useEffect(() => {
-        if (nuevoMunicipio.includes("Elige un municipio")) {
-            setNuevoMunicipio("Elige un municipio")
-            setNuevaLocalidad("Elige una localidad")
-        }
         localidad(nuevoMunicipio)
     }, [nuevoMunicipio])
 
 
+
     const provincia = () => {
-        fetch("https://apis.datos.gob.ar/georef/api/provincias")
-            .then(res => res.ok ? res.json() : Promise.reject(res))
-            .then(json => {
-                let $options = `<option value="Elige una provincia">Elige una provincia</option>`;
+        Axios.get("https://apis.datos.gob.ar/georef/api/provincias").then(async (res) => {
+            let json = await res.data
+            console.log(json.provincias)
+            let sort = json.provincias.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            setProvincias(sort)
 
-                json.provincias.forEach(el => $options += `<option value="${el.nombre}">${el.nombre}</option>`);
-
-                $selectProvincias.innerHTML = $options;
-            })
-            .catch(error => {
-                let message = error.statusText || "Ocurrió un error";
-
-                console.log(message)
-            })
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
 
     const municipio = (provincia) => {
-        fetch(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=200`)
-            .then(res => res.ok ? res.json() : Promise.reject(res))
-            .then(json => {
-                let $options = `<option value="Elige un municipio">Elige un municipio</option>`;
+        Axios.get(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=400`).then(async (res) => {
+            let json = await res.data
+            console.log(json.municipios)
+            let sort = json.municipios.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            setMunicipios(sort)
+        }).catch((err) => {
+            console.log(err)
+        })
 
-                json.municipios.forEach(el => $options += `<option value="${el.nombre}">${el.nombre}</option>`);
-
-                $selectMunicipios.innerHTML = $options;
-            })
-            .catch(error => {
-                let message = error.statusText || "Ocurrió un error";
-
-                console.log(message)
-            })
     }
 
 
     const localidad = (municipio) => {
-        fetch(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${municipio}&max=20`)
-            .then(res => res.ok ? res.json() : Promise.reject(res))
-            .then(json => {
-                let $options = `<option value="Elige una localidad">Elige una localidad</option>`;
+        Axios.get(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${municipio}&max=20`).then(async (res) => {
+            let json = await res.data
+            console.log(json.localidades)
+            let sort = json.localidades.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            setLocalidades(sort)
+        }).catch((err) => {
+            console.log(err)
+        })
 
-                json.localidades.forEach(el => $options += `<option value="${el.nombre}">${el.nombre}</option>`);
-
-                $selectLocalidades.innerHTML = $options;
-            })
-            .catch(error => {
-                let message = error.statusText || "Ocurrió un error";
-
-                console.log(message)
-            })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -181,20 +139,37 @@ const Configuracion = ({ info }) => {
                 <br />
 
                 <div>
-                    <select value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} id="selectProvincias">
-                        <option value="Elige una provincia">Elige una provincia</option>
+                    <select value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
+                        <option value="">Elige una provincia</option>
+                        {
+                            provincias.map((p) => {
+                                return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                            })
+                        }
+
+
                     </select>
 
-                    <select value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} id="selectMunicipios">
-                        <option value="Elige un municipio">Elige un municipio</option>
+                    <select value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
+                        <option value="">Elige un municipio</option>
+                        {
+                            municipios.map((p) => {
+                                return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                            })
+                        }
                     </select>
 
-                    <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }} id="selectLocalidades">
-                        <option value="Elige una localidad">Elige una localidad</option>
+                    <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                        <option value="">Elige una localidad</option>
+                        {
+                            localidades.map((p) => {
+                                return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                            })
+                        }
                     </select>
 
-                    <button onClick={() => {setNuevaProvincia("Elige una provincia"); setNuevoMunicipio("Elige un municipio"); setNuevaLocalidad("Elige una localidad")}}>Resetear</button>
-
+                    <button onClick={() => { setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>Resetear</button>
+                    <button onClick={() => { provincia() }}>Recargar</button>
                 </div>
 
 
