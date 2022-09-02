@@ -1,0 +1,11 @@
+.arriba{
+    display: flex;
+}
+
+.perfil{
+    width: 300px;
+}
+
+.fondo{
+    width: 600px;
+}

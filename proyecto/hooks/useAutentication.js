@@ -45,9 +45,6 @@ const useAutentication = () => {
                         console.log(router.pathname)
                         router.push("/")
 
-                    case "/perfil/configuracion":
-                        console.log(router.pathname)
-                        router.push("/")
                 }
 
 
