@@ -305,7 +305,11 @@ const principal = () => {
 
                             }
 
-                            <input value={nuevoNumeroCelular} onChange={(e) => setNuevoNumeroCelular(e.target.value)} type="text" placeholder="Nuevo numero de celular Ej: 5491112341234" />
+                            <input value={nuevoNumeroCelular} onKeyPress={(event) => {
+                                if (!/[0-9]/.test(event.key)) {
+                                    event.preventDefault();
+                                }
+                            }} onChange={(e) => setNuevoNumeroCelular(e.target.value)} type="text" placeholder="Nuevo numero de celular Ej: 5491112341234" />
                         </div>
 
                         <div>
@@ -320,7 +324,11 @@ const principal = () => {
 
                             }
 
-                            <input value={nuevoNumeroTelefono} onChange={(e) => setNuevoNumeroTelefono(e.target.value)} type="text" placeholder="Nuevo numero de telefono" />
+                            <input value={nuevoNumeroTelefono} onKeyPress={(event) => {
+                                if (!/[0-9]/.test(event.key)) {
+                                    event.preventDefault();
+                                }
+                            }} onChange={(e) => setNuevoNumeroTelefono(e.target.value)} type="text" placeholder="Nuevo numero de telefono" />
                         </div>
 
                         <div>
@@ -402,7 +410,7 @@ const principal = () => {
                                         (
                                             <div>
                                                 <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su localidad?</p>
-                                                <select value={nuevaLocalidad} onChange={(e) => {setNuevaLocalidad(e.target.value)}}>
+                                                <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
                                                     <option value="">Elige una localidad</option>
                                                     {
                                                         localidades.map((p) => {
@@ -415,7 +423,7 @@ const principal = () => {
                                         (
                                             <div>
                                                 <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>x</p>
-                                                <input placeholder='Ingrese su localidad' value={nuevaLocalidad} onChange={(e) => {setNuevaLocalidad(titleCase(e.target.value))}} />
+                                                <input placeholder='Ingrese su localidad' value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
                                             </div>
                                         )
                                 }
