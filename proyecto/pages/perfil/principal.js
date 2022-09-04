@@ -5,7 +5,7 @@ import { getDownloadURL, ref } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '../../components/layout/Layout'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import styles from '../../styles/Principal.module.css'
 import Axios from 'axios'
 
@@ -20,7 +20,7 @@ const principal = () => {
 
 
     const [nuevoNombre, setNuevoNombre] = useState("")
-    const [nuevoTipo, setNuevoTipo] = useState("no seleccionar")
+    const [nuevoTipo, setNuevoTipo] = useState("")
     const [nuevoNumeroCelular, setNuevoNumeroCelular] = useState("")
     const [nuevoNumeroTelefono, setNuevoNumeroTelefono] = useState("")
 
@@ -37,67 +37,14 @@ const principal = () => {
 
     const [nuevaDireccion, setNuevaDireccion] = useState("")
 
+    const [toggleProvincia, setToggleProvincia] = useState(false)
+    const [toggleMunicipio, setToggleMunicipio] = useState(false)
+    const [toggleLocalidad, setToggleLocalidad] = useState(false)
+
+    const [botonConfirmar, setBotonConfirmar] = useState(false)
+
 
     const router = useRouter()
-
-
-
-    useEffect(() => {
-        provincia()
-    }, [])
-
-
-    useEffect(() => {
-        municipio(nuevaProvincia)
-    }, [nuevaProvincia])
-
-
-    useEffect(() => {
-        localidad(nuevoMunicipio)
-    }, [nuevoMunicipio])
-
-
-
-    const provincia = () => {
-        Axios.get("https://apis.datos.gob.ar/georef/api/provincias").then(async (res) => {
-            let json = await res.data
-            console.log(json.provincias)
-            let sort = json.provincias.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            setProvincias(sort)
-
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-
-
-    const municipio = (provincia) => {
-        Axios.get(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=400`).then(async (res) => {
-            let json = await res.data
-            console.log(json.municipios)
-            let sort = json.municipios.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            setMunicipios(sort)
-        }).catch((err) => {
-            console.log(err)
-        })
-
-    }
-
-
-    const localidad = (municipio) => {
-        Axios.get(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${municipio}&max=20`).then(async (res) => {
-            let json = await res.data
-            console.log(json.localidades)
-            let sort = json.localidades.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            setLocalidades(sort)
-        }).catch((err) => {
-            console.log(err)
-        })
-
-    }
-
-
-
 
 
 
@@ -150,6 +97,155 @@ const principal = () => {
 
 
 
+    useEffect(() => {
+        provincia()
+    }, [])
+
+
+    useEffect(() => {
+        if (nuevaProvincia.length == 0) {
+            setNuevoMunicipio("")
+            setMunicipios([])
+            setNuevaLocalidad("")
+            setLocalidades([])
+            return
+        }
+        municipio(nuevaProvincia)
+
+    }, [nuevaProvincia])
+
+
+    useEffect(() => {
+        if (nuevoMunicipio.length == 0) {
+            setNuevaLocalidad("")
+            setLocalidades([])
+            return
+        }
+        localidad(nuevoMunicipio)
+    }, [nuevoMunicipio])
+
+
+
+
+
+    useEffect(() => {
+        setNuevaProvincia("")
+    }, [toggleProvincia])
+
+    useEffect(() => {
+        setNuevoMunicipio("")
+    }, [toggleMunicipio])
+
+    useEffect(() => {
+        setNuevaLocalidad("")
+    }, [toggleLocalidad])
+
+
+    const handleModificar = async () => {
+        if (
+            nuevoNombre.length == 0
+            && nuevoTipo.length == 0
+            && nuevoNumeroCelular.length == 0
+            && nuevoNumeroTelefono.length == 0
+            && nuevaProvincia.length == 0
+            && nuevoMunicipio.length == 0
+            && nuevaLocalidad.length == 0
+            && nuevaDireccion.length == 0
+        ) {
+            alert("No se aplicaron cambios")
+            setBotonConfirmar(false)
+            return
+        }
+
+        if (nuevaDireccion.length > 0 && nuevoMunicipio.length == 0 && nuevaProvincia.length == 0) {
+            alert("Si incluye una direccion, por lo menos debe indicar una provincia y un municipio")
+            setBotonConfirmar(false)
+            return
+        }
+
+
+        try{
+            console.log(doc(firebase.db, "Usuarios", usuario.uid))
+            await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
+                [nuevoNombre.length > 0 && 'nombreUsuario']: nuevoNombre,
+                [nuevoTipo.length > 0 && 'type']: nuevoTipo,
+                [nuevoNumeroCelular.length > 0 && 'numeroCelular']: nuevoNumeroCelular,
+                [nuevoNumeroTelefono.length > 0 && 'numeroTelefono']: nuevoNumeroTelefono,
+                [nuevaProvincia.length > 0 && 'provincia']: nuevaProvincia,
+                [nuevoMunicipio.length > 0 && 'municipio']: nuevoMunicipio,
+                [nuevaLocalidad.length > 0 && 'localidad']: nuevaLocalidad,
+                [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion
+            })
+            alert("Se aplicaron los cambios")
+            router.reload()
+            return
+        } catch(err){
+            console.log(err)
+            alert("Ha habido un error")
+        }
+
+        
+        
+        
+
+
+    }
+
+
+
+
+
+
+
+
+
+    const provincia = () => {
+        Axios.get("https://apis.datos.gob.ar/georef/api/provincias").then(async (res) => {
+            let json = await res.data
+            console.log(json.provincias)
+            let sort = json.provincias.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            setProvincias(sort)
+
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+
+    const municipio = (provincia) => {
+        Axios.get(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=400`).then(async (res) => {
+            let json = await res.data
+            console.log(json.municipios)
+            let sort = json.municipios.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            setMunicipios(sort)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+    }
+
+
+    const localidad = (municipio) => {
+        Axios.get(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${municipio}&max=20`).then(async (res) => {
+            let json = await res.data
+            console.log(json.localidades)
+            let sort = json.localidades.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            setLocalidades(sort)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     if (info == null) {
@@ -174,11 +270,11 @@ const principal = () => {
                         <div>
                             <label>Tipo de cuenta : {info.type}</label>
                             <select value={nuevoTipo} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                <option value="no seleccionar" disabled>-- Seleccione un nuevo tipo de cuenta --</option>
+                                <option value="">-- Seleccione un nuevo tipo de cuenta --</option>
                                 <option value="particular">Particular</option>
                                 <option value="empresa">Empresa</option>
                             </select>
-                            <button onClick={() => { setNuevoTipo("no seleccionar") }}>Resetear</button>
+                            <button onClick={() => { setNuevoTipo("") }}>Resetear</button>
                         </div>
 
                         <div>
@@ -193,7 +289,7 @@ const principal = () => {
 
                             }
 
-                            <input value={nuevoNumeroCelular} onChange={(e) => setNuevoNumeroCelular(e.target.value)} type="text" placeholder="Nuevo numero de celular" />
+                            <input value={nuevoNumeroCelular} onChange={(e) => setNuevoNumeroCelular(e.target.value)} type="text" placeholder="Nuevo numero de celular Ej: 5491112341234" />
                         </div>
 
                         <div>
@@ -224,34 +320,90 @@ const principal = () => {
                             }
                             <p>Nueva ubicacion</p>
 
-                            <select value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
-                                <option value="">Elige una provincia</option>
+                            <div>
+
                                 {
-                                    provincias.map((p) => {
-                                        return <option key={p.id} value={p.nombre}>{p.nombre}</option>
-                                    })
+                                    toggleProvincia == false ?
+                                        (
+                                            <div>
+                                                <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>No encuentra su provincia?</p>
+
+                                                <select value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
+                                                    <option value="">Elige una provincia</option>
+                                                    {
+                                                        provincias.map((p) => {
+                                                            return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+
+                                        ) :
+                                        (
+                                            <div>
+                                                <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>x</p>
+                                                <input placeholder='Ingrese su provincia' value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} />
+                                            </div>
+                                        )
                                 }
-                            </select>
 
 
-                            <select value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
-                                <option value="">Elige un municipio</option>
+
+
+                            </div>
+
+
+                            <div>
                                 {
-                                    municipios.map((p) => {
-                                        return <option key={p.id} value={p.nombre}>{p.nombre}</option>
-                                    })
+                                    toggleMunicipio == false ?
+                                        (
+                                            <div>
+                                                <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>No encuentra su municipio?</p>
+                                                <select value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
+                                                    <option value="">Elige un municipio</option>
+                                                    {
+                                                        municipios.map((p) => {
+                                                            return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+
+                                        ) :
+                                        (
+                                            <div>
+                                                <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>x</p>
+                                                <input placeholder='Ingrese su municipio' value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} />
+                                            </div>
+                                        )
                                 }
-                            </select>
+                            </div>
 
 
-                            <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
-                                <option value="">Elige una localidad</option>
+                            <div>
                                 {
-                                    localidades.map((p) => {
-                                        return <option key={p.id} value={p.nombre}>{p.nombre}</option>
-                                    })
+                                    toggleLocalidad == false ?
+                                        (
+                                            <div>
+                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su municipio?</p>
+                                                <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                                                    <option value="">Elige una localidad</option>
+                                                    {
+                                                        localidades.map((p) => {
+                                                            return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+                                        ) :
+                                        (
+                                            <div>
+                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>x</p>
+                                                <input placeholder='Ingrese su localidad' value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }} />
+                                            </div>
+                                        )
                                 }
-                            </select>
+                            </div>
 
 
 
@@ -262,7 +414,23 @@ const principal = () => {
                                 <input type="text" placeholder="Ej: Inmo 123" value={nuevaDireccion} onChange={(e) => setNuevaDireccion(e.target.value)} />
                             </div>
 
-                            <button>Modificar perfil</button>
+                            {
+                                botonConfirmar == false ?
+                                    (
+                                        <button onClick={() => { setBotonConfirmar(true) }}>Modificar perfil</button>
+                                    ) :
+                                    (
+                                        <div>
+                                            <p>Esta seguro que desea modificar su perfil?</p>
+                                            <div>
+                                                <button onClick={() => { handleModificar() }}>Si</button>
+                                                <button onClick={() => { setBotonConfirmar(false) }}>No</button>
+                                            </div>
+                                        </div>
+                                    )
+                            }
+
+
                         </div>
 
 
@@ -273,6 +441,76 @@ const principal = () => {
                         <p>{info.mail}</p>
                         <p>{info.nombreUsuario}</p>
                         <p>{info.type}</p>
+                        <div>
+                            <p>Ubicacion</p>
+                            <div>
+                                {
+                                    'provincia' in info || 'municipio' in info || 'direccion' in info ?
+                                        (
+                                            <p>
+                                                {
+                                                    'provincia' in info &&
+                                                    (
+                                                        info.provincia
+                                                    )
+                                                },
+                                                {
+                                                    'municipio' in info &&
+                                                    (
+                                                        info.municipio
+                                                    )
+                                                }
+                                                {
+                                                    'localidad' in info &&
+                                                    (
+                                                        <>
+                                                            ,{info.localidad}
+                                                        </>
+                                                    )
+                                                }
+                                                {
+                                                    'direccion' in info &&
+                                                    (
+                                                        <>
+                                                            ,{info.direccion}
+                                                        </>
+                                                    )
+                                                }
+                                            </p>
+
+                                        ) :
+                                        (
+                                            <p>No tiene ninguna ubicacion asignada</p>
+
+                                        )
+                                }
+                            </div>
+                        </div>
+
+                        <div>
+                            {
+                                'numeroCelular' in info ?
+                                    (
+                                        <p>{info.numeroCelular}</p>
+                                    ) :
+                                    (
+                                        <p>No tiene ningun numero de celular asignado</p>
+                                    )
+                            }
+                        </div>
+
+                        <div>
+                            {
+                                'numeroTelefono' in info ?
+                                    (
+                                        <p>{info.numeroTelefono}</p>
+                                    ) :
+                                    (
+                                        <p>No tiene ningun numero de telefono asignado</p>
+                                    )
+                            }
+                        </div>
+
                         <img className={styles.perfil} src={info.fotoPerfilURL} />
                         <img className={styles.fondo} src={info.fotoFondoURL} />
                     </div>

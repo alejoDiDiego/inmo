@@ -22,14 +22,17 @@ const useAutentication = () => {
                         case "/registro/principal":
                             console.log(router.pathname)
                             router.push("/")
+                            break
 
                         case "/inicio-sesion/principal":
                             console.log(router.pathname)
                             router.push("/")
+                            break
 
                         case "/verificar":
                             console.log(router.pathname)
                             router.push("/")
+                            break
                     }
                 }
 
@@ -40,11 +43,12 @@ const useAutentication = () => {
                     case "/verificar":
                         console.log(router.pathname)
                         router.push("/")
+                        break
 
                     case "/perfil/principal":
                         console.log(router.pathname)
                         router.push("/")
-
+                        break
                 }
 
 

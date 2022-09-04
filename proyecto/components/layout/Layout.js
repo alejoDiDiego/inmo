@@ -12,7 +12,6 @@ const Layout = ({ children, registro }) => {
     const router = useRouter()
     const { usuario } = useContext(FirebaseContext)
     const [enRegistro,setEnRegistro] = useState(false)
-    console.log(router.pathname)
 
     useEffect(() => {
         if(registro){

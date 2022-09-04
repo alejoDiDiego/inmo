@@ -28,7 +28,6 @@ const Header = ({ usuario, enRegistro}) => {
         }
     }, [usuario])
 
-    console.log(barraBusqueda)
 
 
     useEffect(() =>{
