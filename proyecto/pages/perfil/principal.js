@@ -102,6 +102,17 @@ const principal = () => {
     }, [])
 
 
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
+    }
+
+
+
+
     useEffect(() => {
         if (nuevaProvincia.length == 0) {
             setNuevoMunicipio("")
@@ -110,6 +121,9 @@ const principal = () => {
             setLocalidades([])
             return
         }
+
+        setNuevaProvincia(titleCase(nuevaProvincia))
+
         municipio(nuevaProvincia)
 
     }, [nuevaProvincia])
@@ -121,9 +135,11 @@ const principal = () => {
             setLocalidades([])
             return
         }
+
+        setNuevoMunicipio(titleCase(nuevoMunicipio))
+
         localidad(nuevoMunicipio)
     }, [nuevoMunicipio])
-
 
 
 
@@ -164,7 +180,7 @@ const principal = () => {
         }
 
 
-        try{
+        try {
             console.log(doc(firebase.db, "Usuarios", usuario.uid))
             await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
                 [nuevoNombre.length > 0 && 'nombreUsuario']: nuevoNombre,
@@ -179,14 +195,14 @@ const principal = () => {
             alert("Se aplicaron los cambios")
             router.reload()
             return
-        } catch(err){
+        } catch (err) {
             console.log(err)
             alert("Ha habido un error")
         }
 
-        
-        
-        
+
+
+
 
 
     }
@@ -385,12 +401,12 @@ const principal = () => {
                                     toggleLocalidad == false ?
                                         (
                                             <div>
-                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su municipio?</p>
-                                                <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su localidad?</p>
+                                                <select value={nuevaLocalidad} onChange={(e) => {setNuevaLocalidad(e.target.value)}}>
                                                     <option value="">Elige una localidad</option>
                                                     {
                                                         localidades.map((p) => {
-                                                            return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                                                            return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
                                                         })
                                                     }
                                                 </select>
@@ -399,7 +415,7 @@ const principal = () => {
                                         (
                                             <div>
                                                 <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>x</p>
-                                                <input placeholder='Ingrese su localidad' value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }} />
+                                                <input placeholder='Ingrese su localidad' value={nuevaLocalidad} onChange={(e) => {setNuevaLocalidad(titleCase(e.target.value))}} />
                                             </div>
                                         )
                                 }
@@ -453,7 +469,7 @@ const principal = () => {
                                                     (
                                                         info.provincia
                                                     )
-                                                },
+                                                }, {`${" "}`}
                                                 {
                                                     'municipio' in info &&
                                                     (
@@ -464,7 +480,7 @@ const principal = () => {
                                                     'localidad' in info &&
                                                     (
                                                         <>
-                                                            ,{info.localidad}
+                                                            ,{`${" "}`}{info.localidad}
                                                         </>
                                                     )
                                                 }
@@ -472,7 +488,7 @@ const principal = () => {
                                                     'direccion' in info &&
                                                     (
                                                         <>
-                                                            ,{info.direccion}
+                                                            ,{`${" "}`}{info.direccion}
                                                         </>
                                                     )
                                                 }
