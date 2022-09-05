@@ -117,6 +117,7 @@ const principal = () => {
 
 
             setCroppedImageFondo(croppedImage)
+            
             setResultadoFondo(true)
 
             setImageSrc(null)
@@ -138,7 +139,7 @@ const principal = () => {
 
 
     useEffect(() => {
-        if (imageFondoUpload.length == 0) {
+        if (typeof imageFondoUpload == "undefined" || imageFondoUpload.length == 0 ) {
             return
         }
         const change = async () => {
@@ -160,7 +161,7 @@ const principal = () => {
 
 
     useEffect(() => {
-        if (imagePerfilUpload.length == 0) {
+        if (typeof imagePerfilUpload == "undefined" || imagePerfilUpload.length == 0 ) {
             return
         }
         const change = async () => {
