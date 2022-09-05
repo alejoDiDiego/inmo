@@ -48,9 +48,10 @@ const principal = () => {
 
     const [botonConfirmar, setBotonConfirmar] = useState(false)
 
+    const [cargando, setCargando] = useState(false)
+
 
     const router = useRouter()
-
 
 
     const [imageSrc, setImageSrc] = React.useState(null)
@@ -70,7 +71,6 @@ const principal = () => {
 
     const [confirmarEliminacionFondo, setConfirmarEliminacionFondo] = useState(false)
     const [confirmarEliminacionPerfil, setConfirmarEliminacionPerfil] = useState(false)
-    const [cargandoEliminacion, setCargandoEliminacion] = useState(false)
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
@@ -362,6 +362,7 @@ const principal = () => {
 
 
     const handleModificar = async () => {
+        setCargando(true)
         if (
             nuevoNombre.length == 0
             && nuevoTipo.length == 0
@@ -373,12 +374,14 @@ const principal = () => {
             && nuevaDireccion.length == 0
         ) {
             alert("No se aplicaron cambios")
+            setCargando(false)
             setBotonConfirmar(false)
             return
         }
 
         if (nuevaDireccion.length > 0 && nuevoMunicipio.length == 0 && nuevaProvincia.length == 0) {
             alert("Si incluye una direccion, por lo menos debe indicar una provincia y un municipio")
+            setCargando(false)
             setBotonConfirmar(false)
             return
         }
@@ -396,11 +399,12 @@ const principal = () => {
                 [nuevaLocalidad.length > 0 && 'localidad']: nuevaLocalidad,
                 [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion
             })
-            alert("Se aplicaron los cambios")
+
             router.reload()
             return
         } catch (err) {
             console.log(err)
+            setCargando(false)
             alert("Ha habido un error")
         }
 
@@ -455,7 +459,7 @@ const principal = () => {
 
 
     const handleEliminarPerfil = async () => {
-        setCargandoEliminacion(true)
+        setCargando(true)
         await deleteObject(ref(firebase.storage, `usuarios/${usuario.uid}/perfil`)).then(async () => {
             const imagePerfRef = ref(firebase.storage, `imagenesDefault/perfilDefault.jpg`)
             const urlPerf = await getDownloadURL(imagePerfRef)
@@ -476,7 +480,7 @@ const principal = () => {
             return
         }).catch((error) => {
             console.log(error)
-            setCargandoEliminacion(false)
+            setCargando(false)
             setConfirmarEliminacionPerfil(false)
             return
         })
@@ -488,7 +492,7 @@ const principal = () => {
 
 
     const handleEliminarFondo = async () => {
-        setCargandoEliminacion(true)
+        setCargando(true)
         await deleteObject(ref(firebase.storage, `usuarios/${usuario.uid}/fondo`)).then(async () => {
             const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
             const urlFondo = await getDownloadURL(imageFondRef)
@@ -504,7 +508,7 @@ const principal = () => {
 
         }).catch((error) => {
             console.log(error)
-            setCargandoEliminacion(false)
+            setCargando(false)
             setConfirmarEliminacionFondo(false)
             return
         })
@@ -745,22 +749,25 @@ const principal = () => {
                                 </div>
                                 : null
                         }
+
+
+
                         <div>
 
                             <div>
                                 <label>Nuevo nombre</label>
-                                <input value={nuevoNombre} placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
+                                <input value={nuevoNombre} readOnly={cargando} placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
                             </div>
 
 
                             <div>
                                 <label>Tipo de cuenta : {info.type}</label>
-                                <select value={nuevoTipo} onChange={(e) => setNuevoTipo(e.target.value)}>
+                                <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
                                     <option value="">-- Seleccione un nuevo tipo de cuenta --</option>
                                     <option value="particular">Particular</option>
                                     <option value="empresa">Empresa</option>
                                 </select>
-                                <button onClick={() => { setNuevoTipo("") }}>Resetear</button>
+                                <button disabled={cargando} onClick={() => { setNuevoTipo("") }}>Resetear</button>
                             </div>
 
                             <div>
@@ -775,7 +782,7 @@ const principal = () => {
 
                                 }
 
-                                <input value={nuevoNumeroCelular} onKeyPress={(event) => {
+                                <input value={nuevoNumeroCelular} readOnly={cargando} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
                                     }
@@ -794,7 +801,7 @@ const principal = () => {
 
                                 }
 
-                                <input value={nuevoNumeroTelefono} onKeyPress={(event) => {
+                                <input value={nuevoNumeroTelefono} readOnly={cargando} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
                                     }
@@ -855,7 +862,7 @@ const principal = () => {
                                                 <div>
                                                     <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>No encuentra su provincia?</p>
 
-                                                    <select value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
+                                                    <select value={nuevaProvincia} disabled={cargando} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
                                                         <option value="">Elige una provincia</option>
                                                         {
                                                             provincias.map((p) => {
@@ -869,7 +876,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>x</p>
-                                                    <input placeholder='Ingrese su provincia' value={nuevaProvincia} onChange={(e) => { setNuevaProvincia(e.target.value) }} />
+                                                    <input placeholder='Ingrese su provincia' value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(e.target.value) }} />
                                                 </div>
                                             )
                                     }
@@ -886,7 +893,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>No encuentra su municipio?</p>
-                                                    <select value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
+                                                    <select value={nuevoMunicipio} disabled={cargando} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
                                                         <option value="">Elige un municipio</option>
                                                         {
                                                             municipios.map((p) => {
@@ -900,7 +907,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>x</p>
-                                                    <input placeholder='Ingrese su municipio' value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} />
+                                                    <input placeholder='Ingrese su municipio' readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} />
                                                 </div>
                                             )
                                     }
@@ -913,7 +920,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su localidad?  (no es obligatorio para para poder publicar)</p>
-                                                    <select value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                                                    <select value={nuevaLocalidad} disabled={cargando} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
                                                         <option value="">Elige una localidad</option>
                                                         {
                                                             localidades.map((p) => {
@@ -926,7 +933,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>x</p>
-                                                    <input placeholder='Ingrese su localidad' value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
+                                                    <input placeholder='Ingrese su localidad' readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
                                                 </div>
                                             )
                                     }
@@ -934,28 +941,31 @@ const principal = () => {
 
 
 
-                                <button onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>Recargar ubicaciones</button>
+                                <button disabled={cargando} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>Recargar ubicaciones</button>
 
 
                                 <div>
                                     <label>Nueva direccion</label>
-                                    <input type="text" placeholder="Ej: Inmo 123" value={nuevaDireccion} onChange={(e) => setNuevaDireccion(e.target.value)} />
+                                    <input type="text" readOnly={cargando} placeholder="Ej: Inmo 123" value={nuevaDireccion} onChange={(e) => setNuevaDireccion(e.target.value)} />
                                 </div>
-
                                 {
-                                    botonConfirmar == false ?
+                                    cargando == false ?
                                         (
-                                            <button onClick={() => { setBotonConfirmar(true) }}>Modificar perfil</button>
+                                            botonConfirmar == false ?
+                                                (
+                                                    <button onClick={() => { setBotonConfirmar(true) }}>Modificar perfil</button>
+                                                ) :
+                                                (
+                                                    <div>
+                                                        <p>Esta seguro que desea modificar su perfil?</p>
+                                                        <div>
+                                                            <button onClick={() => { handleModificar() }}>Si</button>
+                                                            <button onClick={() => { setBotonConfirmar(false) }}>No</button>
+                                                        </div>
+                                                    </div>
+                                                )
                                         ) :
-                                        (
-                                            <div>
-                                                <p>Esta seguro que desea modificar su perfil?</p>
-                                                <div>
-                                                    <button onClick={() => { handleModificar() }}>Si</button>
-                                                    <button onClick={() => { setBotonConfirmar(false) }}>No</button>
-                                                </div>
-                                            </div>
-                                        )
+                                        <p>cargando</p>
                                 }
 
 
@@ -1055,7 +1065,7 @@ const principal = () => {
 
                             <div className={styles.container_img}>
                                 {
-                                    cargandoEliminacion == false ?
+                                    cargando == false ?
                                         (
                                             confirmarEliminacionPerfil == false ?
                                                 (
@@ -1098,7 +1108,7 @@ const principal = () => {
 
                             <div className={styles.container_img}>
                                 {
-                                    cargandoEliminacion == false ?
+                                    cargando == false ?
                                         confirmarEliminacionFondo == false ?
                                             (
                                                 <div>
