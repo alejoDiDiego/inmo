@@ -11,6 +11,7 @@ import Axios from 'axios'
 import Head from 'next/head'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
+import { updateProfile } from 'firebase/auth'
 
 
 
@@ -58,9 +59,6 @@ const principal = () => {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
 
-    const [croppedImagePerfil, setCroppedImagePerfil] = useState(null)
-    const [croppedImageFondo, setCroppedImageFondo] = useState(null)
-
     const [modalPerfil, setModalPerfil] = useState(false)
     const [modalFondo, setModalFondo] = useState(false)
 
@@ -103,11 +101,15 @@ const principal = () => {
                 console.log(error)
             })
 
+            await updateProfile(firebase.auth.currentUser, {
+                photoURL: url
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            router.reload()
+
             setCargandoCorte(false)
-
-
-            setCroppedImagePerfil(croppedImage)
-
 
 
             setImageSrc(null)
@@ -150,11 +152,9 @@ const principal = () => {
                 console.log(error)
             })
 
+            router.reload()
+
             setCargandoCorte(false)
-
-
-            setCroppedImageFondo(croppedImage)
-
 
 
             setImageSrc(null)
@@ -462,6 +462,12 @@ const principal = () => {
 
             await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
                 fotoPerfilURL: urlPerf
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            await updateProfile(firebase.auth.currentUser, {
+                photoURL: urlPerf
             }).catch((error) => {
                 console.log(error)
             })
@@ -1050,34 +1056,42 @@ const principal = () => {
                             <div className={styles.container_img}>
                                 {
                                     cargandoEliminacion == false ?
-                                    (
-                                        confirmarEliminacionPerfil == false ?
                                         (
-                                            <div>
-                                                <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
-                                                <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
+                                            confirmarEliminacionPerfil == false ?
+                                                (
+                                                    <div>
+                                                        <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
+                                                        <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
 
-                                                <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
-                                            </div>
+                                                        {
+                                                            info.fotoPerfilURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FperfilDefault.jpg?alt=media&token=19044d3e-c7bc-493f-9850-20dc001ad5c5") == false ?
+                                                                (
+                                                                    <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
+                                                                ) :
+                                                                null
+
+                                                        }
+
+                                                    </div>
+                                                ) :
+                                                (
+                                                    <div>
+                                                        <p>Desea eliminar la foto?</p>
+                                                        <div>
+                                                            <button onClick={() => { handleEliminarPerfil() }}>Si</button>
+                                                            <button onClick={() => setConfirmarEliminacionPerfil(false)}>No</button>
+                                                        </div>
+                                                    </div>
+                                                )
                                         ) :
-                                        (
-                                            <div>
-                                                <p>Desea eliminar la foto?</p>
-                                                <div>
-                                                    <button onClick={() => { handleEliminarPerfil() }}>Si</button>
-                                                    <button onClick={() => setConfirmarEliminacionPerfil(false)}>No</button>
-                                                </div>
-                                            </div>
-                                        )
-                                    ) :
-                                    <p>cargando</p>
-                                    
+                                        <p>cargando</p>
+
                                 }
 
                                 {/* https://www.flaticon.com/free-icon/x-mark_1617543?term=delete&page=1&position=34&page=1&position=34&related_id=1617543&origin=search */}
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
-                                <img className={styles.perfil} src={croppedImagePerfil != null ? croppedImagePerfil : info.fotoPerfilURL} />
+                                <img className={styles.perfil} src={info.fotoPerfilURL} />
                             </div>
 
 
@@ -1091,7 +1105,13 @@ const principal = () => {
                                                     <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
                                                     <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
 
-                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
+                                                    {
+                                                        info.fotoFondoURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FfondoDefault.png?alt=media&token=d4bde7ff-b705-43cd-b647-899db546186b") == false ?
+                                                            (
+                                                                <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
+                                                            ) : null
+                                                    }
+
                                                 </div>
                                             ) :
                                             (
@@ -1103,13 +1123,13 @@ const principal = () => {
                                                     </div>
                                                 </div>
                                             ) :
-                                    <p>cargando</p>
+                                        <p>cargando</p>
                                 }
 
 
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
-                                <img className={styles.fondo} src={croppedImageFondo != null ? croppedImageFondo : info.fotoFondoURL} />
+                                <img className={styles.fondo} src={info.fotoFondoURL} />
                             </div>
 
 
