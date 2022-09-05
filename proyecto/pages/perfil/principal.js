@@ -928,7 +928,8 @@ const principal = () => {
 
 
 
-                                <button onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>Recargar</button>
+                                <button onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>Recargar ubicaciones</button>
+
 
                                 <div>
                                     <label>Nueva direccion</label>
