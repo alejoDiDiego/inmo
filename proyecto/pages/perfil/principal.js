@@ -400,6 +400,14 @@ const principal = () => {
                 [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion
             })
 
+            if(nuevoNombre.length > 0){
+                await updateProfile(firebase.auth.currentUser, {
+                    displayName: nuevoNombre
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
+
             router.reload()
             return
         } catch (err) {
