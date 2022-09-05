@@ -178,6 +178,36 @@
     margin-bottom: 45px;
 }
 
+
+.button_back {
+    width: 120px;
+    height: 50px;
+    position: absolute;
+    background-color: #0071b3;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    top: 0;
+}
+
+.button_content {
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+    background-color: #E8EFF4;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid black;
+    top: 0;
+
+}
+
+.button_content span {
+    font-weight: bold;
+}
+
 .button_recortar:hover .button_content {
     transform: translate(3px, -3px);
 
@@ -186,3 +216,13 @@
 .button_recortar:hover .button_back {
     transform: translate(-3px, 3px);
 }
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import Image from 'next/image'
-import { getDownloadURL, ref } from 'firebase/storage'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '../../components/layout/Layout'
@@ -11,6 +11,7 @@ import Axios from 'axios'
 import Head from 'next/head'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
+
 
 
 const principal = () => {
@@ -69,6 +70,8 @@ const principal = () => {
     const [resultadoPerfil, setResultadoPerfil] = useState(false)
     const [resultadoFondo, setResultadoFondo] = useState(false)
 
+    const [cargandoCorte, setCargandoCorte] = useState(false)
+
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
@@ -84,9 +87,27 @@ const principal = () => {
             )
             console.log('donee', { croppedImage })
 
+            setCargandoCorte(true)
+
+            let blobPerfil = await fetch(croppedImage).then(r => r.blob());
+            const imagePerfRef = ref(firebase.storage, `usuarios/${usuario.uid}/perfil`)
+            const snapshot = await uploadBytes(imagePerfRef, blobPerfil) // le subo el archivo ya que imagePerfilUpload es un archivo y no una url
+            console.log("url")
+            const url = await getDownloadURL(snapshot.ref)
+            console.log(url)
+            await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
+                fotoPerfilURL: url
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            setCargandoCorte(false)
+
 
             setCroppedImagePerfil(croppedImage)
             setResultadoPerfil(true)
+
+
 
             setImageSrc(null)
             setCrop({ x: 0, y: 0 })
@@ -115,9 +136,27 @@ const principal = () => {
             )
             console.log('donee', { croppedImage })
 
+            setCargandoCorte(true)
+
+            let blobFondo = await fetch(croppedImage).then(r => r.blob());
+            const imageFondRef = ref(firebase.storage, `usuarios/${usuario.uid}/fondo`)
+            const snapshot = await uploadBytes(imageFondRef, blobFondo)
+            const url = await getDownloadURL(snapshot.ref)
+
+            await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
+                fotoFondoURL: url
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            setCargandoCorte(false)
+
 
             setCroppedImageFondo(croppedImage)
-            
+
+
+
+
             setResultadoFondo(true)
 
             setImageSrc(null)
@@ -139,7 +178,7 @@ const principal = () => {
 
 
     useEffect(() => {
-        if (typeof imageFondoUpload == "undefined" || imageFondoUpload.length == 0 ) {
+        if (typeof imageFondoUpload == "undefined" || imageFondoUpload.length == 0) {
             return
         }
         const change = async () => {
@@ -161,7 +200,7 @@ const principal = () => {
 
 
     useEffect(() => {
-        if (typeof imagePerfilUpload == "undefined" || imagePerfilUpload.length == 0 ) {
+        if (typeof imagePerfilUpload == "undefined" || imagePerfilUpload.length == 0) {
             return
         }
         const change = async () => {
@@ -483,44 +522,60 @@ const principal = () => {
                                                 }}
                                             />
                                         </div>
-                                        <div className={styles.div_controls}>
-                                            <div className={styles.controls}>
-                                                <input
-                                                    type="range"
-                                                    value={zoom}
-                                                    min={1}
-                                                    max={3}
-                                                    step={0.1}
-                                                    aria-labelledby="Zoom"
-                                                    onChange={(e) => {
-                                                        setZoom(e.target.value)
-                                                    }}
-                                                    className={styles.zoom_range}
-                                                />
-
-                                                <div className={styles.div_rotate}>
-                                                    <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
-
-                                                        <Image height={30} width={30} src="/rotate-left.png" />
-
-                                                        {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
-                                                    </button>
-
-                                                    <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
-
-                                                        <Image height={30} width={30} src="/rotate-right.png" />
 
 
-                                                        {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        {
+                                            cargandoCorte == false ?
+                                                (
+                                                    <div className={styles.div_controls}>
+                                                        <div className={styles.controls}>
+                                                            <input
+                                                                type="range"
+                                                                value={zoom}
+                                                                min={1}
+                                                                max={3}
+                                                                step={0.1}
+                                                                aria-labelledby="Zoom"
+                                                                onChange={(e) => {
+                                                                    setZoom(e.target.value)
+                                                                }}
+                                                                className={styles.zoom_range}
+                                                            />
 
-                                            <div className={styles.button_recortar} onClick={showCroppedImagePerfil}>
-                                                <div className={styles.button_back}></div>
-                                                <div className={styles.button_content}><span>Recortar</span></div>
-                                            </div>
-                                        </div>
+                                                            <div className={styles.div_rotate}>
+                                                                <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
+
+                                                                    <Image height={30} width={30} src="/rotate-left.png" />
+
+                                                                    {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
+                                                                </button>
+
+                                                                <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
+
+                                                                    <Image height={30} width={30} src="/rotate-right.png" />
+
+
+                                                                    {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className={styles.button_recortar} onClick={showCroppedImagePerfil}>
+                                                            <div className={styles.button_back}></div>
+                                                            <div className={styles.button_content}><span>Recortar</span></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                ) :
+                                                (
+                                                    <div className={styles.div_controls}>
+                                                        <p>cargando</p>
+                                                    </div>
+                                                )
+
+                                        }
+
 
 
 
@@ -556,45 +611,60 @@ const principal = () => {
                                                 }}
                                             />
                                         </div>
-                                        <div className={styles.div_controls}>
-                                            <div className={styles.controls}>
-                                                <input
-                                                    type="range"
-                                                    value={zoom}
-                                                    min={1}
-                                                    max={3}
-                                                    step={0.1}
-                                                    aria-labelledby="Zoom"
-                                                    onChange={(e) => {
-                                                        setZoom(e.target.value)
-                                                    }}
-                                                    className={styles.zoom_range}
-                                                />
-
-                                                <div className={styles.div_rotate}>
-                                                    <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
-
-                                                        <Image height={30} width={30} src="/rotate-left.png" />
-
-                                                        {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
-                                                    </button>
-
-                                                    <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
-
-                                                        <Image height={30} width={30} src="/rotate-right.png" />
 
 
-                                                        {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
-                                                    </button>
-                                                </div>
+                                        {
+                                            cargandoCorte == false ?
+                                                (
+                                                    <div className={styles.div_controls}>
+                                                        <div className={styles.controls}>
+                                                            <input
+                                                                type="range"
+                                                                value={zoom}
+                                                                min={1}
+                                                                max={3}
+                                                                step={0.1}
+                                                                aria-labelledby="Zoom"
+                                                                onChange={(e) => {
+                                                                    setZoom(e.target.value)
+                                                                }}
+                                                                className={styles.zoom_range}
+                                                            />
 
-                                            </div>
-                                            <div className={styles.button_recortar} onClick={showCroppedImageFondo}>
-                                                <div className={styles.button_back}></div>
-                                                <div className={styles.button_content}><span>Recortar</span></div>
-                                            </div>
+                                                            <div className={styles.div_rotate}>
+                                                                <button onClick={() => setRotation(rotation - 90)} className={styles.btn_rotate}>
 
-                                        </div>
+                                                                    <Image height={30} width={30} src="/rotate-left.png" />
+
+                                                                    {/*https://www.flaticon.com/premium-icon/rotate-left_3889488 */}
+                                                                </button>
+
+                                                                <button onClick={() => setRotation(rotation + 90)} className={styles.btn_rotate}>
+
+                                                                    <Image height={30} width={30} src="/rotate-right.png" />
+
+
+                                                                    {/*https://www.flaticon.com/premium-icon/rotate-right_3889492 */}
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div className={styles.button_recortar} onClick={showCroppedImageFondo}>
+                                                            <div className={styles.button_back}></div>
+                                                            <div className={styles.button_content}><span>Recortar</span></div>
+                                                        </div>
+
+
+                                                    </div>
+                                                ) :
+                                                (
+                                                    <div className={styles.div_controls}>
+                                                        <p>cargando</p>
+                                                    </div>
+                                                )
+                                        }
 
 
 
@@ -933,7 +1003,7 @@ const principal = () => {
                                 <img className={styles.fondo} src={croppedImageFondo != null ? croppedImageFondo : info.fotoFondoURL} />
                             </div>
 
-                            
+
                         </div>
 
                     </div>
