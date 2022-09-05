@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import Image from 'next/image'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '../../components/layout/Layout'
@@ -67,10 +67,12 @@ const principal = () => {
     const [imagePerfilUpload, setImagePerfilUpload] = useState([])
     const [imageFondoUpload, setImageFondoUpload] = useState([])
 
-    const [resultadoPerfil, setResultadoPerfil] = useState(false)
-    const [resultadoFondo, setResultadoFondo] = useState(false)
 
     const [cargandoCorte, setCargandoCorte] = useState(false)
+
+    const [confirmarEliminacionFondo, setConfirmarEliminacionFondo] = useState(false)
+    const [confirmarEliminacionPerfil, setConfirmarEliminacionPerfil] = useState(false)
+    const [cargandoEliminacion, setCargandoEliminacion] = useState(false)
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
@@ -105,7 +107,6 @@ const principal = () => {
 
 
             setCroppedImagePerfil(croppedImage)
-            setResultadoPerfil(true)
 
 
 
@@ -155,9 +156,6 @@ const principal = () => {
             setCroppedImageFondo(croppedImage)
 
 
-
-
-            setResultadoFondo(true)
 
             setImageSrc(null)
             setCrop({ x: 0, y: 0 })
@@ -406,15 +404,7 @@ const principal = () => {
             alert("Ha habido un error")
         }
 
-
-
-
-
-
     }
-
-
-
 
 
 
@@ -456,6 +446,63 @@ const principal = () => {
         }).catch((err) => {
             console.log(err)
         })
+
+    }
+
+
+
+
+
+
+    const handleEliminarPerfil = async () => {
+        setCargandoEliminacion(true)
+        await deleteObject(ref(firebase.storage, `usuarios/${usuario.uid}/perfil`)).then(async () => {
+            const imagePerfRef = ref(firebase.storage, `imagenesDefault/perfilDefault.jpg`)
+            const urlPerf = await getDownloadURL(imagePerfRef)
+
+            await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
+                fotoPerfilURL: urlPerf
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            router.reload()
+            return
+        }).catch((error) => {
+            console.log(error)
+            setCargandoEliminacion(false)
+            setConfirmarEliminacionPerfil(false)
+            return
+        })
+
+
+    }
+
+
+
+
+    const handleEliminarFondo = async () => {
+        setCargandoEliminacion(true)
+        await deleteObject(ref(firebase.storage, `usuarios/${usuario.uid}/fondo`)).then(async () => {
+            const imageFondRef = ref(firebase.storage, `imagenesDefault/fondoDefault.png`)
+            const urlFondo = await getDownloadURL(imageFondRef)
+
+            await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
+                fotoFondoURL: urlFondo
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            router.reload()
+            return
+
+        }).catch((error) => {
+            console.log(error)
+            setCargandoEliminacion(false)
+            setConfirmarEliminacionFondo(false)
+            return
+        })
+
 
     }
 
@@ -507,11 +554,17 @@ const principal = () => {
                             modalPerfil ?
                                 <div className={styles.modal_crop}>
                                     <div className={styles.modal_crop_inside}>
-                                        <div className={styles.menu} onClick={() => { setModalPerfil(false); setImagePerfilUpload([]) }}>
-                                            <div className={styles.bar}></div>
-                                            <div className={styles.bar}></div>
-                                            <div className={styles.bar}></div>
-                                        </div>
+                                        {
+                                            cargandoCorte == false ?
+                                                (
+                                                    <div className={styles.menu} onClick={() => { setModalPerfil(false); setImagePerfilUpload([]); setCroppedAreaPixels(null); setZoom(1); setRotation(0) }}>
+                                                        <div className={styles.bar}></div>
+                                                        <div className={styles.bar}></div>
+                                                        <div className={styles.bar}></div>
+                                                    </div>
+                                                ) : <div className={styles.menu_cargando}></div>
+                                        }
+
                                         <div className={styles.div_cropper}>
                                             <Cropper
                                                 image={imageSrc}
@@ -596,11 +649,17 @@ const principal = () => {
                             modalFondo ?
                                 <div className={styles.modal_crop}>
                                     <div className={styles.modal_crop_inside}>
-                                        <div className={styles.menu} onClick={() => setModalFondo(false)}>
-                                            <div className={styles.bar}></div>
-                                            <div className={styles.bar}></div>
-                                            <div className={styles.bar}></div>
-                                        </div>
+                                        {
+                                            cargandoCorte == false ?
+                                                (
+                                                    <div className={styles.menu} onClick={() => { setModalFondo(false); setImageFondoUpload([]); setZoom(1); setRotation(0) }}>
+                                                        <div className={styles.bar}></div>
+                                                        <div className={styles.bar}></div>
+                                                        <div className={styles.bar}></div>
+                                                    </div>
+                                                ) : <div className={styles.menu_cargando}></div>
+                                        }
+
                                         <div className={styles.div_cropper}>
                                             <Cropper
                                                 image={imageSrc}
@@ -988,12 +1047,32 @@ const principal = () => {
                             </div>
 
                             <div className={styles.container_img}>
-                                <div>
-                                    <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
-                                    <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
-                                </div>
+                                {
+                                    cargandoEliminacion == false ?
+                                    (
+                                        confirmarEliminacionPerfil == false ?
+                                        (
+                                            <div>
+                                                <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
+                                                <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
 
-                                <img className={styles.delete_icon} src='/delete.png' />
+                                                <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
+                                            </div>
+                                        ) :
+                                        (
+                                            <div>
+                                                <p>Desea eliminar la foto?</p>
+                                                <div>
+                                                    <button onClick={() => { handleEliminarPerfil() }}>Si</button>
+                                                    <button onClick={() => setConfirmarEliminacionPerfil(false)}>No</button>
+                                                </div>
+                                            </div>
+                                        )
+                                    ) :
+                                    <p>cargando</p>
+                                    
+                                }
+
                                 {/* https://www.flaticon.com/free-icon/x-mark_1617543?term=delete&page=1&position=34&page=1&position=34&related_id=1617543&origin=search */}
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
@@ -1003,12 +1082,29 @@ const principal = () => {
 
 
                             <div className={styles.container_img}>
-                                <div>
-                                    <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
-                                    <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
-                                </div>
+                                {
+                                    cargandoEliminacion == false ?
+                                        confirmarEliminacionFondo == false ?
+                                            (
+                                                <div>
+                                                    <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
+                                                    <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
 
-                                <img className={styles.delete_icon} src='/delete.png' />
+                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
+                                                </div>
+                                            ) :
+                                            (
+                                                <div>
+                                                    <p>Desea eliminar la foto?</p>
+                                                    <div>
+                                                        <button onClick={() => { handleEliminarFondo() }}>Si</button>
+                                                        <button onClick={() => setConfirmarEliminacionFondo(false)}>No</button>
+                                                    </div>
+                                                </div>
+                                            ) :
+                                    <p>cargando</p>
+                                }
+
 
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}

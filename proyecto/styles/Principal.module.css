@@ -96,6 +96,12 @@
     transform: translateY(-8px) rotate(-45deg);
 }
 
+.menu_cargando{
+    width: 25px;
+    height: 29px;
+    margin-bottom: 30px;
+}
+
 
 .modal_crop_inside {
     width: 700px;
