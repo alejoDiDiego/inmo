@@ -480,9 +480,17 @@ const principal = () => {
 
     if (info == null) {
         return (
-            <Layout>
-                <p>cargando</p>
-            </Layout>
+            <div>
+                <Head>
+                    <title>Inmo</title>
+                    <meta name="description" content="Generated" />
+                    <link rel="icon" href="/Logo_inmo_new.png" />
+                </Head>
+                <Layout>
+                    <p>cargando</p>
+                </Layout>
+            </div>
+
 
         )
     } else {
@@ -986,7 +994,7 @@ const principal = () => {
                                 </div>
 
                                 <img className={styles.delete_icon} src='/delete.png' />
-
+                                {/* https://www.flaticon.com/free-icon/x-mark_1617543?term=delete&page=1&position=34&page=1&position=34&related_id=1617543&origin=search */}
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
                                 <img className={styles.perfil} src={croppedImagePerfil != null ? croppedImagePerfil : info.fotoPerfilURL} />
