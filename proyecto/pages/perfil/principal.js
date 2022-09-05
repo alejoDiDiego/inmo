@@ -985,6 +985,8 @@ const principal = () => {
                                     <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
                                 </div>
 
+                                <img className={styles.delete_icon} src='/delete.png' />
+
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
                                 <img className={styles.perfil} src={croppedImagePerfil != null ? croppedImagePerfil : info.fotoPerfilURL} />
@@ -997,6 +999,8 @@ const principal = () => {
                                     <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
                                     <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
                                 </div>
+
+                                <img className={styles.delete_icon} src='/delete.png' />
 
 
                                 { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
