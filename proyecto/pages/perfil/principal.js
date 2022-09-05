@@ -255,6 +255,14 @@ const principal = () => {
                         setCargar(false)
                         setInfo(docSnap.data())
                         console.log(typeof docSnap.data())
+                        setNuevoNombre(docSnap.data().nombreUsuario)
+                        setNuevoTipo(docSnap.data().type)
+                        setNuevoNumeroCelular(docSnap.data().numeroCelular)
+                        setNuevoNumeroTelefono(docSnap.data().numeroTelefono)
+                        setNuevaProvincia(docSnap.data().provincia)
+                        setNuevoMunicipio(docSnap.data().municipio)
+                        setNuevaLocalidad(docSnap.data().localidad)
+                        setNuevaDireccion(docSnap.data().direccion)
                     }
                     return true
 
@@ -379,6 +387,22 @@ const principal = () => {
             return
         }
 
+        if (
+            nuevoNombre.includes(info.nombreUsuario)
+            && nuevoTipo.includes(info.type)
+            && nuevoNumeroCelular.includes(info.numeroCelular)
+            && nuevoNumeroTelefono.includes(info.numeroTelefono)
+            && nuevaProvincia.includes(info.provincia)
+            && nuevoMunicipio.includes(info.municipio)
+            && nuevaLocalidad.includes(info.localidad)
+            && nuevaDireccion.includes(info.direccion)
+        ) {
+            alert("No se aplicaron cambios")
+            setCargando(false)
+            setBotonConfirmar(false)
+            return
+        }
+
         if (nuevaDireccion.length > 0 && nuevoMunicipio.length == 0 && nuevaProvincia.length == 0) {
             alert("Si incluye una direccion, por lo menos debe indicar una provincia y un municipio")
             setCargando(false)
@@ -400,7 +424,7 @@ const principal = () => {
                 [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion
             })
 
-            if(nuevoNombre.length > 0){
+            if (nuevoNombre.length > 0) {
                 await updateProfile(firebase.auth.currentUser, {
                     displayName: nuevoNombre
                 }).catch((error) => {
@@ -763,33 +787,22 @@ const principal = () => {
                         <div>
 
                             <div>
-                                <label>Nuevo nombre</label>
+                                <label>Nombre:</label>
                                 <input value={nuevoNombre} readOnly={cargando} placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
                             </div>
 
 
                             <div>
-                                <label>Tipo de cuenta : {info.type}</label>
+                                <label>Tipo de cuenta: {info.type}</label>
                                 <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                    <option value="">-- Seleccione un nuevo tipo de cuenta --</option>
                                     <option value="particular">Particular</option>
                                     <option value="empresa">Empresa</option>
                                 </select>
-                                <button disabled={cargando} onClick={() => { setNuevoTipo("") }}>Resetear</button>
                             </div>
 
                             <div>
-                                {
-                                    "numeroCelular" in info ?
-                                        (
-                                            <p>Tu numero de celular actual es: {info.numeroCelular}</p>
-                                        ) :
-                                        (
-                                            <p>No tiene ningun numero de celular asignado</p>
-                                        )
 
-                                }
-
+                                <label>Numero de celular: </label>
                                 <input value={nuevoNumeroCelular} readOnly={cargando} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
@@ -798,17 +811,7 @@ const principal = () => {
                             </div>
 
                             <div>
-                                {
-                                    "numeroTelefono" in info ?
-                                        (
-                                            <p>Tu numero de telefono actual es: {info.numeroTelefono}</p>
-                                        ) :
-                                        (
-                                            <p>No tiene ningun numero de telefono asignado</p>
-                                        )
-
-                                }
-
+                                <label>Numero de telefono: </label>
                                 <input value={nuevoNumeroTelefono} readOnly={cargando} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
@@ -961,7 +964,20 @@ const principal = () => {
                                         (
                                             botonConfirmar == false ?
                                                 (
-                                                    <button onClick={() => { setBotonConfirmar(true) }}>Modificar perfil</button>
+
+                                                    <div>
+                                                        <button onClick={() => { setBotonConfirmar(true) }}>Modificar perfil</button>
+                                                        <button onClick={() => {
+                                                            setNuevoNombre(info.nombreUsuario)
+                                                            setNuevoTipo(info.type)
+                                                            setNuevoNumeroCelular(info.numeroCelular)
+                                                            setNuevoNumeroTelefono(info.numeroTelefono)
+                                                            setNuevaProvincia(info.provincia)
+                                                            setNuevoMunicipio(info.municipio)
+                                                            setNuevaLocalidad(info.localidad)
+                                                            setNuevaDireccion(info.direccion)
+                                                        }}>Descartar cambios</button>
+                                                    </div>
                                                 ) :
                                                 (
                                                     <div>
