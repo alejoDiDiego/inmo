@@ -142,6 +142,13 @@ const ContainerRegister = ({
                 uid: user.uid,
                 mail: user.email,
                 type: tipoCuenta,
+                direccion: "",
+                localidad: "",
+                municipio: "",
+                provincia: "",
+                descripcion: "",
+                numeroCelular: "",
+                numeroTelefono: ""
             })
 
 

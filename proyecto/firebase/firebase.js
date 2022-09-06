@@ -85,6 +85,13 @@ class Firebase {
         uid: this.auth.currentUser.uid,
         mail: this.auth.currentUser.email,
         type: "particular",
+        direccion: "",
+        localidad: "",
+        municipio: "",
+        provincia: "",
+        descripcion: "",
+        numeroCelular: "",
+        numeroTelefono: ""
       })
 
       // BEGIN IMAGENES

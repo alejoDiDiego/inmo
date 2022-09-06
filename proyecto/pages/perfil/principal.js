@@ -407,7 +407,7 @@ const principal = () => {
         }
 
 
-        if (nuevaDireccion.length > 0 && nuevoMunicipio.length == 0 && nuevaProvincia.length == 0) {
+        if (nuevaDireccion.length > 0 && (nuevoMunicipio.length == 0 || nuevaProvincia.length == 0)) {
             alert("Si incluye una direccion, por lo menos debe indicar una provincia y un municipio")
             setCargando(false)
             setBotonConfirmar(false)
