@@ -42,6 +42,8 @@ const principal = () => {
 
     const [nuevaDireccion, setNuevaDireccion] = useState("")
 
+    const [nuevaDescripcion, setNuevaDescripcion] = useState("")
+
     const [toggleProvincia, setToggleProvincia] = useState(false)
     const [toggleMunicipio, setToggleMunicipio] = useState(false)
     const [toggleLocalidad, setToggleLocalidad] = useState(false)
@@ -263,6 +265,7 @@ const principal = () => {
                         setNuevoMunicipio(docSnap.data().municipio)
                         setNuevaLocalidad(docSnap.data().localidad)
                         setNuevaDireccion(docSnap.data().direccion)
+                        setNuevaDescripcion(docSnap.data().descripcion)
                     }
                     return true
 
@@ -319,15 +322,15 @@ const principal = () => {
 
 
     useEffect(() => {
+        setNuevoMunicipio("")
+        setMunicipios([])
+        setNuevaLocalidad("")
+        setLocalidades([])
         if (nuevaProvincia.length == 0) {
-            setNuevoMunicipio("")
-            setMunicipios([])
-            setNuevaLocalidad("")
-            setLocalidades([])
             return
         }
 
-        setNuevaProvincia(titleCase(nuevaProvincia))
+        setNuevaProvincia(nuevaProvincia)
 
         municipio(nuevaProvincia)
 
@@ -335,16 +338,21 @@ const principal = () => {
 
 
     useEffect(() => {
+        setNuevaLocalidad("")
+        setLocalidades([])
         if (nuevoMunicipio.length == 0) {
-            setNuevaLocalidad("")
-            setLocalidades([])
             return
         }
 
-        setNuevoMunicipio(titleCase(nuevoMunicipio))
+        setNuevoMunicipio(nuevoMunicipio)
 
         localidad(nuevoMunicipio)
     }, [nuevoMunicipio])
+
+
+    useEffect(() => {
+        setNuevaLocalidad(nuevaLocalidad)
+    }, [nuevaLocalidad])
 
 
 
@@ -372,14 +380,25 @@ const principal = () => {
     const handleModificar = async () => {
         setCargando(true)
         if (
-            nuevoNombre.length == 0
-            && nuevoTipo.length == 0
-            && nuevoNumeroCelular.length == 0
-            && nuevoNumeroTelefono.length == 0
-            && nuevaProvincia.length == 0
-            && nuevoMunicipio.length == 0
-            && nuevaLocalidad.length == 0
-            && nuevaDireccion.length == 0
+            (nuevoNombre.length == 0
+                && nuevoTipo.length == 0
+                && nuevoNumeroCelular.length == 0
+                && nuevoNumeroTelefono.length == 0
+                && nuevaProvincia.length == 0
+                && nuevoMunicipio.length == 0
+                && nuevaLocalidad.length == 0
+                && nuevaDireccion.length == 0
+                && nuevaDescripcion.length == 0)
+            ||
+            (nuevoNombre.includes(info.nombreUsuario)
+                && nuevoTipo.includes(info.type)
+                && nuevoNumeroCelular.includes(info.numeroCelular)
+                && nuevoNumeroTelefono.includes(info.numeroTelefono)
+                && nuevaProvincia.includes(info.provincia)
+                && nuevoMunicipio.includes(info.municipio)
+                && nuevaLocalidad.includes(info.localidad)
+                && nuevaDireccion.includes(info.direccion)
+                && nuevaDescripcion.includes(info.descripcion))
         ) {
             alert("No se aplicaron cambios")
             setCargando(false)
@@ -387,24 +406,17 @@ const principal = () => {
             return
         }
 
-        if (
-            nuevoNombre.includes(info.nombreUsuario)
-            && nuevoTipo.includes(info.type)
-            && nuevoNumeroCelular.includes(info.numeroCelular)
-            && nuevoNumeroTelefono.includes(info.numeroTelefono)
-            && nuevaProvincia.includes(info.provincia)
-            && nuevoMunicipio.includes(info.municipio)
-            && nuevaLocalidad.includes(info.localidad)
-            && nuevaDireccion.includes(info.direccion)
-        ) {
-            alert("No se aplicaron cambios")
-            setCargando(false)
-            setBotonConfirmar(false)
-            return
-        }
 
         if (nuevaDireccion.length > 0 && nuevoMunicipio.length == 0 && nuevaProvincia.length == 0) {
             alert("Si incluye una direccion, por lo menos debe indicar una provincia y un municipio")
+            setCargando(false)
+            setBotonConfirmar(false)
+            return
+        }
+
+
+        if (nuevoNombre.length == 0) {
+            alert("El nombre es obligatorio")
             setCargando(false)
             setBotonConfirmar(false)
             return
@@ -421,7 +433,8 @@ const principal = () => {
                 [nuevaProvincia.length > 0 && 'provincia']: nuevaProvincia,
                 [nuevoMunicipio.length > 0 && 'municipio']: nuevoMunicipio,
                 [nuevaLocalidad.length > 0 && 'localidad']: nuevaLocalidad,
-                [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion
+                [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion,
+                [nuevaDescripcion.length > 0 && 'descripcion']: nuevaDescripcion
             })
 
             if (nuevoNombre.length > 0) {
@@ -788,7 +801,7 @@ const principal = () => {
 
                             <div>
                                 <label>Nombre:</label>
-                                <input value={nuevoNombre} readOnly={cargando} placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
+                                <input value={nuevoNombre} readOnly={cargando} maxLength="100" placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
                             </div>
 
 
@@ -803,7 +816,7 @@ const principal = () => {
                             <div>
 
                                 <label>Numero de celular: </label>
-                                <input value={nuevoNumeroCelular} readOnly={cargando} onKeyPress={(event) => {
+                                <input value={nuevoNumeroCelular} maxLength="16" readOnly={cargando} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
                                     }
@@ -812,7 +825,7 @@ const principal = () => {
 
                             <div>
                                 <label>Numero de telefono: </label>
-                                <input value={nuevoNumeroTelefono} readOnly={cargando} onKeyPress={(event) => {
+                                <input value={nuevoNumeroTelefono} maxLength="16" readOnly={cargando} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
                                     }
@@ -822,23 +835,23 @@ const principal = () => {
                             <div>
                                 <p>Ubicacion</p>
                                 {
-                                    'provincia' in info || 'municipio' in info || 'direccion' in info ?
+                                    info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
                                         (
                                             <p>
                                                 {
-                                                    'provincia' in info &&
+                                                    info.provincia.length > 0 &&
                                                     (
                                                         info.provincia
                                                     )
                                                 }, {`${" "}`}
                                                 {
-                                                    'municipio' in info &&
+                                                    info.municipio.length > 0 &&
                                                     (
                                                         info.municipio
                                                     )
                                                 }
                                                 {
-                                                    'localidad' in info &&
+                                                    info.localidad.length > 0 &&
                                                     (
                                                         <>
                                                             ,{`${" "}`}{info.localidad}
@@ -846,7 +859,7 @@ const principal = () => {
                                                     )
                                                 }
                                                 {
-                                                    'direccion' in info &&
+                                                    info.direccion.length > 0 &&
                                                     (
                                                         <>
                                                             ,{`${" "}`}{info.direccion}
@@ -858,7 +871,6 @@ const principal = () => {
                                         ) :
                                         (
                                             <p>No tiene ninguna ubicacion asignada</p>
-
                                         )
                                 }
 
@@ -877,7 +889,7 @@ const principal = () => {
                                                         <option value="">Elige una provincia</option>
                                                         {
                                                             provincias.map((p) => {
-                                                                return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                                                                return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
                                                             })
                                                         }
                                                     </select>
@@ -887,7 +899,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>x</p>
-                                                    <input placeholder='Ingrese su provincia' value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(e.target.value) }} />
+                                                    <input placeholder='Ingrese su provincia' value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
                                                 </div>
                                             )
                                     }
@@ -908,7 +920,7 @@ const principal = () => {
                                                         <option value="">Elige un municipio</option>
                                                         {
                                                             municipios.map((p) => {
-                                                                return <option key={p.id} value={p.nombre}>{p.nombre}</option>
+                                                                return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
                                                             })
                                                         }
                                                     </select>
@@ -918,7 +930,7 @@ const principal = () => {
                                             (
                                                 <div>
                                                     <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>x</p>
-                                                    <input placeholder='Ingrese su municipio' readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(e.target.value) }} />
+                                                    <input placeholder='Ingrese su municipio' readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
                                                 </div>
                                             )
                                     }
@@ -959,6 +971,23 @@ const principal = () => {
                                     <label>Nueva direccion</label>
                                     <input type="text" readOnly={cargando} placeholder="Ej: Inmo 123" value={nuevaDireccion} onChange={(e) => setNuevaDireccion(e.target.value)} />
                                 </div>
+
+
+
+                                <div>
+                                    <label>Descripcion</label>
+                                    <textarea readOnly={cargando} value={nuevaDescripcion} maxLength="300" onChange={(e) => setNuevaDescripcion(e.target.value)}>
+
+                                    </textarea>
+                                    <p>{nuevaDescripcion.length}/300</p>
+
+                                </div>
+
+
+
+
+
+
                                 {
                                     cargando == false ?
                                         (
@@ -976,6 +1005,7 @@ const principal = () => {
                                                             setNuevoMunicipio(info.municipio)
                                                             setNuevaLocalidad(info.localidad)
                                                             setNuevaDireccion(info.direccion)
+                                                            setNuevaDescripcion(info.descripcion)
                                                         }}>Descartar cambios</button>
                                                     </div>
                                                 ) :
@@ -1022,23 +1052,23 @@ const principal = () => {
                                 <p>Ubicacion</p>
                                 <div>
                                     {
-                                        'provincia' in info || 'municipio' in info || 'direccion' in info ?
+                                        info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
                                             (
                                                 <p>
                                                     {
-                                                        'provincia' in info &&
+                                                        info.provincia.length > 0 &&
                                                         (
                                                             info.provincia
                                                         )
                                                     }, {`${" "}`}
                                                     {
-                                                        'municipio' in info &&
+                                                        info.municipio.length > 0 &&
                                                         (
                                                             info.municipio
                                                         )
                                                     }
                                                     {
-                                                        'localidad' in info &&
+                                                        info.localidad.length > 0 &&
                                                         (
                                                             <>
                                                                 ,{`${" "}`}{info.localidad}
@@ -1046,7 +1076,7 @@ const principal = () => {
                                                         )
                                                     }
                                                     {
-                                                        'direccion' in info &&
+                                                        info.direccion.length > 0 &&
                                                         (
                                                             <>
                                                                 ,{`${" "}`}{info.direccion}
@@ -1065,7 +1095,7 @@ const principal = () => {
 
                             <div>
                                 {
-                                    'numeroCelular' in info ?
+                                    info.numeroCelular.length > 0 ?
                                         (
                                             <p>{info.numeroCelular}</p>
                                         ) :
@@ -1077,12 +1107,29 @@ const principal = () => {
 
                             <div>
                                 {
-                                    'numeroTelefono' in info ?
+                                    info.numeroTelefono.length > 0 ?
                                         (
                                             <p>{info.numeroTelefono}</p>
                                         ) :
                                         (
                                             <p>No tiene ningun numero de telefono asignado</p>
+                                        )
+                                }
+                            </div>
+
+
+                            <div>
+                                {
+                                    info.descripcion.length > 0 ?
+                                        (
+                                            <div>
+                                                <p>Descripcion</p>
+                                                <p>{info.descripcion}</p>
+                                            </div>
+                                        )
+                                        :
+                                        (
+                                            <p>No tiene ninguna descripcion</p>
                                         )
                                 }
                             </div>
