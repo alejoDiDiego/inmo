@@ -58,6 +58,21 @@ const ContainerRegister = ({
 
 
 
+    const handleGoogle = async () => {
+        try {
+            setLoading(true)
+            await firebase.registrarGoogle();
+            router.push("/")
+
+        } catch (err) {
+            console.log(err)
+            setLoading(false)
+        }
+
+    }
+
+
+
 
 
 
@@ -186,7 +201,7 @@ const ContainerRegister = ({
         } catch (err) {
             console.log(err.code)
             let error = err.code
-            if(error.includes("auth/email-already-in-use")){
+            if (error.includes("auth/email-already-in-use")) {
                 setEmailExistsError(true)
             }
             setLoading(false)
@@ -396,6 +411,10 @@ const ContainerRegister = ({
                                         <div className={styles.button} onClick={handleRegistrar}>
                                             <div className={styles.button_back}></div>
                                             <div className={styles.button_content}><span>Crear cuenta</span></div>
+                                        </div>
+                                        <div className={styles.buttonGoogle} onClick={handleGoogle}>
+                                            <div className={styles.buttonGoogle_back}></div>
+                                            <div className={styles.buttonGoogle_content}><span>Continuar con Google</span><Image src='/google.png' width={25} height={25} /></div>
                                         </div>
                                     </div>
                                     :
