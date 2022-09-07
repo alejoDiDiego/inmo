@@ -390,21 +390,24 @@ const principal = () => {
                 && nuevaDireccion.length == 0
                 && nuevaDescripcion.length == 0)
             ||
-            (nuevoNombre.includes(info.nombreUsuario)
-                && nuevoTipo.includes(info.type)
-                && nuevoNumeroCelular.includes(info.numeroCelular)
-                && nuevoNumeroTelefono.includes(info.numeroTelefono)
-                && nuevaProvincia.includes(info.provincia)
-                && nuevoMunicipio.includes(info.municipio)
-                && nuevaLocalidad.includes(info.localidad)
-                && nuevaDireccion.includes(info.direccion)
-                && nuevaDescripcion.includes(info.descripcion))
+            (
+                nuevoNombre === info.nombreUsuario
+                && nuevoTipo === info.type
+                && nuevoNumeroCelular === info.numeroCelular
+                && nuevoNumeroTelefono === info.numeroTelefono
+                && nuevaProvincia === info.provincia
+                && nuevoMunicipio === info.municipio
+                && nuevaLocalidad === info.localidad
+                && nuevaDireccion === info.direccion
+                && nuevaDescripcion === info.descripcion)
+
         ) {
             alert("No se aplicaron cambios")
             setCargando(false)
             setBotonConfirmar(false)
             return
         }
+
 
 
         if (nuevaDireccion.length > 0 && (nuevoMunicipio.length == 0 || nuevaProvincia.length == 0)) {
