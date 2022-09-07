@@ -137,7 +137,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
                     </label>
 
 
-                    <p className={styles.button_ir} onClick={() => { setReestablecerPassword(true) }}>¿Ha olvidado su contraseña?</p>
+                    <p className={styles.button_ir} onClick={() => { loading == true ? null: setReestablecerPassword(true) }}>¿Ha olvidado su contraseña?</p>
 
                     {
                       loading == false ?
