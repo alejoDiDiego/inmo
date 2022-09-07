@@ -70,6 +70,7 @@
 
 
 .hidden_menu{
+    
     z-index: 1;
     right: 10px;
     top: 55px;
@@ -95,7 +96,7 @@
 
 .inside_hidden_menu{
     z-index: 1;
-    position: absolute;
+    position: relative;
     display: flex;
     height: 100%;
     flex-direction: column;

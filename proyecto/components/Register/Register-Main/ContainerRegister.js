@@ -384,8 +384,8 @@ const ContainerRegister = ({
 
 
                             <div className={styles.select}>
-                                <label className='TipoCuenta'>Tipo de cuenta</label>
-                                <select value={tipoCuenta} onChange={(e) => setTipoCuenta(e.target.value)}>
+                                <label className='TipoCuenta'>Tipo de cuenta    </label>
+                                <select className='selectCuenta' value={tipoCuenta} onChange={(e) => setTipoCuenta(e.target.value)}>
                                     <option value="particular">Particular</option>
                                     <option value="empresa">Empresa</option>
                                 </select>

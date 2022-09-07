@@ -438,4 +438,16 @@
     
     font-size: 12px;
 }
-
+.selectCuenta{
+    width: 50px;
+    border: 1px solid white;
+}
+@media screen and (max-height:880px) {
+    .main_container{
+        height: 750px;
+    }
+    .form{
+        font-size: 15px;
+        height: 250px;
+    }
+}

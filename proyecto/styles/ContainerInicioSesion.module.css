@@ -14,7 +14,7 @@
 
 
 .main_container{
-    position: relative;
+    
     height: 800px;
     width: 600px;
     background-color: #E8EFF4;
@@ -284,6 +284,7 @@
 
 .custom_field {
     position: relative;
+    overflow: hidden;
     font-size: 14px;
     border-top: 20px solid transparent;
     margin-bottom: 5px;
@@ -426,4 +427,32 @@
 .subtitulo{
     padding-right: 40px;
 
+}
+@media screen and (max-width:1366px) {
+    .main_container{
+        justify-content: center;
+        width: 700px;
+        height: 800px;
+    }
+}
+@media screen and (max-height:880px){
+    .main_container{
+        justify-content: center;
+        height: 700px;
+        width: 600px;
+        font-size: 15px;
+        background-position: 50%;
+    }
+    .inside_container{
+        align-content: center;
+        font-size: 15px;
+        height: 1000px;
+    }
+    .div_buttons{
+        margin-top: 80px;
+    }
+    /*.wrap {
+        position: absolute;
+      }
+      */
 }

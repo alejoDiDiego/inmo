@@ -7,14 +7,14 @@ import { useRouter } from 'next/router'
 
 const Layout = ({ children, registro }) => {
 
-    
+
 
     const router = useRouter()
     const { usuario } = useContext(FirebaseContext)
-    const [enRegistro,setEnRegistro] = useState(false)
+    const [enRegistro, setEnRegistro] = useState(false)
 
     useEffect(() => {
-        if(registro){
+        if (registro) {
             setEnRegistro(true)
         }
     })
@@ -26,9 +26,12 @@ const Layout = ({ children, registro }) => {
     return (
         <div className={styles.layout}>
             <div className={styles.header}>
-                <Header usuario={usuario != null ? usuario : {usuario: {}} } enRegistro={enRegistro} />
+                <Header usuario={usuario != null ? usuario : { usuario: {} }} enRegistro={enRegistro} />
             </div>
-            {children}
+            
+                {children}
+            
+
             {
                 !enRegistro &&
                 <div className={styles.footer}>
