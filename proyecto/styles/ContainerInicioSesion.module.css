@@ -253,34 +253,11 @@
     transform: translate(-3px, 3px);
 }
 
+.fieldDir{
+    display: flex;
+    flex-direction: column;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 .custom_field {
     position: relative;

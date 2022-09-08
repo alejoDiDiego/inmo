@@ -5,7 +5,7 @@ import styles from '../../styles/Layout.module.css'
 import firebase, { FirebaseContext } from '../../firebase'
 import { useRouter } from 'next/router'
 
-const Layout = ({ children, registro }) => {
+const Layout = ({ children, registro, perfil }) => {
 
 
 
@@ -13,9 +13,15 @@ const Layout = ({ children, registro }) => {
     const { usuario } = useContext(FirebaseContext)
     const [enRegistro, setEnRegistro] = useState(false)
 
+    const [enPerfil, setEnPerfil] = useState(false)
+
     useEffect(() => {
         if (registro) {
             setEnRegistro(true)
+        }
+
+        if (perfil) {
+            setEnPerfil(true)
         }
     })
 
@@ -28,16 +34,18 @@ const Layout = ({ children, registro }) => {
             <div className={styles.header}>
                 <Header usuario={usuario != null ? usuario : { usuario: {} }} enRegistro={enRegistro} />
             </div>
-            
-                {children}
-            
+
+            {children}
+
 
             {
-                !enRegistro &&
+                enRegistro == false && enPerfil == false &&
                 <div className={styles.footer}>
                     <Footer />
                 </div>
             }
+
+
 
         </div>
     )

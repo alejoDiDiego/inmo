@@ -591,7 +591,7 @@ const principal = () => {
                     <meta name="description" content="Generated" />
                     <link rel="icon" href="/Logo_inmo_new.png" />
                 </Head>
-                <Layout>
+                <Layout perfil={true}>
                     <p>cargando</p>
                 </Layout>
             </div>
@@ -606,7 +606,7 @@ const principal = () => {
                     <meta name="description" content="Generated" />
                     <link rel="icon" href="/Logo_inmo_new.png" />
                 </Head>
-                <Layout>
+                <Layout perfil={true}>
                     <div className={styles.arriba}>
                         {
                             modalPerfil ?
@@ -800,13 +800,18 @@ const principal = () => {
 
 
 
-                        <div>
+                        <div className={styles.infoChange_container}>
 
-                            <div>
-                                <label>Nombre:</label>
-                                <input value={nuevoNombre} readOnly={cargando} maxLength="100" placeholder="Nuevo nombre" onChange={e => setNuevoNombre(e.target.value)} type="text" />
+                            <h1>Tu perfil</h1>
+                            <h2>Modificar informacion:</h2>
+
+
+                            <div className={styles.fieldDir}>
+                                <p>Nombre:</p>
+                                <label className={`${styles.custom_field} ${styles.two}`}>
+                                    <input value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                </label>
                             </div>
-
 
                             <div>
                                 <label>Tipo de cuenta: {info.type}</label>
@@ -816,26 +821,24 @@ const principal = () => {
                                 </select>
                             </div>
 
-                            <div>
-
-                                <label>Numero de celular: </label>
-                                <input value={nuevoNumeroCelular} maxLength="16" readOnly={cargando} onKeyPress={(event) => {
-                                    if (!/[0-9]/.test(event.key)) {
-                                        event.preventDefault();
-                                    }
-                                }} onChange={(e) => setNuevoNumeroCelular(e.target.value)} type="text" placeholder="Nuevo numero de celular Ej: 5491112341234" />
+                            <div className={styles.fieldDir}>
+                                <p>Numero de celular:</p>
+                                <label className={`${styles.custom_field} ${styles.two}`}>
+                                    <input value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                </label>
                             </div>
 
-                            <div>
-                                <label>Numero de telefono: </label>
-                                <input value={nuevoNumeroTelefono} maxLength="16" readOnly={cargando} onKeyPress={(event) => {
-                                    if (!/[0-9]/.test(event.key)) {
-                                        event.preventDefault();
-                                    }
-                                }} onChange={(e) => setNuevoNumeroTelefono(e.target.value)} type="text" placeholder="Nuevo numero de telefono" />
+                            <div className={styles.fieldDir}>
+                                <p>Numero de telefono:</p>
+                                <label className={`${styles.custom_field} ${styles.two}`}>
+                                    <input value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                </label>
                             </div>
 
-                            <div>
+
+
+
+                           
                                 <p>Ubicacion</p>
                                 {
                                     info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
@@ -1024,12 +1027,6 @@ const principal = () => {
                                         ) :
                                         <p>cargando</p>
                                 }
-
-
-                            </div>
-
-
-
                         </div>
 
 
