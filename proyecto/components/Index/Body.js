@@ -30,7 +30,7 @@ const Body = () => {
                                             <h3>Publicar</h3>
                                             <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
                                         </div>
-                                        <div className={styles.image}>
+                                        <div className='imgInicio'>
                                             <img src='/discount-tag.png' />
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@ const Body = () => {
                                     <div className={styles.square_chico}>
                                         <div className={styles.square_chico_txt}>
                                             <h3>En alquiler</h3>
-                                            <p>Contacta con arrendatarios y compara entre diferentes opciones</p>
+                                            <p className='pInicio'>Contacta con arrendatarios y compara entre diferentes opciones</p>
                                         </div>
                                         <div className={styles.image}>
                                             <img src='/secret.png' />

@@ -180,7 +180,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
   } else {
     return (
       <div className={styles.div_supremo}>
-        <div className={styles.main_container}>
+        <div className={styles.container_Restablecer}>
           <div className={styles.inside_container}>
             <h2 className={styles.title}>Restablece tu <span className={styles.text_blue}>contraseña</span></h2>
             

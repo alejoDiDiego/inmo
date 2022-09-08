@@ -395,6 +395,22 @@
 
 
 /* restablecer contraseña*/
+.container_Restablecer h2{
+    font-size: 40px;
+    margin-right: 40px;
+    line-height: 80px;
+    margin-bottom: 20px;
+}
+.container_Restablecer{
+    height: 800px;
+    width: 600px;
+    background-color: #E8EFF4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
 .buttonVolver{
     margin-top: 100px;
     cursor: pointer 
@@ -451,8 +467,16 @@
     .div_buttons{
         margin-top: 80px;
     }
-    /*.wrap {
-        position: absolute;
-      }
-      */
+}
+
+@media screen and (max-height:760px){
+    .container_Restablecer{
+        height: 600px;
+        width: 600px;
+        font-size: 10px;
+        background-position: 100%;
+    }
+    .buttonVolver{
+        margin: auto;
+    }
 }

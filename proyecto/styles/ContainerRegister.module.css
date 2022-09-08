@@ -451,3 +451,14 @@
         height: 250px;
     }
 }
+/*
+@media screen and (max-height:768px) {
+    .main_container{
+        height: 500px;
+    }
+    .form{
+        font-size: 10px;
+        height: 200px;
+    }
+}
+*/
