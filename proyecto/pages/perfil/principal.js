@@ -12,6 +12,8 @@ import Head from 'next/head'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
 import { updateProfile } from 'firebase/auth'
+import Select from 'react-select'
+
 
 
 
@@ -77,6 +79,12 @@ const principal = () => {
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
+
+    const options = [
+        { value: 'empresa', label: 'Empresa' },
+        { value: 'particular', label: 'Particular' },
+      ]
+      
 
 
 
@@ -564,7 +572,10 @@ const principal = () => {
 
     }
 
-
+const handleSelect = ({ value }) => {
+    console.log(value)
+    setNuevoTipo(value)
+}
 
 
 
@@ -813,12 +824,17 @@ const principal = () => {
                                 </label>
                             </div>
 
-                            <div>
-                                <label>Tipo de cuenta: {info.type}</label>
-                                <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                    <option value="particular">Particular</option>
-                                    <option value="empresa">Empresa</option>
-                                </select>
+                            <div className={styles.fieldDir}>
+                            <p>Tipo de cuenta:</p>
+                            <Select styles={{
+                                option: (provided, state) => ({
+                                    ...provided,
+                                    borderBottom: '1px dotted pink',
+                                    color: state.isSelected ? 'red' : 'blue',
+                                    padding: 20,
+                                    //https://react-select.com/styles
+                                })
+                            }} options={options} defaultValue={{label: titleCase(nuevoTipo), value: nuevoTipo}} onChange={handleSelect}></Select>
                             </div>
 
                             <div className={styles.fieldDir}>
