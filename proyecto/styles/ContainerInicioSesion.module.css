@@ -14,7 +14,7 @@
 
 
 .main_container{
-    
+    position: relative;
     height: 800px;
     width: 600px;
     background-color: #E8EFF4;
@@ -53,7 +53,6 @@
     gap: 26px;
     
 }
-
 
 
 
@@ -261,7 +260,6 @@
 
 .custom_field {
     position: relative;
-    overflow: hidden;
     font-size: 14px;
     border-top: 20px solid transparent;
     margin-bottom: 5px;
