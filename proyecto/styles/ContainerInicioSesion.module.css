@@ -455,3 +455,10 @@
         margin: auto;
     }
 }
+
+@media screen and (max-width:650px){
+    .main_container{
+        justify-content: center;
+        /*hay que hacer un weight y height 100% pero no se en que div ponerlo*/
+    }
+}
