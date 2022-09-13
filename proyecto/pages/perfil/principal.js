@@ -12,8 +12,6 @@ import Head from 'next/head'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
 import { updateProfile } from 'firebase/auth'
-import Select from 'react-select'
-
 
 
 
@@ -79,26 +77,6 @@ const principal = () => {
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
-
-
-    const [optionsProvincia, setOptionsProvincia] = useState([])
-
-    const [optionsMunicipio, setOptionsMunicipio] = useState([])
-
-    const [optionsLocalidad, setOptionsLocalida] = useState([])
-
-    const optionsTipo = [
-        { value: 'empresa', label: 'Empresa' },
-        { value: 'particular', label: 'Particular' },
-    ]
-
-
-    useEffect(() => {
-        console.log(optionsProvincia)
-    }, optionsProvincia)
-
-    // const optionsProvincia = 
-
 
 
 
@@ -331,40 +309,7 @@ const principal = () => {
     }, [])
 
 
-    useEffect(() => {
-        let options = []
-        provincias.map((p) => {
-            console.log(p)
-            options.push({ value: titleCase(p.nombre), label: titleCase(p.nombre) })
-        })
-        setOptionsProvincia(options)
-
-    }, [provincias])
-
-    useEffect(() => {
-        let options = []
-        municipios.map((p) => {
-            console.log(p)
-            options.push({ value: titleCase(p.nombre), label: titleCase(p.nombre) })
-        })
-        setOptionsMunicipio(options)
-
-    }, [municipios])
-
-    useEffect(() => {
-        let options = []
-        localidades.map((p) => {
-            console.log(p)
-            options.push({ value: titleCase(p.nombre), label: titleCase(p.nombre) })
-        })
-        setLocalidades(options)
-
-    }, [localidades])
-
-
-
-
-    function titleCase(str) {
+     function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
         for (var i = 0; i < splitStr.length; i++) {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -619,26 +564,7 @@ const principal = () => {
 
     }
 
-    const handleSelect = ({ value }) => {
-        console.log(value)
-        setNuevoTipo(value)
-    }
 
-    const handleProvincia = ({ value }) => {
-        console.log(value)
-        setNuevaProvincia(value)
-        setNuevoMunicipio("")
-    }
-
-    const handleMunicipio = ({ value }) => {
-        console.log(value)
-        setNuevoMunicipio(value)
-    }
-
-    const handleLocalidad = ({ value }) => {
-        console.log(value)
-        setNuevaLocalidad(value)
-    }
 
 
 
@@ -887,12 +813,14 @@ const principal = () => {
                                 </label>
                             </div>
 
-                            <div className={styles.fieldDirSelect}>
-                                <p>Tipo de cuenta:</p>
-                                <Select styles={{
-                                }} isSearchable={false} options={optionsTipo} defaultValue={{ label: titleCase(nuevoTipo), value: nuevoTipo }} onChange={handleSelect}></Select>
-                            </div>
 
+                            <div className={styles.fieldDirSelect}>
+                                <label>Tipo de cuenta: {info.type}</label>
+                                <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
+                                    <option value="particular">Particular</option>
+                                    <option value="empresa">Empresa</option>
+                                </select>
+                            </div>
                             <div className={styles.fieldDir}>
                                 <p>Numero de celular:</p>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
@@ -962,10 +890,12 @@ const principal = () => {
                                     toggleProvincia == false ?
                                         (
                                             <div className={styles.fieldDirSelect}>
-                                                <p>Provincia:</p>
-                                                <Select styles={{
-                                                }} isSearchable={true} options={optionsProvincia} value={{ value: nuevaProvincia, label: nuevaProvincia }} disabled={cargando} onChange={handleProvincia}></Select>
-                                            </div>
+                                            <label>Tipo de cuenta: {info.type}</label>
+                                            <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
+                                                <option value="particular">Particular</option>
+                                                <option value="empresa">Empresa</option>
+                                            </select>
+                                        </div>
                                         ) :
                                         (
                                             <div>
@@ -986,10 +916,12 @@ const principal = () => {
                                     toggleMunicipio == false ?
                                         (
                                             <div className={styles.fieldDirSelect}>
-                                                <p>Municipio:</p>
-                                                <Select styles={{
-                                                }} isSearchable={true} options={optionsMunicipio} value={{ value: nuevoMunicipio, label: nuevoMunicipio }} disabled={cargando} onChange={handleMunicipio}></Select>
-                                            </div>
+                                            <label>Tipo de cuenta: {info.type}</label>
+                                            <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
+                                                <option value="particular">Particular</option>
+                                                <option value="empresa">Empresa</option>
+                                            </select>
+                                        </div>
 
                                         ) :
                                         (
@@ -1007,10 +939,12 @@ const principal = () => {
                                     toggleLocalidad == false ?
                                         (
                                             <div className={styles.fieldDirSelect}>
-                                                <p>Municipio:</p>
-                                                <Select styles={{
-                                                }} isSearchable={true} options={optionsLocalidad} value={{ value: nuevaLocalidad, label: nuevaLocalidad }} disabled={cargando} onChange={handleLocalidad}></Select>
-                                            </div>
+                                            <label>Tipo de cuenta: {info.type}</label>
+                                            <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
+                                                <option value="particular">Particular</option>
+                                                <option value="empresa">Empresa</option>
+                                            </select>
+                                        </div>
 
                                         ) :
                                         (
