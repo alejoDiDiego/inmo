@@ -309,7 +309,7 @@ const principal = () => {
     }, [])
 
 
-     function titleCase(str) {
+    function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
         for (var i = 0; i < splitStr.length; i++) {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -813,14 +813,14 @@ const principal = () => {
                                 </label>
                             </div>
 
-
-                            <div className={styles.fieldDirSelect}>
+                            <div className={styles.fieldDir}>
                                 <label>Tipo de cuenta: {info.type}</label>
                                 <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
                                     <option value="particular">Particular</option>
                                     <option value="empresa">Empresa</option>
                                 </select>
                             </div>
+
                             <div className={styles.fieldDir}>
                                 <p>Numero de celular:</p>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
@@ -840,10 +840,10 @@ const principal = () => {
 
                             <p>Tu ubicacion actual:</p>
                             {
-                                
+
                                 info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
                                     (
-                                        
+
                                         <p>
                                             {
                                                 info.provincia.length > 0 &&
@@ -883,19 +883,24 @@ const principal = () => {
 
 
 
-                            <div>
+                            <div >
                                 <p>Cambiar tu ubicacion:</p>
-
                                 {
                                     toggleProvincia == false ?
                                         (
-                                            <div className={styles.fieldDirSelect}>
-                                            <label>Tipo de cuenta: {info.type}</label>
-                                            <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                                <option value="particular">Particular</option>
-                                                <option value="empresa">Empresa</option>
-                                            </select>
-                                        </div>
+                                            <div>
+                                                <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>Provincia</p>
+
+                                                <select value={nuevaProvincia} disabled={cargando} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
+                                                    <option value="">Elige una provincia</option>
+                                                    {
+                                                        provincias.map((p) => {
+                                                            return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+
                                         ) :
                                         (
                                             <div>
@@ -904,10 +909,6 @@ const principal = () => {
                                             </div>
                                         )
                                 }
-
-
-
-
                             </div>
 
 
@@ -915,14 +916,17 @@ const principal = () => {
                                 {
                                     toggleMunicipio == false ?
                                         (
-                                            <div className={styles.fieldDirSelect}>
-                                            <label>Tipo de cuenta: {info.type}</label>
-                                            <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                                <option value="particular">Particular</option>
-                                                <option value="empresa">Empresa</option>
-                                            </select>
-                                        </div>
-
+                                            <div>
+                                                <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>No encuentra su municipio?</p>
+                                                <select value={nuevoMunicipio} disabled={cargando} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
+                                                    <option value="">Elige un municipio</option>
+                                                    {
+                                                        municipios.map((p) => {
+                                                            return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
                                         ) :
                                         (
                                             <div>
@@ -933,19 +937,22 @@ const principal = () => {
                                 }
                             </div>
 
-
                             <div>
                                 {
                                     toggleLocalidad == false ?
                                         (
-                                            <div className={styles.fieldDirSelect}>
-                                            <label>Tipo de cuenta: {info.type}</label>
-                                            <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                                <option value="particular">Particular</option>
-                                                <option value="empresa">Empresa</option>
-                                            </select>
-                                        </div>
+                                            <div>
+                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su localidad?  (no es obligatorio para para poder publicar)</p>
+                                                <select value={nuevaLocalidad} disabled={cargando} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                                                    <option value="">Elige una localidad</option>
+                                                    {
+                                                        localidades.map((p) => {
+                                                            return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
+                                                        })
+                                                    }
+                                                </select>
 
+                                            </div>
                                         ) :
                                         (
                                             <div>
@@ -955,28 +962,33 @@ const principal = () => {
                                         )
                                 }
                             </div>
+
+
+
+
+
                             <div className={styles.divButtons}>
-                                <div className={styles.button}onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>
+                                <div className={styles.button} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>
                                     <div className={styles.button_back}></div>
                                     <div className={styles.button_content}><span>Recargar ubicaciones</span></div>
                                 </div>
                             </div>
-   
-                            
+
+
                             <div className={styles.fieldDir}>
                                 <p>Direccion:</p>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
                                     <input value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                 </label>
                             </div>
-                            
 
 
-                                 
+
+
                             <div className={styles.fieldDir}>
                                 <p>Descripcion:</p>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="300"  type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                    <input value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="300" type="text" readOnly={cargando} placeholder="&nbsp;" />
                                 </label>
                             </div>
 
