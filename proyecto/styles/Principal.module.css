@@ -228,6 +228,34 @@
 
 }
 
+.descripArea{
+    width: 450px;
+    height: 130px;
+    resize: none;
+    font-family: "lato";
+    padding: 12px;
+    font-size: 14px;
+    border:  1px solid #aaa;
+    border-radius: 3px;
+}
+
+.descripArea:focus {
+    outline: none !important;
+    border:2px solid #0071b3;
+}
+
+.ubiLabel span{
+    font-size: 13px;
+    color: #0071b3;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.ubiLabel span:hover{
+    color: #0096ec;
+}
+
 .button_content span {
     font-weight: bold;
 }
@@ -263,7 +291,7 @@
 .infoChange_container{
     position: fixed;
     display: flex;
-    width: 600px;
+    width: 550px;
     height: 100%;
     flex-direction: column;
     font-size: medium;
@@ -272,6 +300,7 @@
     padding-top: 30px;
     overflow-y: scroll;
     padding-bottom: 100px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .infoChange_container::-webkit-scrollbar-track
@@ -294,9 +323,39 @@
   border-radius: 10px;
 }
 
+.pInfo{
+    margin-top: -10px;
+}
+
+.uInfo{
+    margin-top: 30px;
+}
+
+.dInfo{
+    margin-top: 30px;
+}
+
+.dInfo h2 span{
+    font-size: 15px;
+}
+
+.reloadBtn{
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+
+    /* https://www.flaticon.com/free-icon/reload_3580291?term=reload&page=1&position=2&page=1&position=2&related_id=3580291&origin=style */
+}
+
+.reloadBtn img{
+    height: 100%;
+    width: 100%;
+    
+}
+
 
 .derecha{
-    
+    padding: 50px;
     display: flex;
     width: 100%;
     height: 100%;
@@ -309,37 +368,211 @@
     flex-direction: column;
 }
 
+.fieldDirSelect{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    position: relative;
+}
+
+.ubi{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
 .divButtons{
     position: relative;
     display: flex;
-    margin-top: 30px;
-    margin-bottom: 50px;
+    flex-direction: row-reverse;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+    width: 450px;
 }
 
-.button{
+.divButtonsSure{
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 20px;
+    justify-content: flex-end;
     width: 450px;
+    gap: 50px;
+}
+
+.buttonsInside{
+    width: 200px;
+    position: relative;
+}
+
+.buttonConfirm{
+    width: 250px;
     height: 40px;
     cursor: pointer;
     position: absolute;
     
 }
 
-.button_back{
-    width: 450px;
+.buttonConfirm_back{
+    width: 250px;
     height: 40px;
-    background-color: #6a747a;
+    background-color: #0071b3;
     transition: all ease-in-out .2s;
     z-index: 0;
     position: absolute;
 }
 
-.button_content{
+.buttonConfirm_content{
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    width: 450px;
+    width: 250px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid #0071b3;
+    
+}
+
+.buttonConfirm_content span{
+    font-weight: bold;
+}
+
+
+.buttonConfirm:hover .buttonConfirm_content{
+    transform: translate(3px, -3px);
+
+}
+
+.buttonConfirm:hover .buttonConfirm_back{
+    transform: translate(-3px, 3px);
+}
+
+.buttonDiscard{
+    width: 170px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    
+}
+
+.buttonDiscard_back{
+    width: 170px;
+    height: 40px;
+    background-color: #a41717;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    position: absolute;
+}
+
+.buttonDiscard_content{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 170px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid red;
+    
+}
+
+.buttonDiscard_content span{
+    font-weight: bold;
+}
+
+
+.buttonDiscard:hover .buttonDiscard_content{
+    transform: translate(3px, -3px);
+
+}
+
+.buttonDiscard:hover .buttonDiscard_back{
+    transform: translate(-3px, 3px);
+}
+
+
+
+.buttonNo{
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    
+}
+
+.buttonNo_back{
+    width: 200px;
+    height: 40px;
+    background-color: #a41717;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    position: absolute;
+}
+
+.buttonNo_content{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid red;
+    
+}
+
+.buttonNo_content span{
+    font-weight: bold;
+}
+
+
+.buttonNo:hover .buttonNo_content{
+    transform: translate(3px, -3px);
+
+}
+
+.buttonNo:hover .buttonNo_back{
+    transform: translate(-3px, 3px);
+}
+
+
+
+
+
+
+.buttonYes{
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    
+}
+
+.buttonYes_back{
+    width: 200px;
+    height: 40px;
+    background-color: #0071b3;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    position: absolute;
+}
+
+.buttonYes_content{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 200px;
     height: 40px;
     background-color: #ffffff;
     transition: all ease-in-out .2s;
@@ -347,22 +580,23 @@
     
 }
 
-.button_content span{
+.buttonYes_content span{
     font-weight: bold;
 }
 
 
-.button:hover .button_content{
+.buttonYes:hover .buttonYes_content{
     transform: translate(3px, -3px);
 
 }
 
-.button:hover .button_back{
+.buttonYes:hover .buttonYes_back{
     transform: translate(-3px, 3px);
 }
 
-
-
+.sure{
+    margin-top: 10px;
+}
 
 
 

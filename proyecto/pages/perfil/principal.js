@@ -75,9 +75,10 @@ const principal = () => {
     const [confirmarEliminacionFondo, setConfirmarEliminacionFondo] = useState(false)
     const [confirmarEliminacionPerfil, setConfirmarEliminacionPerfil] = useState(false)
 
-    const [jamesWeb, setJamesWeb] = useState([])
-    const [alejitiEnaniti, setAlejitiEnaniti] = useState([])
-    const [enanism, setEnanism] = useState([])
+    const [tipos, setTipos] = useState(
+        [{ value: "empresa", label: "Empresa" },
+        { value: "particular", label: "Particular" }]
+    )
 
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -463,19 +464,18 @@ const principal = () => {
 
     }
 
-    
+
     const provincia = () => {
         const arr = [];
         Axios.get("https://apis.datos.gob.ar/georef/api/provincias").then(async (res) => {
             let json = await res.data
             console.log(json.provincias)
             let sort = json.provincias.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            setProvincias(sort)
             sort.map((prov) => {
-                return arr.push({value: titleCase(prov.nombre), label: titleCase(prov.nombre)});
-              });
-              setJamesWeb(arr)
-              console.log(jamesWeb)
+                return arr.push({ value: titleCase(prov.nombre), label: titleCase(prov.nombre) });
+            });
+            setProvincias(arr)
+            console.log(jamesWeb)
         }).catch((err) => {
             console.log(err)
         })
@@ -488,11 +488,10 @@ const principal = () => {
             let json = await res.data
             console.log(json.municipios)
             let sort = json.municipios.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            setMunicipios(sort)
             sort.map((mun) => {
-                return arr.push({value: titleCase(mun.nombre), label: titleCase(mun.nombre)});
-              });
-            setAlejitiEnaniti(arr)
+                return arr.push({ value: titleCase(mun.nombre), label: titleCase(mun.nombre) });
+            });
+            setMunicipios(arr)
         }).catch((err) => {
             console.log(err)
         })
@@ -506,11 +505,10 @@ const principal = () => {
             let json = await res.data
             console.log(json.localidades)
             let sort = json.localidades.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            setLocalidades(sort)
             sort.map((loc) => {
-                return arr.push({value: titleCase(loc.nombre), label: titleCase(loc.nombre)});
-              });
-            setEnanism(arr)
+                return arr.push({ value: titleCase(loc.nombre), label: titleCase(loc.nombre) });
+            });
+            setLocalidades(arr)
         }).catch((err) => {
             console.log(err)
         })
@@ -580,45 +578,55 @@ const principal = () => {
 
     }
 
+    const handleSelectTipo = (event) => {
+        if (event == null) {
+            setNuevoTipo("")
+        }
+        else {
+            const value = event.value
+            setNuevoTipo(value)
+        }
+    }
+
     const handleSelectProv = (event) => {
-        if(event == null){
+        if (event == null) {
             setNuevaProvincia("")
             setNuevoMunicipio("")
             setNuevaLocalidad("")
-            setAlejitiEnaniti([])
-            setEnanism([])
+            setMunicipios([])
+            setLocalidades([])
         }
-        else{
-        const value = event.value
-        setNuevaProvincia(value)
-        setNuevoMunicipio("")
-        setNuevaLocalidad("")
-        setAlejitiEnaniti([])
-        setEnanism([])
+        else {
+            const value = event.value
+            setNuevaProvincia(value)
+            setNuevoMunicipio("")
+            setNuevaLocalidad("")
+            setMunicipios([])
+            setLocalidades([])
         }
     }
 
     const handleSelectMun = (event) => {
-        if(event == null){
+        if (event == null) {
             setNuevoMunicipio("")
             setNuevaLocalidad("")
-            setEnanism([])
+            setLocalidades([])
         }
-        else{
-        const value = event.value
-        setNuevoMunicipio(value)
-        setNuevaLocalidad("")
-        setEnanism([])
+        else {
+            const value = event.value
+            setNuevoMunicipio(value)
+            setNuevaLocalidad("")
+            setLocalidades([])
         }
     }
 
     const handleSelectLoc = (event) => {
-        if(event == null){
+        if (event == null) {
             setNuevaLocalidad("")
         }
-        else{
-        const value = event.value
-        setNuevaLocalidad(value)
+        else {
+            const value = event.value
+            setNuevaLocalidad(value)
         }
     }
 
@@ -842,240 +850,265 @@ const principal = () => {
 
                         <div className={styles.infoChange_container}>
 
-                            <h1>Tu perfil</h1>
-                            <h2>Modificar informacion:</h2>
+                            <div className={styles.pInfo}>
+                                <h1>Tu perfil</h1>
+                                <p>Los campos marcados con * son obligatorios para realizar publicaciones</p>
+                                <h2>Informacion personal:</h2>
 
 
-                            <div className={styles.fieldDir}>
-                                <p>Nombre:</p>
-                                <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
-                                </label>
+                                <div className={styles.fieldDir}>
+                                    <p>Nombre*:</p>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        <input value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                    </label>
+                                </div>
+
+                                <p>Tipo de cuenta*:</p>
+                                <div className={styles.fieldDirSelect}>
+                                    <Select options={tipos} onChange={handleSelectTipo} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de cuenta"} defaultValue={nuevoTipo == "" ? { value: null, label: "Seleccione un tipo" } : { value: nuevoTipo, label: titleCase(nuevoTipo) }}></Select>
+                                </div>
+
+
+                                <div className={styles.fieldDir}>
+                                    <p>Numero de celular*:</p>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        {
+                                            nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>Ej: 5491112341234</span> : null
+                                        }
+                                        
+                                        <input value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                    </label>
+                                </div>
+
+                                <div className={styles.fieldDir}>
+                                    <p>Numero de telefono*:</p>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        <input value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                    </label>
+                                </div>
                             </div>
 
-                            <div className={styles.fieldDir}>
-                                <label>Tipo de cuenta: {info.type}</label>
-                                <select value={nuevoTipo} disabled={cargando} onChange={(e) => setNuevoTipo(e.target.value)}>
-                                    <option value="particular">Particular</option>
-                                    <option value="empresa">Empresa</option>
-                                </select>
-                            </div>
+                            <div className={styles.uInfo}>
+                                <h2>Ubicacion:</h2>
+                                <div className={styles.ubi}>
+                                    <h3>Tu ubicacion actual:</h3>
+                                    {
 
-                            <div className={styles.fieldDir}>
-                                <p>Numero de celular:</p>
-                                <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
-                                </label>
-                            </div>
+                                        info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
+                                            (
 
-                            <div className={styles.fieldDir}>
-                                <p>Numero de telefono:</p>
-                                <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
-                                </label>
-                            </div>
+                                                <p>
+                                                    {
+                                                        info.provincia.length > 0 &&
+                                                        (
+                                                            info.provincia
+                                                        )
+                                                    }, {`${" "}`}
+                                                    {
+                                                        info.municipio.length > 0 &&
+                                                        (
+                                                            info.municipio
+                                                        )
+                                                    }
+                                                    {
+                                                        info.localidad.length > 0 &&
+                                                        (
+                                                            <>
+                                                                ,{`${" "}`}{info.localidad}
+                                                            </>
+                                                        )
+                                                    }
+                                                    {
+                                                        info.direccion.length > 0 &&
+                                                        (
+                                                            <>
+                                                                ,{`${" "}`}{info.direccion}
+                                                            </>
+                                                        )
+                                                    }
+                                                </p>
 
-
-
-
-                            <p>Tu ubicacion actual:</p>
-                            {
-
-                                info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
-                                    (
-
-                                        <p>
-                                            {
-                                                info.provincia.length > 0 &&
-                                                (
-                                                    info.provincia
-                                                )
-                                            }, {`${" "}`}
-                                            {
-                                                info.municipio.length > 0 &&
-                                                (
-                                                    info.municipio
-                                                )
-                                            }
-                                            {
-                                                info.localidad.length > 0 &&
-                                                (
-                                                    <>
-                                                        ,{`${" "}`}{info.localidad}
-                                                    </>
-                                                )
-                                            }
-                                            {
-                                                info.direccion.length > 0 &&
-                                                (
-                                                    <>
-                                                        ,{`${" "}`}{info.direccion}
-                                                    </>
-                                                )
-                                            }
-                                        </p>
-
-                                    ) :
-                                    (
-                                        <p>No tiene ninguna ubicacion asignada</p>
-                                    )
-                            }
+                                            ) :
+                                            (
+                                                <p>No tiene ninguna ubicacion asignada</p>
+                                            )
+                                    }
+                                    <div className={styles.reloadBtn} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad(""); setMunicipios([]); setLocalidades([]) }}><img src="/reload.png" /></div>
+                                </div>
 
 
 
-                            <div >
-                                <p>Cambiar tu ubicacion:</p>
-                                {
-                                    toggleProvincia == false ?
-                                        (
-                                            <div>
-                                                <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>Provincia</p>
+                                <div >
+                                    {
+                                        toggleProvincia == false ?
+                                            (
+                                                <div>
+                                                    <p className={styles.ubiLabel}> Provincia* <span onClick={() => { setToggleProvincia(!toggleProvincia) }}>No encuentro mi provincia</span></p>
 
-                                                <select value={nuevaProvincia} disabled={cargando} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
+                                                    {/* <select value={nuevaProvincia} disabled={cargando} onChange={(e) => { setNuevaProvincia(e.target.value) }} >
                                                     <option value="">Elige una provincia</option>
                                                     {
                                                         provincias.map((p) => {
                                                             return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
                                                         })
                                                     }
-                                                </select>
+                                                </select> */}
 
+                                                    <div className={styles.fieldDirSelect}>
+                                                        <Select options={provincias} onChange={handleSelectProv} isClearable={true} isSearchable={true} placeholder={"Seleccione una provincia"} value={nuevaProvincia == "" ? { value: null, label: "Seleccione una provincia" } : { value: nuevaProvincia, label: nuevaProvincia }}></Select>
+                                                    </div>
 
-                                                <div>
-                                                    <Select options={jamesWeb}  onChange={handleSelectProv} placeholder={"Seleccione una provincia"} value = {nuevaProvincia == "" ? {value: null, label: "Seleccione una provincia"} : {value: nuevaProvincia, label: nuevaProvincia}}></Select>
                                                 </div>
 
-                                            </div>
+                                            ) :
+                                            (
 
-                                        ) :
-                                        (
-                                            <div>
-                                                <p onClick={() => { setToggleProvincia(!toggleProvincia) }}>x</p>
-                                                <input placeholder='Ingrese su provincia' value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
-                                            </div>
-                                        )
-                                }
-                            </div>
+                                                <div>
+                                                    <div className={styles.fieldDir}>
+                                                        <p className={styles.ubiLabel}> Escriba su provincia* <span onClick={() => { setToggleProvincia(!toggleProvincia) }}>Volver</span></p>
+                                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                                            <input value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            )
+                                    }
+                                </div>
 
 
-                            <div>
-                                {
-                                    toggleMunicipio == false ?
-                                        (
-                                            <div>
-                                                <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>No encuentra su municipio?</p>
-                                                <select value={nuevoMunicipio} disabled={cargando} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
+                                <div>
+                                    {
+                                        toggleMunicipio == false ?
+                                            (
+                                                <div>
+                                                    <p className={styles.ubiLabel}> Municipio* <span onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>No encuentro mi municipio</span></p>
+
+                                                    {/* <select value={nuevoMunicipio} disabled={cargando} onChange={(e) => { setNuevoMunicipio(e.target.value) }} >
                                                     <option value="">Elige un municipio</option>
                                                     {
                                                         municipios.map((p) => {
                                                             return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
                                                         })
                                                     }
-                                                </select>
+                                                </select> */}
 
-                                                
-                                                <div>
-                                                    <Select options={alejitiEnaniti}  onChange={handleSelectMun}  placeholder={"Seleccione un municipio"}  value={nuevoMunicipio == "" ? {value: null, label: "Seleccione un municipio"} : {value: nuevoMunicipio, label: nuevoMunicipio}}></Select>
+                                                    <div className={styles.fieldDirSelect}>
+                                                        <Select options={municipios} onChange={handleSelectMun} isClearable={true} isSearchable={true} placeholder={"Seleccione un municipio"} value={nuevoMunicipio == "" ? { value: null, label: "Seleccione un municipio" } : { value: nuevoMunicipio, label: nuevoMunicipio }}></Select>
+                                                    </div>
+
                                                 </div>
 
-                                            </div>
-                                            
-                                        ) :
-                                        (
-                                            <div>
-                                                <p onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>x</p>
-                                                <input placeholder='Ingrese su municipio' readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
-                                            </div>
-                                        )
-                                }
-                            </div>
+                                            ) :
+                                            (
+                                                <div>
+                                                    <div className={styles.fieldDir}>
+                                                        <p className={styles.ubiLabel}> Escriba su municipio* <span onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>Volver</span></p>
+                                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                                            <input readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            )
+                                    }
+                                </div>
 
-                            <div>
-                                {
-                                    toggleLocalidad == false ?
-                                        (
-                                            <div>
-                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentra su localidad?  (no es obligatorio para para poder publicar)</p>
-                                                <select value={nuevaLocalidad} disabled={cargando} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                                <div>
+                                    {
+                                        toggleLocalidad == false ?
+                                            (
+                                                <div>
+                                                    <p className={styles.ubiLabel}>Localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentro mi localidad</span></p>
+                                                    {/* <select value={nuevaLocalidad} disabled={cargando} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
                                                     <option value="">Elige una localidad</option>
                                                     {
                                                         localidades.map((p) => {
                                                             return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
                                                         })
                                                     }
-                                                </select>
-                                                
-                                                <div>
-                                                    <Select options={enanism}  onChange={handleSelectLoc} placeholder={"Seleccione una localidad"}  value={nuevaLocalidad == "" ? {value: null, label: "Seleccione una localidad"} : {value: nuevaLocalidad, label: nuevaLocalidad}}></Select>
+                                                </select> */}
+
+                                                    <div className={styles.fieldDirSelect}>
+                                                        <Select options={localidades} onChange={handleSelectLoc} isClearable={true} isSearchable={true} placeholder={"Seleccione una localidad"} value={nuevaLocalidad == "" ? { value: null, label: "Seleccione una localidad" } : { value: nuevaLocalidad, label: nuevaLocalidad }}></Select>
+                                                    </div>
+
                                                 </div>
+                                            ) :
+                                            (
+                                                <div>
 
-                                            </div>
-                                        ) :
-                                        (
-                                            <div>
-                                                <p onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>x</p>
-                                                <input placeholder='Ingrese su localidad' readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
-                                            </div>
-                                        )
-                                }
-                            </div>
+                                                    <div className={styles.fieldDir}>
+                                                        <p className={styles.ubiLabel}> Escriba su localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>Volver</span></p>
+                                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                                            <input readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }}/>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            )
+                                    }
+                                </div>
 
-
-
-
-
-                            <div className={styles.divButtons}>
-                                <div className={styles.button} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad(""); setAlejitiEnaniti([]); setEnanism([])}}>
-                                    <div className={styles.button_back}></div>
-                                    <div className={styles.button_content}><span>Recargar ubicaciones</span></div>
+                                <div className={styles.fieldDir}>
+                                    <p>Direccion:</p>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        <input value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                    </label>
                                 </div>
                             </div>
 
 
-                            <div className={styles.fieldDir}>
-                                <p>Direccion:</p>
-                                <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
-                                </label>
+                            <div className={styles.dInfo}>
+                                <h2>Descripcion: <span>{nuevaDescripcion.length}/300</span></h2>
+                                <div className={styles.fieldDir}>
+                                    <textarea className={styles.descripArea} value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="300" type="text" readOnly={cargando} placeholder="&nbsp;"></textarea>
+                                </div>
                             </div>
-
-
-
-
-                            <div className={styles.fieldDir}>
-                                <p>Descripcion:</p>
-                                <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="300" type="text" readOnly={cargando} placeholder="&nbsp;" />
-                                </label>
-                            </div>
-
                             {
                                 cargando == false ?
                                     (
                                         botonConfirmar == false ?
                                             (
+                                                <div className={styles.divButtons}>
+                                                    <div className={styles.buttonsInside}>
+                                                        <div className={styles.buttonConfirm} onClick={() => { setBotonConfirmar(true) }}>
+                                                            <div className={styles.buttonConfirm_back}></div>
+                                                            <div className={styles.buttonConfirm_content}><span>Aplicar Cambios</span></div>
+                                                        </div>
+                                                    </div>
 
-                                                <div>
-                                                    <button onClick={() => { setBotonConfirmar(true) }}>Modificar perfil</button>
-                                                    <button onClick={() => {
-                                                        setNuevoNombre(info.nombreUsuario)
-                                                        setNuevoTipo(info.type)
-                                                        setNuevoNumeroCelular(info.numeroCelular)
-                                                        setNuevoNumeroTelefono(info.numeroTelefono)
-                                                        setNuevaProvincia(info.provincia)
-                                                        setNuevoMunicipio(info.municipio)
-                                                        setNuevaLocalidad(info.localidad)
-                                                        setNuevaDireccion(info.direccion)
-                                                        setNuevaDescripcion(info.descripcion)
-                                                    }}>Descartar cambios</button>
+                                                    <div className={styles.buttonsInside}>
+                                                        <div className={styles.buttonDiscard} onClick={() => {
+                                                            setNuevoNombre(info.nombreUsuario)
+                                                            setNuevoTipo(info.type)
+                                                            setNuevoNumeroCelular(info.numeroCelular)
+                                                            setNuevoNumeroTelefono(info.numeroTelefono)
+                                                            setNuevaProvincia(info.provincia)
+                                                            setNuevoMunicipio(info.municipio)
+                                                            setNuevaLocalidad(info.localidad)
+                                                            setNuevaDireccion(info.direccion)
+                                                            setNuevaDescripcion(info.descripcion)
+                                                        }}>
+                                                            <div className={styles.buttonDiscard_back}></div>
+                                                            <div className={styles.buttonDiscard_content}><span>Descartar Cambios</span></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             ) :
                                             (
-                                                <div>
+                                                <div className={styles.sure}>
                                                     <p>Esta seguro que desea modificar su perfil?</p>
-                                                    <div>
-                                                        <button onClick={() => { handleModificar() }}>Si</button>
-                                                        <button onClick={() => { setBotonConfirmar(false) }}>No</button>
+                                                    <div className={styles.divButtonsSure}>
+                                                        <div className={styles.buttonsInside}>
+                                                            <div className={styles.buttonYes} onClick={() => { handleModificar() }}>
+                                                                <div className={styles.buttonYes_back}></div>
+                                                                <div className={styles.buttonYes_content}><span>Si</span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div className={styles.buttonsInside}>
+                                                            <div className={styles.buttonNo} onClick={() => { setBotonConfirmar(false) }}>
+                                                                <div className={styles.buttonNo_back}></div>
+                                                                <div className={styles.buttonNo_content}><span>No</span></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             )
