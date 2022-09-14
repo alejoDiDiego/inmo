@@ -12,6 +12,7 @@ import Head from 'next/head'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
 import { updateProfile } from 'firebase/auth'
+import Select from 'react-select'
 
 
 
@@ -73,6 +74,11 @@ const principal = () => {
 
     const [confirmarEliminacionFondo, setConfirmarEliminacionFondo] = useState(false)
     const [confirmarEliminacionPerfil, setConfirmarEliminacionPerfil] = useState(false)
+
+    const [jamesWeb, setJamesWeb] = useState([])
+    const [alejitiEnaniti, setAlejitiEnaniti] = useState([])
+    const [enanism, setEnanism] = useState([])
+
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
@@ -457,19 +463,19 @@ const principal = () => {
 
     }
 
-
-
-
-
-
+    
     const provincia = () => {
+        const arr = [];
         Axios.get("https://apis.datos.gob.ar/georef/api/provincias").then(async (res) => {
             let json = await res.data
             console.log(json.provincias)
             let sort = json.provincias.sort((a, b) => a.nombre.localeCompare(b.nombre))
             setProvincias(sort)
-
-
+            sort.map((prov) => {
+                return arr.push({value: titleCase(prov.nombre), label: titleCase(prov.nombre)});
+              });
+              setJamesWeb(arr)
+              console.log(jamesWeb)
         }).catch((err) => {
             console.log(err)
         })
@@ -477,11 +483,16 @@ const principal = () => {
 
 
     const municipio = (provincia) => {
+        const arr = [];
         Axios.get(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=400`).then(async (res) => {
             let json = await res.data
             console.log(json.municipios)
             let sort = json.municipios.sort((a, b) => a.nombre.localeCompare(b.nombre))
             setMunicipios(sort)
+            sort.map((mun) => {
+                return arr.push({value: titleCase(mun.nombre), label: titleCase(mun.nombre)});
+              });
+            setAlejitiEnaniti(arr)
         }).catch((err) => {
             console.log(err)
         })
@@ -490,11 +501,16 @@ const principal = () => {
 
 
     const localidad = (municipio) => {
+        const arr = [];
         Axios.get(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${municipio}&max=20`).then(async (res) => {
             let json = await res.data
             console.log(json.localidades)
             let sort = json.localidades.sort((a, b) => a.nombre.localeCompare(b.nombre))
             setLocalidades(sort)
+            sort.map((loc) => {
+                return arr.push({value: titleCase(loc.nombre), label: titleCase(loc.nombre)});
+              });
+            setEnanism(arr)
         }).catch((err) => {
             console.log(err)
         })
@@ -564,23 +580,47 @@ const principal = () => {
 
     }
 
+    const handleSelectProv = (event) => {
+        if(event == null){
+            setNuevaProvincia("")
+            setNuevoMunicipio("")
+            setNuevaLocalidad("")
+            setAlejitiEnaniti([])
+            setEnanism([])
+        }
+        else{
+        const value = event.value
+        setNuevaProvincia(value)
+        setNuevoMunicipio("")
+        setNuevaLocalidad("")
+        setAlejitiEnaniti([])
+        setEnanism([])
+        }
+    }
 
+    const handleSelectMun = (event) => {
+        if(event == null){
+            setNuevoMunicipio("")
+            setNuevaLocalidad("")
+            setEnanism([])
+        }
+        else{
+        const value = event.value
+        setNuevoMunicipio(value)
+        setNuevaLocalidad("")
+        setEnanism([])
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const handleSelectLoc = (event) => {
+        if(event == null){
+            setNuevaLocalidad("")
+        }
+        else{
+        const value = event.value
+        setNuevaLocalidad(value)
+        }
+    }
 
 
     if (info == null) {
@@ -899,6 +939,12 @@ const principal = () => {
                                                         })
                                                     }
                                                 </select>
+
+
+                                                <div>
+                                                    <Select options={jamesWeb}  onChange={handleSelectProv} placeholder={"Seleccione una provincia"} value = {nuevaProvincia == "" ? {value: null, label: "Seleccione una provincia"} : {value: nuevaProvincia, label: nuevaProvincia}}></Select>
+                                                </div>
+
                                             </div>
 
                                         ) :
@@ -926,7 +972,14 @@ const principal = () => {
                                                         })
                                                     }
                                                 </select>
+
+                                                
+                                                <div>
+                                                    <Select options={alejitiEnaniti}  onChange={handleSelectMun}  placeholder={"Seleccione un municipio"}  value={nuevoMunicipio == "" ? {value: null, label: "Seleccione un municipio"} : {value: nuevoMunicipio, label: nuevoMunicipio}}></Select>
+                                                </div>
+
                                             </div>
+                                            
                                         ) :
                                         (
                                             <div>
@@ -951,6 +1004,10 @@ const principal = () => {
                                                         })
                                                     }
                                                 </select>
+                                                
+                                                <div>
+                                                    <Select options={enanism}  onChange={handleSelectLoc} placeholder={"Seleccione una localidad"}  value={nuevaLocalidad == "" ? {value: null, label: "Seleccione una localidad"} : {value: nuevaLocalidad, label: nuevaLocalidad}}></Select>
+                                                </div>
 
                                             </div>
                                         ) :
@@ -968,7 +1025,7 @@ const principal = () => {
 
 
                             <div className={styles.divButtons}>
-                                <div className={styles.button} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad("") }}>
+                                <div className={styles.button} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad(""); setAlejitiEnaniti([]); setEnanism([])}}>
                                     <div className={styles.button_back}></div>
                                     <div className={styles.button_content}><span>Recargar ubicaciones</span></div>
                                 </div>
