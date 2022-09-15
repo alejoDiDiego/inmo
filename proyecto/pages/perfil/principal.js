@@ -434,16 +434,29 @@ const principal = () => {
 
         try {
             console.log(doc(firebase.db, "Usuarios", usuario.uid))
+            // await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
+            //     [nuevoNombre.length > 0 && 'nombreUsuario']: nuevoNombre,
+            //     [nuevoTipo.length > 0 && 'type']: nuevoTipo,
+            //     [nuevoNumeroCelular.length > 0 && 'numeroCelular']: nuevoNumeroCelular,
+            //     [nuevoNumeroTelefono.length > 0 && 'numeroTelefono']: nuevoNumeroTelefono,
+            //     [nuevaProvincia.length > 0 && 'provincia']: nuevaProvincia,
+            //     [nuevoMunicipio.length > 0 && 'municipio']: nuevoMunicipio,
+            //     [nuevaLocalidad.length > 0 && 'localidad']: nuevaLocalidad,
+            //     [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion,
+            //     [nuevaDescripcion.length > 0 && 'descripcion']: nuevaDescripcion
+            // })
+
+
             await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
                 [nuevoNombre.length > 0 && 'nombreUsuario']: nuevoNombre,
                 [nuevoTipo.length > 0 && 'type']: nuevoTipo,
-                [nuevoNumeroCelular.length > 0 && 'numeroCelular']: nuevoNumeroCelular,
-                [nuevoNumeroTelefono.length > 0 && 'numeroTelefono']: nuevoNumeroTelefono,
-                [nuevaProvincia.length > 0 && 'provincia']: nuevaProvincia,
-                [nuevoMunicipio.length > 0 && 'municipio']: nuevoMunicipio,
-                [nuevaLocalidad.length > 0 && 'localidad']: nuevaLocalidad,
-                [nuevaDireccion.length > 0 && 'direccion']: nuevaDireccion,
-                [nuevaDescripcion.length > 0 && 'descripcion']: nuevaDescripcion
+                ['numeroCelular']: nuevoNumeroCelular,
+                ['numeroTelefono']: nuevoNumeroTelefono,
+                ['provincia']: nuevaProvincia,
+                ['municipio']: nuevoMunicipio,
+                ['localidad']: nuevaLocalidad,
+                ['direccion']: nuevaDireccion,
+                ['descripcion']: nuevaDescripcion
             })
 
             if (nuevoNombre.length > 0) {
@@ -475,7 +488,6 @@ const principal = () => {
                 return arr.push({ value: titleCase(prov.nombre), label: titleCase(prov.nombre) });
             });
             setProvincias(arr)
-            console.log(jamesWeb)
         }).catch((err) => {
             console.log(err)
         })
@@ -859,7 +871,7 @@ const principal = () => {
                                 <div className={styles.fieldDir}>
                                     <p>Nombre*:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
-                                        <input value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={70} value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
 
@@ -876,14 +888,14 @@ const principal = () => {
                                             nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>Ej: 5491112341234</span> : null
                                         }
 
-                                        <input value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={16} value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
 
                                 <div className={styles.fieldDir}>
                                     <p>Numero de telefono*:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
-                                        <input value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={16} value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
                             </div>
@@ -967,7 +979,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su provincia* <span onClick={() => { setToggleProvincia(!toggleProvincia) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
+                                                            <input maxLength={50} value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1004,7 +1016,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su municipio* <span onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
+                                                            <input maxLength={50} readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1039,7 +1051,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
+                                                            <input maxLength={50} readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1050,7 +1062,7 @@ const principal = () => {
                                 <div className={styles.fieldDir}>
                                     <p>Direccion:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
-                                        <input value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={50} value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
                             </div>
