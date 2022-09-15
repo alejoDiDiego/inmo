@@ -10,11 +10,6 @@
     width: 600px;
 }
 
-.container_img{
-    position: relative;
-    width: fit-content;
-}
-
 .edit_icon{
     background-color: white;
     padding: 3px;
@@ -355,7 +350,8 @@
 
 
 .derecha{
-    padding: 50px;
+    padding: 20px;
+    padding-top: 50px;
     display: flex;
     width: 100%;
     height: 100%;
@@ -601,19 +597,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .custom_field {
     position: relative;
     overflow: hidden;
@@ -692,3 +675,49 @@
 
 
 
+.profileDataContainer{
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+}
+
+.container_imgProfile{
+    position: relative;
+    width: fit-content;
+    margin-left: -440px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.imageProfileInside{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.perfil{
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+.fondo{
+    width: 550px;
+    height: 500px;
+    border-bottom-right-radius: 10px;
+}
+
+.container_imgBack{
+    position: relative;
+    width: fit-content;
+}
+
+.profileTextPill{
+    width: 750px;
+    height: 300px;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+}

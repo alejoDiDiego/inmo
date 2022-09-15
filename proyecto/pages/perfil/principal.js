@@ -875,7 +875,7 @@ const principal = () => {
                                         {
                                             nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>Ej: 5491112341234</span> : null
                                         }
-                                        
+
                                         <input value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
@@ -1039,7 +1039,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }}/>
+                                                            <input readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1133,6 +1133,94 @@ const principal = () => {
 
 
                         <div className={styles.derecha}>
+
+
+                            <div className={styles.profileDataContainer}>
+
+                                <div className={styles.container_imgBack}>
+                                    {
+                                        cargando == false ?
+                                            confirmarEliminacionFondo == false ?
+                                                (
+                                                    <div>
+                                                        <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
+                                                        <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
+
+                                                        {
+                                                            info.fotoFondoURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FfondoDefault.png?alt=media&token=d4bde7ff-b705-43cd-b647-899db546186b") == false ?
+                                                                (
+                                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
+                                                                ) : null
+                                                        }
+
+                                                    </div>
+                                                ) :
+                                                (
+                                                    <div>
+                                                        <p>Desea eliminar la foto?</p>
+                                                        <div>
+                                                            <button onClick={() => { handleEliminarFondo() }}>Si</button>
+                                                            <button onClick={() => setConfirmarEliminacionFondo(false)}>No</button>
+                                                        </div>
+                                                    </div>
+                                                ) :
+                                            <p>cargando</p>
+                                    }
+
+
+
+                                    { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
+                                    <img className={styles.fondo} src={info.fotoFondoURL} />
+                                </div>
+
+
+
+
+
+
+                                <div className={styles.imageProfileInside}>
+                                    <div className={styles.container_imgProfile}>
+                                        {
+                                            cargando == false ?
+                                                (
+                                                    confirmarEliminacionPerfil == false ?
+                                                        (
+                                                            <div>
+                                                                <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
+                                                                <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
+
+                                                                {
+                                                                    info.fotoPerfilURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FperfilDefault.jpg?alt=media&token=19044d3e-c7bc-493f-9850-20dc001ad5c5") == false ?
+                                                                        (
+                                                                            <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
+                                                                        ) :
+                                                                        null
+
+                                                                }
+
+                                                            </div>
+                                                        ) :
+                                                        (
+                                                            <div>
+                                                                <p>Desea eliminar la foto?</p>
+                                                                <div>
+                                                                    <button onClick={() => { handleEliminarPerfil() }}>Si</button>
+                                                                    <button onClick={() => setConfirmarEliminacionPerfil(false)}>No</button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                ) :
+                                                <p>cargando</p>
+
+                                        }
+
+                                        {/* https://www.flaticon.com/free-icon/x-mark_1617543?term=delete&page=1&position=34&page=1&position=34&related_id=1617543&origin=search */}
+
+                                        { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
+                                        <img className={styles.perfil} src={info.fotoPerfilURL} />
+                                    </div>
+                                    <div className={styles.profileTextPill}>
+                                            
                             <p>{info.mail}</p>
                             <p>{info.nombreUsuario}</p>
                             <p>{info.type}</p>
@@ -1222,84 +1310,17 @@ const principal = () => {
                                 }
                             </div>
 
-                            <div className={styles.container_img}>
-                                {
-                                    cargando == false ?
-                                        (
-                                            confirmarEliminacionPerfil == false ?
-                                                (
-                                                    <div>
-                                                        <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
-                                                        <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
 
-                                                        {
-                                                            info.fotoPerfilURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FperfilDefault.jpg?alt=media&token=19044d3e-c7bc-493f-9850-20dc001ad5c5") == false ?
-                                                                (
-                                                                    <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
-                                                                ) :
-                                                                null
 
-                                                        }
 
-                                                    </div>
-                                                ) :
-                                                (
-                                                    <div>
-                                                        <p>Desea eliminar la foto?</p>
-                                                        <div>
-                                                            <button onClick={() => { handleEliminarPerfil() }}>Si</button>
-                                                            <button onClick={() => setConfirmarEliminacionPerfil(false)}>No</button>
-                                                        </div>
-                                                    </div>
-                                                )
-                                        ) :
-                                        <p>cargando</p>
 
-                                }
+                                    </div>
+                                </div>
 
-                                {/* https://www.flaticon.com/free-icon/x-mark_1617543?term=delete&page=1&position=34&page=1&position=34&related_id=1617543&origin=search */}
 
-                                { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
-                                <img className={styles.perfil} src={info.fotoPerfilURL} />
+
                             </div>
 
-
-
-                            <div className={styles.container_img}>
-                                {
-                                    cargando == false ?
-                                        confirmarEliminacionFondo == false ?
-                                            (
-                                                <div>
-                                                    <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
-                                                    <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
-
-                                                    {
-                                                        info.fotoFondoURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FfondoDefault.png?alt=media&token=d4bde7ff-b705-43cd-b647-899db546186b") == false ?
-                                                            (
-                                                                <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
-                                                            ) : null
-                                                    }
-
-                                                </div>
-                                            ) :
-                                            (
-                                                <div>
-                                                    <p>Desea eliminar la foto?</p>
-                                                    <div>
-                                                        <button onClick={() => { handleEliminarFondo() }}>Si</button>
-                                                        <button onClick={() => setConfirmarEliminacionFondo(false)}>No</button>
-                                                    </div>
-                                                </div>
-                                            ) :
-                                        <p>cargando</p>
-                                }
-
-
-
-                                { /* https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=1&page=1&position=1&related_id=1159633&origin=search# */}
-                                <img className={styles.fondo} src={info.fotoFondoURL} />
-                            </div>
 
 
                         </div>
