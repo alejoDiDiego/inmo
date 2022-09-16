@@ -885,7 +885,7 @@ const principal = () => {
                                     <p>Numero de celular*:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
                                         {
-                                            nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>Ej: 5491112341234</span> : null
+                                            nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>11 12341234</span> : null
                                         }
 
                                         <input maxLength={16} value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
@@ -895,6 +895,11 @@ const principal = () => {
                                 <div className={styles.fieldDir}>
                                     <p>Numero de telefono*:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
+                                        {
+                                            nuevoNumeroTelefono.length == 0 ? <span className={styles.placeholder}>12341234</span> : null
+                                        }
+
+
                                         <input maxLength={16} value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
@@ -1232,101 +1237,189 @@ const principal = () => {
                                         <img className={styles.perfil} src={info.fotoPerfilURL} />
                                     </div>
                                     <div className={styles.profileTextPill}>
+                                        <div className={styles.profileData}>
                                             
-                            <p>{info.mail}</p>
-                            <p>{info.nombreUsuario}</p>
-                            <p>{info.type}</p>
-                            <div>
-                                <p>Ubicacion</p>
-                                <div>
-                                    {
-                                        info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
-                                            (
-                                                <p>
+                                            <div className={styles.profileName}>
+                                                <div className={styles.profileNameInside}>
+                                                    <p className={styles.name}>{info.nombreUsuario}</p>
+                                                    <p>{info.type}</p>
+                                                </div>
+                                                <div className={styles.pillUbi}>
                                                     {
-                                                        info.provincia.length > 0 &&
-                                                        (
-                                                            info.provincia
-                                                        )
-                                                    }, {`${" "}`}
-                                                    {
-                                                        info.municipio.length > 0 &&
-                                                        (
-                                                            info.municipio
-                                                        )
+                                                        info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
+                                                            (
+                                                                <p>
+                                                                    {
+                                                                        info.provincia.length > 0 &&
+                                                                        (
+                                                                            info.provincia
+                                                                        )
+                                                                    }, {`${" "}`}
+                                                                    {
+                                                                        info.municipio.length > 0 &&
+                                                                        (
+                                                                            info.municipio
+                                                                        )
+                                                                    }
+                                                                    {
+                                                                        info.localidad.length > 0 &&
+                                                                        (
+                                                                            <>
+                                                                                ,{`${" "}`}{info.localidad}
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                    {
+                                                                        info.direccion.length > 0 &&
+                                                                        (
+                                                                            <>
+                                                                                ,{`${" "}`}{info.direccion}
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                </p>
+
+                                                            ) :
+                                                            (
+                                                                <p>No tiene ninguna ubicacion asignada</p>
+                                                            )
                                                     }
-                                                    {
-                                                        info.localidad.length > 0 &&
-                                                        (
-                                                            <>
-                                                                ,{`${" "}`}{info.localidad}
-                                                            </>
-                                                        )
-                                                    }
-                                                    {
-                                                        info.direccion.length > 0 &&
-                                                        (
-                                                            <>
-                                                                ,{`${" "}`}{info.direccion}
-                                                            </>
-                                                        )
-                                                    }
-                                                </p>
+                                                </div>
+                                                <div className={styles.contactInfo}>
+                                                    <p className={styles.cInfo}>Informacion de contacto:</p>
+                                                    <p>{info.mail}</p>
+                                                    <div className={styles.numbers}>
+                                                        <div>
+                                                            {
+                                                                info.numeroCelular.length > 0 ?
+                                                                    (
+                                                                        <p>{info.numeroCelular}</p>
+                                                                    ) :
+                                                                    (
+                                                                        <p>No tiene ningun numero de celular asignado</p>
+                                                                    )
+                                                            }
+                                                        </div>
 
-                                            ) :
-                                            (
-                                                <p>No tiene ninguna ubicacion asignada</p>
-                                            )
-                                    }
-                                </div>
-                            </div>
-
-                            <div>
-                                {
-                                    info.numeroCelular.length > 0 ?
-                                        (
-                                            <p>{info.numeroCelular}</p>
-                                        ) :
-                                        (
-                                            <p>No tiene ningun numero de celular asignado</p>
-                                        )
-                                }
-                            </div>
-
-                            <div>
-                                {
-                                    info.numeroTelefono.length > 0 ?
-                                        (
-                                            <p>{info.numeroTelefono}</p>
-                                        ) :
-                                        (
-                                            <p>No tiene ningun numero de telefono asignado</p>
-                                        )
-                                }
-                            </div>
-
-
-                            <div>
-                                {
-                                    info.descripcion.length > 0 ?
-                                        (
-                                            <div>
-                                                <p>Descripcion</p>
-                                                <p>{info.descripcion}</p>
+                                                        <div>
+                                                            {
+                                                                info.numeroTelefono.length > 0 ?
+                                                                    (
+                                                                        <p>{info.numeroTelefono}</p>
+                                                                    ) :
+                                                                    (
+                                                                        <p>No tiene ningun numero de telefono asignado</p>
+                                                                    )
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        )
-                                        :
-                                        (
-                                            <p>No tiene ninguna descripcion</p>
-                                        )
-                                }
-                            </div>
 
-
-
-
-
+                                            <div>
+                                                {
+                                                    info.descripcion.length > 0 ?
+                                                        (
+                                                            <div className={styles.descriptionPill}>
+                                                                <p>Descripcion</p>
+                                                                <p>{info.descripcion}</p>
+                                                            </div>
+                                                        )
+                                                        :
+                                                        (
+                                                            <p>No tiene ninguna descripcion</p>
+                                                        )
+                                                }
+                                            </div>
+                                            
+                                        </div>
                                     </div>
+                                    {/* <div> */}
+                                    {/*       <p>Ubicacion</p>
+                                        <div>
+                                            {
+                                                info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
+                                                    (
+                                                        <p>
+                                                            {
+                                                                info.provincia.length > 0 &&
+                                                                (
+                                                                    info.provincia
+                                                                )
+                                                            }, {`${" "}`}
+                                                            {
+                                                                info.municipio.length > 0 &&
+                                                                (
+                                                                    info.municipio
+                                                                )
+                                                            }
+                                                            {
+                                                                info.localidad.length > 0 &&
+                                                                (
+                                                                    <>
+                                                                        ,{`${" "}`}{info.localidad}
+                                                                    </>
+                                                                )
+                                                            }
+                                                            {
+                                                                info.direccion.length > 0 &&
+                                                                (
+                                                                    <>
+                                                                        ,{`${" "}`}{info.direccion}
+                                                                    </>
+                                                                )
+                                                            }
+                                                        </p>
+
+                                                    ) :
+                                                    (
+                                                        <p>No tiene ninguna ubicacion asignada</p>
+                                                    )
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        {
+                                            info.numeroCelular.length > 0 ?
+                                                (
+                                                    <p>{info.numeroCelular}</p>
+                                                ) :
+                                                (
+                                                    <p>No tiene ningun numero de celular asignado</p>
+                                                )
+                                        }
+                                    </div>
+
+                                    <div>
+                                        {
+                                            info.numeroTelefono.length > 0 ?
+                                                (
+                                                    <p>{info.numeroTelefono}</p>
+                                                ) :
+                                                (
+                                                    <p>No tiene ningun numero de telefono asignado</p>
+                                                )
+                                        }
+                                    </div>
+
+
+                                    <div>
+                                        {
+                                            info.descripcion.length > 0 ?
+                                                (
+                                                    <div>
+                                                        <p>Descripcion</p>
+                                                        <p>{info.descripcion}</p>
+                                                    </div>
+                                                )
+                                                :
+                                                (
+                                                    <p>No tiene ninguna descripcion</p>
+                                                )
+                                        }
+                                    </div> */}
+
                                 </div>
 
 

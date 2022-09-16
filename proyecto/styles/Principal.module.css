@@ -335,8 +335,8 @@
 }
 
 .reloadBtn{
-    height: 16px;
-    width: 16px;
+    height: 15px;
+    width: 17px;
     cursor: pointer;
 
     /* https://www.flaticon.com/free-icon/reload_3580291?term=reload&page=1&position=2&page=1&position=2&related_id=3580291&origin=style */
@@ -715,9 +715,65 @@
 }
 
 .profileTextPill{
-    width: 750px;
+    width: 800px;
     height: 300px;
     border-radius: 5px;
     background-color: white;
     position: relative;
+    font-family: 'lato';
+    padding: 20px;
+}
+
+.profileName{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+
+.profileNameInside{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 20px;
+    width: 300px;
+    height: 50px;
+}
+
+.name{
+    font-weight: bold;
+}
+
+.pillUbi{
+    width: 200px;
+    height: 60px;
+}
+
+.contactInfo{
+    height: 150px;
+    width: 200px;
+}
+
+.cInfo{
+    font-weight: 700;
+}
+
+.descriptionPill{
+  display: flex;
+}
+
+.profileData{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.blackPill{
+    display: flex;
+    height: 100%;
+    width: 300px;
+    background-color: #222;
+    align-self: flex-end;
 }
