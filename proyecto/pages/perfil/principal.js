@@ -871,7 +871,7 @@ const principal = () => {
                                 <div className={styles.fieldDir}>
                                     <p>Nombre*:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
-                                        <input maxLength={70} value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={40} value={nuevoNombre} onChange={e => { setNuevoNombre(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
 
@@ -984,7 +984,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su provincia* <span onClick={() => { setToggleProvincia(!toggleProvincia) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input maxLength={50} value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
+                                                            <input maxLength={30} value={nuevaProvincia} readOnly={cargando} onChange={(e) => { setNuevaProvincia(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1021,7 +1021,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su municipio* <span onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input maxLength={50} readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
+                                                            <input maxLength={30} readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1056,7 +1056,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input maxLength={50} readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
+                                                            <input maxLength={30} readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1067,7 +1067,7 @@ const principal = () => {
                                 <div className={styles.fieldDir}>
                                     <p>Direccion:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
-                                        <input maxLength={50} value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={30} value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
                             </div>
