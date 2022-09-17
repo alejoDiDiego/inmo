@@ -842,20 +842,19 @@
 
 .blackPill p{
     color: #FFF;
-    font-size: large;
+    
     font-weight: 300;
 }
 
 .contactBtn{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     height: 50px;
-    width: 200px;
-    align-self: flex-end;
-    position: absolute;
-    margin-left: 730px;
-    margin-bottom: 25px;
+    gap: 5px;
+    width: 250px;
+    align-items: center;
+    cursor: pointer;
+    color: #0071b3;
 }
 
 .contactImg{
@@ -869,4 +868,26 @@
 .contactImg img{
     height: 100%;
     width: 100%;
+}
+
+
+.contactInfo{
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    width: 250px;
+    cursor: pointer;
+    color: white;
+}
+
+.contactInfo p{
+    margin: 5px;
+    margin-left: 0;
+}
+
+
+.email_publico{
+    margin-top: 30px;
+    display: flex;
+    gap: 5px;
 }

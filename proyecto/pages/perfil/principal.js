@@ -45,6 +45,8 @@ const principal = () => {
 
     const [nuevaDescripcion, setNuevaDescripcion] = useState("")
 
+    const [emailPublico, setEmailPublico] = useState(false)
+
     const [toggleProvincia, setToggleProvincia] = useState(false)
     const [toggleMunicipio, setToggleMunicipio] = useState(false)
     const [toggleLocalidad, setToggleLocalidad] = useState(false)
@@ -55,6 +57,8 @@ const principal = () => {
 
 
     const router = useRouter()
+
+    const [mostrarContactos, setMostrarContactos] = useState(false)
 
 
     const [imageSrc, setImageSrc] = React.useState(null)
@@ -273,6 +277,8 @@ const principal = () => {
                         setNuevaLocalidad(docSnap.data().localidad)
                         setNuevaDireccion(docSnap.data().direccion)
                         setNuevaDescripcion(docSnap.data().descripcion)
+                        setEmailPublico(docSnap.data().emailPublico)
+                        
                     }
                     return true
 
@@ -405,7 +411,8 @@ const principal = () => {
                 && nuevoMunicipio === info.municipio
                 && nuevaLocalidad === info.localidad
                 && nuevaDireccion === info.direccion
-                && nuevaDescripcion === info.descripcion)
+                && nuevaDescripcion === info.descripcion
+                && emailPublico === info.emailPublico)
 
         ) {
             alert("No se aplicaron cambios")
@@ -456,7 +463,8 @@ const principal = () => {
                 ['municipio']: nuevoMunicipio,
                 ['localidad']: nuevaLocalidad,
                 ['direccion']: nuevaDireccion,
-                ['descripcion']: nuevaDescripcion
+                ['descripcion']: nuevaDescripcion,
+                ['emailPublico']: emailPublico
             })
 
             if (nuevoNombre.length > 0) {
@@ -1065,7 +1073,7 @@ const principal = () => {
                                 </div>
 
                                 <div className={styles.fieldDir}>
-                                    <p>Direccion:</p>
+                                    <p>Direccion</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
                                         <input maxLength={30} value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
@@ -1078,6 +1086,11 @@ const principal = () => {
                                 <div className={styles.fieldDir}>
                                     <textarea className={styles.descripArea} value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="200" type="text" readOnly={cargando} placeholder="&nbsp;"></textarea>
                                 </div>
+                            </div>
+
+                            <div className={styles.email_publico}>
+                                <label htmlFor='check'>Email publico</label>
+                                <input id='check' checked={emailPublico} onChange={(e) => setEmailPublico(e.target.checked)} type="checkbox" />
                             </div>
                             {
                                 cargando == false ?
@@ -1335,8 +1348,28 @@ const principal = () => {
                                                 </div>
                                             </div>
                                             <div className={styles.blackPill}>
-                                                <p>000 Publicaciones</p>   
+                                                <p>000 Publicaciones</p>
                                                 <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
+                                                {
+                                                    info.numeroCelular === "" && info.numeroTelefono === "" && info.email === "" ?
+                                                        (
+                                                            <p>No proporciono medios de contacto</p>
+                                                        ) :
+                                                        mostrarContactos == false ?
+                                                            (
+                                                                <div onClick={() => { setMostrarContactos(!mostrarContactos) }} className={styles.contactBtn}>
+                                                                    <div className={styles.contactImg}><img src="/contactos.png"></img></div>
+                                                                    <p>Informacion de contacto</p>
+                                                                </div>
+                                                            ) :
+                                                            (
+
+                                                                <div className={styles.contactInfo}>
+                                                                    <p>Celular: {info.numeroCelular}</p>
+                                                                    <p>Telefono: {info.numeroTelefono}</p>
+                                                                </div>
+                                                            )
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -1429,10 +1462,7 @@ const principal = () => {
                                 </div>
 
 
-                                <div className={styles.contactBtn}>
-                                    <div className={styles.contactImg}><img src="/contactos.png"></img></div>
-                                    <p>Informacion de contacto</p>
-                                </div>
+
                             </div>
 
 
