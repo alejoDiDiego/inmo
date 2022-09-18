@@ -277,6 +277,48 @@ const InformacionBasica = ({
                             )
                     }
                 </div>
+
+
+                <div>
+                    {
+                        toggleLocalidad == false ?
+                            (
+                                <div>
+                                    <p className={styles.ubiLabel}>Localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>No encuentro mi localidad</span></p>
+                                    {/* <select value={nuevaLocalidad} disabled={cargando} onChange={(e) => { setNuevaLocalidad(e.target.value) }}>
+                                                    <option value="">Elige una localidad</option>
+                                                    {
+                                                        localidades.map((p) => {
+                                                            return <option key={p.id} value={titleCase(p.nombre)}>{titleCase(p.nombre)}</option>
+                                                        })
+                                                    }
+                                                </select> */}
+
+                                    <div className={styles.fieldDirSelect}>
+                                        <Select options={localidades} onChange={handleSelectLoc} isClearable={true} isSearchable={true} placeholder={"Seleccione una localidad"} value={localidad == "" ? { value: null, label: "Seleccione una localidad" } : { value: localidad, label: localidad }}></Select>
+                                    </div>
+
+                                </div>
+                            ) :
+                            (
+                                <div>
+
+                                    <div className={styles.fieldDir}>
+                                        <p className={styles.ubiLabel}> Escriba su localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>Volver</span></p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={30} value={localidad} onChange={(e) => { municipio.length == 0 ? null : setLocalidad(titleCase(e.target.value)) }} />
+                                        </label>
+                                    </div>
+                                </div>
+                            )
+                    }
+                </div>
+
+                <div>
+                    <br />
+                    <label>Direccion</label>
+                    <input type="text" />
+                </div>
             </div>
         </div>
     )
