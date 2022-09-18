@@ -113,6 +113,7 @@ const Header = ({ usuario, enRegistro}) => {
                                         :
                                         <p>aa</p>
                                 }
+                                <Link href={usuario.emailVerified ? '/crear-publicacion/principal' : '/verificar'}><button>Crear Publicacion</button></Link>
                             </div>
                     }
 

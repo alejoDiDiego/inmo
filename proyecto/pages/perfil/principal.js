@@ -278,7 +278,7 @@ const principal = () => {
                         setNuevaDireccion(docSnap.data().direccion)
                         setNuevaDescripcion(docSnap.data().descripcion)
                         setEmailPublico(docSnap.data().emailPublico)
-                        
+
                     }
                     return true
 
@@ -893,7 +893,7 @@ const principal = () => {
                                     <p>Numero de celular*:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
                                         {
-                                            nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>11 12341234</span> : null
+                                            nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>5491112341234</span> : null
                                         }
 
                                         <input maxLength={16} value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
@@ -1351,24 +1351,40 @@ const principal = () => {
                                                 <p>000 Publicaciones</p>
                                                 <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
                                                 {
-                                                    info.numeroCelular === "" && info.numeroTelefono === "" && info.email === "" ?
+                                                    info.numeroCelular === "" && info.numeroTelefono === "" && info.emailPublico == false ?
                                                         (
                                                             <p>No proporciono medios de contacto</p>
                                                         ) :
-                                                        mostrarContactos == false ?
-                                                            (
-                                                                <div onClick={() => { setMostrarContactos(!mostrarContactos) }} className={styles.contactBtn}>
-                                                                    <div className={styles.contactImg}><img src="/contactos.png"></img></div>
-                                                                    <p>Informacion de contacto</p>
-                                                                </div>
-                                                            ) :
-                                                            (
 
-                                                                <div className={styles.contactInfo}>
-                                                                    <p>Celular: {info.numeroCelular}</p>
-                                                                    <p>Telefono: {info.numeroTelefono}</p>
-                                                                </div>
-                                                            )
+                                                        (
+
+                                                            <div className={styles.contactInfo}>
+                                                                {
+                                                                    info.numeroCelular !== "" ?
+                                                                    (
+                                                                        <p>Celular: {info.numeroCelular}</p>
+                                                                    ) :
+                                                                    null
+                                                                }
+
+                                                                {
+                                                                    info.numeroTelefono !== "" ?
+                                                                    (
+                                                                        <p>Telefono: {info.numeroTelefono}</p>
+                                                                    ) :
+                                                                    null
+                                                                }
+                                                                
+                                                                
+                                                                {
+                                                                    info.emailPublico == true ?
+                                                                    (
+                                                                        <p>{info.mail}</p>
+                                                                    ) : 
+                                                                    null
+                                                                }
+                                                            </div>
+                                                        )
                                                 }
                                             </div>
                                         </div>
