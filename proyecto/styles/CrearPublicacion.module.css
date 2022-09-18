@@ -1,0 +1,30 @@
+.main{
+    margin: auto;
+    max-width: 1920px;
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+
+
+
+.izquierda{
+    position: fixed;
+    width: 100%;
+    max-width: 700px;
+    min-height: 100vh;
+    background-color: red;
+}
+
+.derecha{
+    margin-left: 700px;
+    background-color: gray;
+    width: calc(100% - 700px);
+    min-height: 100vh;
+    overflow-wrap: break-word;
+    
+}
+

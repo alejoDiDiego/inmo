@@ -49,6 +49,11 @@ const useAutentication = () => {
                         console.log(router.pathname)
                         router.push("/")
                         break
+
+                    case "/crear-publicacion/principal":
+                        console.log(router.pathname)
+                        router.push("/")
+                        break
                 }
 
 

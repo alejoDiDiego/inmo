@@ -278,6 +278,7 @@ const principal = () => {
                         setNuevaDireccion(docSnap.data().direccion)
                         setNuevaDescripcion(docSnap.data().descripcion)
                         setEmailPublico(docSnap.data().emailPublico)
+                        console.log(docSnap.data())
 
                     }
                     return true
@@ -1029,7 +1030,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su municipio* <span onClick={() => { setToggleMunicipio(!toggleMunicipio) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input maxLength={30} readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { setNuevoMunicipio(titleCase(e.target.value)) }} />
+                                                            <input maxLength={30} readOnly={cargando} value={nuevoMunicipio} onChange={(e) => { nuevaProvincia.length == 0 ? null : setNuevoMunicipio(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1064,7 +1065,7 @@ const principal = () => {
                                                     <div className={styles.fieldDir}>
                                                         <p className={styles.ubiLabel}> Escriba su localidad <span onClick={() => { setToggleLocalidad(!toggleLocalidad) }}>Volver</span></p>
                                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                                            <input maxLength={30} readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { setNuevaLocalidad(titleCase(e.target.value)) }} />
+                                                            <input maxLength={30} readOnly={cargando} value={nuevaLocalidad} onChange={(e) => { nuevoMunicipio.length == 0 ? null : setNuevaLocalidad(titleCase(e.target.value)) }} />
                                                         </label>
                                                     </div>
                                                 </div>
