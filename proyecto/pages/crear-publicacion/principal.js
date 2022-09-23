@@ -12,15 +12,6 @@ const principal = () => {
   const { usuario } = useContext(FirebaseContext)
   const [loading, setLoading] = useState(true)
 
-  const router = useRouter()
-
-
-  const [provincia, setProvincia] = useState("")
-  const [municipio, setMunicipio] = useState("")
-  const [localidad, setLocalidad] = useState("")
-  const [direccion, setDireccion] = useState("")
-
-
   useEffect(() => {
 
     const check = async () => {
@@ -91,16 +82,7 @@ const principal = () => {
             </div>
 
             <div className={styles.derecha}>
-              <InformacionBasica 
-                provincia={provincia}
-                setProvincia={setProvincia}
-                municipio={municipio}
-                setMunicipio={setMunicipio}
-                localidad={localidad}
-                setLocalidad={setLocalidad}
-                direccion={direccion}
-                setDireccion={setDireccion}
-              />
+              <InformacionBasica />
               
             </div>
           </div>

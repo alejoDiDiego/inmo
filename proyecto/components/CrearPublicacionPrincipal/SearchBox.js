@@ -5,22 +5,24 @@ const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?"
 const params = {
     q: "",
     format: "json",
-    addressdetails : "addressdetails"
+    addressdetails: "addressdetails"
 }
 
-const SearchBox = ({selectPosition, setSelectPosition}) => {
+const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchText }) => {
 
-    const [searchText, setSearchText] = useState("")
+
     const [listPlace, setListPlace] = useState([])
 
-    
+    const [ocultar, setOcultar] = useState(false)
+
+
 
 
     const handleClick = () => {
         const params = {
             q: searchText,
             format: "json",
-            addressdetails : 1,
+            addressdetails: 1,
             polygon_geojson: 0
         }
         const queryString = new URLSearchParams(params).toString()
@@ -43,24 +45,31 @@ const SearchBox = ({selectPosition, setSelectPosition}) => {
     return (
         <div>
             <div>
-                <input value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+                <input style={{ width: "600px" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
                 <button
                     onClick={() => handleClick()}
                 >Buscar</button>
             </div>
 
-            <div>
-                {
-                    listPlace.map(p => {
-                        return (
-                            <button key={p?.osm_id} onClick={() => setSelectPosition(p)}>
-                                <img src='/location-sign-azul.png' />
-                                <p>{p?.display_name}</p>
-                            </button>
-                        )
-                    })
-                }
-            </div>
+            {
+                listPlace.length > 0 ?
+                    (
+                        <div>
+                            {
+                                listPlace.map(p => {
+                                    return (
+                                        <button key={p?.osm_id} onClick={() => {setSelectPosition(p); setListPlace([])}}>
+                                            <img src='/location-sign-azul.png' />
+                                            <p>{p?.display_name}</p>
+                                        </button>
+                                    )
+                                })
+                            }
+                        </div>
+                    ) : null
+            }
+
+
         </div>
     )
 }

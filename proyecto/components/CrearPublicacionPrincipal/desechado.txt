@@ -1,0 +1,168 @@
+const [provincias, setProvincias] = useState([])
+    const [municipios, setMunicipios] = useState([])
+    const [localidades, setLocalidades] = useState([])
+
+
+
+    const [toggleProvincia, setToggleProvincia] = useState(false)
+    const [toggleMunicipio, setToggleMunicipio] = useState(false)
+    const [toggleLocalidad, setToggleLocalidad] = useState(false)
+
+
+    useEffect(() => {
+        setProvincia("")
+    }, [toggleProvincia])
+
+    useEffect(() => {
+        setMunicipio("")
+    }, [toggleMunicipio])
+
+    useEffect(() => {
+        setLocalidad("")
+    }, [toggleLocalidad])
+
+
+
+
+
+    const provinciaFunc = () => {
+        const arr = [];
+        Axios.get("https://apis.datos.gob.ar/georef/api/provincias").then(async (res) => {
+            let json = await res.data
+            console.log(json.provincias)
+            let sort = json.provincias.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            sort.map((prov) => {
+                return arr.push({ value: titleCase(prov.nombre), label: titleCase(prov.nombre) });
+            });
+            setProvincias(arr)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+
+    const municipioFunc = (provincia) => {
+        const arr = [];
+        Axios.get(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=400`).then(async (res) => {
+            let json = await res.data
+            console.log(json.municipios)
+            let sort = json.municipios.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            sort.map((mun) => {
+                return arr.push({ value: titleCase(mun.nombre), label: titleCase(mun.nombre) });
+            });
+            setMunicipios(arr)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+    }
+
+
+    const localidadFunc = (municipio) => {
+        const arr = [];
+        Axios.get(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${municipio}&max=20`).then(async (res) => {
+            let json = await res.data
+            console.log(json.localidades)
+            let sort = json.localidades.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            sort.map((loc) => {
+                return arr.push({ value: titleCase(loc.nombre), label: titleCase(loc.nombre) });
+            });
+            setLocalidades(arr)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+    }
+
+
+    useEffect(() => {
+        provinciaFunc()
+    }, [])
+
+
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
+    }
+
+
+    useEffect(() => {
+        setMunicipio("")
+        setMunicipios([])
+        setLocalidad("")
+        setLocalidades([])
+        if (provincia.length == 0) {
+            return
+        }
+
+        setProvincia(provincia)
+
+        municipioFunc(provincia)
+
+    }, [provincia])
+
+
+    useEffect(() => {
+        setLocalidad("")
+        setLocalidades([])
+        if (municipio.length == 0) {
+            return
+        }
+
+        setMunicipio(municipio)
+
+        localidadFunc(municipio)
+    }, [municipio])
+
+
+    useEffect(() => {
+        setLocalidad(localidad)
+    }, [localidad])
+
+
+
+
+    const handleSelectProv = (event) => {
+        if (event == null) {
+            setProvincia("")
+            setMunicipio("")
+            setLocalidad("")
+            setMunicipios([])
+            setLocalidades([])
+        }
+        else {
+            const value = event.value
+            setProvincia(value)
+            setMunicipio("")
+            setLocalidad("")
+            setMunicipios([])
+            setLocalidades([])
+        }
+    }
+
+    const handleSelectMun = (event) => {
+        if (event == null) {
+            setMunicipio("")
+            setLocalidad("")
+            setLocalidades([])
+        }
+        else {
+            const value = event.value
+            setMunicipio(value)
+            setLocalidad("")
+            setLocalidades([])
+        }
+    }
+
+    const handleSelectLoc = (event) => {
+        if (event == null) {
+            setLocalidad("")
+        }
+        else {
+            const value = event.value
+            setLocalidad(value)
+        }
+    }
