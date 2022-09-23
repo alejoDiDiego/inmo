@@ -40,6 +40,7 @@ function HandleClickMap({ setSelectPosition }) {
 
     const map = useMapEvents({
         click(e) {
+
             console.log(e.latlng)
             const lat = e.latlng.lat
             const lon = e.latlng.lng
@@ -59,7 +60,14 @@ function HandleClickMap({ setSelectPosition }) {
                 .then((response) => response.text())
                 .then((result) => {
                     console.log(JSON.parse(result))
-                    setSelectPosition(JSON.parse(result))
+                    if ("error" in JSON.parse(result) || JSON.parse(result).address.country != "Argentina") {
+                        setSelectPosition({ lat: -34.9964963, lon: -64.9672817 })
+                    } else {
+
+                        setSelectPosition(JSON.parse(result))
+
+                    }
+
                 })
                 .catch((err) => console.log("err ", err))
         }

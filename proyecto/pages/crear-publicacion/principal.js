@@ -13,6 +13,11 @@ const principal = () => {
   const [loading, setLoading] = useState(true)
 
   const [provincia, setProvincia] = useState("")
+  const [municipio, setMunicipio] = useState("")
+  const [localidad, setLocalidad] = useState("")
+  const [direccion, setDireccion] = useState("")
+  const [codigoPostal, setCodigoPostal] = useState("")
+  const [numeroDeCasa, setNumeroDeCasa] = useState("")
 
   useEffect(() => {
 
@@ -87,8 +92,18 @@ const principal = () => {
               <InformacionBasica
                 provincia={provincia}
                 setProvincia={setProvincia}
+                municipio={municipio}
+                setMunicipio={setMunicipio}
+                localidad={localidad}
+                setLocalidad={setLocalidad}
+                direccion={direccion}
+                setDireccion={setDireccion}
+                codigoPostal={codigoPostal}
+                setCodigoPostal={setCodigoPostal}
+                numeroDeCasa={numeroDeCasa}
+                setNumeroDeCasa={setNumeroDeCasa}
               />
-              
+
             </div>
           </div>
 
