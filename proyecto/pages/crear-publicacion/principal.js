@@ -12,6 +12,8 @@ const principal = () => {
   const { usuario } = useContext(FirebaseContext)
   const [loading, setLoading] = useState(true)
 
+  const [provincia, setProvincia] = useState("")
+
   useEffect(() => {
 
     const check = async () => {
@@ -82,7 +84,10 @@ const principal = () => {
             </div>
 
             <div className={styles.derecha}>
-              <InformacionBasica />
+              <InformacionBasica
+                provincia={provincia}
+                setProvincia={setProvincia}
+              />
               
             </div>
           </div>

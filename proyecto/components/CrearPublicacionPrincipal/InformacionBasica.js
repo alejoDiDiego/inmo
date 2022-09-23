@@ -8,13 +8,20 @@ const MapNoSSR = dynamic(() => import("./Map"), {
 });
 
 
-const InformacionBasica = ({}) => {
+const InformacionBasica = ({
+    provincia,
+    setProvincia
+ }) => {
     const [selectPosition, setSelectPosition] = useState(null)
     const [searchText, setSearchText] = useState("")
 
-    useEffect(() =>{
+    useEffect(() => {
         console.log(selectPosition)
-        setSearchText(selectPosition != null ? selectPosition.display_name : "")
+        if(selectPosition != null){
+            setSearchText(selectPosition.display_name)
+            setProvincia(selectPosition.address.state)
+        }
+        
     }, [selectPosition])
 
 
@@ -23,9 +30,9 @@ const InformacionBasica = ({}) => {
 
     return (
         <div>
-            <h2>Ubicacion</h2>
-
             <div>
+                <h2>Ubicacion</h2>
+
                 <div>
                     <div>
                         <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
@@ -34,6 +41,12 @@ const InformacionBasica = ({}) => {
                         <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
                     </div>
                 </div>
+
+                <div>
+                    <label>Provincia</label>
+                    <input value={provincia} onChange={e => setProvincia(e.target.value)} />
+                </div>
+
 
             </div>
         </div>
