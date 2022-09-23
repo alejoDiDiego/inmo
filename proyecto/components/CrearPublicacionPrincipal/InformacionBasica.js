@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import styles from '../../styles/InformacionBasica.module.css'
 import Axios from 'axios'
+import dynamic from "next/dynamic"
+import SearchBox from './SearchBox'
+
+const MapNoSSR = dynamic(() => import("./Map"), {
+    ssr: false,
+});
+
 
 const InformacionBasica = ({
     provincia,
@@ -25,12 +32,11 @@ const InformacionBasica = ({
     const [toggleMunicipio, setToggleMunicipio] = useState(false)
     const [toggleLocalidad, setToggleLocalidad] = useState(false)
 
+    const [selectPosition, setSelectPosition] = useState(null)
 
-
-
-
-
-
+    useEffect(() =>{
+        console.log(selectPosition)
+    }, [selectPosition])
 
 
     useEffect(() => {
@@ -194,8 +200,6 @@ const InformacionBasica = ({
 
 
 
-
-
     return (
         <div>
             <h2>Ubicacion</h2>
@@ -318,7 +322,19 @@ const InformacionBasica = ({
                     <br />
                     <label>Direccion</label>
                     <input type="text" />
+
+
                 </div>
+
+                <div>
+                    <div>
+                        <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+                    </div>
+                    <div className={styles.map}>
+                        <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+                    </div>
+                </div>
+
             </div>
         </div>
     )

@@ -12,12 +12,14 @@
     "axios": "^0.27.2",
     "firebase": "^9.8.4",
     "firebase-admin": "^10.2.0",
+    "leaflet": "^1.9.1",
     "next": "^12.2.4",
     "react": "^18.2.0",
     "react-admin-firebase": "^4.0.2",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
     "react-easy-crop": "^4.4.2",
+    "react-leaflet": "^4.0.2",
     "react-select": "^5.4.0"
   },
   "devDependencies": {
