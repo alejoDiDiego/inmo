@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?"
@@ -15,6 +15,10 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
 
     const [ocultar, setOcultar] = useState(false)
 
+    // useEffect(() => {
+    //     handleClick()
+    // }, [searchText])
+
 
 
 
@@ -23,6 +27,7 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
             q: searchText,
             format: "json",
             addressdetails: 1,
+            limit: 5,
             polygon_geojson: 0
         }
         const queryString = new URLSearchParams(params).toString()
