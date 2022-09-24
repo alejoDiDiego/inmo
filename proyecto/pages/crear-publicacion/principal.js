@@ -18,6 +18,7 @@ const principal = () => {
   const [direccion, setDireccion] = useState("")
   const [codigoPostal, setCodigoPostal] = useState("")
   const [numeroDeCasa, setNumeroDeCasa] = useState("")
+  const [latLon, setLatLon] = useState({})
 
   useEffect(() => {
 
@@ -102,6 +103,8 @@ const principal = () => {
                 setCodigoPostal={setCodigoPostal}
                 numeroDeCasa={numeroDeCasa}
                 setNumeroDeCasa={setNumeroDeCasa}
+                latLon={latLon}
+                setLatLon={setLatLon}
               />
 
             </div>

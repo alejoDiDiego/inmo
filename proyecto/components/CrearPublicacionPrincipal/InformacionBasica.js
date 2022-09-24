@@ -20,7 +20,9 @@ const InformacionBasica = ({
     codigoPostal,
     setCodigoPostal,
     numeroDeCasa,
-    setNumeroDeCasa
+    setNumeroDeCasa,
+    latLon,
+    setLatLon
 }) => {
     const [selectPosition, setSelectPosition] = useState(null)
     const [searchText, setSearchText] = useState("")
@@ -59,7 +61,10 @@ const InformacionBasica = ({
                     setLocalidad(selectPosition.address.town)
                 } else if ("quarter" in selectPosition.address) {
                     setLocalidad(selectPosition.address.quarter)
-                } else {
+                } else if ("village" in selectPosition.address) {
+                    setLocalidad(selectPosition.address.village)
+                }
+                else {
                     setLocalidad("")
                 }
 
@@ -82,6 +87,8 @@ const InformacionBasica = ({
                 } else {
                     setNumeroDeCasa("")
                 }
+                setLatLon({lat: selectPosition.lat, lon: selectPosition.lon})
+                console.log(latLon)
 
 
 
@@ -93,6 +100,7 @@ const InformacionBasica = ({
                 setCodigoPostal("")
                 setDireccion("")
                 setNumeroDeCasa("")
+                setLatLon({})
             }
 
 
@@ -107,7 +115,7 @@ const InformacionBasica = ({
     const isNumber = e => {
         const result = e.target.value.replace(/\D/g, '');
         setNumeroDeCasa(result);
-      };
+    };
 
 
 

@@ -28,7 +28,8 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
             format: "json",
             addressdetails: 1,
             limit: 5,
-            polygon_geojson: 0
+            polygon_geojson: 0,
+            countrycodes: "AR"
         }
         const queryString = new URLSearchParams(params).toString()
         const requestOptions = {
