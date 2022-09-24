@@ -19,10 +19,12 @@ const InformacionBasica = ({
     setDireccion,
     codigoPostal,
     setCodigoPostal,
-    numeroDeCasa,
-    setNumeroDeCasa,
+    altura,
+    setAltura,
     latLon,
-    setLatLon
+    setLatLon,
+    pisoDepto,
+    setPisoDepto
 }) => {
     const [selectPosition, setSelectPosition] = useState(null)
     const [searchText, setSearchText] = useState("")
@@ -55,18 +57,22 @@ const InformacionBasica = ({
                     setMunicipio("")
                 }
 
+
                 if ("city" in selectPosition.address) {
-                    setLocalidad(selectPosition.address.city)
-                } else if ("town" in selectPosition.address) {
+                } if ("town" in selectPosition.address) {
                     setLocalidad(selectPosition.address.town)
-                } else if ("quarter" in selectPosition.address) {
+                } if ("quarter" in selectPosition.address) {
                     setLocalidad(selectPosition.address.quarter)
-                } else if ("village" in selectPosition.address) {
+                } if ("village" in selectPosition.address) {
                     setLocalidad(selectPosition.address.village)
+                } if ("suburb" in selectPosition.address) {
+                    setLocalidad(selectPosition.address.suburb)
+                } if ("neighbourhood" in selectPosition.address) {
+                    setLocalidad(selectPosition.address.neighbourhood)
+                } if ("district" in selectPosition.address) {
+                    setLocalidad(selectPosition.address.district)
                 }
-                else {
-                    setLocalidad("")
-                }
+
 
 
                 if ("postcode" in selectPosition.address) {
@@ -83,11 +89,11 @@ const InformacionBasica = ({
                 }
 
                 if ("house_number" in selectPosition.address) {
-                    setNumeroDeCasa(selectPosition.address.house_number)
+                    setAltura(selectPosition.address.house_number)
                 } else {
-                    setNumeroDeCasa("")
+                    setAltura("")
                 }
-                setLatLon({lat: selectPosition.lat, lon: selectPosition.lon})
+                setLatLon({ lat: selectPosition.lat, lon: selectPosition.lon })
                 console.log(latLon)
 
 
@@ -99,7 +105,8 @@ const InformacionBasica = ({
                 setLocalidad("")
                 setCodigoPostal("")
                 setDireccion("")
-                setNumeroDeCasa("")
+                setAltura("")
+                setPisoDepto("")
                 setLatLon({})
             }
 
@@ -114,7 +121,7 @@ const InformacionBasica = ({
 
     const isNumber = e => {
         const result = e.target.value.replace(/\D/g, '');
-        setNumeroDeCasa(result);
+        setAltura(result);
     };
 
 
@@ -163,8 +170,13 @@ const InformacionBasica = ({
                 </div>
 
                 <div>
-                    <label>Numero de la vivienda</label>
-                    <input value={numeroDeCasa} onChange={e => isNumber(e)} />
+                    <label>Altura</label>
+                    <input value={altura} onChange={e => isNumber(e)} />
+                </div>
+
+                <div>
+                    <label>Piso/Departamento</label>
+                    <input value={pisoDepto} onChange={e => setPisoDepto(e.target.value)} />
                 </div>
 
 

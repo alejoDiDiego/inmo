@@ -14,15 +14,15 @@
 .izquierda{
     position: fixed;
     width: 100%;
-    max-width: 700px;
+    max-width: 500px;
     min-height: 100vh;
     background-color: red;
 }
 
 .derecha{
-    margin-left: 700px;
+    margin-left: 500px;
     background-color: gray;
-    width: calc(100% - 700px);
+    width: calc(100% - 500px);
     min-height: calc(100vh - 45px);
     overflow-wrap: break-word;
     
