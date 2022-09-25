@@ -132,8 +132,16 @@ const SubirImagenes = ({
         })
     }
 
-    const handleDerecha = (index) => {
-
+    const handleDerecha = (index, m) => {
+        setImagenes(current => {
+            const part1 = current.slice(0, index)
+            console.log("part1: " + part1)
+            const part2 = current.slice(index + 1)
+            console.log("part2: " + part2)
+            part2.splice(1, 0, m)
+            console.log("part2 splice: " + part2)
+            return [...part1, ...part2]
+      })
     }
 
 
@@ -171,7 +179,7 @@ const SubirImagenes = ({
                                                     {
                                                         index + 1 != imagenes.length ?
                                                             (
-                                                                <img src='/arrow.png' onClick={() => {handleDerecha(index)}} className={styles.edit_icon} />
+                                                                <img src='/arrow.png' onClick={() => {handleDerecha(index, m)}} className={styles.edit_icon} />
                                                             ) : null
                                                     }
 
