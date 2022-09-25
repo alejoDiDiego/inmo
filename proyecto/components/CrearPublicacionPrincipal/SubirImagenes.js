@@ -121,10 +121,10 @@ const SubirImagenes = ({
 
     const handleIzquierda = (index, m) => {
         setImagenes(current => {
-              const part1 = current.slice(0, index)
-              const part2 = current.slice(index + 1)
-              part1.splice(-1, 0, m)
-              return [...part1, ...part2]
+            const part1 = current.slice(0, index)
+            const part2 = current.slice(index + 1)
+            part1.splice(-1, 0, m)
+            return [...part1, ...part2]
         })
     }
 
@@ -134,7 +134,7 @@ const SubirImagenes = ({
             const part2 = current.slice(index + 1)
             part2.splice(1, 0, m)
             return [...part1, ...part2]
-      })
+        })
     }
 
 
@@ -149,51 +149,56 @@ const SubirImagenes = ({
             <div>
                 <h2>Subir Imagenes</h2>
 
+                <p>ATENCION: si quiere volver a subir la ultima imagen cargada (por ejemplo si la borro), debe seleccionar otra imagen, cerrar la pestana de recortar y volver a cargar la imagen (que borro)</p>
+
                 <div>
                     <label htmlFor='file-img-perfil'>Subir imagen</label>
                     <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
                 </div>
 
-                {
-                    imagenes.map(m => {
-                        let urlCreator = window.URL || window.webkitURL;
-                        let index = imagenes.indexOf(m)
-                        console.log(index)
-                        return (
-                            <div className={styles.div_img}>
+                <div className={styles.div_imagenes}>
+                    {
+                        imagenes.map(m => {
+                            let urlCreator = window.URL || window.webkitURL;
+                            let index = imagenes.indexOf(m)
+                            console.log(index)
+                            return (
+                                <div className={styles.div_img}>
 
-                                <div className={styles.iconos_img}>
-                                    <img src='/edit.png' className={styles.edit_icon} />
-                                    <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
-                                    {
-                                        imagenes.length > 1 ?
-                                            (
-                                                <>
-                                                    {
-                                                        index + 1 != imagenes.length ?
-                                                            (
-                                                                <img src='/arrow.png' onClick={() => {handleDerecha(index, m)}} className={styles.edit_icon} />
-                                                            ) : null
-                                                    }
+                                    <div className={styles.iconos_img}>
+                                        <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
+                                        {
+                                            imagenes.length > 1 ?
+                                                (
+                                                    <>
+                                                        {
+                                                            index + 1 != imagenes.length ?
+                                                                (
+                                                                    <img src='/arrow.png' onClick={() => { handleDerecha(index, m) }} className={styles.delete_icon} />
+                                                                ) : null
+                                                        }
 
-                                                    {
-                                                        index != 0 ?
-                                                            (
-                                                                <img src='/arrow.png' onClick={() => {handleIzquierda(index, m)}} style={{ transform: "rotate(180deg)" }} className={styles.edit_icon} />
-                                                            ) : null
-                                                    }
-                                                </>
-                                            ) : null
-                                    }
+                                                        {
+                                                            index != 0 ?
+                                                                (
+                                                                    <img src='/arrow.png' onClick={() => { handleIzquierda(index, m) }} style={{ transform: "rotate(180deg)" }} className={styles.delete_icon} />
+                                                                ) : null
+                                                        }
+                                                    </>
+                                                ) : null
+                                        }
+                                    </div>
+
+                                    <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
                                 </div>
 
-                                <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
-                            </div>
+                                //  https://www.flaticon.com/free-icon/right-arrow_467282?term=arrow&related_id=467282# 
+                            )
+                        })
+                    }
+                </div>
 
-                            //  https://www.flaticon.com/free-icon/right-arrow_467282?term=arrow&related_id=467282# 
-                        )
-                    })
-                }
+
 
 
 

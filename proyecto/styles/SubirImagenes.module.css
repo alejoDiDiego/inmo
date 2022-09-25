@@ -207,6 +207,15 @@
 
 
 
+
+
+.div_imagenes{
+    display: flex;
+    gap: 20px;
+}
+
+
+
 .div_img{
     position: relative;
     width: 200px;
