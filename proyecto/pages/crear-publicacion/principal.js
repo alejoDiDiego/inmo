@@ -21,6 +21,20 @@ const principal = () => {
   const [pisoDepto, setPisoDepto] = useState("")
   const [latLon, setLatLon] = useState({})
 
+  const [tipoVivienda, setTipoVivienda] = useState("")
+
+  const [cantAmbientes, setCantAmbientes] = useState("")
+  const [cantBanos, setCantBanos] = useState("")
+  const [cantHabitaciones, setCantHabitaciones] = useState("")
+  const [cantCocheras, setCantCocheras] = useState("")
+
+  const [tipoPublicacion, setTipoPublicacion] = useState("")
+  const [precio, setPrecio] = useState("")
+  const [expensas, setExpensas] = useState("")
+
+
+
+
   useEffect(() => {
 
     const check = async () => {
@@ -90,27 +104,47 @@ const principal = () => {
 
             </div>
 
-            <div className={styles.derecha}>
-              <InformacionBasica
-                provincia={provincia}
-                setProvincia={setProvincia}
-                municipio={municipio}
-                setMunicipio={setMunicipio}
-                localidad={localidad}
-                setLocalidad={setLocalidad}
-                direccion={direccion}
-                setDireccion={setDireccion}
-                codigoPostal={codigoPostal}
-                setCodigoPostal={setCodigoPostal}
-                altura={altura}
-                setAltura={setAltura}
-                latLon={latLon}
-                setLatLon={setLatLon}
-                pisoDepto={pisoDepto}
-                setPisoDepto={setPisoDepto}
-              />
 
-            </div>
+                  <div className={styles.derecha}>
+                    <InformacionBasica
+                      provincia={provincia}
+                      setProvincia={setProvincia}
+                      municipio={municipio}
+                      setMunicipio={setMunicipio}
+                      localidad={localidad}
+                      setLocalidad={setLocalidad}
+                      direccion={direccion}
+                      setDireccion={setDireccion}
+                      codigoPostal={codigoPostal}
+                      setCodigoPostal={setCodigoPostal}
+                      altura={altura}
+                      setAltura={setAltura}
+                      latLon={latLon}
+                      setLatLon={setLatLon}
+                      pisoDepto={pisoDepto}
+                      setPisoDepto={setPisoDepto}
+                      setTipoVivienda={setTipoVivienda}
+                      cantAmbientes={cantAmbientes}
+                      setCantAmbientes={setCantAmbientes}
+                      cantBanos={cantBanos}
+                      setCantBanos={setCantBanos}
+                      cantHabitaciones={cantHabitaciones}
+                      setCantHabitaciones={setCantHabitaciones}
+                      cantCocheras={cantCocheras}
+                      setCantCocheras={setCantCocheras}
+                      setTipoPublicacion={setTipoPublicacion}
+                      precio={precio}
+                      setPrecio={setPrecio}
+                      expensas={expensas}
+                      setExpensas={setExpensas}
+                    />
+                  </div>
+
+
+
+
+
+
           </div>
 
         </Layout>

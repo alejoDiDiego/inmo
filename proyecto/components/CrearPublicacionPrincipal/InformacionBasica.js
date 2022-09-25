@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '../../styles/InformacionBasica.module.css'
 import dynamic from "next/dynamic"
 import SearchBox from './SearchBox'
+import Select from 'react-select'
 
 const MapNoSSR = dynamic(() => import("./Map"), {
     ssr: false,
@@ -24,10 +25,34 @@ const InformacionBasica = ({
     latLon,
     setLatLon,
     pisoDepto,
-    setPisoDepto
+    setPisoDepto,
+    setTipoVivienda,
+    cantAmbientes,
+    setCantAmbientes,
+    cantBanos,
+    setCantBanos,
+    cantHabitaciones,
+    setCantHabitaciones,
+    cantCocheras,
+    setCantCocheras,
+    setTipoPublicacion,
+    precio,
+    setPrecio,
+    expensas,
+    setExpensas,
 }) => {
     const [selectPosition, setSelectPosition] = useState(null)
     const [searchText, setSearchText] = useState("")
+
+    const tipoViviendaOptions =
+        [{ value: "casa", label: "Casa" },
+        { value: "departamento", label: "Departamento" }]
+
+    const tipoPublicacionOptions =
+        [{ value: "venta", label: "Venta" },
+        { value: "alquiler", label: "Alquiler" }]
+
+
 
     useEffect(() => {
         console.log(selectPosition)
@@ -71,6 +96,8 @@ const InformacionBasica = ({
                     setLocalidad(selectPosition.address.neighbourhood)
                 } if ("district" in selectPosition.address) {
                     setLocalidad(selectPosition.address.district)
+                } if ("county" in selectPosition.address) {
+                    setLocalidad(selectPosition.address.county)
                 }
 
 
@@ -120,9 +147,30 @@ const InformacionBasica = ({
 
 
     const isNumber = e => {
-        const result = e.target.value.replace(/\D/g, '');
-        setAltura(result);
+        return e.target.value.replace(/\D/g, '');
     };
+
+
+    const handleSelectTipoVivienda = (event) => {
+        if (event == null) {
+            setTipoVivienda("")
+        }
+        else {
+            const value = event.value
+            setTipoVivienda(value)
+        }
+    }
+
+
+    const handleSelectTipoPublicacion = (event) => {
+        if (event == null) {
+            setTipoPublicacion("")
+        }
+        else {
+            const value = event.value
+            setTipoPublicacion(value)
+        }
+    }
 
 
 
@@ -140,7 +188,7 @@ const InformacionBasica = ({
                     <div className={styles.map}>
                         <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
                     </div>
-                    <p>ATENCION 1: es posible que no encuentre su direccion. Haga click en el lugar mas exacto de su casa y luego escriba la direccion de esta debajo.</p>
+                    <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
                     <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
                 </div>
 
@@ -171,16 +219,62 @@ const InformacionBasica = ({
 
                 <div>
                     <label>Altura</label>
-                    <input value={altura} onChange={e => isNumber(e)} />
+                    <input value={altura} onChange={e => setAltura(e.target.value)} />
                 </div>
 
                 <div>
                     <label>Piso/Departamento</label>
                     <input value={pisoDepto} onChange={e => setPisoDepto(e.target.value)} />
                 </div>
+            </div>
 
 
+            <div>
+                <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: null, label: "Seleccione un tipo" }}></Select>
+            </div>
 
+
+            <h2>Informacion de la propiedad</h2>
+
+            <div>
+                <div>
+                    <label>Cantidad de ambientes</label>
+                    <input value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} />
+                </div>
+
+                <div>
+                    <label>Cantidad de baños</label>
+                    <input value={cantBanos} onChange={e => setCantBanos(isNumber(e))} />
+                </div>
+
+                <div>
+                    <label>Cantidad de habitacion</label>
+                    <input value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} />
+                </div>
+
+                <div>
+                    <label>Cantidad de cocheras</label>
+                    <input value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} />
+                </div>
+            </div>
+
+
+            <h2>Valor</h2>
+
+            <div>
+                <div>
+                    <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: null, label: "Seleccione un tipo" }}></Select>
+                </div>
+
+                <div>
+                    <label>Precio*</label>
+                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                </div>
+
+                <div>
+                    <label>Expensas</label>
+                    <input value={expensas} onChange={e => setExpensas(isNumber(e))} />
+                </div>
 
             </div>
         </div>
