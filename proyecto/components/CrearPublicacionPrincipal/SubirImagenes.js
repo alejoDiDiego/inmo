@@ -13,6 +13,8 @@ const SubirImagenes = ({
 
 
 
+
+
     const [cargandoCorte, setCargandoCorte] = useState(false)
     const [imageSrc, setImageSrc] = React.useState(null)
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -46,7 +48,7 @@ const SubirImagenes = ({
 
             setImagenes([...imagenes, blobPerfil])
             setCargandoCorte(false)
-            
+
 
 
             setImageSrc(null)
@@ -108,7 +110,14 @@ const SubirImagenes = ({
 
 
 
+    const handleEliminar = (index) => {
+        setImagenes(current =>
+            current.filter(img => {
+                return current.indexOf(img) != index
+            })
 
+        )
+    }
 
 
 
@@ -132,12 +141,14 @@ const SubirImagenes = ({
                         let urlCreator = window.URL || window.webkitURL;
                         let index = imagenes.indexOf(m)
                         console.log(index)
-                        return(
+                        return (
                             <div className={styles.div_img}>
+
                                 <div className={styles.iconos_img}>
                                     <img src='/edit.png' className={styles.edit_icon} />
-                                    <img src='/delete.png' className={styles.delete_icon} />
+                                    <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
                                 </div>
+
                                 <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
                             </div>
                         )
