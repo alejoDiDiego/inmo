@@ -58,7 +58,6 @@ const SubirImagenes = ({
             setCroppedAreaPixels(null)
             setModalPerfil(false)
             setImagePerfilUpload([])
-            setImageFondoUpload([])
 
 
         } catch (e) {
@@ -123,11 +122,8 @@ const SubirImagenes = ({
     const handleIzquierda = (index, m) => {
         setImagenes(current => {
               const part1 = current.slice(0, index)
-              console.log("part1: " + part1)
               const part2 = current.slice(index + 1)
               part1.splice(-1, 0, m)
-              console.log("part1 splice: " + part1)
-              console.log("part2: " + part2)
               return [...part1, ...part2]
         })
     }
@@ -135,11 +131,8 @@ const SubirImagenes = ({
     const handleDerecha = (index, m) => {
         setImagenes(current => {
             const part1 = current.slice(0, index)
-            console.log("part1: " + part1)
             const part2 = current.slice(index + 1)
-            console.log("part2: " + part2)
             part2.splice(1, 0, m)
-            console.log("part2 splice: " + part2)
             return [...part1, ...part2]
       })
     }
