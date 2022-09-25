@@ -1,0 +1,245 @@
+.edit_icon{
+    background-color: white;
+    padding: 3px;
+    border-radius: 3px;
+    
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.input_file{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal_crop {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgb(0 0 0 / 0.8);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 30px;
+
+
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #FFF;
+}
+
+.menu .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.menu_cargando{
+    width: 25px;
+    height: 29px;
+    margin-bottom: 30px;
+}
+
+
+.modal_crop_inside {
+    width: 700px;
+    height: 700px;
+    border-radius: 20px;
+    background-color: transparent;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+
+}
+
+
+.div_cropper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border-top-left-radius: 20px;
+    overflow: hidden;
+    border-top-right-radius: 20px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+
+
+.div_controls {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #E8EFF4;
+}
+
+
+.controls{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    gap: 30px;
+    display: flex;
+}
+
+
+
+.zoom_range {
+    width: 300px;
+    border-radius: 5px;
+    background: transparent;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.div_rotate {
+    display: flex;
+    gap: 20px;
+}
+
+
+.btn_rotate {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+    
+    border-bottom: 2px solid black;
+}
+
+.btn_rotate:hover {
+    border: 1px solid black;
+    border-bottom: 2px solid black;
+}
+
+.btn_rotate:active {
+    background-color: #0071b3;
+}
+
+.button_recortar {
+    margin-top: 30px;
+    align-self: center;
+    width: 120px;
+    height: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+    position: relative;
+    margin-bottom: 45px;
+}
+
+
+.button_back {
+    width: 120px;
+    height: 50px;
+    position: absolute;
+    background-color: #0071b3;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    top: 0;
+}
+
+.button_content {
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+    background-color: #E8EFF4;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid black;
+    top: 0;
+
+}
+
+
+
+
+
+
+
+
+
+.div_img{
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.iconos_img{
+    position: absolute;
+    right: 0px;
+}
+
+
+.img_subir{
+    width: 200px;
+    height: 200px;
+}
+
+
+
+.delete_icon{
+    background-color: white;
+    padding: 4px;
+    border-radius: 3px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 50px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+

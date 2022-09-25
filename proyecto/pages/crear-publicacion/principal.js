@@ -5,6 +5,9 @@ import Layout from '../../components/layout/Layout'
 import Head from 'next/head'
 import styles from '../../styles/CrearPublicacion.module.css'
 import InformacionBasica from '../../components/CrearPublicacionPrincipal/InformacionBasica'
+import Descripcion from '../../components/CrearPublicacionPrincipal/Descripcion'
+import SubirImagenes from '../../components/CrearPublicacionPrincipal/SubirImagenes'
+
 
 const principal = () => {
 
@@ -31,6 +34,15 @@ const principal = () => {
   const [tipoPublicacion, setTipoPublicacion] = useState("")
   const [precio, setPrecio] = useState("")
   const [expensas, setExpensas] = useState("")
+
+
+
+  const [titulo, setTitulo] = useState("")
+  const [descripcion, setDescripcion] = useState("")
+
+
+
+  const [imagenes, setImagenes] = useState([])
 
 
 
@@ -105,40 +117,53 @@ const principal = () => {
             </div>
 
 
-                  <div className={styles.derecha}>
-                    <InformacionBasica
-                      provincia={provincia}
-                      setProvincia={setProvincia}
-                      municipio={municipio}
-                      setMunicipio={setMunicipio}
-                      localidad={localidad}
-                      setLocalidad={setLocalidad}
-                      direccion={direccion}
-                      setDireccion={setDireccion}
-                      codigoPostal={codigoPostal}
-                      setCodigoPostal={setCodigoPostal}
-                      altura={altura}
-                      setAltura={setAltura}
-                      latLon={latLon}
-                      setLatLon={setLatLon}
-                      pisoDepto={pisoDepto}
-                      setPisoDepto={setPisoDepto}
-                      setTipoVivienda={setTipoVivienda}
-                      cantAmbientes={cantAmbientes}
-                      setCantAmbientes={setCantAmbientes}
-                      cantBanos={cantBanos}
-                      setCantBanos={setCantBanos}
-                      cantHabitaciones={cantHabitaciones}
-                      setCantHabitaciones={setCantHabitaciones}
-                      cantCocheras={cantCocheras}
-                      setCantCocheras={setCantCocheras}
-                      setTipoPublicacion={setTipoPublicacion}
-                      precio={precio}
-                      setPrecio={setPrecio}
-                      expensas={expensas}
-                      setExpensas={setExpensas}
-                    />
-                  </div>
+            <div className={styles.derecha}>
+              <InformacionBasica
+                provincia={provincia}
+                setProvincia={setProvincia}
+                municipio={municipio}
+                setMunicipio={setMunicipio}
+                localidad={localidad}
+                setLocalidad={setLocalidad}
+                direccion={direccion}
+                setDireccion={setDireccion}
+                codigoPostal={codigoPostal}
+                setCodigoPostal={setCodigoPostal}
+                altura={altura}
+                setAltura={setAltura}
+                latLon={latLon}
+                setLatLon={setLatLon}
+                pisoDepto={pisoDepto}
+                setPisoDepto={setPisoDepto}
+                setTipoVivienda={setTipoVivienda}
+                cantAmbientes={cantAmbientes}
+                setCantAmbientes={setCantAmbientes}
+                cantBanos={cantBanos}
+                setCantBanos={setCantBanos}
+                cantHabitaciones={cantHabitaciones}
+                setCantHabitaciones={setCantHabitaciones}
+                cantCocheras={cantCocheras}
+                setCantCocheras={setCantCocheras}
+                setTipoPublicacion={setTipoPublicacion}
+                precio={precio}
+                setPrecio={setPrecio}
+                expensas={expensas}
+                setExpensas={setExpensas}
+              />
+
+              <Descripcion
+                titulo={titulo}
+                setTitulo={setTitulo}
+                descripcion={descripcion}
+                setDescripcion={setDescripcion}
+              />
+
+              <SubirImagenes
+                imagenes={imagenes}
+                setImagenes={setImagenes}
+              />
+
+            </div>
 
 
 
