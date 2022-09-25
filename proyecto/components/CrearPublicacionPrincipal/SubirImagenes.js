@@ -145,7 +145,7 @@ const SubirImagenes = ({
 
 
     return (
-        <div>
+        <div className={styles.main}>
             <div>
                 <h2>Subir Imagenes</h2>
 

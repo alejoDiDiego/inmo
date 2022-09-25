@@ -177,7 +177,7 @@ const InformacionBasica = ({
 
 
     return (
-        <div>
+        <div className={styles.main}>
             <div>
                 <h2>Ubicacion</h2>
 
