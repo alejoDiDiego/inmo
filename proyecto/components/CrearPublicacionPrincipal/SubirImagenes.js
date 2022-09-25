@@ -148,7 +148,7 @@ const SubirImagenes = ({
         <div className={styles.main}>
             <div>
                 <h2>Subir Imagenes</h2>
-
+                <p>La primera imagen sera la principal de la publicacion</p>
                 <p>ATENCION: si quiere volver a subir la ultima imagen cargada (por ejemplo si la borro), debe seleccionar otra imagen, cerrar la pestana de recortar y volver a cargar la imagen (que borro)</p>
 
                 <div>

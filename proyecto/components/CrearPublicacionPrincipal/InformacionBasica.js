@@ -26,6 +26,7 @@ const InformacionBasica = ({
     setLatLon,
     pisoDepto,
     setPisoDepto,
+    tipoVivienda,
     setTipoVivienda,
     cantAmbientes,
     setCantAmbientes,
@@ -35,11 +36,14 @@ const InformacionBasica = ({
     setCantHabitaciones,
     cantCocheras,
     setCantCocheras,
+    tipoPublicacion,
     setTipoPublicacion,
     precio,
     setPrecio,
     expensas,
     setExpensas,
+    descripcion,
+    setDescripcion
 }) => {
     const [selectPosition, setSelectPosition] = useState(null)
     const [searchText, setSearchText] = useState("")
@@ -193,39 +197,36 @@ const InformacionBasica = ({
                 </div>
 
                 <div>
-                    <label>Provincia</label>
+                    <label>Provincia*</label>
                     <input value={provincia} onChange={e => setProvincia(e.target.value)} />
                 </div>
 
                 <div>
-                    <label>Municipio</label>
+                    <label>Municipio*</label>
                     <input value={municipio} onChange={e => setMunicipio(e.target.value)} />
                 </div>
 
                 <div>
-                    <label>Localidad</label>
+                    <label>Localidad*</label>
                     <input value={localidad} onChange={e => setLocalidad(e.target.value)} />
                 </div>
 
                 <div>
-                    <label>Codigo Postal</label>
+                    <label>Codigo Postal*</label>
                     <input value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} />
                 </div>
 
                 <div>
-                    <label>Direccion</label>
+                    <label>Direccion*</label>
                     <input value={direccion} onChange={e => setDireccion(e.target.value)} />
                 </div>
 
                 <div>
-                    <label>Altura</label>
+                    <label>Altura*</label>
                     <input value={altura} onChange={e => setAltura(e.target.value)} />
                 </div>
 
-                <div>
-                    <label>Piso/Departamento</label>
-                    <input value={pisoDepto} onChange={e => setPisoDepto(e.target.value)} />
-                </div>
+
             </div>
 
 
@@ -233,49 +234,88 @@ const InformacionBasica = ({
                 <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: null, label: "Seleccione un tipo" }}></Select>
             </div>
 
+            {
+                tipoVivienda == "departamento" ?
+                    (
+                        <div>
+                            <label>Piso/Departamento*</label>
+                            <input value={pisoDepto} onChange={e => setPisoDepto(e.target.value)} />
+                        </div>
+                    ) : null
 
-            <h2>Informacion de la propiedad</h2>
+            }
+
+
+
 
             <div>
+
+                <h2>Informacion de la propiedad</h2>
+
                 <div>
-                    <label>Cantidad de ambientes</label>
+                    <label>Cantidad de ambientes*</label>
                     <input value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} />
                 </div>
 
                 <div>
-                    <label>Cantidad de baños</label>
+                    <label>Cantidad de baños*</label>
                     <input value={cantBanos} onChange={e => setCantBanos(isNumber(e))} />
                 </div>
 
                 <div>
-                    <label>Cantidad de habitacion</label>
+                    <label>Cantidad de habitacion*</label>
                     <input value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} />
                 </div>
 
                 <div>
-                    <label>Cantidad de cocheras</label>
+                    <label>Cantidad de cocheras*</label>
                     <input value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} />
                 </div>
             </div>
 
 
-            <h2>Valor</h2>
+            <div>
+                <h2>Valor</h2>
+
+                <div>
+                    <div>
+                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: "venta", label: "Venta" }}></Select>
+                    </div>
+
+                    {
+                        tipoPublicacion == "venta" ?
+                            (
+
+                                <div>
+                                    <label>Precio USD$*</label>
+                                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                                </div>
+
+
+
+                            ) :
+                            (
+                                <div>
+                                    <label>Precio por mes ARS$*</label>
+                                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                                </div>
+                            )
+                    }
+
+                    <div>
+                        <label>Expensas</label>
+                        <input value={expensas} onChange={e => setExpensas(isNumber(e))} />
+                    </div>
+
+
+
+                </div>
+            </div>
+
 
             <div>
-                <div>
-                    <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: null, label: "Seleccione un tipo" }}></Select>
-                </div>
-
-                <div>
-                    <label>Precio*</label>
-                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Expensas</label>
-                    <input value={expensas} onChange={e => setExpensas(isNumber(e))} />
-                </div>
-
+                <h2>Descripcion</h2>
+                <textarea value={descripcion} onChange={e => setDescripcion(e.target.value)}></textarea>
             </div>
         </div>
     )
