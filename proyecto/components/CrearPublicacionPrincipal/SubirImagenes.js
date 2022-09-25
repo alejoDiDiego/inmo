@@ -120,6 +120,23 @@ const SubirImagenes = ({
     }
 
 
+    const handleIzquierda = (index, m) => {
+        setImagenes(current => {
+              const part1 = current.slice(0, index)
+              console.log("part1: " + part1)
+              const part2 = current.slice(index + 1)
+              part1.splice(-1, 0, m)
+              console.log("part1 splice: " + part1)
+              console.log("part2: " + part2)
+              return [...part1, ...part2]
+        })
+    }
+
+    const handleDerecha = (index) => {
+
+    }
+
+
 
 
 
@@ -147,10 +164,32 @@ const SubirImagenes = ({
                                 <div className={styles.iconos_img}>
                                     <img src='/edit.png' className={styles.edit_icon} />
                                     <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
+                                    {
+                                        imagenes.length > 1 ?
+                                            (
+                                                <>
+                                                    {
+                                                        index + 1 != imagenes.length ?
+                                                            (
+                                                                <img src='/arrow.png' onClick={() => {handleDerecha(index)}} className={styles.edit_icon} />
+                                                            ) : null
+                                                    }
+
+                                                    {
+                                                        index != 0 ?
+                                                            (
+                                                                <img src='/arrow.png' onClick={() => {handleIzquierda(index, m)}} style={{ transform: "rotate(180deg)" }} className={styles.edit_icon} />
+                                                            ) : null
+                                                    }
+                                                </>
+                                            ) : null
+                                    }
                                 </div>
 
                                 <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
                             </div>
+
+                            //  https://www.flaticon.com/free-icon/right-arrow_467282?term=arrow&related_id=467282# 
                         )
                     })
                 }
