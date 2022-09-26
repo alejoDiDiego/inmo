@@ -264,6 +264,7 @@ const principal = () => {
                       descripcion={descripcion}
                       imagenes={imagenes}
                       usuario={usuario}
+                      selectPosition={selectPosition}
                     />
                   )
               }

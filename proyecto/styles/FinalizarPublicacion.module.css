@@ -1,0 +1,10 @@
+.main{
+    position: relative;
+    z-index: 2;
+}
+
+
+.map{
+    height: 400px;
+    width: 800px;
+}

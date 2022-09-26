@@ -2,6 +2,12 @@ import React, { useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import styles from '../../styles/FinalizarPublicacion.module.css'
+import dynamic from "next/dynamic"
+
+const MapNoSSR = dynamic(() => import("./Map"), {
+  ssr: false,
+});
 
 const FinalizarPublicacion = ({
   setSiguiente,
@@ -23,7 +29,8 @@ const FinalizarPublicacion = ({
   expensas,
   descripcion,
   imagenes,
-  usuario
+  usuario,
+  selectPosition
 }) => {
 
   const [cargando, setCargando] = useState(false)
@@ -53,7 +60,8 @@ const FinalizarPublicacion = ({
       ["precio"]: precio,
       ["expensas"]: expensas,
       ["descripcion"]: descripcion,
-      ["publicador"]: usuario.uid
+      ["publicador"]: usuario.uid,
+      ["creado"]: Date.now()
     }
 
 
@@ -119,7 +127,10 @@ const FinalizarPublicacion = ({
 
 
   return (
-    <div>
+    <div className={styles.main}>
+      <div className={styles.map}>
+        <MapNoSSR selectPosition={selectPosition} />
+      </div>
       <p>{provincia}</p>
       <p>{municipio}</p>
       <p>{localidad}</p>
