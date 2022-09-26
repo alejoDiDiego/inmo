@@ -5,7 +5,6 @@ const Publicacion = ({ p }) => {
 
 
     const [imagen, setImagen] = useState(0)
-    const [imagenes, setImagenes] = useState(p.imagenes)
 
 
 
@@ -34,7 +33,7 @@ const Publicacion = ({ p }) => {
                         }
 
                         {
-                            imagen + 1 != imagenes.length ?
+                            imagen + 1 != p.imagenes.length ?
                             <img src='/arrow.png' onClick={() => setImagen(imagen + 1)} className={styles.delete_icon} /> : 
                             <div className={styles.fake}></div>
                         }
@@ -45,7 +44,7 @@ const Publicacion = ({ p }) => {
                 }
 
 
-                <img className={styles.img} src={imagenes[imagen]} />
+                <img className={styles.img} src={p.imagenes[imagen]} />
             </div>
 
             <div>
