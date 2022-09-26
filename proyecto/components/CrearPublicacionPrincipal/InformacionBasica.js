@@ -104,6 +104,8 @@ const InformacionBasica = ({
                     setLocalidad(selectPosition.address.district)
                 } if ("county" in selectPosition.address) {
                     setLocalidad(selectPosition.address.county)
+                } if("residential" in selectPosition.address){
+                    setLocalidad(selectPosition.address.residential)
                 }
 
 

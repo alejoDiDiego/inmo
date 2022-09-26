@@ -152,7 +152,12 @@ const SubirImagenes = ({
                 <p>ATENCION: si quiere volver a subir la ultima imagen cargada (por ejemplo si la borro), debe seleccionar otra imagen, cerrar la pestana de recortar y volver a cargar la imagen (que borro)</p>
 
                 <div>
-                    <label htmlFor='file-img-perfil'>Subir imagen</label>
+                    <div className={styles.div_button}>
+                        <label className={styles.buttonConfirm} htmlFor='file-img-perfil'>
+                            <div className={styles.buttonConfirm_back}></div>
+                            <div className={styles.buttonConfirm_content}><span>Subir Imagenes</span></div>
+                        </label>
+                    </div>
                     <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
                 </div>
 

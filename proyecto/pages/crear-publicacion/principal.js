@@ -245,6 +245,25 @@ const principal = () => {
                   (
                     <FinalizarPublicacion
                       setSiguiente={setSiguiente}
+                      provincia={provincia}
+                      municipio={municipio}
+                      localidad={localidad}
+                      direccion={direccion}
+                      codigoPostal={codigoPostal}
+                      altura={altura}
+                      pisoDepto={pisoDepto}
+                      latLon={latLon}
+                      tipoVivienda={tipoVivienda}
+                      cantAmbientes={cantAmbientes}
+                      cantBanos={cantBanos}
+                      cantHabitaciones={cantHabitaciones}
+                      cantCocheras={cantCocheras}
+                      tipoPublicacion={tipoPublicacion}
+                      precio={precio}
+                      expensas={expensas}
+                      descripcion={descripcion}
+                      imagenes={imagenes}
+                      usuario={usuario}
                     />
                   )
               }
