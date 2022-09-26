@@ -1,0 +1,30 @@
+.publicaciones{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.publicacion{
+    display: flex;
+    width: 100%;
+    max-width: 950px;
+    background-color: gray;
+    height: 300px;
+}
+
+.publicacion_div_img img{
+    width: 300px;
+    height: 300px;
+}
+
+
+
+.head{
+    display: flex;
+}
+
+
+.cantidades{
+    display: flex;
+    gap: 10px;
+}

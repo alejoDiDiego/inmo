@@ -4,6 +4,7 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import styles from '../../styles/FinalizarPublicacion.module.css'
 import dynamic from "next/dynamic"
+import { useRouter } from 'next/router'
 
 const MapNoSSR = dynamic(() => import("./Map"), {
   ssr: false,
@@ -17,7 +18,8 @@ const FinalizarPublicacion = ({
   direccion,
   codigoPostal,
   altura,
-  pisoDepto,
+  piso,
+  numeroLetraDepto,
   latLon,
   tipoVivienda,
   cantAmbientes,
@@ -30,12 +32,15 @@ const FinalizarPublicacion = ({
   descripcion,
   imagenes,
   usuario,
-  selectPosition
+  selectPosition,
+  mt2Totales,
+  mt2Utilizados,
 }) => {
 
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState("")
 
+  const router = useRouter()
 
 
   const handlePublicar = async () => {
@@ -49,13 +54,16 @@ const FinalizarPublicacion = ({
       ["direccion"]: direccion,
       ["codigoPostal"]: codigoPostal,
       ["altura"]: altura,
-      ["pisoDepto"]: pisoDepto,
+      ["piso"]: piso,
+      ["numeroLetraDepto"]: numeroLetraDepto,
       ["latLon"]: latLon,
       ["tipoVivienda"]: tipoVivienda,
       ["cantAmbientes"]: cantAmbientes,
       ["cantBanos"]: cantBanos,
       ["cantHabitaciones"]: cantHabitaciones,
       ["cantCocheras"]: cantCocheras,
+      ["mt2Totales"]: mt2Totales,
+      ["mt2Utilizados"]: mt2Utilizados,
       ["tipoPublicacion"]: tipoPublicacion,
       ["precio"]: precio,
       ["expensas"]: expensas,
@@ -108,6 +116,7 @@ const FinalizarPublicacion = ({
 
       setCargando(false)
       console.log("Listo")
+      router.push("/perfil/principal")
 
     } catch (err) {
       console.log(err)
@@ -131,22 +140,25 @@ const FinalizarPublicacion = ({
       <div className={styles.map}>
         <MapNoSSR selectPosition={selectPosition} />
       </div>
-      <p>{provincia}</p>
-      <p>{municipio}</p>
-      <p>{localidad}</p>
-      <p>{direccion}</p>
-      <p>{codigoPostal}</p>
-      <p>{altura}</p>
-      <p>{pisoDepto}</p>
-      <p>{tipoVivienda}</p>
-      <p>{cantAmbientes}</p>
-      <p>{cantBanos}</p>
-      <p>{cantHabitaciones}</p>
-      <p>{cantCocheras}</p>
-      <p>{tipoPublicacion}</p>
-      <p>{precio}</p>
-      <p>{expensas}</p>
-      <p>{descripcion}</p>
+      <p>provincia: {provincia}</p>
+      <p>municipio: {municipio}</p>
+      <p>localidad: {localidad}</p>
+      <p>direccion: {direccion}</p>
+      <p>codigoPostal: {codigoPostal}</p>
+      <p>altura: {altura}</p>
+      <p>piso: {piso}</p>
+      <p>numeroLetraDepto: {numeroLetraDepto}</p>
+      <p>tipoVivienda: {tipoVivienda}</p>
+      <p>cantAmbientes: {cantAmbientes}</p>
+      <p>cantBanos: {cantBanos}</p>
+      <p>cantHabitaciones: {cantHabitaciones}</p>
+      <p>cantCocheras: {cantCocheras}</p>
+      <p>mt2Totales: {mt2Totales}</p>
+      <p>mt2Utilizados: {mt2Utilizados}</p>
+      <p>tipoPublicacion: {tipoPublicacion}</p>
+      <p>precio: {precio}</p>
+      <p>expensas: {expensas}</p>
+      <p>descripcion: {descripcion}</p>
       {
         imagenes.map(m => {
           let urlCreator = window.URL || window.webkitURL;

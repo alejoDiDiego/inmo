@@ -13,6 +13,7 @@ import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
 import { updateProfile } from 'firebase/auth'
 import Select from 'react-select'
+import MisPublicaciones from '../../components/Perfil/MisPublicaciones'
 
 
 
@@ -1481,6 +1482,19 @@ const principal = () => {
 
 
                             </div>
+
+
+
+
+
+
+
+
+
+
+                            <MisPublicaciones
+                                usuario={usuario}
+                            />
 
 
 

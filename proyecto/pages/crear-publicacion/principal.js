@@ -24,15 +24,20 @@ const principal = () => {
   const [direccion, setDireccion] = useState("")
   const [codigoPostal, setCodigoPostal] = useState("")
   const [altura, setAltura] = useState("")
-  const [pisoDepto, setPisoDepto] = useState("")
+
   const [latLon, setLatLon] = useState({})
 
   const [tipoVivienda, setTipoVivienda] = useState("casa")
+
+  const [piso, setPiso] = useState("")
+  const [numeroLetraDepto, setNumeroLetraDepto] = useState("")
 
   const [cantAmbientes, setCantAmbientes] = useState("")
   const [cantBanos, setCantBanos] = useState("")
   const [cantHabitaciones, setCantHabitaciones] = useState("")
   const [cantCocheras, setCantCocheras] = useState("")
+  const [mt2Totales, setMt2Totales] = useState("")
+  const [mt2Utilizados, setMt2Utilizados] = useState("")
 
   const [tipoPublicacion, setTipoPublicacion] = useState("venta")
   const [precio, setPrecio] = useState("")
@@ -115,13 +120,20 @@ const principal = () => {
       tipoPublicacion.length == 0 ||
       precio.length == 0 ||
       descripcion.length == 0 ||
-      imagenes.length == 0
+      imagenes.length == 0 ||
+      mt2Totales.length == 0 ||
+      mt2Utilizados.length == 0
     ) {
       setErrorSiguiente(true)
       return
     }
 
-    if (tipoVivienda == "departamento" && pisoDepto.length == 0) {
+    if (tipoVivienda == "departamento" && piso.length == 0) {
+      setErrorSiguiente(true)
+      return
+    }
+
+    if (tipoVivienda == "departamento" && piso.length == 0 && numeroLetraDepto.length == 0) {
       setErrorSiguiente(true)
       return
     }
@@ -201,8 +213,8 @@ const principal = () => {
                         setAltura={setAltura}
                         latLon={latLon}
                         setLatLon={setLatLon}
-                        pisoDepto={pisoDepto}
-                        setPisoDepto={setPisoDepto}
+                        piso={piso}
+                        setPiso={setPiso}
                         tipoVivienda={tipoVivienda}
                         setTipoVivienda={setTipoVivienda}
                         cantAmbientes={cantAmbientes}
@@ -221,6 +233,12 @@ const principal = () => {
                         setExpensas={setExpensas}
                         descripcion={descripcion}
                         setDescripcion={setDescripcion}
+                        mt2Totales={mt2Totales}
+                        setMt2Totales={setMt2Totales}
+                        mt2Utilizados={mt2Utilizados}
+                        setMt2Utilizados={setMt2Utilizados}
+                        numeroLetraDepto={numeroLetraDepto}
+                        setNumeroLetraDepto={setNumeroLetraDepto}
                       />
 
 
@@ -251,7 +269,8 @@ const principal = () => {
                       direccion={direccion}
                       codigoPostal={codigoPostal}
                       altura={altura}
-                      pisoDepto={pisoDepto}
+                      piso={piso}
+                      numeroLetraDepto={numeroLetraDepto}
                       latLon={latLon}
                       tipoVivienda={tipoVivienda}
                       cantAmbientes={cantAmbientes}
@@ -265,6 +284,8 @@ const principal = () => {
                       imagenes={imagenes}
                       usuario={usuario}
                       selectPosition={selectPosition}
+                      mt2Totales={mt2Totales}
+                      mt2Utilizados={mt2Utilizados}
                     />
                   )
               }

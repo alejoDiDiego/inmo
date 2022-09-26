@@ -24,8 +24,8 @@ const InformacionBasica = ({
     setAltura,
     latLon,
     setLatLon,
-    pisoDepto,
-    setPisoDepto,
+    piso,
+    setPiso,
     tipoVivienda,
     setTipoVivienda,
     cantAmbientes,
@@ -36,6 +36,10 @@ const InformacionBasica = ({
     setCantHabitaciones,
     cantCocheras,
     setCantCocheras,
+    mt2Totales,
+    setMt2Totales,
+    mt2Utilizados,
+    setMt2Utilizados,
     tipoPublicacion,
     setTipoPublicacion,
     precio,
@@ -45,9 +49,11 @@ const InformacionBasica = ({
     descripcion,
     setDescripcion,
     selectPosition,
-    setSelectPosition
+    setSelectPosition,
+    numeroLetraDepto,
+    setNumeroLetraDepto
 }) => {
-    
+
     const [searchText, setSearchText] = useState("")
 
     const tipoViviendaOptions =
@@ -104,7 +110,7 @@ const InformacionBasica = ({
                     setLocalidad(selectPosition.address.district)
                 } if ("county" in selectPosition.address) {
                     setLocalidad(selectPosition.address.county)
-                } if("residential" in selectPosition.address){
+                } if ("residential" in selectPosition.address) {
                     setLocalidad(selectPosition.address.residential)
                 }
 
@@ -141,7 +147,7 @@ const InformacionBasica = ({
                 setCodigoPostal("")
                 setDireccion("")
                 setAltura("")
-                setPisoDepto("")
+                setPiso("")
                 setLatLon({})
             }
 
@@ -183,7 +189,7 @@ const InformacionBasica = ({
 
 
 
-    
+
     function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
         for (var i = 0; i < splitStr.length; i++) {
@@ -254,10 +260,24 @@ const InformacionBasica = ({
                 tipoVivienda == "departamento" ?
                     (
                         <div>
-                            <label>Piso/Departamento*</label>
-                            <input value={pisoDepto} onChange={e => setPisoDepto(e.target.value)} />
+                            <div>
+                                <label>Piso*</label>
+                                <input value={piso} onChange={e => setPiso(isNumber(e))} />
+                            </div>
+
+                            <div>
+                                <label>Depto*</label>
+                                <input placeholder="Ej: A / 1 / 1C" value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} />
+                            </div>
+
                         </div>
-                    ) : null
+                    ) :
+                    (
+                        <div>
+                            <label>Depto/Division</label>
+                            <input value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} />
+                        </div>
+                    )
 
             }
 
@@ -286,6 +306,16 @@ const InformacionBasica = ({
                 <div>
                     <label>Cantidad de cocheras*</label>
                     <input value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} />
+                </div>
+
+                <div>
+                    <label>Mt<sup>2</sup> Totales*</label>
+                    <input value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} />
+                </div>
+
+                <div>
+                    <label>Mt<sup>2</sup> Utilizados*</label>
+                    <input value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} />
                 </div>
             </div>
 
