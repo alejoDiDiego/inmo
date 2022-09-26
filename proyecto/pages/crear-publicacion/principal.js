@@ -6,7 +6,7 @@ import Head from 'next/head'
 import styles from '../../styles/CrearPublicacion.module.css'
 import InformacionBasica from '../../components/CrearPublicacionPrincipal/InformacionBasica'
 import SubirImagenes from '../../components/CrearPublicacionPrincipal/SubirImagenes'
-import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/FInalizarPublicacion'
+import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/FinalizarPublicacion'
 
 
 
@@ -15,6 +15,8 @@ const principal = () => {
 
   const { usuario } = useContext(FirebaseContext)
   const [loading, setLoading] = useState(true)
+
+  const [selectPosition, setSelectPosition] = useState(null)
 
   const [provincia, setProvincia] = useState("")
   const [municipio, setMunicipio] = useState("")
@@ -25,14 +27,14 @@ const principal = () => {
   const [pisoDepto, setPisoDepto] = useState("")
   const [latLon, setLatLon] = useState({})
 
-  const [tipoVivienda, setTipoVivienda] = useState("")
+  const [tipoVivienda, setTipoVivienda] = useState("casa")
 
   const [cantAmbientes, setCantAmbientes] = useState("")
   const [cantBanos, setCantBanos] = useState("")
   const [cantHabitaciones, setCantHabitaciones] = useState("")
   const [cantCocheras, setCantCocheras] = useState("")
 
-  const [tipoPublicacion, setTipoPublicacion] = useState("")
+  const [tipoPublicacion, setTipoPublicacion] = useState("venta")
   const [precio, setPrecio] = useState("")
   const [expensas, setExpensas] = useState("")
 
@@ -105,7 +107,6 @@ const principal = () => {
       direccion.length == 0 ||
       codigoPostal.length == 0 ||
       altura.length == 0 ||
-      latLon.hasOwnProperty("lat") == 0 && latLon.hasOwnProperty("lon") ||
       tipoVivienda.length == 0 ||
       cantAmbientes.length == 0 ||
       cantBanos.length == 0 ||
@@ -184,6 +185,8 @@ const principal = () => {
                   (
                     <div>
                       <InformacionBasica
+                        selectPosition={selectPosition}
+                        setSelectPosition={setSelectPosition}
                         provincia={provincia}
                         setProvincia={setProvincia}
                         municipio={municipio}

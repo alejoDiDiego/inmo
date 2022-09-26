@@ -43,9 +43,11 @@ const InformacionBasica = ({
     expensas,
     setExpensas,
     descripcion,
-    setDescripcion
+    setDescripcion,
+    selectPosition,
+    setSelectPosition
 }) => {
-    const [selectPosition, setSelectPosition] = useState(null)
+    
     const [searchText, setSearchText] = useState("")
 
     const tipoViviendaOptions =
@@ -179,6 +181,18 @@ const InformacionBasica = ({
 
 
 
+    
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
+    }
+
+
+
+
 
     return (
         <div className={styles.main}>
@@ -231,7 +245,7 @@ const InformacionBasica = ({
 
 
             <div>
-                <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: null, label: "Seleccione un tipo" }}></Select>
+                <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
             </div>
 
             {
@@ -279,7 +293,7 @@ const InformacionBasica = ({
 
                 <div>
                     <div>
-                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: "venta", label: "Venta" }}></Select>
+                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
                     </div>
 
                     {

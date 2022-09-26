@@ -46,8 +46,6 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
             .catch((err) => console.log("err ", err))
     }
 
-    console.log(selectPosition)
-
     return (
         <div>
             <div>

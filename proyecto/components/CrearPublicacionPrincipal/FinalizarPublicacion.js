@@ -5,7 +5,7 @@ const FinalizarPublicacion = ({
 }) => {
   return (
     <div>
-        <button onClick={setSiguiente(false)}>Volver</button>
+        <button onClick={() => setSiguiente(false)}>Volver</button>
     </div>
   )
 }
