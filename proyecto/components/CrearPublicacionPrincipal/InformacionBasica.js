@@ -210,7 +210,9 @@ const InformacionBasica = ({
                 <div className={styles.mapPlusData}>
                     <div className={styles.mapPlusInfo}>
                         <div className={styles.mapa}>
+                            <div className={styles.search}>
                             <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
+                            </div>
                             <div className={styles.map}>
                                 <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
                             </div>
@@ -240,19 +242,19 @@ const InformacionBasica = ({
                         <div className={styles.fieldDir}>
                             <p>Codigo Postal*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input maxLength={100}  value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} type="text" placeholder="&nbsp;" />
+                                <input maxLength={100} value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
                         <div className={styles.fieldDir}>
                             <p>Direccion*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input maxLength={100}  value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="&nbsp;" />
+                                <input maxLength={100} value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
                         <div className={styles.fieldDir}>
                             <p>Altura*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input maxLength={100}  value={altura} onChange={e => setAltura(e.target.value)} type="text" placeholder="&nbsp;" />
+                                <input maxLength={100} value={altura} onChange={e => setAltura(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
                     </div>

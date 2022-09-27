@@ -34,9 +34,22 @@
     margin-left: 600px;
 }
 
+.search{
+    position: relative;
+    z-index: 3;
+    margin-bottom: -60px;
+    margin-left: 80px;
+}
+
 .map {
+    position: relative;
+    z-index: 2;
     height: 550px;
     width: 700px;
+}
+
+.prueba{
+    position: absolute;
 }
 
 .mapa {
@@ -53,6 +66,11 @@
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    margin-top: -20px;
+}
+
+.ubiButton{
+    position: absolute;
 }
 
 .fieldDir {
@@ -125,13 +143,14 @@
     background-size: 100% 0.15em, 100% 0.1em, 100%;
 }
 
-
-
-
-
-
 .custom_field i {
     position: relative;
     margin-left: -30px;
     cursor: pointer;
 }
+
+.searchButton{
+    height: 40px;
+    width: 40px;
+}
+

@@ -50,10 +50,15 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
     return (
         <div>
             <div>
-                <input style={{ width: "600px" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+                <label className={`${styles.custom_field} ${styles.two}`}>
+                    <input value={searchText} onChange={(e) => setSearchText(e.target.value)} type="text" placeholder="&nbsp;" />
+                </label>
                 <button
+                    className={styles.searchButton}
                     onClick={() => handleClick()}
-                >Buscar</button>
+                >
+                    <img src='/search2.png' />
+                </button>
             </div>
 
             {
@@ -63,7 +68,7 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
                             {
                                 listPlace.map(p => {
                                     return (
-                                        <button key={p?.osm_id} onClick={() => {setSelectPosition(p); setListPlace([])}}>
+                                        <button className={styles.ubiButton} key={p?.osm_id} onClick={() => { setSelectPosition(p); setListPlace([]) }}>
                                             <img src='/location-sign-azul.png' />
                                             <p>{p?.display_name}</p>
                                         </button>
