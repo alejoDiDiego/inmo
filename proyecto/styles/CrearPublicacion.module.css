@@ -7,8 +7,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-
 }
 
 .izquierda {
@@ -25,8 +23,8 @@
 }
 
 .derecha {
+    margin-top: 20px;
     padding: 20px;
-    padding-top: 50px;
     display: flex;
     width: 100%;
     max-width: calc(100% - 600px);
@@ -34,7 +32,7 @@
     margin-left: 600px;
 }
 
-.search{
+.search {
     position: relative;
     z-index: 3;
     margin-bottom: -60px;
@@ -48,13 +46,10 @@
     width: 700px;
 }
 
-.prueba{
-    position: absolute;
-}
-
 .mapa {
-    height: 800px;
+    height: 675px;
     width: 700px;
+    margin-top: 25px;
 }
 
 .mapPlusData {
@@ -69,8 +64,23 @@
     margin-top: -20px;
 }
 
-.ubiButton{
+.ubiButton {
+    position: relative;
+    width: 500px;
+    background-color: #fafafac1 ;
+    border: 0px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.ubiButton:hover{
+    background-color: #fafafa;
+}
+
+.results {
     position: absolute;
+    display: flex;
+    flex-direction: column;
 }
 
 .fieldDir {
@@ -133,7 +143,7 @@
     background:
         linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
         linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
-        linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+        linear-gradient(90deg, #fafafac1, #fafafac1) left bottom/100% no-repeat;
     transition: background-size 0.3s ease;
 }
 
@@ -149,8 +159,53 @@
     cursor: pointer;
 }
 
-.searchButton{
-    height: 40px;
-    width: 40px;
+.searchButton {
+    display: flex;
+    border-radius: 5px;
+    height: 35px;
+    width: 35px;
+    background-color: #fafafac1;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
 }
 
+.searchButton img {
+    width: 20px;
+    height: 20px;
+}
+
+.searchButton:hover {
+    background-color: #fafafa;
+
+}
+
+.searchController {
+    display: flex;
+    flex-direction: row;
+}
+
+.ubiTitle{
+    margin-bottom: 10px;
+}
+
+.advices{
+    margin-top: 30px;
+}
+
+.descripArea{
+    width: 450px;
+    height: 130px;
+    resize: none;
+    font-family: "lato";
+    padding: 12px;
+    font-size: 14px;
+    border:  1px solid #aaa;
+    border-radius: 3px;
+}
+
+.descripArea:focus {
+    outline: none !important;
+    border:2px solid #0071b3;
+}

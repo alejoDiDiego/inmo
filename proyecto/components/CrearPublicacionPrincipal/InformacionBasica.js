@@ -204,20 +204,24 @@ const InformacionBasica = ({
 
     return (
         <div className={styles.main}>
-            <div>
+
+            <div className={styles.ubicacion}>
                 <h1>Crear Publicacion</h1>
-                <h2>Ubicacion</h2>
+                <p>Los campos marcados con un asterisco (*) son obligatorios</p>
+                <h2 className={styles.ubiTitle}>1. Ubicacion</h2>
                 <div className={styles.mapPlusData}>
                     <div className={styles.mapPlusInfo}>
                         <div className={styles.mapa}>
                             <div className={styles.search}>
-                            <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
+                                <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
                             </div>
                             <div className={styles.map}>
                                 <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
                             </div>
-                            <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
-                            <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
+                            <div className={styles.advices}>
+                                <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
+                                <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
+                            </div>
                         </div>
                     </div>
                     <div className={styles.ubiInput}>
@@ -261,116 +265,140 @@ const InformacionBasica = ({
                 </div>
             </div>
 
-
-            <div>
-                <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
-            </div>
-
-            {
-                tipoVivienda == "departamento" ?
-                    (
-                        <div>
-                            <div>
-                                <label>Piso*</label>
-                                <input value={piso} onChange={e => setPiso(isNumber(e))} />
-                            </div>
-
-                            <div>
-                                <label>Depto*</label>
-                                <input placeholder="Ej: A / 1 / 1C" value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} />
-                            </div>
-
-                        </div>
-                    ) :
-                    (
-                        <div>
-                            <label>Depto/Division</label>
-                            <input value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} />
-                        </div>
-                    )
-
-            }
-
-
-
-
-            <div>
-                <h2>Informacion de la propiedad</h2>
+            <div className={styles.informacionV}>
 
                 <div>
-                    <label>Cantidad de ambientes*</label>
-                    <input value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} />
-                </div>
+                    <h2>2. Informacion de la propiedad</h2>
+                    <h3>Informacion basica</h3>
 
-                <div>
-                    <label>Cantidad de baños*</label>
-                    <input value={cantBanos} onChange={e => setCantBanos(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Cantidad de habitacion*</label>
-                    <input value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Cantidad de cocheras*</label>
-                    <input value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Mt<sup>2</sup> Totales*</label>
-                    <input value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Mt<sup>2</sup> Utilizados*</label>
-                    <input value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} />
-                </div>
-            </div>
-
-
-            <div>
-                <h2>Valor</h2>
-
-                <div>
                     <div>
-                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
+                        <label>Tipo de propiedad</label>
+                        <div>
+                            <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
+                        </div>
                     </div>
 
                     {
-                        tipoPublicacion == "venta" ?
+                        tipoVivienda == "departamento" ?
                             (
-
                                 <div>
-                                    <label>Precio USD$*</label>
-                                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                                    <div className={styles.fieldDir}>
+                                        <p>Piso*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={25} value={piso} onChange={e => setPiso(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                        </label>
+                                    </div>
+                                    <div className={styles.fieldDir}>
+                                        <p>Depto*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
+                                        </label>
+                                    </div>
                                 </div>
-
-
-
                             ) :
                             (
-                                <div>
-                                    <label>Precio por mes ARS$*</label>
-                                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                                <div className={styles.fieldDir}>
+                                    <p>Depto/Division*:</p>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
+                                    </label>
                                 </div>
                             )
+
                     }
 
-                    <div>
-                        <label>Expensas</label>
-                        <input value={expensas} onChange={e => setExpensas(isNumber(e))} />
+
+                    <div className={styles.fieldDir}>
+                        <p>Cantidad de ambientes*:</p>
+                        <label className={`${styles.custom_field} ${styles.two}`}>
+                            <input maxLength={25} value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} type="text" placeholder="&nbsp;" />
+                        </label>
                     </div>
-
-
-
+                    <div className={styles.fieldDir}>
+                        <p>Cantidad de baños*:</p>
+                        <label className={`${styles.custom_field} ${styles.two}`}>
+                            <input maxLength={25} value={cantBanos} onChange={e => setCantBanos(isNumber(e))} type="text" placeholder="&nbsp;" />
+                        </label>
+                    </div>
+                    <div className={styles.fieldDir}>
+                        <p>Cantidad de habitaciones*:</p>
+                        <label className={`${styles.custom_field} ${styles.two}`}>
+                            <input maxLength={25} value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} type="text" placeholder="&nbsp;" />
+                        </label>
+                    </div>
+                    <div className={styles.fieldDir}>
+                        <p>Cantidad de cocheras*:</p>
+                        <label className={`${styles.custom_field} ${styles.two}`}>
+                            <input maxLength={25} value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} type="text" placeholder="&nbsp;" />
+                        </label>
+                    </div>
+                    <div className={styles.fieldDir}>
+                        <p>Mt<sup>2</sup> Totales*:</p>
+                        <label className={`${styles.custom_field} ${styles.two}`}>
+                            <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
+                        </label>
+                    </div>
+                    <div className={styles.fieldDir}>
+                        <p>Mt<sup>2</sup> Utilizados*:</p>
+                        <label className={`${styles.custom_field} ${styles.two}`}>
+                            <input maxLength={25} value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} type="text" placeholder="&nbsp;" />
+                        </label>
+                    </div>
                 </div>
-            </div>
 
 
-            <div>
-                <h2>Descripcion</h2>
-                <textarea value={descripcion} onChange={e => setDescripcion(e.target.value)}></textarea>
+                <div>
+                    <h3>Valor</h3>
+
+                    <div>
+                        <div>
+                            <label>Tipo de publicacion</label>
+                            <div>
+                                <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
+                            </div>
+                        </div>
+
+                        {
+                            tipoPublicacion == "venta" ?
+                                (
+
+                                    <div className={styles.fieldDir}>
+                                        <p>Precio USD$*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={100} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                        </label>
+                                    </div>
+
+
+
+                                ) :
+                                (
+                                    <div className={styles.fieldDir}>
+                                        <p>Precio por mes ARS$*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={100} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                        </label>
+                                    </div>
+                                )
+                        }
+
+                        <div className={styles.fieldDir}>
+                            <p>Expensas:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={expensas} onChange={e => setExpensas(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
+                    <div className={styles.fieldDir}>
+                        <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
     )

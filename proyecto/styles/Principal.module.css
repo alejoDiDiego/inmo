@@ -277,12 +277,6 @@
 
 
 
-
-
-
-
-
-
 .infoChange_container{
     position: fixed;
     display: flex;
@@ -661,10 +655,6 @@
 .custom_field.two input:focus {
     background-size: 100% 0.15em, 100% 0.1em, 100%;
 }
-
-
-
-
 
 
 .custom_field i{

@@ -49,29 +49,27 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
 
     return (
         <div>
-            <div>
+            <div className={styles.searchController}>
                 <label className={`${styles.custom_field} ${styles.two}`}>
-                    <input value={searchText} onChange={(e) => setSearchText(e.target.value)} type="text" placeholder="&nbsp;" />
+                    <input value={searchText} onChange={(e) => setSearchText(e.target.value)} type="text" placeholder="Escriba una ubicación" />
                 </label>
-                <button
-                    className={styles.searchButton}
-                    onClick={() => handleClick()}
-                >
-                    <img src='/search2.png' />
-                </button>
+                <div className={styles.searchButton} onClick={() => handleClick()}>
+                    <img src='/search2.png'/>
+                </div>
             </div>
 
             {
                 listPlace.length > 0 ?
                     (
-                        <div>
+                        <div className={styles.results}>
                             {
                                 listPlace.map(p => {
                                     return (
-                                        <button className={styles.ubiButton} key={p?.osm_id} onClick={() => { setSelectPosition(p); setListPlace([]) }}>
-                                            <img src='/location-sign-azul.png' />
-                                            <p>{p?.display_name}</p>
-                                        </button>
+                                        <div>
+                                            <button className={styles.ubiButton} key={p?.osm_id} onClick={() => { setSelectPosition(p); setListPlace([]) }}>
+                                                <p>{p?.display_name}</p>
+                                            </button>
+                                        </div>
                                     )
                                 })
                             }
