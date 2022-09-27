@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../styles/InformacionBasica.module.css'
+import styles from '../../styles/CrearPublicacion.module.css'
 import dynamic from "next/dynamic"
 import SearchBox from './SearchBox'
 import Select from 'react-select'
@@ -205,19 +205,19 @@ const InformacionBasica = ({
     return (
         <div className={styles.main}>
             <div>
+                <h1>Crear Publicacion</h1>
                 <h2>Ubicacion</h2>
 
-                <div>
-                    <div>
+                <div className={styles.mapPlusInfo}>
+                    <div className={styles.mapa}>
                         <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
-                    </div>
-                    <div className={styles.map}>
-                        <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
-                    </div>
-                    <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
-                    <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
+                        <div className={styles.map}>
+                            <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+                        </div>
+                        <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
+                        <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
+                    </div>    
                 </div>
-
                 <div>
                     <label>Provincia*</label>
                     <input value={provincia} onChange={e => setProvincia(e.target.value)} />
@@ -285,7 +285,6 @@ const InformacionBasica = ({
 
 
             <div>
-
                 <h2>Informacion de la propiedad</h2>
 
                 <div>
