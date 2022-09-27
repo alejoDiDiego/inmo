@@ -272,9 +272,9 @@ const InformacionBasica = ({
                     <h3>Informacion basica</h3>
 
                     <div>
-                        <label>Tipo de propiedad</label>
+                        <p className={styles.selectLabel}>Tipo de propiedad</p>
                         <div>
-                            <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
+                            <Select className={styles.selectContainer} options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
                         </div>
                     </div>
 
@@ -347,13 +347,13 @@ const InformacionBasica = ({
                 </div>
 
 
-                <div>
-                    <h3>Valor</h3>
+                <div className={styles.valueInfoContainer}>
+                    <div className={styles.valueFields}>
+                        <h3>Valor</h3>
 
-                    <div>
                         <div>
-                            <label>Tipo de publicacion</label>
-                            <div>
+                            <p className={styles.selectLabel}>Tipo de publicacion</p>
+                            <div className={styles.selectContainer}>
                                 <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
                             </div>
                         </div>
@@ -388,16 +388,18 @@ const InformacionBasica = ({
                                 <input maxLength={100} value={expensas} onChange={e => setExpensas(isNumber(e))} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
+                    </div>
+                    <div className={styles.valueCard}>
 
                     </div>
                 </div>
+            </div>
 
 
-                <div>
-                    <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
-                    <div className={styles.fieldDir}>
-                        <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>
-                    </div>
+            <div>
+                <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
+                <div className={styles.fieldDir}>
+                    <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>
                 </div>
             </div>
         </div>
