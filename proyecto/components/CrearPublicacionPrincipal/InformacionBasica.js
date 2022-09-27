@@ -207,48 +207,56 @@ const InformacionBasica = ({
             <div>
                 <h1>Crear Publicacion</h1>
                 <h2>Ubicacion</h2>
-
-                <div className={styles.mapPlusInfo}>
-                    <div className={styles.mapa}>
-                        <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
-                        <div className={styles.map}>
-                            <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+                <div className={styles.mapPlusData}>
+                    <div className={styles.mapPlusInfo}>
+                        <div className={styles.mapa}>
+                            <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
+                            <div className={styles.map}>
+                                <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+                            </div>
+                            <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
+                            <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
                         </div>
-                        <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
-                        <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
-                    </div>    
+                    </div>
+                    <div className={styles.ubiInput}>
+                        <div className={styles.fieldDir}>
+                            <p>Provincia*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={provincia} onChange={e => setProvincia(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Municipio*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={municipio} onChange={e => setMunicipio(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Localidad*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={localidad} onChange={e => setLocalidad(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Codigo Postal*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100}  value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Direccion*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100}  value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Altura*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100}  value={altura} onChange={e => setAltura(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Provincia*</label>
-                    <input value={provincia} onChange={e => setProvincia(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Municipio*</label>
-                    <input value={municipio} onChange={e => setMunicipio(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Localidad*</label>
-                    <input value={localidad} onChange={e => setLocalidad(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Codigo Postal*</label>
-                    <input value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Direccion*</label>
-                    <input value={direccion} onChange={e => setDireccion(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Altura*</label>
-                    <input value={altura} onChange={e => setAltura(e.target.value)} />
-                </div>
-
-
             </div>
 
 

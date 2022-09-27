@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import styles from '../../styles/CrearPublicacion.module.css'
 
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?"
