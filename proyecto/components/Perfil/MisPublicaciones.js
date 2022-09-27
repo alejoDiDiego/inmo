@@ -14,22 +14,23 @@ const MisPublicaciones = ({ usuario }) => {
 
 
     useEffect(() => {
-        const queryFirebase = () => {
-            const colRef = collection(firebase.db, "Publicaciones")
-
-            const q = query(colRef, where("publicador", "==", `${usuario.uid}`))
-
-            onSnapshot(q, (snapshot) => {
-                let ps = []
-                snapshot.docs.map(d => {
-                    ps.push(d.data())
-                })
-                setPublicaciones(ps)
-            })
-        }
-
         queryFirebase()
     }, [])
+
+
+    const queryFirebase = () => {
+        const colRef = collection(firebase.db, "Publicaciones")
+
+        const q = query(colRef, where("publicador", "==", `${usuario.uid}`))
+
+        onSnapshot(q, (snapshot) => {
+            let ps = []
+            snapshot.docs.map(d => {
+                ps.push(d.data())
+            })
+            setPublicaciones(ps)
+        })
+    }
 
 
 
@@ -42,9 +43,10 @@ const MisPublicaciones = ({ usuario }) => {
                     publicaciones.map(p => {
 
                         return (
-                            <Publicacion 
+                            <Publicacion
                                 key={publicaciones.indexOf(p)}
                                 p={p}
+                                queryFirebase={queryFirebase}
                             />
                         )
                     })

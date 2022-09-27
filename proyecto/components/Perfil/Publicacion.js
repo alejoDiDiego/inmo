@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import styles from '../../styles/Publicacion.module.css'
+import PublicacionExtendida from './PublicacionExtendida'
+import { doc, deleteDoc } from "firebase/firestore";
+import firebase, { FirebaseContext } from '../../firebase'
+import { getStorage, listAll, ref, deleteObject } from "firebase/storage";
 
-const Publicacion = ({ p }) => {
+const Publicacion = ({ p, queryFirebase }) => {
 
 
     const [imagen, setImagen] = useState(0)
+
+    const [editar, setEditar] = useState(false)
 
 
 
@@ -15,12 +21,33 @@ const Publicacion = ({ p }) => {
     }
 
 
+    const handleEliminar = async () => {
+        try {
+            const refFolder = ref(firebase.storage, `publicaciones/${p.id}`)
+            console.log(refFolder)
+            const allItems = await listAll(refFolder)
+            console.log(allItems)
+            await Promise.all(
+                allItems.items.map(async i => {
+                    console.log(i)
+                    await deleteObject(i)
+                })
+            )
+            console.log("casi")
+            await deleteDoc(doc(firebase.db, "Publicaciones", `${p.id}`))
+            console.log("listo")
+            queryFirebase()
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 
 
 
-    return (
-        <div className={styles.publicacion}>
+
+        return(
+            <div className={styles.publicacion}>
             <div className={styles.publicacion_div_img}>
 
                 {
@@ -28,14 +55,14 @@ const Publicacion = ({ p }) => {
                     <div className={styles.arrows}>
                         {
                             imagen > 0 ?
-                            <img src='/arrow.png' onClick={() => setImagen(imagen - 1)} style={{ transform: "rotate(180deg)" }} className={styles.delete_icon} /> : 
-                            <div className={styles.fake}></div>
+                                <img src='/arrow.png' onClick={() => setImagen(imagen - 1)} style={{ transform: "rotate(180deg)" }} className={styles.delete_icon} /> :
+                                <div className={styles.fake}></div>
                         }
 
                         {
                             imagen + 1 != p.imagenes.length ?
-                            <img src='/arrow.png' onClick={() => setImagen(imagen + 1)} className={styles.delete_icon} /> : 
-                            <div className={styles.fake}></div>
+                                <img src='/arrow.png' onClick={() => setImagen(imagen + 1)} className={styles.delete_icon} /> :
+                                <div className={styles.fake}></div>
                         }
 
 
@@ -47,11 +74,26 @@ const Publicacion = ({ p }) => {
                 <img className={styles.img} src={p.imagenes[imagen]} />
             </div>
 
+
+
+
             <div>
-                <div className={styles.div_buttons}>
-                    <img src='/edit.png' onClick={() => { }} className={styles.edit_icon} />
-                    <img src='/delete.png' onClick={() => { }} className={styles.delete_icon} />
-                </div>
+                {
+                    editar == false ?
+                        (
+                            <div className={styles.div_buttons}>
+                                <img src='/edit.png' onClick={() => { setEditar(true) }} className={styles.edit_icon} />
+                                <img src='/delete.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
+                            </div>
+                        ) :
+                        (
+                            <div className={styles.div_buttons}>
+                                <img src='/delete.png' onClick={() => { setEditar(false) }} className={styles.edit_icon} />
+                                {/* https://www.flaticon.com/free-icon/diskette_2874091?term=save&page=1&position=5&page=1&position=5&related_id=2874091&origin=search# */}
+                                <img src='/diskette.png' onClick={() => { }} className={styles.delete_icon} />
+                            </div>
+                        )
+                }
 
 
                 <div className={styles.head}>
@@ -145,9 +187,19 @@ const Publicacion = ({ p }) => {
                 </div>
 
 
+
+
+
+
             </div>
         </div>
-    )
+
+        )
+    
+
+    
+
+    
 }
 
 export default Publicacion
