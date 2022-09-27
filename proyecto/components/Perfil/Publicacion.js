@@ -4,6 +4,8 @@ import PublicacionExtendida from './PublicacionExtendida'
 import { doc, deleteDoc } from "firebase/firestore";
 import firebase, { FirebaseContext } from '../../firebase'
 import { getStorage, listAll, ref, deleteObject } from "firebase/storage";
+import Link from 'next/link';
+
 
 const Publicacion = ({ p, queryFirebase }) => {
 
@@ -82,7 +84,7 @@ const Publicacion = ({ p, queryFirebase }) => {
                     editar == false ?
                         (
                             <div className={styles.div_buttons}>
-                                <img src='/edit.png' onClick={() => { setEditar(true) }} className={styles.edit_icon} />
+                                <Link href="/modificar-publicacion/[id]" as={`/modificar-publicacion/${p.id}`}><img src='/edit.png' onClick={() => { setEditar(true) }} className={styles.edit_icon} /></Link>
                                 <img src='/delete.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
                             </div>
                         ) :
