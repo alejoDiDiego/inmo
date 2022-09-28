@@ -267,82 +267,87 @@ const InformacionBasica = ({
 
             <div className={styles.informacionV}>
 
-                <div>
-                    <h2>2. Informacion de la propiedad</h2>
-                    <h3>Informacion basica</h3>
+                <div className={styles.basicInfo}>
+                    <div className={styles.fieldsInputs}>
+                        <h2>2. Informacion de la propiedad</h2>
+                        <h3>Informacion basica</h3>
 
-                    <div>
-                        <p className={styles.selectLabel}>Tipo de propiedad</p>
                         <div>
-                            <Select className={styles.selectContainer} options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
+                            <p className={styles.selectLabel}>Tipo de propiedad</p>
+                            <div>
+                                <Select className={styles.selectContainer} options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
+                            </div>
                         </div>
-                    </div>
 
-                    {
-                        tipoVivienda == "departamento" ?
-                            (
-                                <div>
-                                    <div className={styles.fieldDir}>
-                                        <p>Piso*:</p>
-                                        <label className={`${styles.custom_field} ${styles.two}`}>
-                                            <input maxLength={25} value={piso} onChange={e => setPiso(isNumber(e))} type="text" placeholder="&nbsp;" />
-                                        </label>
+                        {
+                            tipoVivienda == "departamento" ?
+                                (
+                                    <div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Piso*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={piso} onChange={e => setPiso(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Depto*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
+                                            </label>
+                                        </div>
                                     </div>
+                                ) :
+                                (
                                     <div className={styles.fieldDir}>
-                                        <p>Depto*:</p>
+                                        <p>Depto/Division*:</p>
                                         <label className={`${styles.custom_field} ${styles.two}`}>
                                             <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
                                         </label>
                                     </div>
-                                </div>
-                            ) :
-                            (
-                                <div className={styles.fieldDir}>
-                                    <p>Depto/Division*:</p>
-                                    <label className={`${styles.custom_field} ${styles.two}`}>
-                                        <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
-                                    </label>
-                                </div>
-                            )
+                                )
 
-                    }
+                        }
 
 
-                    <div className={styles.fieldDir}>
-                        <p>Cantidad de ambientes*:</p>
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input maxLength={25} value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} type="text" placeholder="&nbsp;" />
-                        </label>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de ambientes*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de baños*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantBanos} onChange={e => setCantBanos(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de habitaciones*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de cocheras*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Mt<sup>2</sup> Totales*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Mt<sup>2</sup> Utilizados*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
                     </div>
-                    <div className={styles.fieldDir}>
-                        <p>Cantidad de baños*:</p>
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input maxLength={25} value={cantBanos} onChange={e => setCantBanos(isNumber(e))} type="text" placeholder="&nbsp;" />
-                        </label>
-                    </div>
-                    <div className={styles.fieldDir}>
-                        <p>Cantidad de habitaciones*:</p>
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input maxLength={25} value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} type="text" placeholder="&nbsp;" />
-                        </label>
-                    </div>
-                    <div className={styles.fieldDir}>
-                        <p>Cantidad de cocheras*:</p>
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input maxLength={25} value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} type="text" placeholder="&nbsp;" />
-                        </label>
-                    </div>
-                    <div className={styles.fieldDir}>
-                        <p>Mt<sup>2</sup> Totales*:</p>
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
-                        </label>
-                    </div>
-                    <div className={styles.fieldDir}>
-                        <p>Mt<sup>2</sup> Utilizados*:</p>
-                        <label className={`${styles.custom_field} ${styles.two}`}>
-                            <input maxLength={25} value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} type="text" placeholder="&nbsp;" />
-                        </label>
+                    <div className={styles.houseGraph}>
+                        <img src='/houseIcon.png'></img>
                     </div>
                 </div>
 
@@ -365,7 +370,7 @@ const InformacionBasica = ({
                                     <div className={styles.fieldDir}>
                                         <p>Precio USD$*:</p>
                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                            <input maxLength={100} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            <input maxLength={10} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
                                         </label>
                                     </div>
 
@@ -376,7 +381,7 @@ const InformacionBasica = ({
                                     <div className={styles.fieldDir}>
                                         <p>Precio por mes ARS$*:</p>
                                         <label className={`${styles.custom_field} ${styles.two}`}>
-                                            <input maxLength={100} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            <input maxLength={10} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
                                         </label>
                                     </div>
                                 )
@@ -385,12 +390,59 @@ const InformacionBasica = ({
                         <div className={styles.fieldDir}>
                             <p>Expensas:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input maxLength={100} value={expensas} onChange={e => setExpensas(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                <input maxLength={10} value={expensas} onChange={e => setExpensas(isNumber(e))} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
                     </div>
-                    <div className={styles.valueCard}>
+                    <div className={styles.cardContainer}>
+                        <div className={styles.pole}></div>
+                        <div className={styles.valueCard}>
+                            {
+                                tipoPublicacion == "venta" ?
+                                    (
+                                        <div className={styles.cardInside}>
+                                            <div>
+                                                <h2>En venta</h2>
+                                                {
+                                                    expensas == 0 ?
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3 className={styles.exp1}>Sin expensas</h3>
+                                                            </div>
+                                                        ) :
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3>Expensas</h3>
+                                                                <h3 className={styles.exp2}>{expensas} <span>$/mes</span></h3>
+                                                            </div>
+                                                        )
+                                                }
+                                            </div>
 
+                                            {
+                                                precio == 0 ?
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>0000000000</h2>
+                                                            <h2 className={styles.price}>USD</h2>
+                                                        </div>
+                                                    ) :
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>{precio}</h2>
+                                                            <h2 className={styles.price}>USD</h2>
+                                                        </div>
+
+                                                    )
+                                            }
+                                        </div>
+
+                                    ) :
+                                    (
+                                        <h2>Alquiler</h2>
+                                    )
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
