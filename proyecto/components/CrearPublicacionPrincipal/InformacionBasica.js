@@ -347,7 +347,7 @@ const InformacionBasica = ({
                         </div>
                     </div>
                     <div className={styles.houseGraph}>
-                        <img src='/houseIcon.png'></img>
+                        
                     </div>
                 </div>
 
@@ -423,7 +423,7 @@ const InformacionBasica = ({
                                                 precio == 0 ?
                                                     (
                                                         <div className={styles.priceContainer}>
-                                                            <h2 className={styles.price}>0000000000</h2>
+                                                            <h2 className={styles.price}>----------</h2>
                                                             <h2 className={styles.price}>USD</h2>
                                                         </div>
                                                     ) :
@@ -439,7 +439,42 @@ const InformacionBasica = ({
 
                                     ) :
                                     (
-                                        <h2>Alquiler</h2>
+                                        <div className={styles.cardInside}>
+                                            <div>
+                                                <h2>Alquiler</h2>
+                                                {
+                                                    expensas == 0 ?
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3 className={styles.exp1}>Sin expensas</h3>
+                                                            </div>
+                                                        ) :
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3>Expensas</h3>
+                                                                <h3 className={styles.exp2}>{expensas} <span>ARS$/mes</span></h3>
+                                                            </div>
+                                                        )
+                                                }
+                                            </div>
+
+                                            {
+                                                precio == 0 ?
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>----------</h2>
+                                                            <h2 className={styles.price}>ARS$/mes</h2>
+                                                        </div>
+                                                    ) :
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>{precio}</h2>
+                                                            <h2 className={styles.price}>ARS$/mes</h2>
+                                                        </div>
+
+                                                    )
+                                            }
+                                        </div>
                                     )
                             }
                         </div>
@@ -448,7 +483,7 @@ const InformacionBasica = ({
             </div>
 
 
-            <div>
+            <div className={styles.descripAreaContainer}>
                 <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
                 <div className={styles.fieldDir}>
                     <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>
