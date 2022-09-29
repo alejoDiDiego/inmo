@@ -388,28 +388,46 @@ const InformacionBasica = ({
                                                 }
                                             </div>
                                         </div>
-                                        
+
                                         <div className={styles.roomNumber}>
                                             <div className={styles.roomNumberContainer}>
-                                                <img></img>
+                                                <img src='/open-door.png'></img>
                                                 <p>{cantAmbientes}</p>
                                             </div>
                                             <div className={styles.roomNumberContainer}>
-                                                <img></img>
+                                                <img src='/bed.png'></img>
                                                 <p>{cantHabitaciones}</p>
                                             </div>
                                             <div className={styles.roomNumberContainer}>
-                                                <img ></img>
+                                                <img src='/shower.png'></img>
                                                 <p>{cantBanos}</p>
                                             </div>
                                             <div className={styles.roomNumberContainer}>
-                                                <img></img>
+                                                <img src='/garage.png'></img>
                                                 <p>{cantCocheras}</p>
-                                            </div>                                                                            
+                                            </div>
                                         </div>
 
                                     </div>
                                     <img src='/houseIlustration.png'></img>
+                                    <div className={styles.measurementContainer}>
+                                        <div className={styles.totalMeasurement}>
+                                            <div className={styles.limit}></div>
+                                            <div className={styles.measurement}>
+                                                <div className={styles.line}></div>
+                                                <p>{mt2Totales} mts2</p>
+                                            </div>
+                                            <div className={styles.limit}></div>
+                                        </div>
+                                        <div className={styles.partialMeasurement}>
+                                            <div className={styles.limit}></div>
+                                            <div className={styles.measurement}>
+                                                <div className={styles.line}></div>
+                                                <p>{mt2Utilizados} mts2</p>
+                                            </div>
+                                            <div className={styles.limit}></div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             ) :
