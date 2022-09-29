@@ -89,8 +89,9 @@ const FinalizarPublicacion = ({
       const map = async () => {
         await Promise.all(
           imagenes.map(async m => {
-            let random = Math.floor(Math.random() * 100) + Date.now()
-            const imageRef = ref(firebase.storage, `publicaciones/${randomDoc}/${random}`)
+            // let random = Math.floor(Math.random() * 100) + Date.now()
+            const imageRef = ref(firebase.storage, `publicaciones/${randomDoc}/${Date.now() + imgs.length}`)
+            console.log(m)
             const snapshot = await uploadBytes(imageRef, m)
             const url = await getDownloadURL(snapshot.ref)
             console.log(url)

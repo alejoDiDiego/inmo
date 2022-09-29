@@ -53,6 +53,7 @@ const ModificarPublicacion = () => {
 
 
   const [imagenes, setImagenes] = useState([])
+  const [nuevasImagenes, setNuevasImagenes] = useState([])
 
 
   const router = useRouter()
@@ -93,22 +94,7 @@ const ModificarPublicacion = () => {
     setPrecio(docSnap.data().precio)
     setExpensas(docSnap.data().expensas)
     setDescripcion(docSnap.data().descripcion)
-
-    docSnap.data().imagenes.map(async i => {
-
-      let file = await fetch(i)
-        .then(res => res.blob()) // Gets the response and returns it as a blob
-        .then(blob => {
-          let objectURL = URL.createObjectURL(blob);
-          let myImage = new Image();
-          myImage.src = objectURL;
-          console.log(myImage.src)
-          return blob
-        });
-
-      console.log(file)
-      setImagenes(current => [...current, file]);
-    })
+    setImagenes(docSnap.data().imagenes)
 
     console.log(docSnap.data())
 
@@ -157,6 +143,37 @@ const ModificarPublicacion = () => {
 
 
   }
+
+
+
+
+  useEffect(() => {
+    imagenes.map(async i => {
+
+      let file = await fetch(i)
+        .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(blob => {
+          let objectURL = URL.createObjectURL(blob);
+          let myImage = new Image();
+          myImage.src = objectURL;
+          console.log(myImage.src)
+          return blob
+        });
+
+      console.log(file)
+      setNuevasImagenes(current => [...current, file]);
+    })
+  }, [imagenes])
+
+
+
+
+
+
+
+
+
+
 
 
   useEffect(() => {
@@ -275,9 +292,9 @@ const ModificarPublicacion = () => {
       let imgs = []
       const map = async () => {
         await Promise.all(
-          imagenes.map(async m => {
-            let random = Math.floor(Math.random() * 100) + Date.now()
-            const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${random}`)
+          nuevasImagenes.map(async m => {
+            // let random = Math.floor(Math.random() * 100) + Date.now()
+            const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now()}`)
             const snapshot = await uploadBytes(imageRef, m)
             const url = await getDownloadURL(snapshot.ref)
             console.log(url)
@@ -420,8 +437,8 @@ const ModificarPublicacion = () => {
 
 
                 <SubirImagenes
-                  imagenes={imagenes}
-                  setImagenes={setImagenes}
+                  imagenes={nuevasImagenes}
+                  setImagenes={setNuevasImagenes}
                 />
 
 
