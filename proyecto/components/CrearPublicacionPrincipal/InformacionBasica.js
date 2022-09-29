@@ -304,6 +304,7 @@ const InformacionBasica = ({
                                             <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
                                         </label>
                                     </div>
+
                                 )
 
                         }
@@ -346,21 +347,132 @@ const InformacionBasica = ({
                             </label>
                         </div>
                     </div>
-                        {
-                            tipoVivienda == "casa" ?
-                                (
+                    {
+                        tipoVivienda == "casa" ?
+                            (
 
-                                    <div className={styles.houseGraph}>
+                                <div className={styles.houseGraph}>
+                                    <div className={styles.houseInfoContainer}>
+                                        <div className={styles.houseDir}>
+                                            {
+                                                direccion == "" ?
+                                                    (
+                                                        <p>Direccion de la propiedad</p>
+                                                    ) :
+                                                    (
+                                                        <p>{direccion}</p>
+                                                    )
+
+                                            }
+
+                                            <div className={styles.numberContainer}>
+                                                {
+                                                    altura == 0 ?
+                                                        (
+                                                            <p className={styles.number}>----</p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>{altura}</p>
+                                                        )
+
+                                                }
+                                                {
+                                                    numeroLetraDepto == "" ?
+                                                        (
+                                                            <p></p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>/{numeroLetraDepto}</p>
+                                                        )
+
+                                                }
+                                            </div>
+                                        </div>
+                                        
+                                        <div className={styles.roomNumber}>
+                                            <div className={styles.roomNumberContainer}>
+                                                <img></img>
+                                                <p>{cantAmbientes}</p>
+                                            </div>
+                                            <div className={styles.roomNumberContainer}>
+                                                <img></img>
+                                                <p>{cantHabitaciones}</p>
+                                            </div>
+                                            <div className={styles.roomNumberContainer}>
+                                                <img ></img>
+                                                <p>{cantBanos}</p>
+                                            </div>
+                                            <div className={styles.roomNumberContainer}>
+                                                <img></img>
+                                                <p>{cantCocheras}</p>
+                                            </div>                                                                            
+                                        </div>
+
+                                    </div>
                                     <img src='/houseIlustration.png'></img>
-                                    </div>
+                                </div>
 
-                                ) :
-                                (
-                                    <div className={styles.houseGraph}>
-                                    <img src='/buildingIlustration.png'></img>
+                            ) :
+                            (
+                                <div className={styles.houseGraph}>
+                                    <div className={styles.houseInfoContainer}>
+                                        <div className={styles.houseDir}>
+                                            {
+                                                direccion == "" ?
+                                                    (
+                                                        <p>Direccion de la propiedad</p>
+                                                    ) :
+                                                    (
+                                                        <p>{direccion}</p>
+                                                    )
+
+                                            }
+                                            <div className={styles.numberContainer}>
+                                                {
+                                                    altura == 0 ?
+                                                        (
+                                                            <p className={styles.number}>----</p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>{altura}</p>
+                                                        )
+
+                                                }
+                                                {
+                                                    numeroLetraDepto == "" ?
+                                                        (
+                                                            <p></p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>/{numeroLetraDepto}</p>
+                                                        )
+
+                                                }
+                                                {
+                                                    piso == 0 ?
+                                                        (
+                                                            <p className={styles.numberHeight}>Piso:</p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.numberHeight}>Piso: {piso}</p>
+                                                        )
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.roomNumber}>
+                                            <p>{cantAmbientes}</p>
+                                            <p>{cantHabitaciones}</p>
+                                            <p>{cantBanos}</p>
+                                            <p>{cantCocheras}</p>
+                                        </div>
                                     </div>
-                                )
-                        }
+                                    <img src='/buildingIlustration.png'></img>
+
+                                </div>
+                            )
+                    }
                 </div>
 
 

@@ -309,3 +309,58 @@
 .descripAreaContainer{
     margin-top: 40px;
 }
+
+.houseDir{
+    border-radius: 10px;
+    margin-bottom: 60px;
+    height: 100px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.number{
+    font-size: larger;
+}
+
+.numberContainer{
+    margin-top: -20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.numberHeight{
+    font-size: larger;
+    margin-left: 20px;
+}
+
+.houseInfoContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.roomNumber{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.roomNumber p{
+    margin-top: -5px;
+    font-size: medium;
+}
+
+.roomNumberContainer{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.roomNumberContainer img{
+    height: 30px;
+    width: 30px;
+}
