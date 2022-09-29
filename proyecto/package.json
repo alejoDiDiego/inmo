@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "firebase": "^9.8.4",
     "firebase-admin": "^10.2.0",
     "leaflet": "^1.9.1",

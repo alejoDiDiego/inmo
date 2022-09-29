@@ -4,13 +4,55 @@ import firebase, { FirebaseContext } from '../../firebase'
 import { collection, doc, onSnapshot, getDoc, query, where, getDocs, collectionGroup } from 'firebase/firestore'
 import Layout from '../../components/layout/Layout'
 import Head from 'next/head'
-
+import InformacionBasica from '../../components/CrearPublicacionPrincipal/InformacionBasica'
+import SubirImagenes from '../../components/CrearPublicacionPrincipal/SubirImagenes'
+import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/FinalizarPublicacion'
+import styles from '../../styles/CrearPublicacion.module.css'
+import Axios from 'axios'
+import * as cors from 'cors';
+const corsHandler = cors({ origin: true });
 
 
 const ModificarPublicacion = () => {
 
   const [producto, setProducto] = useState({})
   const [cargando, setCargando] = useState(true)
+
+
+  const [selectPosition, setSelectPosition] = useState(null)
+
+  const [provincia, setProvincia] = useState("")
+  const [municipio, setMunicipio] = useState("")
+  const [localidad, setLocalidad] = useState("")
+  const [direccion, setDireccion] = useState("")
+  const [codigoPostal, setCodigoPostal] = useState("")
+  const [altura, setAltura] = useState("")
+
+  const [latLon, setLatLon] = useState({})
+
+  const [tipoVivienda, setTipoVivienda] = useState("casa")
+
+  const [piso, setPiso] = useState("")
+  const [numeroLetraDepto, setNumeroLetraDepto] = useState("")
+
+  const [cantAmbientes, setCantAmbientes] = useState("")
+  const [cantBanos, setCantBanos] = useState("")
+  const [cantHabitaciones, setCantHabitaciones] = useState("")
+  const [cantCocheras, setCantCocheras] = useState("")
+  const [mt2Totales, setMt2Totales] = useState("")
+  const [mt2Utilizados, setMt2Utilizados] = useState("")
+
+  const [tipoPublicacion, setTipoPublicacion] = useState("venta")
+  const [precio, setPrecio] = useState("")
+  const [expensas, setExpensas] = useState("")
+
+
+
+  const [descripcion, setDescripcion] = useState("")
+
+
+
+  const [imagenes, setImagenes] = useState([])
 
 
   const router = useRouter()
@@ -29,7 +71,65 @@ const ModificarPublicacion = () => {
       console.log("no tiene permiso")
       return
     }
+    setProducto(docSnap.data())
+    setProvincia(docSnap.data().provincia)
+    setMunicipio(docSnap.data().municipio)
+    setLocalidad(docSnap.data().localidad)
+    setDireccion(docSnap.data().direccion)
+    setCodigoPostal(docSnap.data().codigoPostal)
+    setAltura(docSnap.data().altura)
+    setLatLon(docSnap.data().latLon)
+    console.log(docSnap.data().latLon)
+    setTipoVivienda(docSnap.data().tipoVivienda)
+    setPiso(docSnap.data().piso)
+    setNumeroLetraDepto(docSnap.data().numeroLetraDepto)
+    setCantAmbientes(docSnap.data().cantAmbientes)
+    setCantBanos(docSnap.data().cantBanos)
+    setCantHabitaciones(docSnap.data().cantHabitaciones)
+    setCantCocheras(docSnap.data().cantCocheras)
+    setMt2Totales(docSnap.data().mt2Totales)
+    setMt2Utilizados(docSnap.data().mt2Utilizados)
+    setTipoPublicacion(docSnap.data().tipoPublicacion)
+    setPrecio(docSnap.data().precio)
+    setExpensas(docSnap.data().expensas)
+    setDescripcion(docSnap.data().descripcion)
+    let imgs = []
+    await Promise.all(
+      docSnap.data().imagenes.map(async i => {
+        // let file = await crearBlob(i)
+        // imgs.push(file)
+        createFile(i)
+      })
+    )
+    setImagenes(imgs)
     console.log(docSnap.data())
+
+
+    async function createFile(img) {
+      console.log(img)
+
+      Axios.get(img).then(async (res) => {
+          let data = await response.blob()
+          let file = new File([data], "test.jpg", { type: "image/jpeg" })
+          console.log(file)
+        
+
+
+      }).catch((err) => {
+        console.log(err)
+      })
+
+    }
+
+
+    // async function createFile(img) {
+    //   fetch(img, {method: 'GET'})
+    //     .then(function (response) {
+    //       return response.blob();
+    //     })
+
+    //   // ... do something with the file or return it
+    // }
 
 
   }
@@ -73,6 +173,66 @@ const ModificarPublicacion = () => {
   }, [usuario])
 
 
+
+  const handleEditar = () => {
+    if (
+      provincia.length == 0 ||
+      municipio.length == 0 ||
+      localidad.length == 0 ||
+      direccion.length == 0 ||
+      codigoPostal.length == 0 ||
+      altura.length == 0 ||
+      tipoVivienda.length == 0 ||
+      cantAmbientes.length == 0 ||
+      cantBanos.length == 0 ||
+      cantHabitaciones.length == 0 ||
+      cantCocheras.length == 0 ||
+      tipoPublicacion.length == 0 ||
+      precio.length == 0 ||
+      descripcion.length == 0 ||
+      imagenes.length == 0 ||
+      mt2Totales.length == 0 ||
+      mt2Utilizados.length == 0
+    ) {
+      setErrorSiguiente(true)
+      return
+    }
+
+    if (tipoVivienda == "departamento" && piso.length == 0) {
+      setErrorSiguiente(true)
+      return
+    }
+
+    if (tipoVivienda == "departamento" && piso.length == 0 && numeroLetraDepto.length == 0) {
+      setErrorSiguiente(true)
+      return
+    }
+
+
+    // if (
+    //   provincia.length == producto ||
+    //   municipio.length == 0 ||
+    //   localidad.length == 0 ||
+    //   direccion.length == 0 ||
+    //   codigoPostal.length == 0 ||
+    //   altura.length == 0 ||
+    //   tipoVivienda.length == 0 ||
+    //   cantAmbientes.length == 0 ||
+    //   cantBanos.length == 0 ||
+    //   cantHabitaciones.length == 0 ||
+    //   cantCocheras.length == 0 ||
+    //   tipoPublicacion.length == 0 ||
+    //   precio.length == 0 ||
+    //   descripcion.length == 0 ||
+    //   imagenes.length == 0 ||
+    //   mt2Totales.length == 0 ||
+    //   mt2Utilizados.length == 0
+    //   ) {
+
+    // }
+  }
+
+
   if (cargando) {
     return (
       <>
@@ -100,7 +260,80 @@ const ModificarPublicacion = () => {
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
         <Layout>
-          <div>Desde {id}</div>
+          <div className={styles.main}>
+            <div className={styles.izquierda}>
+
+            </div>
+
+
+            <div className={styles.derecha}>
+
+              <div>
+                <InformacionBasica
+                  selectPosition={selectPosition}
+                  setSelectPosition={setSelectPosition}
+                  provincia={provincia}
+                  setProvincia={setProvincia}
+                  municipio={municipio}
+                  setMunicipio={setMunicipio}
+                  localidad={localidad}
+                  setLocalidad={setLocalidad}
+                  direccion={direccion}
+                  setDireccion={setDireccion}
+                  codigoPostal={codigoPostal}
+                  setCodigoPostal={setCodigoPostal}
+                  altura={altura}
+                  setAltura={setAltura}
+                  latLon={latLon}
+                  setLatLon={setLatLon}
+                  piso={piso}
+                  setPiso={setPiso}
+                  tipoVivienda={tipoVivienda}
+                  setTipoVivienda={setTipoVivienda}
+                  cantAmbientes={cantAmbientes}
+                  setCantAmbientes={setCantAmbientes}
+                  cantBanos={cantBanos}
+                  setCantBanos={setCantBanos}
+                  cantHabitaciones={cantHabitaciones}
+                  setCantHabitaciones={setCantHabitaciones}
+                  cantCocheras={cantCocheras}
+                  setCantCocheras={setCantCocheras}
+                  tipoPublicacion={tipoPublicacion}
+                  setTipoPublicacion={setTipoPublicacion}
+                  precio={precio}
+                  setPrecio={setPrecio}
+                  expensas={expensas}
+                  setExpensas={setExpensas}
+                  descripcion={descripcion}
+                  setDescripcion={setDescripcion}
+                  mt2Totales={mt2Totales}
+                  setMt2Totales={setMt2Totales}
+                  mt2Utilizados={mt2Utilizados}
+                  setMt2Utilizados={setMt2Utilizados}
+                  numeroLetraDepto={numeroLetraDepto}
+                  setNumeroLetraDepto={setNumeroLetraDepto}
+                />
+
+
+                <SubirImagenes
+                  imagenes={imagenes}
+                  setImagenes={setImagenes}
+                />
+
+
+                <button onClick={() => handleEditar()}>Siguiente</button>
+              </div>
+
+
+
+            </div>
+
+
+
+
+
+
+          </div>
         </Layout>
       </>
 
