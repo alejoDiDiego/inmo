@@ -312,7 +312,6 @@
 
 .houseDir{
     border-radius: 10px;
-    margin-bottom: 60px;
     height: 100px;
     width: 300px;
     background-color: white;
@@ -321,6 +320,7 @@
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    align-self: center;
 }
 
 .number{
@@ -347,6 +347,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 30px;
+    gap: 5px;
 }
 
 .roomNumber p{
@@ -355,12 +356,21 @@
 }
 
 .roomNumberContainer{
+    height: 30px;
+    width: 60px;
     display: flex;
     flex-direction: row;
     text-align: center;
+    align-items: center;
 }
 
 .roomNumberContainer img{
     height: 30px;
     width: 30px;
+}
+
+.roomNumberContainer p{
+    justify-self: center;
+    margin: 0px;
+    margin-left: 10px;
 }
