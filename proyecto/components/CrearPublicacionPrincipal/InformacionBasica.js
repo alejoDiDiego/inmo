@@ -346,9 +346,21 @@ const InformacionBasica = ({
                             </label>
                         </div>
                     </div>
-                    <div className={styles.houseGraph}>
-                        
-                    </div>
+                        {
+                            tipoVivienda == "casa" ?
+                                (
+
+                                    <div className={styles.houseGraph}>
+                                    <img src='/houseIlustration.png'></img>
+                                    </div>
+
+                                ) :
+                                (
+                                    <div className={styles.houseGraph}>
+                                    <img src='/buildingIlustration.png'></img>
+                                    </div>
+                                )
+                        }
                 </div>
 
 

@@ -295,8 +295,7 @@
 
 .houseGraph{
     height: 300px;
-    width: 300px;
-    background-color: #fafafa;
+    width: 400px;
     justify-self: center;
     align-self: center;
     margin-left: 200px;
