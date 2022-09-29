@@ -103,7 +103,7 @@ const ModificarPublicacion = () => {
           let myImage = new Image();
           myImage.src = objectURL;
           console.log(myImage.src)
-          return myImage.src
+          return blob
         });
 
       console.log(file)
