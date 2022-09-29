@@ -4,7 +4,6 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
 import "firebase/compat/firestore";
 import firebaseConfig from './config';
-import cors from "cors"
 
 
 class Firebase {

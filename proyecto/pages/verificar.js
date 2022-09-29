@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React, { useContext, useEffect, useState } from 'react'
 import Layout from '../components/layout/Layout'
 import firebase, { FirebaseContext } from '../firebase'
@@ -40,23 +41,31 @@ const verificar = () => {
 
 
     return (
-        <Layout>
-            {
-                loading ? (
-                    <div>
-                        cargando
-                    </div>
-                ) :
-                    (
+        <>
+            <Head>
+                <title>Inmo</title>
+                <meta name="description" content="Generated" />
+                <link rel="icon" href="/Logo_inmo_new.png" />
+            </Head>
+            <Layout>
+                {
+                    loading ? (
                         <div>
-                            <h2>por favor verifique su cuenta</h2>
-                            <p>se ha enviado el mail de verificacion a {usuario.email}, si llego haga click en el boton de abajo</p>
-                            <button onClick={() => { firebase.verificar() }}>Reenviar mail de verificacion</button>
+                            cargando
                         </div>
-                    )
-            }
+                    ) :
+                        (
+                            <div>
+                                <h2>por favor verifique su cuenta</h2>
+                                <p>se ha enviado el mail de verificacion a {usuario.email}, si llego haga click en el boton de abajo</p>
+                                <button onClick={() => { firebase.verificar() }}>Reenviar mail de verificacion</button>
+                            </div>
+                        )
+                }
 
-        </Layout>
+            </Layout>
+        </>
+
 
     )
 }

@@ -9,9 +9,7 @@ import SubirImagenes from '../../components/CrearPublicacionPrincipal/SubirImage
 import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/FinalizarPublicacion'
 import styles from '../../styles/CrearPublicacion.module.css'
 import Axios from 'axios'
-import * as cors from 'cors';
 import { deleteObject, getBlob, getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage'
-const corsHandler = cors({ origin: true });
 
 
 
