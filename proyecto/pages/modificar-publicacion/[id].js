@@ -289,20 +289,29 @@ const ModificarPublicacion = () => {
         })
       )
 
-      let imgs = []
+      
       const map = async () => {
-        await Promise.all(
-          nuevasImagenes.map(async m => {
-            // let random = Math.floor(Math.random() * 100) + Date.now()
-            const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now()}`)
+          // nuevasImagenes.map(async m => {
+          //   // let random = Math.floor(Math.random() * 100) + Date.now()
+          //   const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now()}`)
+          //   const snapshot = await uploadBytes(imageRef, m)
+          //   const url = await getDownloadURL(snapshot.ref)
+          //   console.log(url)
+          //   imgs.push(url)
+          //   console.log(imgs)
+          // }
+          // )
+          let imgs = []
+
+          for (const m of nuevasImagenes) {
+            const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now() + imgs.length}`)
+            console.log(m)
             const snapshot = await uploadBytes(imageRef, m)
             const url = await getDownloadURL(snapshot.ref)
             console.log(url)
             imgs.push(url)
             console.log(imgs)
           }
-          )
-        ).then(async () => {
 
           await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
             imagenes: imgs,
@@ -311,7 +320,7 @@ const ModificarPublicacion = () => {
             setError(error)
             console.log(error)
           })
-        })
+
 
       }
 
