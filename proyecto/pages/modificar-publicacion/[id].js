@@ -1,7 +1,7 @@
 import { useRouter, } from 'next/router'
 import React, { useEffect, useContext, useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
-import { collection, doc, onSnapshot, getDoc, query, where, getDocs, collectionGroup } from 'firebase/firestore'
+import { collection, doc, onSnapshot, getDoc, query, where, getDocs, collectionGroup, updateDoc } from 'firebase/firestore'
 import Layout from '../../components/layout/Layout'
 import Head from 'next/head'
 import InformacionBasica from '../../components/CrearPublicacionPrincipal/InformacionBasica'
@@ -10,7 +10,9 @@ import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/Fin
 import styles from '../../styles/CrearPublicacion.module.css'
 import Axios from 'axios'
 import * as cors from 'cors';
+import { deleteObject, getBlob, getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage'
 const corsHandler = cors({ origin: true });
+
 
 
 const ModificarPublicacion = () => {
@@ -93,31 +95,55 @@ const ModificarPublicacion = () => {
     setPrecio(docSnap.data().precio)
     setExpensas(docSnap.data().expensas)
     setDescripcion(docSnap.data().descripcion)
-    let imgs = []
-    await Promise.all(
-      docSnap.data().imagenes.map(async i => {
-        // let file = await crearBlob(i)
-        // imgs.push(file)
-        createFile(i)
-      })
-    )
-    setImagenes(imgs)
+
+    docSnap.data().imagenes.map(async i => {
+
+      let file = await fetch(i)
+        .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(blob => {
+          let objectURL = URL.createObjectURL(blob);
+          let myImage = new Image();
+          myImage.src = objectURL;
+          console.log(myImage.src)
+          return myImage.src
+        });
+
+      console.log(file)
+      setImagenes(current => [...current, file]);
+    })
+
     console.log(docSnap.data())
 
 
+
+
+
     async function createFile(img) {
-      console.log(img)
 
-      Axios.get(img).then(async (res) => {
-          let data = await response.blob()
-          let file = new File([data], "test.jpg", { type: "image/jpeg" })
-          console.log(file)
-        
+      fetch(img)
+        .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(blob => {
+          let objectURL = URL.createObjectURL(blob);
+          let myImage = new Image();
+          myImage.src = objectURL;
+          console.log(myImage.src)
+          return myImage.src
+        });
 
 
-      }).catch((err) => {
-        console.log(err)
-      })
+
+      // console.log("imagen   " + img)
+      // Axios.get(img).then(async (res) => {
+      //   console.log(data)
+      //   let data = await res.blob()
+      //   let file = new File([data], "test.jpg", { type: "image/jpeg" })
+      //   console.log(file)
+
+
+
+      // }).catch((err) => {
+      //   console.log(err)
+      // })
 
     }
 
@@ -174,7 +200,7 @@ const ModificarPublicacion = () => {
 
 
 
-  const handleEditar = () => {
+  const handleEditar = async () => {
     if (
       provincia.length == 0 ||
       municipio.length == 0 ||
@@ -183,16 +209,16 @@ const ModificarPublicacion = () => {
       codigoPostal.length == 0 ||
       altura.length == 0 ||
       tipoVivienda.length == 0 ||
-      cantAmbientes.length == 0 ||
-      cantBanos.length == 0 ||
-      cantHabitaciones.length == 0 ||
+      cantAmbientes.length == 0 || cantAmbientes == 0 ||
+      cantBanos.length == 0 || cantBanos == 0 ||
+      cantHabitaciones.length == 0 || cantHabitaciones == 0 ||
       cantCocheras.length == 0 ||
       tipoPublicacion.length == 0 ||
-      precio.length == 0 ||
+      precio.length == 0 || precio == 0 ||
       descripcion.length == 0 ||
       imagenes.length == 0 ||
-      mt2Totales.length == 0 ||
-      mt2Utilizados.length == 0
+      mt2Totales.length == 0 || mt2Totales == 0 ||
+      mt2Utilizados.length == 0 || mt2Utilizados == 0
     ) {
       setErrorSiguiente(true)
       return
@@ -207,6 +233,86 @@ const ModificarPublicacion = () => {
       setErrorSiguiente(true)
       return
     }
+
+    try {
+
+
+
+      await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
+        ["provincia"]: provincia,
+        ["municipio"]: municipio,
+        ["localidad"]: localidad,
+        ["direccion"]: direccion,
+        ["codigoPostal"]: codigoPostal,
+        ["altura"]: altura,
+        ["piso"]: piso,
+        ["numeroLetraDepto"]: numeroLetraDepto,
+        ["latLon"]: latLon,
+        ["tipoVivienda"]: tipoVivienda,
+        ["cantAmbientes"]: cantAmbientes,
+        ["cantBanos"]: cantBanos,
+        ["cantHabitaciones"]: cantHabitaciones,
+        ["cantCocheras"]: cantCocheras,
+        ["mt2Totales"]: mt2Totales,
+        ["mt2Utilizados"]: mt2Utilizados,
+        ["tipoPublicacion"]: tipoPublicacion,
+        ["precio"]: precio,
+        ["expensas"]: expensas,
+        ["descripcion"]: descripcion,
+        ["publicador"]: usuario.uid,
+      })
+
+
+      const refFolder = ref(firebase.storage, `publicaciones/${producto.id}`)
+      console.log(refFolder)
+      const allItems = await listAll(refFolder)
+      console.log(allItems)
+      await Promise.all(
+        allItems.items.map(async i => {
+          console.log(i)
+          await deleteObject(i)
+        })
+      )
+
+      let imgs = []
+      const map = async () => {
+        await Promise.all(
+          imagenes.map(async m => {
+            let random = Math.floor(Math.random() * 100) + Date.now()
+            const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${random}`)
+            const snapshot = await uploadBytes(imageRef, m)
+            const url = await getDownloadURL(snapshot.ref)
+            console.log(url)
+            imgs.push(url)
+            console.log(imgs)
+          }
+          )
+        ).then(async () => {
+
+          await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
+            imagenes: imgs,
+          }).catch((error) => {
+            setCargando(false)
+            setError(error)
+            console.log(error)
+          })
+        })
+
+      }
+
+      await map()
+
+      setCargando(false)
+      console.log("Listo")
+
+
+    } catch (err) {
+      console.log(err)
+    }
+
+
+
+
 
 
     // if (
