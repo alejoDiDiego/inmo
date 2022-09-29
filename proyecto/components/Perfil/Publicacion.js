@@ -48,8 +48,8 @@ const Publicacion = ({ p, queryFirebase }) => {
 
 
 
-        return(
-            <div className={styles.publicacion}>
+    return (
+        <div className={styles.publicacion}>
             <div className={styles.publicacion_div_img}>
 
                 {
@@ -80,22 +80,12 @@ const Publicacion = ({ p, queryFirebase }) => {
 
 
             <div>
-                {
-                    editar == false ?
-                        (
-                            <div className={styles.div_buttons}>
-                                <Link href="/modificar-publicacion/[id]" as={`/modificar-publicacion/${p.id}`}><img src='/edit.png' onClick={() => { setEditar(true) }} className={styles.edit_icon} /></Link>
-                                <img src='/delete.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
-                            </div>
-                        ) :
-                        (
-                            <div className={styles.div_buttons}>
-                                <img src='/delete.png' onClick={() => { setEditar(false) }} className={styles.edit_icon} />
-                                {/* https://www.flaticon.com/free-icon/diskette_2874091?term=save&page=1&position=5&page=1&position=5&related_id=2874091&origin=search# */}
-                                <img src='/diskette.png' onClick={() => { }} className={styles.delete_icon} />
-                            </div>
-                        )
-                }
+
+                <div className={styles.div_buttons}>
+                    <Link href="/modificar-publicacion/[id]" as={`/modificar-publicacion/${p.id}`}><img src='/edit.png' className={styles.edit_icon} /></Link>
+                    <img src='/delete.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
+                </div>
+
 
 
                 <div className={styles.head}>
@@ -196,12 +186,12 @@ const Publicacion = ({ p, queryFirebase }) => {
             </div>
         </div>
 
-        )
-    
+    )
 
-    
 
-    
+
+
+
 }
 
 export default Publicacion
