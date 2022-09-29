@@ -334,18 +334,39 @@ const InformacionBasica = ({
                                 <input maxLength={25} value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
-                        <div className={styles.fieldDir}>
-                            <p>Mt<sup>2</sup> Totales*:</p>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
-                            </label>
-                        </div>
-                        <div className={styles.fieldDir}>
-                            <p>Mt<sup>2</sup> Utilizados*:</p>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input maxLength={25} value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} type="text" placeholder="&nbsp;" />
-                            </label>
-                        </div>
+
+                        {
+                            tipoVivienda == "casa" ?
+                                (
+                                    <div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Mt<sup>2</sup> Totales*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Mt<sup>2</sup> Utilizados*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                ) :
+                                (
+                                    <div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Mt<sup>2</sup> Totales*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                )
+
+                        }
+
+
                     </div>
                     {
                         tipoVivienda == "casa" ?
@@ -390,21 +411,59 @@ const InformacionBasica = ({
                                         </div>
 
                                         <div className={styles.roomNumber}>
-                                            <div className={styles.roomNumberContainer}>
-                                                <img src='/open-door.png'></img>
-                                                <p>{cantAmbientes}</p>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/open-door.png'></img>
+                                                    {
+                                                        cantAmbientes == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantAmbientes}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/bed.png'></img>
+                                                    {
+                                                        cantHabitaciones == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantHabitaciones}</p>
+                                                            )
+                                                    }
+                                                </div>
                                             </div>
-                                            <div className={styles.roomNumberContainer}>
-                                                <img src='/bed.png'></img>
-                                                <p>{cantHabitaciones}</p>
-                                            </div>
-                                            <div className={styles.roomNumberContainer}>
-                                                <img src='/shower.png'></img>
-                                                <p>{cantBanos}</p>
-                                            </div>
-                                            <div className={styles.roomNumberContainer}>
-                                                <img src='/garage.png'></img>
-                                                <p>{cantCocheras}</p>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/shower.png'></img>
+                                                    {
+                                                        cantBanos == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantBanos}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/garage.png'></img>
+                                                    {
+                                                        cantCocheras == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantCocheras}</p>
+                                                            )
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
 
@@ -480,14 +539,73 @@ const InformacionBasica = ({
                                         </div>
 
                                         <div className={styles.roomNumber}>
-                                            <p>{cantAmbientes}</p>
-                                            <p>{cantHabitaciones}</p>
-                                            <p>{cantBanos}</p>
-                                            <p>{cantCocheras}</p>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/open-door.png'></img>
+                                                    {
+                                                        cantAmbientes == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantAmbientes}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/bed.png'></img>
+                                                    {
+                                                        cantHabitaciones == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantHabitaciones}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/shower.png'></img>
+                                                    {
+                                                        cantBanos == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantBanos}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/garage.png'></img>
+                                                    {
+                                                        cantCocheras == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantCocheras}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <img src='/buildingIlustration.png'></img>
-
+                                    <div className={styles.measurementContainer}>
+                                        <div className={styles.totalMeasurement}>
+                                            <div className={styles.limit}></div>
+                                            <div className={styles.measurement}>
+                                                <div className={styles.line}></div>
+                                                <p>{mt2Totales} mts2</p>
+                                            </div>
+                                            <div className={styles.limit}></div>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                     }

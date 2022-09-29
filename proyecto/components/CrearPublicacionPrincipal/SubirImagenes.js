@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
-import styles from '../../styles/SubirImagenes.module.css'
+import styles from '../../styles/CrearPublicacion.module.css'
 import Image from 'next/image'
 
 
@@ -145,11 +145,10 @@ const SubirImagenes = ({
 
 
     return (
-        <div className={styles.main}>
+        <div className={styles.mainImg}>
             <div>
-                <h2>Subir Imagenes</h2>
-                <p>La primera imagen sera la principal de la publicacion</p>
-                <p>ATENCION: si quiere volver a subir la ultima imagen cargada (por ejemplo si la borro), debe seleccionar otra imagen, cerrar la pestana de recortar y volver a cargar la imagen (que borro)</p>
+                <h2>3. Subir Imagenes</h2>
+                <p>La primer imagen sera utilizada como portada de la publicación</p>
 
                 <div>
                     <div className={styles.div_button}>
