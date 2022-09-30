@@ -8,11 +8,12 @@
     flex-direction: column;
     justify-content: space-between;
     font-family: 'Lato';
+
 }
 
 .derecha {
     margin-top: 20px;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     width: 100%;
     max-width: calc(100% - 600px);
@@ -291,7 +292,7 @@
     width: 400px;
     justify-self: center;
     align-self: center;
-    margin-left: 200px;
+    margin-left: 160px;
 }
 
 .houseGraph img{
