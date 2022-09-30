@@ -186,7 +186,34 @@ const principal = () => {
         <Layout perfil={true}>
           <div className={styles.main}>
             <div className={styles.izquierda}>
-
+            <div class="publicatupropiedad">
+                    <h1>Publica tu <span>propiedad</span></h1>
+                </div>
+                <div>
+                    <h4 class="text1">Completa los datos de la propiedad a vender, agrega datos extras y detalles para
+                        maximizar la
+                        comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</h4>
+                </div>
+                <div class="cuadrado1">
+                    <h2 class="infoBasica">Informacion <span>basica</span></h2>
+                    <p class="infoc1">Completar los datos esenciales para crear una publicacion, esta informacion es
+                       <span class="span2"> obligatoria (*)</span>
+                    </p>
+                </div>
+                <div class="cuadrado2">
+                    <h2 class="agregarDesc">Agregar <span>descripcion</span></h2>
+                    <p class="infoc2">Suma una descripcion mas detallada a tu publicacion, agrega informacion que creas
+                        relevante.</p>
+                </div>
+                <div class="cuadrado3">
+                    <h2 class="subirImg">Subir <span>imagenes</span></h2>
+                    <p class="infoc3">Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                </div>
+                <div class="cuadrado4">
+                    <h2 class="cargarPub">Cargar <span>publicacion</span></h2>
+                    <p class="infoc4">finalizar el proceso de publicacion</p>
+                </div>
+            </div>
             </div>
 
 
