@@ -11,7 +11,11 @@ const Body = () => {
 
                 <div className={styles.inside_arriba}>
                     <div className={styles.div_izquierda_arriba}>
+                        
                         <div className={styles.div_inside_izquierda_arriba}>
+                        <div className={styles.titleF}>
+                        <p>Inmo, a un click de tu hogar</p>
+                        </div>
                             <Link href='/'>
                                 <div className={styles.square}>
                                     <div className={styles.image}>
@@ -30,7 +34,7 @@ const Body = () => {
                                             <h3>Publicar</h3>
                                             <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
                                         </div>
-                                        <div className='imgInicio'>
+                                        <div className={styles.image}>
                                             <img src='/discount-tag.png' />
                                         </div>
                                     </div>

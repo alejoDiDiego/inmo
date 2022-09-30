@@ -199,15 +199,12 @@ const principal = () => {
 
                     <div class={styles.cuadrado}>
                       <h3>1. Ubicacion</h3>
-                      <p class={styles.infoc}>Completar los datos esenciales para crear una publicacion, esta informacion es
-                        <span> obligatoria (*)</span>
-                      </p>
+                      <p class={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
                     </div>
 
                     <div class={styles.cuadrado}>
                       <h3 >2. Informacion Basica</h3>
-                      <p class={styles.infoc}>Suma una descripcion mas detallada a tu publicacion, agrega informacion que creas
-                        relevante.</p>
+                      <p class={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
                     </div>
                   </div>
                 </div>

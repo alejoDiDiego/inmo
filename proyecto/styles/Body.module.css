@@ -214,29 +214,6 @@
     margin-left: 20px ;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .arriba {
     height: 800px;
     width: calc(100vw - 17px);
@@ -294,4 +271,16 @@
         height: 350px;
         gap: 5px;
     }
+}
+
+.titleF{
+    height: 300px;
+    width: 600px;
+    margin-right: 210px;
+    display: flex;
+}
+
+.titleF p{
+    font-size: 70px; 
+    color:  white;
 }

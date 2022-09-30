@@ -9,6 +9,7 @@ import Spinner from '../../Spinner/Spinner';
 import firebase from '../../../firebase';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
+import Select from 'react-select';
 
 
 
@@ -40,6 +41,9 @@ const ContainerRegister = ({
     const [loading, setLoading] = useState(false)
 
 
+    const tipoCuentaOptions =
+    [{ value: "particular", label: "Particular" },
+    { value: "empresa", label: "Empresa" }]
 
 
 
@@ -72,6 +76,15 @@ const ContainerRegister = ({
     }
 
 
+    const handleSelectTipoDeCuenta = (event) => {
+        if (event == null) {
+            setTipoCuenta("")
+        }
+        else {
+            const value = event.value
+            setTipoCuenta(value)
+        }
+    }
 
 
 
@@ -381,21 +394,11 @@ const ContainerRegister = ({
                             </label>
 
 
-
-
-                            <div className={styles.select}>
-                                <label className='TipoCuenta'>Tipo de cuenta    </label>
-                                <select className='selectCuenta' value={tipoCuenta} onChange={(e) => setTipoCuenta(e.target.value)}>
-                                    <option value="particular">Particular</option>
-                                    <option value="empresa">Empresa</option>
-                                </select>
+                            <div>
+                                <div className={styles.selectContainer}>
+                                    <Select options={tipoCuentaOptions} onChange={handleSelectTipoDeCuenta} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de cuenta"}></Select>
+                                </div>
                             </div>
-
-
-
-
-
-
 
 
                             <div className={styles.div_link}>
