@@ -1,0 +1,133 @@
+.body{
+    margin: 0px;
+}
+
+.contenedor_Principal{
+    height: 568px;
+    display: flex;
+}
+
+.img{
+    display: flex;
+    align-self: center;
+    width: 1075px;
+    height: 568px;
+    background-color: black;
+    border-bottom-right-radius: 20px;
+    /* background-image: url(""); */
+    background-size: cover;
+    background-position: 0%;
+}
+
+.img_footer{
+    margin-top: -50px;
+    margin-left: 50px;
+    height: 50px;
+}
+
+.h1{
+    font-family: 'Lato';
+    font-size: 50px;
+    color: white;
+    display: flex;
+    margin-top: 200px;
+    margin-left: 50px;
+}
+
+.textos{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 70px;
+}
+
+.titulo{
+    width: 600px;
+    font-family: 'Lato';
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.texto{
+    font-family: 'Lato';
+    margin-top: 50px;
+    font-size: 22px;
+    line-height: 35px;
+    width: 600px;
+}
+
+.texto2{
+    font-family: 'Lato';
+    margin-top: 50px;
+    font-size: 22px;
+    line-height: 35px;
+    width: 600px;
+}
+
+.span{
+    color: #38B6FF;
+}
+
+h2 .span{
+    margin-left: 10px;
+}
+
+.contenedor_Secundario{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.textos_sec{
+    height: 100%;
+    width: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 170px;
+    margin-left: 130px;
+}
+
+.contenedor_Soft{
+    margin-bottom: 200px;
+}
+
+.titulo_sec{
+    width: 500px;
+    font-family: 'Lato';
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.texto_sec{
+    font-family: 'Lato';
+    margin-top: 20px;
+    font-size: 22px;
+    line-height: 35px;
+    width: 200px;
+}
+
+.texto_contenedor{
+    font-family: 'Lato';
+    margin-top: 20px;
+    font-size: 22px;
+    line-height: 35px;
+    width: 100px;
+}
+
+.h1_sec{
+    font-family: 'Lato';
+    font-size: 50px;
+    color: white;
+    display: flex;
+    margin-top: 200px;
+    margin-right: 50px;
+}
+
+.texto_img{
+    font-family: 'Lato';
+    margin-top: 20px;
+    font-size: 22px;
+    line-height: 35px;
+}
