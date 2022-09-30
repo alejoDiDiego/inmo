@@ -225,37 +225,37 @@ const InformacionBasica = ({
                         </div>
                     </div>
                     <div className={styles.ubiInput}>
-                        <div className={styles.fieldDir}>
+                        <div className={styles.fieldDirUbi}>
                             <p>Provincia*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
                                 <input maxLength={100} value={provincia} onChange={e => setProvincia(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
-                        <div className={styles.fieldDir}>
+                        <div className={styles.fieldDirUbi}>
                             <p>Municipio*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
                                 <input maxLength={100} value={municipio} onChange={e => setMunicipio(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
-                        <div className={styles.fieldDir}>
+                        <div className={styles.fieldDirUbi}>
                             <p>Localidad*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
                                 <input maxLength={100} value={localidad} onChange={e => setLocalidad(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
-                        <div className={styles.fieldDir}>
+                        <div className={styles.fieldDirUbi}>
                             <p>Codigo Postal*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
                                 <input maxLength={100} value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
-                        <div className={styles.fieldDir}>
+                        <div className={styles.fieldDirUbi}>
                             <p>Direccion*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
                                 <input maxLength={100} value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="&nbsp;" />
                             </label>
                         </div>
-                        <div className={styles.fieldDir}>
+                        <div className={styles.fieldDirUbi}>
                             <p>Altura*:</p>
                             <label className={`${styles.custom_field} ${styles.two}`}>
                                 <input maxLength={100} value={altura} onChange={e => setAltura(e.target.value)} type="text" placeholder="&nbsp;" />

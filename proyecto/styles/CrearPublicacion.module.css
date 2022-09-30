@@ -10,19 +10,6 @@
     font-family: 'Lato';
 }
 
-.izquierda {
-    position: fixed;
-    display: flex;
-    width: 550px;
-    height: 100%;
-    font-size: medium;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 30px;
-    padding-bottom: 100px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 .derecha {
     margin-top: 20px;
     padding: 20px;
@@ -87,6 +74,12 @@
 .fieldDir {
     display: flex;
     flex-direction: column;
+}
+
+.fieldDirUbi{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
 }
 
 .custom_field {
@@ -777,226 +770,47 @@
     margin-bottom: 30px;
 }
 
-.span2{
-    color: #FF0000;
-}
-.btn-menu{
-    margin-right: 25px;
+.cardDivider{
     display: flex;
-    margin-top: 5px;
-}
-.btnBusqueda{
-    width: 35px;
-    height: 45px;
-    line-height: 35px;
-    text-align: center;
-    color: black;
-    font-size: 15px;
-    border-radius: 50%;
-}
-.menu{
-    padding-right: 1450px;
-}
-.logo{
-    height: 40px;
-    line-height: 50px;
-    float: left;
-}
-.header{
-    background-color:#424243;
-    display: flex;
-    top: 0%;
-    height: 50px;
-    width: 100vw;
-    flex-direction: row-reverse;
-}
-.busqueda{
-    width: 350px;
-    height: 20px;
-    margin-top: 5px;
-    outline: none;
-    border: 1px silver;
-    border-radius: 5px;
-}
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100vh;
+    flex-direction: row;
+    gap: 20px;
 }
 
-.div_izquierdo {
-    background-image:url("gianluca-baio-eipyxcHIn0E-unsplash.jpg");
-    background-size: cover;
-    padding-left: 25px;
-}
-.publicatupropiedad{
-    width: 462px;
-    left: 72px;
-    font-family: 'Lato';
-    font-style: normal;
-    font-size: 20px;
-    line-height: 40px;
-    margin-top: 30px;
-    color: white;
+.cuadrado {
+    height: 225px;
+    width: 250px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    position: relative;
+    font-size: medium;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
-.cuadrado1 {
-    height: 225px;
-    width: 250px;
-    left: 30px;
-    top: 350px;
-    border-radius: 10px;
-    background-color: white;
-    position: absolute;
-    font-size: medium;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+.infoc{
+ font-size: medium;
 }
-.infoc1{
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 25px;
-    letter-spacing: 0em;
-    text-align: left;
-    padding-left: 15px;
-}
-.infoBasica{
-    text-align: left;
-    padding-left: 15px;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-}
-.cuadrado2 {
-    height: 225px;
-    width: 250px;
-    left: 350px;
-    top: 350px;
-    border-radius: 10px;
-    background-color: white;
-    position: absolute;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-}
-.infoc2{
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 25px;
-    letter-spacing: 0em;
-    text-align: left;
-    padding-left: 15px;
-}
-.agregarDesc{
-    text-align: left;
-    padding-left: 15px;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-}
-.cuadrado3 {
-    height: 225px;
-    width: 250px;
-    left: 30px;
-    top: 700px;
-    border-radius: 10px;
-    background-color: white;
-    position: absolute;
-    font-size: medium;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-}
-.infoc3{
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 25px;
-    letter-spacing: 0em;
-    text-align: left;
-    padding-left: 15px;
-}
-.subirImg{
-    text-align: left;
-    padding-left: 15px;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-}
-.cuadrado4 {
-    height: 225px;
-    width: 250px;
-    left: 350px;
-    top: 700px;
-    border-radius: 10px;
-    background-color: white;
-    position: absolute;
-    font-size: medium;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-}
-.cargarPub{
-    text-align: left;
-    padding-left: 15px;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-}
-.infoc4{
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 25px;
-    letter-spacing: 0em;
-    text-align: left;
-    padding-left: 15px;
-}
-.div_derecho{
-    background-color: #E8EFF4;
-    overflow: scroll;
-    padding-left: 50px;
-    font-family: 'Lato';
-}
-.ubicacion{
-    color:#38B6FF;
-    font-family: 'Lato';
-}
-.infoCasa{
-    color:#38B6FF;
-    font-family:'Lato' ;
-}
-.calle{
-    width: 350px;
-}
-.Altura{
-    width: 350px;
-}
-.tipoPropiedad{
-    width: 350px;
-    height: 20px;
-}
-.subtipoPropiedad{
-    width: 350px;
-    height: 20px;
-}
-.button{
-    background-color: #38B6FF;
-    font-size: 20px;
-    transition-duration: 0.4s;
-    border:none;
-    flex-direction: row-reverse;
-}
-.button:hover {
-    background-color: white;
-    color: black;
-  }
-.text1{
-    width: 686px;
-    height: 78px;
-    left: 72px;
+
+
+.cardsContainer{
+    display: flex;
+    flex-direction: column;
     margin-top: 50px;
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 40px;
+    gap: 20px;
+}
+
+.izquierda {
+    position: fixed;
     display: flex;
-    align-items: center;
-    color: white;
+    flex-direction: column;
+    width: 550px;
+    height: 100%;
+    font-size: medium;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+    padding-bottom: 100px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);   
 }

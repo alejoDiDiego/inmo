@@ -184,36 +184,49 @@ const principal = () => {
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
         <Layout perfil={true}>
+
           <div className={styles.main}>
             <div className={styles.izquierda}>
-            <div class="publicatupropiedad">
-                    <h1>Publica tu <span>propiedad</span></h1>
-                </div>
-                <div>
-                    <h4 class="text1">Completa los datos de la propiedad a vender, agrega datos extras y detalles para
-                        maximizar la
-                        comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</h4>
-                </div>
-                <div class="cuadrado1">
-                    <h2 class="infoBasica">Informacion <span>basica</span></h2>
-                    <p class="infoc1">Completar los datos esenciales para crear una publicacion, esta informacion es
-                       <span class="span2"> obligatoria (*)</span>
-                    </p>
-                </div>
-                <div class="cuadrado2">
-                    <h2 class="agregarDesc">Agregar <span>descripcion</span></h2>
-                    <p class="infoc2">Suma una descripcion mas detallada a tu publicacion, agrega informacion que creas
+
+              <h1>Publica tu <span>propiedad</span></h1>
+                <h4 class={styles.text1}>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
+                  maximizar la
+                  comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</h4>
+
+                <div className={styles.cardsContainer}>
+
+                  <div className={styles.cardDivider}>
+
+                    <div class={styles.cuadrado}>
+                      <h3>1. Ubicacion</h3>
+                      <p class={styles.infoc}>Completar los datos esenciales para crear una publicacion, esta informacion es
+                        <span> obligatoria (*)</span>
+                      </p>
+                    </div>
+
+                    <div class={styles.cuadrado}>
+                      <h3 >2. Informacion Basica</h3>
+                      <p class={styles.infoc}>Suma una descripcion mas detallada a tu publicacion, agrega informacion que creas
                         relevante.</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="cuadrado3">
-                    <h2 class="subirImg">Subir <span>imagenes</span></h2>
-                    <p class="infoc3">Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+
+
+                <div className={styles.cardDivider}>
+
+                  <div class={styles.cuadrado}>
+                    <h3>3. Subir imagenes</h3>
+                    <p class={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                  </div>
+
+                  <div class={styles.cuadrado}>
+                    <h3>4. Cargar publicacion</h3>
+                    <p class={styles.infoc}>finalizar el proceso de publicacion</p>
+                  </div>
+
                 </div>
-                <div class="cuadrado4">
-                    <h2 class="cargarPub">Cargar <span>publicacion</span></h2>
-                    <p class="infoc4">finalizar el proceso de publicacion</p>
-                </div>
-            </div>
+
             </div>
 
 
@@ -325,8 +338,9 @@ const principal = () => {
             </div>
           </div>
 
-        </Layout>
-      </div>
+        </Layout >
+
+      </div >
     )
   }
 
