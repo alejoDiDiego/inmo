@@ -10,7 +10,7 @@ const sobreNosotros = () => {
                     <div className={styles.contenedor_Principal}>
 
                         <div className={styles.img}>
-                            <div>
+                            <div className={styles.texto_titulo}>
                                 <h2 className={styles.h1}>Sobre<span className={styles.span}>nosostros</span></h2>
 
                                 <img className={styles.img_footer} src="/icono_about.png" />
