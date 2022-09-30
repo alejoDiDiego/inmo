@@ -219,6 +219,7 @@ const SubirImagenes = ({
                     <StyledDropzone ></StyledDropzone>
                 </div>
 
+
                 <div className={styles.imagesContainer}>
                     <div className={styles.div_imagenes}>
                         {
@@ -228,7 +229,6 @@ const SubirImagenes = ({
                                 console.log(index)
                                 return (
                                     <div className={styles.div_img}>
-
                                         <div className={styles.iconos_img}>
                                             <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
                                             {
@@ -253,7 +253,7 @@ const SubirImagenes = ({
                                             }
                                         </div>
 
-                                        <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
+                                        <img className={styles.img_subir} key={index} src={typeof m == "object" ? urlCreator.createObjectURL(m) : m} />
                                     </div>
                                     //  https://www.flaticon.com/free-icon/right-arrow_467282?term=arrow&related_id=467282# 
                                 )
@@ -263,6 +263,7 @@ const SubirImagenes = ({
                     <div className={styles.limitViewer}>
                         <p>Imagenes subidas {imagenes.length}/20</p>
                     </div>
+
                 </div>
 
 

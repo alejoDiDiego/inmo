@@ -1174,29 +1174,28 @@ const principal = () => {
                                         cargando == false ?
                                             confirmarEliminacionFondo == false ?
                                                 (
-                                                    <div>
+                                                    <div className={styles.div_buttons}>
                                                         <label htmlFor='file-img-fondo'><img className={styles.edit_icon} src='/edit.png' /></label>
                                                         <input className={styles.input_file} onChange={(e) => { setImageFondoUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-fondo' />
 
                                                         {
                                                             info.fotoFondoURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FfondoDefault.png?alt=media&token=d4bde7ff-b705-43cd-b647-899db546186b") == false ?
                                                                 (
-                                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
+                                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/bin.png' />
                                                                 ) : null
                                                         }
 
                                                     </div>
                                                 ) :
                                                 (
-                                                    <div>
-                                                        <p>Desea eliminar la foto?</p>
-                                                        <div>
-                                                            <button onClick={() => { handleEliminarFondo() }}>Si</button>
-                                                            <button onClick={() => setConfirmarEliminacionFondo(false)}>No</button>
-                                                        </div>
+                                                    <div className={styles.div_buttons}>
+                                                        <img onClick={() => { handleEliminarFondo() }} className={styles.delete_icon} src='/bin.png' />
+                                                        <img onClick={() => { setConfirmarEliminacionFondo(false) }} className={styles.delete_icon} src='/delete.png' />
                                                     </div>
                                                 ) :
-                                            <p>cargando</p>
+                                            <div className={styles.div_buttons}>
+                                                <p>Cargando...</p>
+                                            </div>
                                     }
 
 
@@ -1217,14 +1216,14 @@ const principal = () => {
                                                 (
                                                     confirmarEliminacionPerfil == false ?
                                                         (
-                                                            <div>
+                                                            <div className={styles.div_buttons}>
                                                                 <label htmlFor='file-img-perfil'><img className={styles.edit_icon} src='/edit.png' /></label>
                                                                 <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
 
                                                                 {
                                                                     info.fotoPerfilURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FperfilDefault.jpg?alt=media&token=19044d3e-c7bc-493f-9850-20dc001ad5c5") == false ?
                                                                         (
-                                                                            <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
+                                                                            <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/bin.png' />
                                                                         ) :
                                                                         null
 
@@ -1233,16 +1232,15 @@ const principal = () => {
                                                             </div>
                                                         ) :
                                                         (
-                                                            <div>
-                                                                <p>Desea eliminar la foto?</p>
-                                                                <div>
-                                                                    <button onClick={() => { handleEliminarPerfil() }}>Si</button>
-                                                                    <button onClick={() => setConfirmarEliminacionPerfil(false)}>No</button>
-                                                                </div>
+                                                            <div className={styles.div_buttons}>
+                                                                <img onClick={() => handleEliminarPerfil()} className={styles.delete_icon} src='/bin.png' />
+                                                                <img onClick={() => setConfirmarEliminacionPerfil(false)} className={styles.delete_icon} src='/delete.png' />
                                                             </div>
                                                         )
                                                 ) :
-                                                <p>cargando</p>
+                                                <div className={styles.div_buttons}>
+                                                    <p>Cargando...</p>
+                                                </div>
 
                                         }
 
@@ -1363,27 +1361,27 @@ const principal = () => {
                                                             <div className={styles.contactInfo}>
                                                                 {
                                                                     info.numeroCelular !== "" ?
-                                                                    (
-                                                                        <p>Celular: {info.numeroCelular}</p>
-                                                                    ) :
-                                                                    null
+                                                                        (
+                                                                            <p>Celular: {info.numeroCelular}</p>
+                                                                        ) :
+                                                                        null
                                                                 }
 
                                                                 {
                                                                     info.numeroTelefono !== "" ?
-                                                                    (
-                                                                        <p>Telefono: {info.numeroTelefono}</p>
-                                                                    ) :
-                                                                    null
+                                                                        (
+                                                                            <p>Telefono: {info.numeroTelefono}</p>
+                                                                        ) :
+                                                                        null
                                                                 }
-                                                                
-                                                                
+
+
                                                                 {
                                                                     info.emailPublico == true ?
-                                                                    (
-                                                                        <p>{info.mail}</p>
-                                                                    ) : 
-                                                                    null
+                                                                        (
+                                                                            <p>{info.mail}</p>
+                                                                        ) :
+                                                                        null
                                                                 }
                                                             </div>
                                                         )

@@ -6,10 +6,7 @@ import "firebase/compat/firestore";
 import firebaseConfig from './config';
 
 
-
 class Firebase {
-
-
 
   constructor() {
     this.app = initializeApp(firebaseConfig);

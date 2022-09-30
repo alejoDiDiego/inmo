@@ -88,15 +88,20 @@ const InformacionBasica = ({
                         setMunicipio(selectPosition.address.state_district)
                     }
 
-                } else if ("city_district" in selectPosition.address) {
-                    setMunicipio(selectPosition.address.city_district)
-                } else {
-                    setMunicipio("")
+                }
+
+                if ("city" in selectPosition.address) {
+                    if (selectPosition.address.city.includes("Partido de")) {
+                        setMunicipio(selectPosition.address.city.slice(11))
+                    } else if (selectPosition.address.city.includes("Partido")) {
+                        setMunicipio(selectPosition.address.city.slice(8))
+                    } else {
+                        setMunicipio(selectPosition.address.city)
+                    }
                 }
 
 
-                if ("city" in selectPosition.address) {
-                } if ("town" in selectPosition.address) {
+                if ("town" in selectPosition.address) {
                     setLocalidad(selectPosition.address.town)
                 } if ("quarter" in selectPosition.address) {
                     setLocalidad(selectPosition.address.quarter)
@@ -112,7 +117,10 @@ const InformacionBasica = ({
                     setLocalidad(selectPosition.address.county)
                 } if ("residential" in selectPosition.address) {
                     setLocalidad(selectPosition.address.residential)
+                } if ("city_district" in selectPosition.address) {
+                    setLocalidad(selectPosition.address.city_district)
                 }
+
 
 
 
