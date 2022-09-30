@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import styles from '../../styles/CrearPublicacion.module.css'
 
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?"
@@ -48,24 +49,27 @@ const SearchBox = ({ selectPosition, setSelectPosition, searchText, setSearchTex
 
     return (
         <div>
-            <div>
-                <input style={{ width: "600px" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-                <button
-                    onClick={() => handleClick()}
-                >Buscar</button>
+            <div className={styles.searchController}>
+                <label className={`${styles.custom_field} ${styles.two}`}>
+                    <input value={searchText} onChange={(e) => setSearchText(e.target.value)} type="text" placeholder="Escriba una ubicación" />
+                </label>
+                <div className={styles.searchButton} onClick={() => handleClick()}>
+                    <img src='/search2.png'/>
+                </div>
             </div>
 
             {
                 listPlace.length > 0 ?
                     (
-                        <div>
+                        <div className={styles.results}>
                             {
                                 listPlace.map(p => {
                                     return (
-                                        <button key={p?.osm_id} onClick={() => {setSelectPosition(p); setListPlace([])}}>
-                                            <img src='/location-sign-azul.png' />
-                                            <p>{p?.display_name}</p>
-                                        </button>
+                                        <div>
+                                            <button className={styles.ubiButton} key={p?.osm_id} onClick={() => { setSelectPosition(p); setListPlace([]) }}>
+                                                <p>{p?.display_name}</p>
+                                            </button>
+                                        </div>
                                     )
                                 })
                             }

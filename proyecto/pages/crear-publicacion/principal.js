@@ -184,8 +184,45 @@ const principal = () => {
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
         <Layout perfil={true}>
+
           <div className={styles.main}>
             <div className={styles.izquierda}>
+
+              <h1>Publica tu <span>propiedad</span></h1>
+                <h4 class={styles.text1}>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
+                  maximizar la
+                  comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</h4>
+
+                <div className={styles.cardsContainer}>
+
+                  <div className={styles.cardDivider}>
+
+                    <div class={styles.cuadrado}>
+                      <h3>1. Ubicacion</h3>
+                      <p class={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                    </div>
+
+                    <div class={styles.cuadrado}>
+                      <h3 >2. Informacion Basica</h3>
+                      <p class={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className={styles.cardDivider}>
+
+                  <div class={styles.cuadrado}>
+                    <h3>3. Subir imagenes</h3>
+                    <p class={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                  </div>
+
+                  <div class={styles.cuadrado}>
+                    <h3>4. Cargar publicacion</h3>
+                    <p class={styles.infoc}>finalizar el proceso de publicacion</p>
+                  </div>
+
+                </div>
 
             </div>
 
@@ -247,18 +284,23 @@ const principal = () => {
                         setImagenes={setImagenes}
                       />
 
-
-                      <button onClick={() => handleSiguiente()}>Siguiente</button>
-                      {
-                        errorSiguiente == true ?
-                          (
-                            <p>Le falta completar campos</p>
-                          ) :
-                          (
-                            null
-                          )
-                      }
+                      <div className={styles.div_buttonContinue}>
+                        <label className={styles.buttonConfirm} onClick={() => handleSiguiente()}>
+                          <div className={styles.buttonConfirm_back}></div>
+                          <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
+                        </label>
+                        {
+                          errorSiguiente == true ?
+                            (
+                              <p>Le falta completar campos</p>
+                            ) :
+                            (
+                              null
+                            )
+                        }
+                      </div>
                     </div>
+
                   ) :
                   (
                     <FinalizarPublicacion
@@ -291,16 +333,11 @@ const principal = () => {
               }
 
             </div>
-
-
-
-
-
-
           </div>
 
-        </Layout>
-      </div>
+        </Layout >
+
+      </div >
     )
   }
 

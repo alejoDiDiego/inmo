@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../styles/InformacionBasica.module.css'
+import styles from '../../styles/CrearPublicacion.module.css'
 import dynamic from "next/dynamic"
 import SearchBox from './SearchBox'
 import Select from 'react-select'
@@ -204,164 +204,550 @@ const InformacionBasica = ({
 
     return (
         <div className={styles.main}>
-            <div>
-                <h2>Ubicacion</h2>
 
-                <div>
-                    <div>
-                        <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
-                    </div>
-                    <div className={styles.map}>
-                        <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
-                    </div>
-                    <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
-                    <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
-                </div>
-
-                <div>
-                    <label>Provincia*</label>
-                    <input value={provincia} onChange={e => setProvincia(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Municipio*</label>
-                    <input value={municipio} onChange={e => setMunicipio(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Localidad*</label>
-                    <input value={localidad} onChange={e => setLocalidad(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Codigo Postal*</label>
-                    <input value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Direccion*</label>
-                    <input value={direccion} onChange={e => setDireccion(e.target.value)} />
-                </div>
-
-                <div>
-                    <label>Altura*</label>
-                    <input value={altura} onChange={e => setAltura(e.target.value)} />
-                </div>
-
-
-            </div>
-
-
-            <div>
-                <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
-            </div>
-
-            {
-                tipoVivienda == "departamento" ?
-                    (
-                        <div>
-                            <div>
-                                <label>Piso*</label>
-                                <input value={piso} onChange={e => setPiso(isNumber(e))} />
+            <div className={styles.ubicacion}>
+                <h1>Crear Publicacion</h1>
+                <p>Los campos marcados con un asterisco (*) son obligatorios</p>
+                <h2 className={styles.ubiTitle}>1. Ubicacion</h2>
+                <div className={styles.mapPlusData}>
+                    <div className={styles.mapPlusInfo}>
+                        <div className={styles.mapa}>
+                            <div className={styles.search}>
+                                <SearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} searchText={searchText} setSearchText={setSearchText} />
                             </div>
-
-                            <div>
-                                <label>Depto*</label>
-                                <input placeholder="Ej: A / 1 / 1C" value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} />
+                            <div className={styles.map}>
+                                <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
                             </div>
-
+                            <div className={styles.advices}>
+                                <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
+                                <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
+                            </div>
                         </div>
-                    ) :
-                    (
-                        <div>
-                            <label>Depto/Division</label>
-                            <input value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} />
+                    </div>
+                    <div className={styles.ubiInput}>
+                        <div className={styles.fieldDirUbi}>
+                            <p>Provincia*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={provincia} onChange={e => setProvincia(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
                         </div>
-                    )
-
-            }
-
-
-
-
-            <div>
-
-                <h2>Informacion de la propiedad</h2>
-
-                <div>
-                    <label>Cantidad de ambientes*</label>
-                    <input value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Cantidad de baños*</label>
-                    <input value={cantBanos} onChange={e => setCantBanos(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Cantidad de habitacion*</label>
-                    <input value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Cantidad de cocheras*</label>
-                    <input value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Mt<sup>2</sup> Totales*</label>
-                    <input value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} />
-                </div>
-
-                <div>
-                    <label>Mt<sup>2</sup> Utilizados*</label>
-                    <input value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} />
+                        <div className={styles.fieldDirUbi}>
+                            <p>Municipio*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={municipio} onChange={e => setMunicipio(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDirUbi}>
+                            <p>Localidad*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={localidad} onChange={e => setLocalidad(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDirUbi}>
+                            <p>Codigo Postal*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDirUbi}>
+                            <p>Direccion*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDirUbi}>
+                            <p>Altura*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={100} value={altura} onChange={e => setAltura(e.target.value)} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div className={styles.informacionV}>
 
-            <div>
-                <h2>Valor</h2>
+                <div className={styles.basicInfo}>
+                    <div className={styles.fieldsInputs}>
+                        <h2>2. Informacion de la propiedad</h2>
+                        <h3>Informacion basica</h3>
 
-                <div>
-                    <div>
-                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
+                        <div>
+                            <p className={styles.selectLabel}>Tipo de propiedad</p>
+                            <div>
+                                <Select className={styles.selectContainer} options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} defaultValue={{ value: tipoVivienda, label: titleCase(tipoVivienda) }}></Select>
+                            </div>
+                        </div>
+
+                        {
+                            tipoVivienda == "departamento" ?
+                                (
+                                    <div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Piso*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={piso} onChange={e => setPiso(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Depto*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                ) :
+                                (
+                                    <div className={styles.fieldDir}>
+                                        <p>Depto/Division*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
+                                        </label>
+                                    </div>
+
+                                )
+
+                        }
+
+
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de ambientes*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantAmbientes} onChange={e => setCantAmbientes(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de baños*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantBanos} onChange={e => setCantBanos(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de habitaciones*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantHabitaciones} onChange={e => setCantHabitaciones(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+                        <div className={styles.fieldDir}>
+                            <p>Cantidad de cocheras*:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={25} value={cantCocheras} onChange={e => setCantCocheras(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
+
+                        {
+                            tipoVivienda == "casa" ?
+                                (
+                                    <div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Mt<sup>2</sup> Totales*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Mt<sup>2</sup> Utilizados*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={mt2Utilizados} onChange={e => setMt2Utilizados(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                ) :
+                                (
+                                    <div>
+                                        <div className={styles.fieldDir}>
+                                            <p>Mt<sup>2</sup> Totales*:</p>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input maxLength={25} value={mt2Totales} onChange={e => setMt2Totales(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                )
+
+                        }
+
+
                     </div>
-
                     {
-                        tipoPublicacion == "venta" ?
+                        tipoVivienda == "casa" ?
                             (
 
-                                <div>
-                                    <label>Precio USD$*</label>
-                                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                                <div className={styles.houseGraph}>
+                                    <div className={styles.houseInfoContainer}>
+                                        <div className={styles.houseDir}>
+                                            {
+                                                direccion == "" ?
+                                                    (
+                                                        <p>Direccion de la propiedad</p>
+                                                    ) :
+                                                    (
+                                                        <p>{direccion}</p>
+                                                    )
+
+                                            }
+
+                                            <div className={styles.numberContainer}>
+                                                {
+                                                    altura == 0 ?
+                                                        (
+                                                            <p className={styles.number}>----</p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>{altura}</p>
+                                                        )
+
+                                                }
+                                                {
+                                                    numeroLetraDepto == "" ?
+                                                        (
+                                                            <p></p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>/{numeroLetraDepto}</p>
+                                                        )
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.roomNumber}>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/open-door.png'></img>
+                                                    {
+                                                        cantAmbientes == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantAmbientes}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/bed.png'></img>
+                                                    {
+                                                        cantHabitaciones == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantHabitaciones}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/shower.png'></img>
+                                                    {
+                                                        cantBanos == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantBanos}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/garage.png'></img>
+                                                    {
+                                                        cantCocheras == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantCocheras}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <img src='/houseIlustration.png'></img>
+                                    <div className={styles.measurementContainer}>
+                                        <div className={styles.totalMeasurement}>
+                                            <div className={styles.limit}></div>
+                                            <div className={styles.measurement}>
+                                                <div className={styles.line}></div>
+                                                <p>{mt2Totales} mts2</p>
+                                            </div>
+                                            <div className={styles.limit}></div>
+                                        </div>
+                                        <div className={styles.partialMeasurement}>
+                                            <div className={styles.limit}></div>
+                                            <div className={styles.measurement}>
+                                                <div className={styles.line}></div>
+                                                <p>{mt2Utilizados} mts2</p>
+                                            </div>
+                                            <div className={styles.limit}></div>
+                                        </div>
+                                    </div>
                                 </div>
-
-
 
                             ) :
                             (
-                                <div>
-                                    <label>Precio por mes ARS$*</label>
-                                    <input value={precio} onChange={e => setPrecio(isNumber(e))} />
+                                <div className={styles.houseGraph}>
+                                    <div className={styles.houseInfoContainer}>
+                                        <div className={styles.houseDir}>
+                                            {
+                                                direccion == "" ?
+                                                    (
+                                                        <p>Direccion de la propiedad</p>
+                                                    ) :
+                                                    (
+                                                        <p>{direccion}</p>
+                                                    )
+
+                                            }
+                                            <div className={styles.numberContainer}>
+                                                {
+                                                    altura == 0 ?
+                                                        (
+                                                            <p className={styles.number}>----</p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>{altura}</p>
+                                                        )
+
+                                                }
+                                                {
+                                                    numeroLetraDepto == "" ?
+                                                        (
+                                                            <p></p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.number}>/{numeroLetraDepto}</p>
+                                                        )
+
+                                                }
+                                                {
+                                                    piso == 0 ?
+                                                        (
+                                                            <p className={styles.numberHeight}>Piso:</p>
+                                                        ) :
+                                                        (
+                                                            <p className={styles.numberHeight}>Piso: {piso}</p>
+                                                        )
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.roomNumber}>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/open-door.png'></img>
+                                                    {
+                                                        cantAmbientes == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantAmbientes}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/bed.png'></img>
+                                                    {
+                                                        cantHabitaciones == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantHabitaciones}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.roomNumberUnit}>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/shower.png'></img>
+                                                    {
+                                                        cantBanos == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantBanos}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className={styles.roomNumberContainer}>
+                                                    <img src='/garage.png'></img>
+                                                    {
+                                                        cantCocheras == 0 ?
+                                                            (
+                                                                <p>-</p>
+                                                            ) :
+                                                            (
+                                                                <p>{cantCocheras}</p>
+                                                            )
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img src='/buildingIlustration.png'></img>
+                                    <div className={styles.measurementContainer}>
+                                        <div className={styles.totalMeasurement}>
+                                            <div className={styles.limit}></div>
+                                            <div className={styles.measurement}>
+                                                <div className={styles.line}></div>
+                                                <p>{mt2Totales} mts2</p>
+                                            </div>
+                                            <div className={styles.limit}></div>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                     }
+                </div>
 
-                    <div>
-                        <label>Expensas</label>
-                        <input value={expensas} onChange={e => setExpensas(isNumber(e))} />
+
+                <div className={styles.valueInfoContainer}>
+                    <div className={styles.valueFields}>
+                        <h3>Valor</h3>
+
+                        <div>
+                            <p className={styles.selectLabel}>Tipo de publicacion</p>
+                            <div className={styles.selectContainer}>
+                                <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
+                            </div>
+                        </div>
+
+                        {
+                            tipoPublicacion == "venta" ?
+                                (
+
+                                    <div className={styles.fieldDir}>
+                                        <p>Precio USD$*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={10} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                        </label>
+                                    </div>
+
+
+
+                                ) :
+                                (
+                                    <div className={styles.fieldDir}>
+                                        <p>Precio por mes ARS$*:</p>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input maxLength={10} value={precio} onChange={e => setPrecio(isNumber(e))} type="text" placeholder="&nbsp;" />
+                                        </label>
+                                    </div>
+                                )
+                        }
+
+                        <div className={styles.fieldDir}>
+                            <p>Expensas:</p>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={10} value={expensas} onChange={e => setExpensas(isNumber(e))} type="text" placeholder="&nbsp;" />
+                            </label>
+                        </div>
                     </div>
+                    <div className={styles.cardContainer}>
+                        <div className={styles.pole}></div>
+                        <div className={styles.valueCard}>
+                            {
+                                tipoPublicacion == "venta" ?
+                                    (
+                                        <div className={styles.cardInside}>
+                                            <div>
+                                                <h2>En venta</h2>
+                                                {
+                                                    expensas == 0 ?
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3 className={styles.exp1}>Sin expensas</h3>
+                                                            </div>
+                                                        ) :
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3>Expensas</h3>
+                                                                <h3 className={styles.exp2}>{expensas} <span>$/mes</span></h3>
+                                                            </div>
+                                                        )
+                                                }
+                                            </div>
 
+                                            {
+                                                precio == 0 ?
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>----------</h2>
+                                                            <h2 className={styles.price}>USD</h2>
+                                                        </div>
+                                                    ) :
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>{precio}</h2>
+                                                            <h2 className={styles.price}>USD</h2>
+                                                        </div>
 
+                                                    )
+                                            }
+                                        </div>
 
+                                    ) :
+                                    (
+                                        <div className={styles.cardInside}>
+                                            <div>
+                                                <h2>Alquiler</h2>
+                                                {
+                                                    expensas == 0 ?
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3 className={styles.exp1}>Sin expensas</h3>
+                                                            </div>
+                                                        ) :
+                                                        (
+                                                            <div className={styles.expContainer}>
+                                                                <h3>Expensas</h3>
+                                                                <h3 className={styles.exp2}>{expensas} <span>ARS$/mes</span></h3>
+                                                            </div>
+                                                        )
+                                                }
+                                            </div>
+
+                                            {
+                                                precio == 0 ?
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>----------</h2>
+                                                            <h2 className={styles.price}>ARS$/mes</h2>
+                                                        </div>
+                                                    ) :
+                                                    (
+                                                        <div className={styles.priceContainer}>
+                                                            <h2 className={styles.price}>{precio}</h2>
+                                                            <h2 className={styles.price}>ARS$/mes</h2>
+                                                        </div>
+
+                                                    )
+                                            }
+                                        </div>
+                                    )
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
-            <div>
-                <h2>Descripcion</h2>
-                <textarea value={descripcion} onChange={e => setDescripcion(e.target.value)}></textarea>
+            <div className={styles.descripAreaContainer}>
+                <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
+                <div className={styles.fieldDir}>
+                    <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>
+                </div>
             </div>
         </div>
     )

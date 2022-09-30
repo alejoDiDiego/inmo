@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useMemo} from 'react'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
-import styles from '../../styles/SubirImagenes.module.css'
+import styles from '../../styles/CrearPublicacion.module.css'
 import Image from 'next/image'
+import {useDropzone} from 'react-dropzone';
 
 
 
@@ -25,6 +26,68 @@ const SubirImagenes = ({
     const [modalPerfil, setModalPerfil] = useState(false)
 
     const [imagePerfilUpload, setImagePerfilUpload] = useState([])
+
+
+    const baseStyle = {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        borderWidth: 2,
+        borderRadius: 2,
+        borderColor: '#0071b3',
+        borderStyle: 'dashed',
+        backgroundColor: '#fafafa',
+        color: '#bdbdbd',
+        outline: 'none',
+        transition: 'border .24s ease-in-out',
+      };
+      
+      const focusedStyle = {
+        borderColor: '#38B6FF'
+      };
+      
+      const acceptStyle = {
+        borderColor: '#00e676'
+      };
+      
+      const rejectStyle = {
+        borderColor: '#ff1744'
+      };
+      
+      function StyledDropzone(props) {
+        const onDrop = useCallback(acceptedFiles => {
+            setImagePerfilUpload(acceptedFiles[0])
+          }, [])
+        const {
+          getRootProps,
+          getInputProps,
+          isFocused,
+          isDragAccept,
+          isDragReject
+        } = useDropzone({onDrop, accept: {'image/*': []}});
+      
+        const style = useMemo(() => ({
+          ...baseStyle,
+          ...(isFocused ? focusedStyle : {}),
+          ...(isDragAccept ? acceptStyle : {}),
+          ...(isDragReject ? rejectStyle : {})
+        }), [
+          isFocused,
+          isDragAccept,
+          isDragReject
+        ]);
+      
+        return (
+          <div className="container">
+            <div {...getRootProps({style})}>
+              <input {...getInputProps()} />
+              <p>Arrastra una imagen o haz click para abrir el explorador de archivos</p>
+            </div>
+          </div>
+        );
+      }
 
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -82,6 +145,8 @@ const SubirImagenes = ({
             console.log(imagePerfilUpload)
             const file = imagePerfilUpload
             console.log("llega1")
+            console.log(file)
+            console.log(typeof file)
             let imageDataUrl = await readFile(file)
 
             setImageSrc(imageDataUrl)
@@ -145,62 +210,59 @@ const SubirImagenes = ({
 
 
     return (
-        <div className={styles.main}>
+        <div className={styles.mainImg}>
             <div>
-                <h2>Subir Imagenes</h2>
-                <p>La primera imagen sera la principal de la publicacion</p>
-                <p>ATENCION: si quiere volver a subir la ultima imagen cargada (por ejemplo si la borro), debe seleccionar otra imagen, cerrar la pestana de recortar y volver a cargar la imagen (que borro)</p>
+                <h2>3. Subir Imagenes</h2>
+                <p>La primer imagen sera utilizada como portada de la publicación</p>
 
-                <div>
-                    <div className={styles.div_button}>
-                        <label className={styles.buttonConfirm} htmlFor='file-img-perfil'>
-                            <div className={styles.buttonConfirm_back}></div>
-                            <div className={styles.buttonConfirm_content}><span>Subir Imagenes</span></div>
-                        </label>
-                    </div>
-                    <input className={styles.input_file} onChange={(e) => { setImagePerfilUpload(e.target.files[0]) }} accept="image/png, image/gif, image/jpeg" type="file" id='file-img-perfil' />
+                <div className={styles.dropzoneStyle}>
+                    <StyledDropzone ></StyledDropzone>
                 </div>
 
-                <div className={styles.div_imagenes}>
-                    {
-                        imagenes.map(m => {
-                            let urlCreator = window.URL || window.webkitURL;
-                            let index = imagenes.indexOf(m)
-                            console.log(index)
-                            return (
-                                <div className={styles.div_img}>
+                <div className={styles.imagesContainer}>
+                    <div className={styles.div_imagenes}>
+                        {
+                            imagenes.map(m => {
+                                let urlCreator = window.URL || window.webkitURL;
+                                let index = imagenes.indexOf(m)
+                                console.log(index)
+                                return (
+                                    <div className={styles.div_img}>
 
-                                    <div className={styles.iconos_img}>
-                                        <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
-                                        {
-                                            imagenes.length > 1 ?
-                                                (
-                                                    <>
-                                                        {
-                                                            index + 1 != imagenes.length ?
-                                                                (
-                                                                    <img src='/arrow.png' onClick={() => { handleDerecha(index, m) }} className={styles.delete_icon} />
-                                                                ) : null
-                                                        }
+                                        <div className={styles.iconos_img}>
+                                            <img src='/delete.png' onClick={() => { handleEliminar(index) }} className={styles.delete_icon} />
+                                            {
+                                                imagenes.length > 1 ?
+                                                    (
+                                                        <>
+                                                            {
+                                                                index + 1 != imagenes.length ?
+                                                                    (
+                                                                        <img src='/arrow.png' onClick={() => { handleDerecha(index, m) }} className={styles.delete_icon} />
+                                                                    ) : null
+                                                            }
 
-                                                        {
-                                                            index != 0 ?
-                                                                (
-                                                                    <img src='/arrow.png' onClick={() => { handleIzquierda(index, m) }} style={{ transform: "rotate(180deg)" }} className={styles.delete_icon} />
-                                                                ) : null
-                                                        }
-                                                    </>
-                                                ) : null
-                                        }
+                                                            {
+                                                                index != 0 ?
+                                                                    (
+                                                                        <img src='/arrow.png' onClick={() => { handleIzquierda(index, m) }} style={{ transform: "rotate(180deg)" }} className={styles.delete_icon} />
+                                                                    ) : null
+                                                            }
+                                                        </>
+                                                    ) : null
+                                            }
+                                        </div>
+
+                                        <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
                                     </div>
-
-                                    <img className={styles.img_subir} key={index} src={urlCreator.createObjectURL(m)} />
-                                </div>
-
-                                //  https://www.flaticon.com/free-icon/right-arrow_467282?term=arrow&related_id=467282# 
-                            )
-                        })
-                    }
+                                    //  https://www.flaticon.com/free-icon/right-arrow_467282?term=arrow&related_id=467282# 
+                                )
+                            })
+                        }
+                    </div>
+                    <div className={styles.limitViewer}>
+                        <p>Imagenes subidas {imagenes.length}/20</p>
+                    </div>
                 </div>
 
 

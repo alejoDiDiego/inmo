@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet' // npm i leaflet react-leaflet
 import 'leaflet/dist/leaflet.css'
 import L, { latLng } from "leaflet"
+import SearchBox from './SearchBox'
 
 const icon = L.icon({
     iconUrl: "/location-sign.png", // <a href="https://www.flaticon.com/free-icons/gps" title="gps icons">Gps icons created by Freepik - Flaticon</a>
@@ -84,6 +85,7 @@ const Map = ({ selectPosition, setSelectPosition }) => {
     const locationSelection = [selectPosition?.lat, selectPosition?.lon]
 
     return (
+
         <MapContainer center={position} zoom={10} scrollWheelZoom={true} style={{ width: "100%", height: "100%" }}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -104,6 +106,8 @@ const Map = ({ selectPosition, setSelectPosition }) => {
             <HandleClickMap setSelectPosition={setSelectPosition} />
 
         </MapContainer>
+
+
     )
 }
 
