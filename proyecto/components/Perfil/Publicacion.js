@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/Publicacion.module.css'
 import PublicacionExtendida from './PublicacionExtendida'
 import { doc, deleteDoc } from "firebase/firestore";
@@ -12,7 +12,8 @@ const Publicacion = ({ p, queryFirebase }) => {
 
     const [imagen, setImagen] = useState(0)
 
-    const [editar, setEditar] = useState(false)
+    const [eliminar, setEliminar] = useState(false)
+    const [cargandoEliminar, setCargandoEliminar] = useState(false)
 
 
 
@@ -25,6 +26,7 @@ const Publicacion = ({ p, queryFirebase }) => {
 
     const handleEliminar = async () => {
         try {
+            setCargandoEliminar(true)
             const refFolder = ref(firebase.storage, `publicaciones/${p.id}`)
             console.log(refFolder)
             const allItems = await listAll(refFolder)
@@ -39,10 +41,14 @@ const Publicacion = ({ p, queryFirebase }) => {
             await deleteDoc(doc(firebase.db, "Publicaciones", `${p.id}`))
             console.log("listo")
             queryFirebase()
+            setCargandoEliminar()
         } catch (err) {
             console.log(err)
+            setCargandoEliminar()
         }
     }
+
+
 
 
 
@@ -81,10 +87,28 @@ const Publicacion = ({ p, queryFirebase }) => {
 
             <div>
 
-                <div className={styles.div_buttons}>
-                    <Link href="/modificar-publicacion/[id]" as={`/modificar-publicacion/${p.id}`}><img src='/edit.png' className={styles.edit_icon} /></Link>
-                    <img src='/delete.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
-                </div>
+                {
+                    cargandoEliminar == false ?
+                        eliminar == false ?
+                            (
+                                <div className={styles.div_buttons}>
+                                    <Link href="/modificar-publicacion/[id]" as={`/modificar-publicacion/${p.id}`}><img src='/edit.png' className={styles.edit_icon} /></Link>
+                                    <img src='/bin.png' onClick={() => { setEliminar(true) }} className={styles.delete_icon} />
+                                </div>
+                            ) :
+                            (
+                                <div className={styles.div_buttons}>
+                                    <img src='/bin.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
+                                    <img src='/delete.png' onClick={() => { setEliminar(false) }} className={styles.delete_icon} />
+
+                                    {/* https://www.flaticon.com/free-icon/bin_6033424?term=junk&page=1&position=40&page=1&position=40&related_id=6033424&origin=search# */}
+                                </div>
+                            )
+                        :
+                        <div className={styles.div_buttons}>
+                            <p>Cargando...</p>
+                        </div>
+                }
 
 
 
