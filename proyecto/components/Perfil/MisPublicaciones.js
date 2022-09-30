@@ -1,4 +1,5 @@
 import { collection, doc, onSnapshot, query, where, collectionGroup, getDocs } from 'firebase/firestore'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import styles from '../../styles/MisPublicaciones.module.css'
@@ -40,16 +41,23 @@ const MisPublicaciones = ({ usuario }) => {
 
             <div className={styles.publicaciones}>
                 {
-                    publicaciones.map(p => {
+                    publicaciones.length > 0 ?
 
-                        return (
-                            <Publicacion
-                                key={publicaciones.indexOf(p)}
-                                p={p}
-                                queryFirebase={queryFirebase}
-                            />
-                        )
-                    })
+                        publicaciones.map(p => {
+                            return (
+                                <Publicacion
+                                    key={publicaciones.indexOf(p)}
+                                    p={p}
+                                    queryFirebase={queryFirebase}
+                                />
+                            )
+                        })
+                        :
+                        <div>
+                            <p>Comienza a publicar</p>
+                            <Link href="/crear-publicacion/principal"><button>Publicar</button></Link>
+                            
+                        </div>
                 }
             </div>
 
