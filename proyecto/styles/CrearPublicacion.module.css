@@ -632,13 +632,16 @@
 .div_imagenes {
     display: flex;
     gap: 20px;
-    width: 680px;
-    height: 250px;
+    min-width: 680px;
+    min-height: 250px;
+    height: fit-content;
+    width: min-content;
     background-color: white;
     align-content: center;
     align-items: center;
     padding: 20px;
     border-radius: 5px;
+    flex-wrap: wrap;
 }
 
 .div_img {
@@ -693,6 +696,14 @@
     height: 50px;
 }
 
+.div_buttonContinue{
+    position: relative;
+    margin-top: 50px;
+    height: 50px;
+}
+
+
+
 
 .buttonConfirm {
     width: 250px;
@@ -739,4 +750,29 @@
 
 .buttonConfirm:hover .buttonConfirm_back{
     transform: translate(-3px, 3px);
+}
+
+.imagesContainer{
+    width: 680px;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.limitViewer{
+   height: fit-content;
+   width: fit-content;
+    margin-left: 50px;
+    align-self: center;
+}
+
+.limitViewer p{
+    font-size: xx-large;
+}
+
+.dropzoneStyle{
+    height: 100px;
+    width: 680px;
+    margin-bottom: 30px;
 }

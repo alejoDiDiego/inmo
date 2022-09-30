@@ -247,18 +247,23 @@ const principal = () => {
                         setImagenes={setImagenes}
                       />
 
-
-                      <button onClick={() => handleSiguiente()}>Siguiente</button>
-                      {
-                        errorSiguiente == true ?
-                          (
-                            <p>Le falta completar campos</p>
-                          ) :
-                          (
-                            null
-                          )
-                      }
+                      <div className={styles.div_buttonContinue}>
+                        <label className={styles.buttonConfirm} onClick={() => handleSiguiente()}>
+                          <div className={styles.buttonConfirm_back}></div>
+                          <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
+                        </label>
+                        {
+                          errorSiguiente == true ?
+                            (
+                              <p>Le falta completar campos</p>
+                            ) :
+                            (
+                              null
+                            )
+                        }
+                      </div>
                     </div>
+
                   ) :
                   (
                     <FinalizarPublicacion
@@ -291,12 +296,6 @@ const principal = () => {
               }
 
             </div>
-
-
-
-
-
-
           </div>
 
         </Layout>
