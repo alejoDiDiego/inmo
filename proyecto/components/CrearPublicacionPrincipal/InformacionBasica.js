@@ -51,7 +51,8 @@ const InformacionBasica = ({
     selectPosition,
     setSelectPosition,
     numeroLetraDepto,
-    setNumeroLetraDepto
+    setNumeroLetraDepto,
+    referenciaUbi
 }) => {
 
     const [searchText, setSearchText] = useState("")
@@ -63,8 +64,6 @@ const InformacionBasica = ({
     const tipoPublicacionOptions =
         [{ value: "venta", label: "Venta" },
         { value: "alquiler", label: "Alquiler" }]
-
-
 
     useEffect(() => {
         console.log(selectPosition)
@@ -216,7 +215,7 @@ const InformacionBasica = ({
             <div className={styles.ubicacion}>
                 <h1>Crear Publicacion</h1>
                 <p>Los campos marcados con un asterisco (*) son obligatorios</p>
-                <h2 className={styles.ubiTitle}>1. Ubicacion</h2>
+                <h2 className={styles.ubiTitle} ref={referenciaUbi}>1. Ubicacion</h2>
                 <div className={styles.mapPlusData}>
                     <div className={styles.mapPlusInfo}>
                         <div className={styles.mapa}>

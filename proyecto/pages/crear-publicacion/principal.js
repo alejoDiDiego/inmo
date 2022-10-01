@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import firebase, { FirebaseContext } from '../../firebase'
 import Layout from '../../components/layout/Layout'
@@ -24,41 +24,24 @@ const principal = () => {
   const [direccion, setDireccion] = useState("")
   const [codigoPostal, setCodigoPostal] = useState("")
   const [altura, setAltura] = useState("")
-
   const [latLon, setLatLon] = useState({})
-
   const [tipoVivienda, setTipoVivienda] = useState("casa")
-
   const [piso, setPiso] = useState("")
   const [numeroLetraDepto, setNumeroLetraDepto] = useState("")
-
   const [cantAmbientes, setCantAmbientes] = useState("")
   const [cantBanos, setCantBanos] = useState("")
   const [cantHabitaciones, setCantHabitaciones] = useState("")
   const [cantCocheras, setCantCocheras] = useState("")
   const [mt2Totales, setMt2Totales] = useState("")
   const [mt2Utilizados, setMt2Utilizados] = useState("")
-
   const [tipoPublicacion, setTipoPublicacion] = useState("venta")
   const [precio, setPrecio] = useState("")
   const [expensas, setExpensas] = useState("")
-
-
-
   const [descripcion, setDescripcion] = useState("")
-
-
-
   const [imagenes, setImagenes] = useState([])
-
-
-
-
-
   const [errorSiguiente, setErrorSiguiente] = useState(false)
-
-
   const [siguiente, setSiguiente] = useState(false)
+  const referenciaUbi = useRef(null)
 
 
 
@@ -100,8 +83,10 @@ const principal = () => {
   }, [usuario])
 
 
-
-
+  const handleUbi = () =>{
+    referenciaUbi.current.scrollIntoView() 
+    console.log(referenciaUbi)   
+  } 
 
 
   const handleSiguiente = () => {
@@ -189,22 +174,22 @@ const principal = () => {
             <div className={styles.izquierda}>
 
               <h1>Publica tu <span>propiedad</span></h1>
-                <h4 class={styles.text1}>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
+                <p>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
                   maximizar la
-                  comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</h4>
+                  comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</p>
 
                 <div className={styles.cardsContainer}>
 
                   <div className={styles.cardDivider}>
 
-                    <div class={styles.cuadrado}>
+                    <div className={styles.cuadrado} onClick={handleUbi}>
                       <h3>1. Ubicacion</h3>
-                      <p class={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                      <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
                     </div>
 
-                    <div class={styles.cuadrado}>
+                    <div className={styles.cuadrado}>
                       <h3 >2. Informacion Basica</h3>
-                      <p class={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                      <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
                     </div>
                   </div>
                 </div>
@@ -212,14 +197,14 @@ const principal = () => {
 
                 <div className={styles.cardDivider}>
 
-                  <div class={styles.cuadrado}>
+                  <div className={styles.cuadrado}>
                     <h3>3. Subir imagenes</h3>
-                    <p class={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                    <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
                   </div>
 
-                  <div class={styles.cuadrado}>
+                  <div className={styles.cuadrado}>
                     <h3>4. Cargar publicacion</h3>
-                    <p class={styles.infoc}>finalizar el proceso de publicacion</p>
+                    <p className={styles.infoc}>finalizar el proceso de publicacion</p>
                   </div>
 
                 </div>
@@ -276,6 +261,7 @@ const principal = () => {
                         setMt2Utilizados={setMt2Utilizados}
                         numeroLetraDepto={numeroLetraDepto}
                         setNumeroLetraDepto={setNumeroLetraDepto}
+                        referenciaUbi = {referenciaUbi}
                       />
 
 
