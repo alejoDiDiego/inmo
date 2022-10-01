@@ -52,7 +52,9 @@ const InformacionBasica = ({
     setSelectPosition,
     numeroLetraDepto,
     setNumeroLetraDepto,
-    referenciaUbi
+    referenciaUbi,
+    referenciaInfo,
+    referenciaValor
 }) => {
 
     const [searchText, setSearchText] = useState("")
@@ -227,9 +229,9 @@ const InformacionBasica = ({
         <div className={styles.main}>
 
             <div className={styles.ubicacion}>
-                <h1>Crear Publicacion</h1>
+                <h1 ref={referenciaUbi}>Crear Publicacion</h1>
                 <p>Los campos marcados con un asterisco (*) son obligatorios</p>
-                <h2 className={styles.ubiTitle} ref={referenciaUbi}>1. Ubicacion</h2>
+                <h2 className={styles.ubiTitle}>1. Ubicacion</h2>
                 <div className={styles.mapPlusData}>
                     <div className={styles.mapPlusInfo}>
                         <div className={styles.mapa}>
@@ -286,7 +288,7 @@ const InformacionBasica = ({
                 </div>
             </div>
 
-            <div className={styles.informacionV}>
+            <div className={styles.informacionV} ref={referenciaInfo}>
 
                 <div className={styles.basicInfo}>
                     <div className={styles.fieldsInputs}>
@@ -633,7 +635,7 @@ const InformacionBasica = ({
                 </div>
 
 
-                <div className={styles.valueInfoContainer}>
+                <div  className={styles.valueInfoContainer}>
                     <div className={styles.valueFields}>
                         <h3>Valor</h3>
 

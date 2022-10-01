@@ -9,7 +9,8 @@ import {useDropzone} from 'react-dropzone';
 
 const SubirImagenes = ({
     imagenes,
-    setImagenes
+    setImagenes,
+    referenciaImg
 }) => {
 
 
@@ -210,7 +211,7 @@ const SubirImagenes = ({
 
 
     return (
-        <div className={styles.mainImg}>
+        <div ref={referenciaImg} className={styles.mainImg}>
             <div>
                 <h2>3. Subir Imagenes</h2>
                 <p>La primer imagen sera utilizada como portada de la publicación</p>

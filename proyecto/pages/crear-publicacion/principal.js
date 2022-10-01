@@ -43,6 +43,8 @@ const principal = () => {
   const [errorSiguiente, setErrorSiguiente] = useState(false)
   const [siguiente, setSiguiente] = useState(false)
   const referenciaUbi = useRef(null)
+  const referenciaInfo = useRef(null)
+  const referenciaImg = useRef(null)
 
   const router = useRouter()
 
@@ -57,17 +59,17 @@ const principal = () => {
             const docRef = doc(firebase.db, "Usuarios", usuario.uid)
             const docSnap = await getDoc(docRef)
             const data = docSnap.data()
-            if(
+            if (
               data.municipio == "" ||
               data.numeroCelular == "" ||
               data.provincia == ""
-            ){
+            ) {
               router.push("/perfil/principal")
               return true
-            } else{
+            } else {
               setLoading(false)
             }
-            
+
           }
           return true
 
@@ -100,8 +102,16 @@ const principal = () => {
 
   const handleUbi = () => {
     referenciaUbi.current.scrollIntoView()
-    console.log(referenciaUbi)
   }
+
+  const handleInfo = () => {
+    referenciaInfo.current.scrollIntoView()
+  }
+
+  const handleImg = () => {
+    referenciaImg.current.scrollIntoView()
+  }
+
 
 
   const handleSiguiente = () => {
@@ -201,14 +211,18 @@ const principal = () => {
 
                 <div className={styles.cardDivider}>
 
-                  <div className={styles.cuadrado} onClick={handleUbi}>
-                    <h3>1. Ubicacion</h3>
-                    <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                  <div className={styles.cuadradoContainer} onClick={handleUbi}>
+                    <div className={styles.cuadrado} >
+                      <h3>1. Ubicacion</h3>
+                      <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                    </div>
                   </div>
 
-                  <div className={styles.cuadrado}>
-                    <h3 >2. Informacion Basica</h3>
-                    <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                  <div className={styles.cuadradoContainer} onClick={handleInfo}>
+                    <div className={styles.cuadrado}>
+                      <h3 >2. Informacion Basica</h3>
+                      <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,16 +230,18 @@ const principal = () => {
 
               <div className={styles.cardDivider}>
 
-                <div className={styles.cuadrado}>
-                  <h3>3. Subir imagenes</h3>
-                  <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                <div className={styles.cuadradoContainer} onClick={handleImg}>
+                  <div className={styles.cuadrado}>
+                    <h3>3. Subir imagenes</h3>
+                    <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                  </div>
                 </div>
-
-                <div className={styles.cuadrado}>
-                  <h3>4. Cargar publicacion</h3>
-                  <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                <div className={styles.cuadradoContainer} onClick={handleImg}>
+                  <div className={styles.cuadrado}>
+                    <h3>4. Cargar publicacion</h3>
+                    <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                  </div>
                 </div>
-
               </div>
 
             </div>
@@ -281,12 +297,14 @@ const principal = () => {
                         numeroLetraDepto={numeroLetraDepto}
                         setNumeroLetraDepto={setNumeroLetraDepto}
                         referenciaUbi={referenciaUbi}
+                        referenciaInfo={referenciaInfo}
                       />
 
 
                       <SubirImagenes
                         imagenes={imagenes}
                         setImagenes={setImagenes}
+                        referenciaImg={referenciaImg}
                       />
 
                       <div className={styles.div_buttonContinue}>
