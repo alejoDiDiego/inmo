@@ -98,22 +98,26 @@ const principal = () => {
       codigoPostal.length == 0 ||
       altura.length == 0 ||
       tipoVivienda.length == 0 ||
-      cantAmbientes.length == 0 ||
-      cantBanos.length == 0 ||
-      cantHabitaciones.length == 0 ||
+      cantAmbientes.length == 0 || cantAmbientes == 0 ||
+      cantBanos.length == 0 || cantBanos == 0 ||
+      cantHabitaciones.length == 0 || cantHabitaciones == 0 ||
       cantCocheras.length == 0 ||
       tipoPublicacion.length == 0 ||
-      precio.length == 0 ||
+      precio.length == 0 || precio == 0 ||
       descripcion.length == 0 ||
       imagenes.length == 0 ||
-      mt2Totales.length == 0 ||
-      mt2Utilizados.length == 0
+      mt2Totales.length == 0 || mt2Totales == 0
     ) {
       setErrorSiguiente(true)
       return
     }
 
-    if (tipoVivienda == "departamento" && piso.length == 0) {
+    if (tipoVivienda == "departamento" && (piso.length == 0 || piso == 0)) {
+      setErrorSiguiente(true)
+      return
+    }
+
+    if (tipoVivienda == "casa" && (mt2Utilizados.length == 0 || mt2Utilizados == 0)) {
       setErrorSiguiente(true)
       return
     }

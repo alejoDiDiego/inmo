@@ -65,6 +65,14 @@ const InformacionBasica = ({
         [{ value: "venta", label: "Venta" },
         { value: "alquiler", label: "Alquiler" }]
 
+
+    useEffect(() => {
+        setPiso("")
+        setNumeroLetraDepto("")
+        setMt2Totales("")
+        setMt2Utilizados("")
+    }, [tipoVivienda])
+
     useEffect(() => {
         console.log(selectPosition)
         if (selectPosition != null) {
@@ -306,7 +314,7 @@ const InformacionBasica = ({
                                 ) :
                                 (
                                     <div className={styles.fieldDir}>
-                                        <p>Depto/Division*:</p>
+                                        <p>Depto/Division:</p>
                                         <label className={`${styles.custom_field} ${styles.two}`}>
                                             <input maxLength={25} value={numeroLetraDepto} onChange={e => setNumeroLetraDepto(e.target.value)} type="text" placeholder="Ej: A / 1 / 1C" />
                                         </label>
@@ -696,7 +704,7 @@ const InformacionBasica = ({
                                                     ) :
                                                     (
                                                         <div className={styles.priceContainer}>
-                                                            <h2 className={styles.price}>{precio}</h2>
+                                                            <h2 className={styles.price}>${precio}</h2>
                                                             <h2 className={styles.price}>USD</h2>
                                                         </div>
 

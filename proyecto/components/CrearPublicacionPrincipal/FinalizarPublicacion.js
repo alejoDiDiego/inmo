@@ -69,7 +69,8 @@ const FinalizarPublicacion = ({
       ["expensas"]: expensas,
       ["descripcion"]: descripcion,
       ["publicador"]: usuario.uid,
-      ["creado"]: Date.now()
+      ["creado"]: Date.now(),
+      ["comentarios"]: []
     }
 
 
