@@ -56,6 +56,7 @@ const Publicacion = ({ p, queryFirebase }) => {
 
     return (
         <div className={styles.publicacion}>
+
             <div className={styles.publicacion_div_img}>
 
                 {
@@ -111,104 +112,115 @@ const Publicacion = ({ p, queryFirebase }) => {
                 }
 
 
-
-                <div className={styles.head}>
-                    <h3>
-                        {
-                            p.tipoPublicacion == "venta" ?
-                                (
-                                    "USD$" + p.precio
-                                ) :
-                                (
-                                    "ARS$/mes" + p.precio
-                                )
-                        }
-                    </h3>
-
-                    <p>
-                        {
-                            p.expensas.length > 0 &&
-                            (
-                                "Expensas: ARS$ " + p.expensas
-                            )
-                        }
-
-                    </p>
-
-                    <p>
-                        {
-                            p.tipoPublicacion == "venta" ?
-                                (
-                                    "Vende"
-                                ) :
-                                (
-                                    "Alquila"
-                                )
-
-                        }
-                    </p>
-
-                    <p>
-                        {
-                            p.tipoVivienda == "casa" ?
-                                (
-                                    "Casa"
-                                ) :
-                                (
-                                    "Departamento"
-                                )
-                        }
-                    </p>
-
-                    <p>Publicado: {formattedDate(p)}</p>
-                </div>
-
-                <div>
-                    <p>
-                        {p.provincia}, {" "}
-                        {p.municipio}, {" "}
-                        {p.localidad}, {" "}
-                        {p.codigoPostal}, {" "}
-                        {`${p.direccion} ${p.altura}`}
-                        {
-                            p.piso.length > 0 ?
-                                (
-                                    " Piso" + p.piso +
-                                    " Depto" + p.numeroLetraDepto
-                                ) :
-                                (
-                                    p.piso.length == 0 && p.numeroLetraDepto.length > 0 ?
+                <div className={styles.infoContainer}>
+                    <div className={styles.headPlusDir}>
+                        <div className={styles.head}>
+                            <div className={styles.infoInside}>
+                                {
+                                    p.tipoPublicacion == "venta" ?
                                         (
-                                            " Depto" + p.numeroLetraDepto
-                                        ) : null
-                                )
-                        }
+                                            <div className={styles.price}>
+                                                <h3>En venta</h3>
+                                                <h2>USD$</h2>
+                                                <h2>{p.precio}</h2>
+                                            </div>
 
-                    </p>
+                                        ) :
+                                        (
+                                            <div className={styles.price}>
+                                                <h3>En alquiler</h3>
+                                                <h2>ARS$/Mes</h2>
+                                                <h2>{p.precio}</h2>
+                                            </div>
+
+                                        )
+                                }
+
+                                {
+                                    p.expensas.length > 0 &&
+                                    (
+                                        <p>Expensas ARS$/Mes {p.expensas}</p>
+                                    )
+                                }
+
+                                <div className={styles.imagesAndCant}>
+                                    <div className={styles.cantContainerDiv}>
+                                        <div className={styles.cantContainer}>
+                                            <img src='/open-door.png'></img>
+                                            <p>{p.cantAmbientes}</p>
+                                        </div>
+                                        <div className={styles.cantContainer}>
+                                            <img src='/bed.png'></img>
+                                            <p>{p.cantHabitaciones}</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.cantContainerDiv}>
+                                        <div className={styles.cantContainer}>
+                                            <img src='/shower.png'></img>
+                                            <p>{p.cantBanos}</p>
+                                        </div>
+                                        <div className={styles.cantContainer}>
+                                            <img src='/garage.png'></img>
+                                            <p>{p.cantCocheras}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.dire}>
+                            <h3>{p.direccion} {p.altura}</h3>
+                            <p>{p.provincia}, <span>{p.municipio},</span> <span>{p.localidad}</span></p>
+
+                            {
+                                p.piso.length > 0 ?
+                                    (
+                                        <div className={styles.pAndD}>
+                                            <p>Piso: {p.piso}</p>
+                                            {
+                                                p.numeroLetraDepto != 0 ?
+                                                (
+                                                    <p>Depto: {p.numeroLetraDepto}</p>
+                                                ):
+                                                (
+                                                    <p></p>
+                                                )
+                                            }
+                                        </div>
+
+                                    ) :
+                                    (
+                                        p.piso.length == 0 && p.numeroLetraDepto.length > 0 ?
+                                            (
+                                                <div className={styles.pAndD}>
+                                                    <p>Depto: {p.numeroLetraDepto}</p>
+                                                </div>
+
+                                            ) : null
+                                    )
+                            }
+
+                            <div className={styles.cantidades}>
+                                <div className={styles.meters}>
+                                    <div className={styles.metersContainer}>
+                                        <h4>Mt<sup>2</sup> Totales: </h4>
+                                        <p>{p.mt2Totales}</p>
+                                    </div>
+                                    <div className={styles.metersContainer}>
+                                        <h4>Mt<sup>2</sup> Utilizados: </h4>
+                                        <p>{p.mt2Utilizados}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    {/* <div>
+                        <p>Comentarios: {p.comentarios.length}</p>
+                    </div> */}
+
                 </div>
-
-                <div className={styles.cantidades}>
-                    <p>Ambientes: {p.cantAmbientes}</p>
-                    <p>Baños: {p.cantBanos}</p>
-                    <p>Cocheras: {p.cantCocheras}</p>
-                    <p>Habitaciones: {p.cantCocheras}</p>
-                    <p>Mt<sup>2</sup> Totales: {p.mt2Totales}</p>
-                    <p>Mt<sup>2</sup> Utilizados: {p.mt2Utilizados}</p>
-                </div>
-
-
-                <div>
-                    <p>Descripcion:</p>
-                    <p>{p.descripcion}</p>
-                </div>
-
-                <div>
-                    <p>Comentarios: {p.comentarios.length}</p>
-                </div>
-
-
-
-
 
 
             </div>
