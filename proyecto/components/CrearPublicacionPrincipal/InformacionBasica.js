@@ -174,6 +174,12 @@ const InformacionBasica = ({
 
 
 
+    function numeroConPuntos(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+
+
 
     const isNumber = e => {
         return e.target.value.replace(/\D/g, '');
@@ -688,7 +694,7 @@ const InformacionBasica = ({
                                                         (
                                                             <div className={styles.expContainer}>
                                                                 <h3>Expensas</h3>
-                                                                <h3 className={styles.exp2}>{expensas} <span>$/mes</span></h3>
+                                                                <h3 className={styles.exp2}>{numeroConPuntos(expensas)} <span>ARS$/mes</span></h3>
                                                             </div>
                                                         )
                                                 }
@@ -704,7 +710,7 @@ const InformacionBasica = ({
                                                     ) :
                                                     (
                                                         <div className={styles.priceContainer}>
-                                                            <h2 className={styles.price}>${precio}</h2>
+                                                            <h2 className={styles.price}>${numeroConPuntos(precio)}</h2>
                                                             <h2 className={styles.price}>USD</h2>
                                                         </div>
 
@@ -727,7 +733,7 @@ const InformacionBasica = ({
                                                         (
                                                             <div className={styles.expContainer}>
                                                                 <h3>Expensas</h3>
-                                                                <h3 className={styles.exp2}>{expensas} <span>ARS$/mes</span></h3>
+                                                                <h3 className={styles.exp2}>{numeroConPuntos(expensas)} <span>ARS$/mes</span></h3>
                                                             </div>
                                                         )
                                                 }
@@ -743,7 +749,7 @@ const InformacionBasica = ({
                                                     ) :
                                                     (
                                                         <div className={styles.priceContainer}>
-                                                            <h2 className={styles.price}>{precio}</h2>
+                                                            <h2 className={styles.price}>{numeroConPuntos(precio)}</h2>
                                                             <h2 className={styles.price}>ARS$/mes</h2>
                                                         </div>
 

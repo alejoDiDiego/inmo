@@ -202,6 +202,10 @@ const Publicacion = ({ p, queryFirebase }) => {
                     <p>{p.descripcion}</p>
                 </div>
 
+                <div>
+                    <p>Comentarios: {p.comentarios.length}</p>
+                </div>
+
 
 
 

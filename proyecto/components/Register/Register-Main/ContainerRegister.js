@@ -176,7 +176,11 @@ const ContainerRegister = ({
                 provincia: "",
                 descripcion: "",
                 numeroCelular: "",
-                numeroTelefono: ""
+                numeroTelefono: "",
+                creado: Date.now(),
+                comentarios: [],
+                estrellas: 0,
+                valoraciones: 0
             })
 
 

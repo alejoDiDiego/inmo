@@ -58,7 +58,7 @@ class Firebase {
 
   async registrarGoogle() {
     const nuevoUsuario = await signInWithPopup(this.auth, this.providerGoogle)
-    let isRegistered = await this.docExists(this.auth.currentUser.uid).then((r) => {return r})
+    let isRegistered = await this.docExists(this.auth.currentUser.uid).then((r) => { return r })
     console.log(isRegistered)
     if (isRegistered == true) {
       console.log("adentro")
@@ -73,9 +73,9 @@ class Firebase {
         photoURL: docSnapData.fotoPerfilURL
       })
       return
-    } 
-    
-    
+    }
+
+
     else {
       await setDoc(doc(this.db, "Usuarios", this.auth.currentUser.uid), {
         nombreUsuario: this.auth.currentUser.displayName,
@@ -88,7 +88,11 @@ class Firebase {
         provincia: "",
         descripcion: "",
         numeroCelular: "",
-        numeroTelefono: ""
+        numeroTelefono: "",
+        creado: Date.now(),
+        comentarios: [],
+        estrellas: 0,
+        valoraciones: 0
       })
 
       // BEGIN IMAGENES
@@ -155,7 +159,7 @@ class Firebase {
 
       await sendEmailVerification(this.auth.currentUser, actionCodeSettings)
       console.log("se reenvio")
-    } catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
