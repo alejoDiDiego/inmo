@@ -57,6 +57,7 @@ const principal = () => {
     const [cargando, setCargando] = useState(false)
 
 
+
     const router = useRouter()
 
     const [mostrarContactos, setMostrarContactos] = useState(false)
@@ -397,7 +398,6 @@ const principal = () => {
             (nuevoNombre.length == 0
                 && nuevoTipo.length == 0
                 && nuevoNumeroCelular.length == 0
-                && nuevoNumeroTelefono.length == 0
                 && nuevaProvincia.length == 0
                 && nuevoMunicipio.length == 0
                 && nuevaLocalidad.length == 0
@@ -903,7 +903,7 @@ const principal = () => {
                                 </div>
 
                                 <div className={styles.fieldDir}>
-                                    <p>Numero de telefono*:</p>
+                                    <p>Numero de telefono:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
                                         {
                                             nuevoNumeroTelefono.length == 0 ? <span className={styles.placeholder}>12341234</span> : null
@@ -1492,6 +1492,7 @@ const principal = () => {
 
                             <MisPublicaciones
                                 usuario={usuario}
+                                info={info}
                             />
 
 

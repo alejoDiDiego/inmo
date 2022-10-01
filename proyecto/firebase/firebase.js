@@ -92,7 +92,8 @@ class Firebase {
         creado: Date.now(),
         comentarios: [],
         estrellas: 0,
-        valoraciones: 0
+        valoraciones: 0,
+        emailPublico: false
       })
 
       // BEGIN IMAGENES

@@ -1,11 +1,12 @@
 import { collection, doc, onSnapshot, query, where, collectionGroup, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import styles from '../../styles/MisPublicaciones.module.css'
 import Publicacion from './Publicacion'
 
-const MisPublicaciones = ({ usuario }) => {
+const MisPublicaciones = ({ usuario, info }) => {
 
     const [publicaciones, setPublicaciones] = useState([])
 
@@ -33,6 +34,17 @@ const MisPublicaciones = ({ usuario }) => {
         console.log(ps)
     }
 
+    const router = useRouter()
+
+
+    const redirect = () => {
+        if(info.municipio == "" || info.numeroCelular == "" || info.provincia == ""){
+            alert("Le falta completar informacion para poder publicar")
+            return
+        }
+        router.push("/crear-publicacion/principal")
+    }
+
 
 
     return (
@@ -53,11 +65,13 @@ const MisPublicaciones = ({ usuario }) => {
                             )
                         })
                         :
-                        <div>
-                            <p>Comienza a publicar</p>
-                            <Link href="/crear-publicacion/principal"><button>Publicar</button></Link>
-                            
-                        </div>
+                            (
+                                <div>
+                                    <p>Comienza a publicar</p>
+                                    <button onClick={() => redirect()}>Publicar</button>
+
+                                </div>
+                            )
                 }
             </div>
 
@@ -67,3 +81,4 @@ const MisPublicaciones = ({ usuario }) => {
 }
 
 export default MisPublicaciones
+

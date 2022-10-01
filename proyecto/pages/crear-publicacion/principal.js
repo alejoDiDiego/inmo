@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import firebase, { FirebaseContext } from '../../firebase'
 import Layout from '../../components/layout/Layout'
 import Head from 'next/head'
@@ -7,6 +7,7 @@ import styles from '../../styles/CrearPublicacion.module.css'
 import InformacionBasica from '../../components/CrearPublicacionPrincipal/InformacionBasica'
 import SubirImagenes from '../../components/CrearPublicacionPrincipal/SubirImagenes'
 import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/FinalizarPublicacion'
+import { doc, getDoc } from 'firebase/firestore'
 
 
 
@@ -43,6 +44,7 @@ const principal = () => {
   const [siguiente, setSiguiente] = useState(false)
   const referenciaUbi = useRef(null)
 
+  const router = useRouter()
 
 
 
@@ -52,7 +54,20 @@ const principal = () => {
       if (usuario != null) {
         try {
           if (Object.keys(usuario).length > 0) {
-            setLoading(false)
+            const docRef = doc(firebase.db, "Usuarios", usuario.uid)
+            const docSnap = await getDoc(docRef)
+            const data = docSnap.data()
+            if(
+              data.municipio == "" ||
+              data.numeroCelular == "" ||
+              data.provincia == ""
+            ){
+              router.push("/perfil/principal")
+              return true
+            } else{
+              setLoading(false)
+            }
+            
           }
           return true
 
@@ -83,10 +98,10 @@ const principal = () => {
   }, [usuario])
 
 
-  const handleUbi = () =>{
-    referenciaUbi.current.scrollIntoView() 
-    console.log(referenciaUbi)   
-  } 
+  const handleUbi = () => {
+    referenciaUbi.current.scrollIntoView()
+    console.log(referenciaUbi)
+  }
 
 
   const handleSiguiente = () => {
@@ -178,40 +193,40 @@ const principal = () => {
             <div className={styles.izquierda}>
 
               <h1>Publica tu <span>propiedad</span></h1>
-                <p>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
-                  maximizar la
-                  comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</p>
+              <p>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
+                maximizar la
+                comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</p>
 
-                <div className={styles.cardsContainer}>
-
-                  <div className={styles.cardDivider}>
-
-                    <div className={styles.cuadrado} onClick={handleUbi}>
-                      <h3>1. Ubicacion</h3>
-                      <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
-                    </div>
-
-                    <div className={styles.cuadrado}>
-                      <h3 >2. Informacion Basica</h3>
-                      <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
-                    </div>
-                  </div>
-                </div>
-
+              <div className={styles.cardsContainer}>
 
                 <div className={styles.cardDivider}>
 
-                  <div className={styles.cuadrado}>
-                    <h3>3. Subir imagenes</h3>
-                    <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                  <div className={styles.cuadrado} onClick={handleUbi}>
+                    <h3>1. Ubicacion</h3>
+                    <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
                   </div>
 
                   <div className={styles.cuadrado}>
-                    <h3>4. Cargar publicacion</h3>
-                    <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                    <h3 >2. Informacion Basica</h3>
+                    <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
                   </div>
-
                 </div>
+              </div>
+
+
+              <div className={styles.cardDivider}>
+
+                <div className={styles.cuadrado}>
+                  <h3>3. Subir imagenes</h3>
+                  <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                </div>
+
+                <div className={styles.cuadrado}>
+                  <h3>4. Cargar publicacion</h3>
+                  <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                </div>
+
+              </div>
 
             </div>
 
@@ -265,7 +280,7 @@ const principal = () => {
                         setMt2Utilizados={setMt2Utilizados}
                         numeroLetraDepto={numeroLetraDepto}
                         setNumeroLetraDepto={setNumeroLetraDepto}
-                        referenciaUbi = {referenciaUbi}
+                        referenciaUbi={referenciaUbi}
                       />
 
 
