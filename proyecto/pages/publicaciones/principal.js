@@ -19,7 +19,22 @@ const principal = () => {
     const [loading, setLoading] = useState(true)
 
     const router = useRouter()
-    const { query: { q } } = router
+    const { query: {
+        direccion,
+        tipoPublicacion,
+        tipoVivienda,
+        precioMin,
+        precioMax,
+        cantBanosMin,
+        cantBanosMax,
+        cantAmbientesMax,
+        cantAmbientesMin,
+        cantCocherasMax,
+        cantCocherasMin,
+        cantHabitacionesMax,
+        cantHabitacionesMin
+    } } = router
+    console.log(direccion)
 
     const [publicaciones, setPublicaciones] = useState([])
     const [resultado, setResultado] = useState([])
@@ -82,30 +97,31 @@ const principal = () => {
 
     useEffect(() => {
 
-        if (q == "" || q == null) return
+        if (direccion == "" || direccion == null) return
         if (publicaciones.length == 0) return
 
-        const busqueda = q.toLowerCase()
+        const busqueda = direccion.toLowerCase()
         const filtro = publicaciones.filter(p => {
-            if(p.provincia.toLowerCase().includes(busqueda)){
+            if (p.provincia.toLowerCase().includes(busqueda)) {
                 console.log("provincia true")
             }
-            if(p.municipio.toLowerCase().includes(busqueda)){
+            if (p.municipio.toLowerCase().includes(busqueda)) {
                 console.log("municipio true")
             }
-            if(p.localidad.toLowerCase().includes(busqueda)){
+            if (p.localidad.toLowerCase().includes(busqueda)) {
                 console.log("localidad true")
             }
             return (
                 p.provincia.toLowerCase().includes(busqueda) ||
                 p.municipio.toLowerCase().includes(busqueda) ||
-                p.localidad.toLowerCase().includes(busqueda)
+                p.localidad.toLowerCase().includes(busqueda) ||
+                p.codigoPostal.includes(busqueda)
             )
         })
         setResultado(filtro)
         console.log(filtro)
 
-    }, [q, publicaciones])
+    }, [direccion, publicaciones])
 
 
     useEffect(() => {
@@ -182,10 +198,10 @@ const principal = () => {
                         <div className={styles.izquierda}>
 
                             <div className={styles.filtros}>
-                                <Filtros />
+                                <Filtros router={router} />
                             </div>
 
-                            <div style={{width: "100%", height: "100%", position: "relative", zIndex: "1"}}>
+                            <div style={{ width: "100%", height: "100%", position: "relative", zIndex: "1" }}>
                                 <MapNoSSR
                                     positions={positions}
                                 />
