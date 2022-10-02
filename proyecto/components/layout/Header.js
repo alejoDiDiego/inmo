@@ -92,27 +92,45 @@ const Header = ({ usuario, enRegistro}) => {
                 <div className={styles.inside_hidden_menu}>
                     {
                         Object.keys(usuario).length < 1 ?
-                            <div>
-                                <Link href='/inicio-sesion/principal'><button>Iniciar Sesion</button></Link>
-                                <Link href='/registro/principal'><button>Registrarse</button></Link>
-                                made by juan
+                        
+                            <div className={styles.options}>
+                                <h2>Inmo</h2>
+                                <Link href='/inicio-sesion/principal'>
+                                    <div className={styles.menuButton}>
+                                            <div className={styles.buttonInside}>
+                                                <img></img>
+                                                <h4>Iniciar Sesion</h4>
+                                            </div>
+                                    </div>
+                                </Link>
+                                <Link href='/registro/principal'>
+                                <div className={styles.menuButton}>
+                                        <div className={styles.line}></div>
+                                            <div className={styles.buttonInside}>
+                                                <img></img>
+                                                <h4>Registrarse</h4>
+                                            </div>
+                                        <div className={styles.line}></div>
+                                    </div>
+                                </Link>
                             </div>
                             :
                             <div>
-                                <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
-                                <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}><button>Perfil</button></Link>
                                 {
                                     Object.keys(usuario).length > 0 ?
-                                        <div>
+                                        <div className={styles.userInfo}>
                                             <div className={styles.foto}>
                                                 <img src={foto} />
                                             </div>
-                                            <p>{usuario.displayName}</p>
+                                            <h3>{usuario.displayName}</h3>
                                         </div>
 
                                         :
                                         <p>aa</p>
                                 }
+                                <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
+                                <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}><button>Perfil</button></Link>
+                                
                                 <Link href={usuario.emailVerified ? '/crear-publicacion/principal' : '/verificar'}><button>Crear Publicacion</button></Link>
                             </div>
                     }
