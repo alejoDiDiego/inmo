@@ -1539,8 +1539,8 @@ const principal = () => {
 
                             <div>
                                 <div className={styles.headers}>
-                                    <p onClick={() => { setMisPublicaciones(true); setComentarios(false); setMisComentarios(false) }} className={misPublicaciones == true ? styles.h2 : null}>Mis Publicaciones</p>
-                                    <p onClick={() => { setMisPublicaciones(false); setComentarios(true); setMisComentarios(false) }} className={comentarios == true ? styles.h2 : null}>Comentarios</p>
+                                    <p onClick={() => { setMisPublicaciones(true); setComentarios(false); setMisComentarios(false) }} className={misPublicaciones == true ? styles.h2 : null}>Mis Publicaciones <span>{publicaciones.length}</span></p>
+                                    <p onClick={() => { setMisPublicaciones(false); setComentarios(true); setMisComentarios(false) }} className={comentarios == true ? styles.h2 : null}>Valoraciones <span>{info.valoraciones.length}</span> </p>
                                     <p onClick={() => { setMisPublicaciones(false); setComentarios(false); setMisComentarios(true) }} className={misComentarios == true ? styles.h2 : null}>Tus Comentarios</p>
                                 </div>
                                 {
