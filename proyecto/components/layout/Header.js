@@ -187,6 +187,11 @@ const Header = ({ usuario, enRegistro }) => {
                                                             <img src={foto} />
                                                         </div>
                                                         <h3>{usuario.displayName}</h3>
+                                                        <div>
+                                                            <div onClick={firebase.handleSignOut} className={styles.buttonInside}>
+                                                                <img src='/logout.png'></img>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
