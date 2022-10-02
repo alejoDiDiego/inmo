@@ -92,44 +92,52 @@ const Header = ({ usuario, enRegistro }) => {
                 <div className={styles.inside_hidden_menu}>
                     {
                         Object.keys(usuario).length < 1 ?
-
                             <div className={styles.options}>
-                                <h2>Inmo</h2>
-                                <Link href='/inicio-sesion/principal'>
+                                <h1>Inmo</h1>
+                                <Link className={styles.link} href='/inicio-sesion/principal'>
                                     <div className={styles.menuButton}>
                                         <div className={styles.buttonInside}>
-                                            <img></img>
+                                            <img src='/key.png'></img>
                                             <h4>Iniciar Sesion</h4>
                                         </div>
                                     </div>
                                 </Link>
                                 <Link href='/registro/principal'>
                                     <div className={styles.menuButton}>
-                                        <div className={styles.line}></div>
                                         <div className={styles.buttonInside}>
-                                            <img></img>
+                                            <img src='/register.png'></img>
                                             <h4>Registrarse</h4>
                                         </div>
-                                        <div className={styles.line}></div>
                                     </div>
                                 </Link>
+                                <Link href='/mas-info/creditos'>
+                                    <div className={styles.menuButton}>
+                                        <div className={styles.buttonInside}>
+                                            <img src='/customer-service.png'></img>
+                                            <h4>Sobre Nosotros</h4>
+                                        </div>
+                                    </div>
+                                </Link>
+                                <Link href='/mas-info/sobre-nosotros'>
+                                    <div className={styles.menuButton}>
+                                        <div className={styles.buttonInside}>
+                                            <img src='/people.png'></img>
+                                            <h4>Creditos</h4>
+                                        </div>
+                                    </div>
+                                </Link>
+                                <div className={styles.currentUser}>
+                                    <div className={styles.userDivider}>
+                                        <img src='/register_picture.png'></img>
+                                        <h4>Todavia no has iniciado sesion</h4>
+                                    </div>
+                                </div>
+
                             </div>
                             :
                             <div>
-                                {
-                                    Object.keys(usuario).length > 0 ?
-                                        <div className={styles.userInfo}>
-                                            <div className={styles.foto}>
-                                                <img src={foto} />
-                                            </div>
-                                            <h3>{usuario.displayName}</h3>
-                                        </div>
-
-                                        :
-                                        <p>aa</p>
-                                }
                                 <div className={styles.options}>
-
+                                    <h1>Inmo</h1>
                                     <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}>
                                         <div className={styles.menuButton}>
                                             <div className={styles.line}></div>
@@ -151,18 +159,42 @@ const Header = ({ usuario, enRegistro }) => {
                                             <div className={styles.line}></div>
                                         </div>
                                     </Link>
-                                </div>
+                                    <Link href='/mas-info/creditos'>
+                                        <div className={styles.menuButton}>
+                                            <div className={styles.buttonInside}>
+                                                <img src='/customer-service.png'></img>
+                                                <h4>Sobre Nosotros</h4>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    <Link href='/mas-info/sobre-nosotros'>
+                                        <div className={styles.menuButton}>
+                                            <div className={styles.buttonInside}>
+                                                <img src='/people.png'></img>
+                                                <h4>Creditos</h4>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    <div className={styles.currentUserLogged}>
 
-                                <div onClick={firebase.handleSignOut} className={styles.menuButtonSignOut}>
-                                    <div className={styles.line}></div>
-                                    <div className={styles.buttonInside}>
-                                        <img></img>
-                                        <h4>Cerrar Sesion</h4>
+                                        {
+                                            Object.keys(usuario).length > 0 ?
+                                                <div>
+                                                    <p>Sesion iniciada como:</p>
+                                                    <div className={styles.userDividerLogged}>
+
+                                                        <div className={styles.foto}>
+                                                            <img src={foto} />
+                                                        </div>
+                                                        <h3>{usuario.displayName}</h3>
+                                                    </div>
+                                                </div>
+
+                                                :
+                                                <p>aa</p>
+                                        }
                                     </div>
-                                    <div className={styles.line}></div>
                                 </div>
-
-
                             </div>
                     }
 

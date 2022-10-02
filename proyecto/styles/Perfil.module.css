@@ -731,7 +731,7 @@
 
 .pillUbi{
     width: 450px;
-    max-height: 60px;
+    max-height: 70px;
     overflow-y: auto;
 }
 
@@ -781,6 +781,7 @@
 }
 
 .descriptionPill{
+    margin-top: -10px;
   display: flex;
   overflow-wrap: break-word;
 }
@@ -893,7 +894,7 @@
 
 .headers{
     display: flex;
-    gap: 20px;
+    gap: 50px;
     margin-top: 40px;
     margin-bottom: 40px;
 }

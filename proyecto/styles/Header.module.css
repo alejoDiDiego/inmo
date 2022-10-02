@@ -70,26 +70,22 @@
 
 
 .hidden_menu{
-    
     z-index: 1;
-    right: 10px;
-    top: 55px;
+    right: 3px;
+    top: 45px;
     position: absolute;
     height: 0px;
-    width: 400px;
+    width: 350px;
     background-color: #E8EFF4;
-    
-    transition: all 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
 }
 
 
 
 .hidden_menu.active{
-    padding: 20px;
-    border-radius: 20px;
-    height: 700px;
+    border-bottom-left-radius: 10px;
+    height: 600px;
     z-index: 1;
     
 }
@@ -106,9 +102,15 @@
 
 
 .foto{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     
+}
+
+.logo{
+    height: 40px;
+    width: 90px;
+    margin-left: 20px;
 }
 
 .foto img{
@@ -127,31 +129,43 @@
 }
 
 .menuButton{
-    height: 50px;
+    height: 100%;
     width: 100%;
     position: relative;
-    
-    
+    border-bottom: black solid 1px;
+
+}
+
+
+
+.link{
+    width: 100%;
+    height: 30px;
 }
 
 .options{
     display: flex;
     flex-direction: column;
-    gap: 20px;
     margin-top: 20px;
+}
+
+.options h1{
+    margin-left: 20px;
 }
 
 .buttonInside{
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-left: 20px;
     gap: 20px;
-    border-bottom: black solid 1px;
+   
 }
 
-.buttonInside:hover{
-    border-bottom: #007cc3 solid 1px;
+.menuButton:hover{
+    border-left: #007cc3 solid 4px;
     cursor: pointer;
+    transition: 0.1s ease-in-out;
 }
 
 .buttonInside img{
@@ -166,3 +180,48 @@
     position: relative;
 }
 
+.currentUser{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 100%;
+    margin-top: 130px;
+    border-top: black solid 1px;;
+}
+
+.currentUserLogged{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 100%;
+    margin-top: 90px;
+    border-top: black solid 1px;;
+}
+
+.currentUserLogged p{
+   margin-left: 20px;
+}
+
+.userDividerLogged{
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.userDivider{
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.userDivider img{
+    width: 30px;
+    height: 30px;
+}

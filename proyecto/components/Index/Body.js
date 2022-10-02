@@ -8,14 +8,15 @@ const Body = () => {
     return (
         <div className={styles.div}>
             <div className={styles.arriba}>
-
                 <div className={styles.inside_arriba}>
                     <div className={styles.div_izquierda_arriba}>
-                        
                         <div className={styles.div_inside_izquierda_arriba}>
-                        <div className={styles.titleF}>
-                        <p>Inmo, a un click de tu hogar</p>
-                        </div>
+                            <video autoPlay muted loop className={styles.video}>
+                                <source src='/cityLapse.mp4' type='video/mp4'></source>
+                            </video>
+                            <div className={styles.titleF}>
+                                <p>Tu hogar a un click de distancia, <span className={styles.inmo}>Inmo</span></p>
+                            </div>
                             <Link href='/'>
                                 <div className={styles.square}>
                                     <div className={styles.image}>
@@ -97,6 +98,9 @@ const Body = () => {
 
                     <div className={styles.div_derecha}>
                         <div className={styles.inside_div_derecha}>
+                            <video autoPlay muted loop className={styles.videoD}>
+                                <source src='/cityLapse2.mp4' type='video/mp4'></source>
+                            </video>
                             <Link href='/mas-info/sobre-nosotros'>
                                 <div className={styles.square}>
 
@@ -129,6 +133,11 @@ const Body = () => {
                                 </div>
 
                             </div>
+
+                            <div className={styles.titleM}>
+                                <p>Mas sobre <span className={styles.inmo}>Inmo</span></p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
