@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MisComentarios = () => {
+const MisComentarios = ({usuario}) => {
   return (
     <div>
-        MisComentarios
+        No realizo ningun comentario
     </div>
   )
 }

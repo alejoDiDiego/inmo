@@ -1542,12 +1542,17 @@ const principal = () => {
 
                                 {
                                     comentarios == true &&
-                                    <Comentarios />
+                                    <Comentarios 
+                                        usuario={usuario}
+                                        info={info}
+                                    />
                                 }
 
                                 {
                                     misComentarios == true &&
-                                    <MisComentarios />
+                                    <MisComentarios
+                                        usuario={usuario} 
+                                    />
                                 }
                             </div>
 
