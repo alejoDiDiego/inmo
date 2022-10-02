@@ -178,11 +178,19 @@ const ContainerRegister = ({
                 numeroCelular: "",
                 numeroTelefono: "",
                 creado: Date.now(),
-                comentarios: [],
-                estrellas: 0,
-                valoraciones: 0,
+                valoraciones: [],
                 emailPublico: false
             })
+
+            // valoraciones: 
+            // [
+            //     {
+            //         usuarioComentador: { uid, nombre }
+            //         fechaComentario: Date.now(),
+            //         estrellas: 0 a 5,
+            //         comentario: ""
+            //     }
+            // ]
 
 
             // BEGIN IMAGENES

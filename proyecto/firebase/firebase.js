@@ -90,9 +90,7 @@ class Firebase {
         numeroCelular: "",
         numeroTelefono: "",
         creado: Date.now(),
-        comentarios: [],
-        estrellas: 0,
-        valoraciones: 0,
+        valoraciones: [],
         emailPublico: false
       })
 

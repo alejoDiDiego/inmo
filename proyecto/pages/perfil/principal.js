@@ -91,6 +91,9 @@ const principal = () => {
     const [confirmarEliminacionFondo, setConfirmarEliminacionFondo] = useState(false)
     const [confirmarEliminacionPerfil, setConfirmarEliminacionPerfil] = useState(false)
 
+    let puntajeEstrellas = 0
+
+
     const [tipos, setTipos] = useState(
         [{ value: "empresa", label: "Empresa" },
         { value: "particular", label: "Particular" }]
@@ -291,6 +294,9 @@ const principal = () => {
                         setNuevaDescripcion(docSnap.data().descripcion)
                         setEmailPublico(docSnap.data().emailPublico)
                         queryFirebase()
+                        docSnap.data().valoraciones.map(v => {
+                            puntajeEstrellas += v.estrellas
+                        })
                         console.log(docSnap.data())
 
                     }
@@ -1383,8 +1389,14 @@ const principal = () => {
                                                 </div>
                                             </div>
                                             <div className={styles.blackPill}>
-                                                <p>000 Publicaciones</p>
-                                                <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
+                                                <p>{publicaciones.length} Publicaciones</p>
+                                                {
+                                                    info.valoraciones.length == 0 ?
+                                                    <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
+                                                    :
+                                                    <p>{puntajeEstrellas / info.valoraciones.length} Estrellas de {info.valoraciones.length} valoraciones</p>
+                                                }
+
                                                 {
                                                     info.numeroCelular === "" && info.numeroTelefono === "" && info.emailPublico == false ?
                                                         (
@@ -1537,6 +1549,7 @@ const principal = () => {
                                         publicaciones={publicaciones}
                                         setPublicaciones={setPublicaciones}
                                         queryFirebase={queryFirebase}
+                                        info={info}
                                     />
                                 }
 

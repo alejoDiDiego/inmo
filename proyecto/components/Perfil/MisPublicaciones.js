@@ -5,7 +5,7 @@ import firebase, { FirebaseContext } from '../../firebase'
 import styles from '../../styles/MisPublicaciones.module.css'
 import Publicacion from './Publicacion'
 
-const MisPublicaciones = ({ publicaciones, setPublicaciones, queryFirebase }) => {
+const MisPublicaciones = ({ publicaciones, info, setPublicaciones, queryFirebase }) => {
 
     
 

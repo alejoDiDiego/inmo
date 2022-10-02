@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Comentarios = ({ usuario, info }) => {
-    if (info.comentarios.length > 0) {
+    if (info.valoraciones.length > 0) {
         return (
-            info.comentarios.map(c => {
+            info.valoraciones.map(c => {
                 return (
                     <div>
                         {c}
