@@ -59,8 +59,7 @@ const InformacionBasica = ({
     referenciaValor,
     setUbiTrigger,
     setInfoTrigger,
-    imgTrigger,
-    LoadTrigger
+    setImgTrigger
 }) => {
 
     const [searchText, setSearchText] = useState("")
@@ -76,26 +75,23 @@ const InformacionBasica = ({
 
     const onEnterUbi = () => {
         setUbiTrigger(true)
+        setInfoTrigger(false)
     }
 
     const onExitUbi = () => {
         setUbiTrigger(false)
+        setInfoTrigger(true)
+
     }
 
     const onEnterInfo = () => {
-        setInfoTrigger(true)
+        setInfoTrigger(false)
+        setImgTrigger(true)
     }
 
     const onExitInfo = () => {
-        setInfoTrigger(false)
-    }
-
-    const onEnterImg = () => {
-        imgTrigger = true
-    }
-
-    const onExitImg = () => {
-        mgTrigger = false
+        setInfoTrigger(true)
+        setImgTrigger(false)
     }
 
 
@@ -305,6 +301,7 @@ const InformacionBasica = ({
                                     <input maxLength={40} value={codigoPostal} onChange={e => setCodigoPostal(e.target.value)} type="text" placeholder="&nbsp;" />
                                 </label>
                             </div>
+                            <ScrollTrigger onEnter={onEnterUbi} onExit={onExitUbi}></ScrollTrigger>
                             <div className={styles.fieldDirUbi}>
                                 <p>Direccion*:</p>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
@@ -319,7 +316,13 @@ const InformacionBasica = ({
                             </div>
                         </div>              
                     </div>
+                    
             </div>
+           
+
+
+
+
             <div className={styles.informacionV} ref={referenciaInfo}>
                 <div className={styles.basicInfo}>
                         <div className={styles.fieldsInputs}>
@@ -804,9 +807,11 @@ const InformacionBasica = ({
 
             <div className={styles.descripAreaContainer}>
                 <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
+                
                 <div className={styles.fieldDir}>
                     <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>
                 </div>
+                <ScrollTrigger onEnter={onEnterInfo} onExit={onExitInfo}></ScrollTrigger>
             </div>
         </div>
     )

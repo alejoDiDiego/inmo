@@ -159,4 +159,10 @@
     width: 30px;
 }
 
+.menuButtonSignOut{
+    margin-top: 20px;
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
 

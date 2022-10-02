@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 
 
-const Header = ({ usuario, enRegistro}) => {
+const Header = ({ usuario, enRegistro }) => {
 
     const router = useRouter()
 
@@ -30,13 +30,13 @@ const Header = ({ usuario, enRegistro}) => {
 
 
 
-    useEffect(() =>{
-        console.log("barraBusqueda"+barraBusqueda)
+    useEffect(() => {
+        console.log("barraBusqueda" + barraBusqueda)
     }, [barraBusqueda])
 
 
     useEffect(() => {
-        if(enRegistro == true){
+        if (enRegistro == true) {
             setBarraBusqueda(false)
         }
     })
@@ -92,24 +92,24 @@ const Header = ({ usuario, enRegistro}) => {
                 <div className={styles.inside_hidden_menu}>
                     {
                         Object.keys(usuario).length < 1 ?
-                        
+
                             <div className={styles.options}>
                                 <h2>Inmo</h2>
                                 <Link href='/inicio-sesion/principal'>
                                     <div className={styles.menuButton}>
-                                            <div className={styles.buttonInside}>
-                                                <img></img>
-                                                <h4>Iniciar Sesion</h4>
-                                            </div>
+                                        <div className={styles.buttonInside}>
+                                            <img></img>
+                                            <h4>Iniciar Sesion</h4>
+                                        </div>
                                     </div>
                                 </Link>
                                 <Link href='/registro/principal'>
-                                <div className={styles.menuButton}>
+                                    <div className={styles.menuButton}>
                                         <div className={styles.line}></div>
-                                            <div className={styles.buttonInside}>
-                                                <img></img>
-                                                <h4>Registrarse</h4>
-                                            </div>
+                                        <div className={styles.buttonInside}>
+                                            <img></img>
+                                            <h4>Registrarse</h4>
+                                        </div>
                                         <div className={styles.line}></div>
                                     </div>
                                 </Link>
@@ -128,10 +128,41 @@ const Header = ({ usuario, enRegistro}) => {
                                         :
                                         <p>aa</p>
                                 }
-                                <button onClick={firebase.handleSignOut}>Cerrar Sesion</button>
-                                <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}><button>Perfil</button></Link>
-                                
-                                <Link href={usuario.emailVerified ? '/crear-publicacion/principal' : '/verificar'}><button>Crear Publicacion</button></Link>
+                                <div className={styles.options}>
+
+                                    <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}>
+                                        <div className={styles.menuButton}>
+                                            <div className={styles.line}></div>
+                                            <div className={styles.buttonInside}>
+                                                <img></img>
+                                                <h4>Mi Perfil</h4>
+                                            </div>
+                                            <div className={styles.line}></div>
+                                        </div>
+                                    </Link>
+
+                                    <Link href={usuario.emailVerified ? '/crear-publicacion/principal' : '/verificar'}>
+                                        <div className={styles.menuButton}>
+                                            <div className={styles.line}></div>
+                                            <div className={styles.buttonInside}>
+                                                <img></img>
+                                                <h4>Crear Publicacion</h4>
+                                            </div>
+                                            <div className={styles.line}></div>
+                                        </div>
+                                    </Link>
+                                </div>
+
+                                <div onClick={firebase.handleSignOut} className={styles.menuButtonSignOut}>
+                                    <div className={styles.line}></div>
+                                    <div className={styles.buttonInside}>
+                                        <img></img>
+                                        <h4>Cerrar Sesion</h4>
+                                    </div>
+                                    <div className={styles.line}></div>
+                                </div>
+
+
                             </div>
                     }
 
