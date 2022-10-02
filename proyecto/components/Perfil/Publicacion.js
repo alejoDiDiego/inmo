@@ -178,12 +178,12 @@ const Publicacion = ({ p, queryFirebase }) => {
                                             <p>Piso: {p.piso}</p>
                                             {
                                                 p.numeroLetraDepto != 0 ?
-                                                (
-                                                    <p>Depto: {p.numeroLetraDepto}</p>
-                                                ):
-                                                (
-                                                    <p></p>
-                                                )
+                                                    (
+                                                        <p>Depto: {p.numeroLetraDepto}</p>
+                                                    ) :
+                                                    (
+                                                        <p></p>
+                                                    )
                                             }
                                         </div>
 
@@ -205,10 +205,18 @@ const Publicacion = ({ p, queryFirebase }) => {
                                         <h4>Mt<sup>2</sup> Totales: </h4>
                                         <p>{p.mt2Totales}</p>
                                     </div>
-                                    <div className={styles.metersContainer}>
-                                        <h4>Mt<sup>2</sup> Utilizados: </h4>
-                                        <p>{p.mt2Utilizados}</p>
-                                    </div>
+
+                                    {
+                                        p.mt2Utilizados.length > 0 ?
+                                            (
+                                                <div className={styles.metersContainer}>
+                                                    <h4>Mt<sup>2</sup> Utilizados: </h4>
+                                                    <p>{p.mt2Utilizados}</p>
+                                                </div>
+                                            ) :
+                                            null
+                                    }
+
                                 </div>
                             </div>
 
