@@ -6,6 +6,7 @@ import firebase, { FirebaseContext } from '../../firebase'
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore'
 import dynamic from 'next/dynamic'
 import styles from "../../styles/PublicacionesPrincipal.module.css"
+import Filtros from '../../components/Publicaciones/Filtros'
 
 const MapNoSSR = dynamic(() => import("../../components/Publicaciones/Map"), {
     ssr: false,
@@ -86,6 +87,15 @@ const principal = () => {
 
         const busqueda = q.toLowerCase()
         const filtro = publicaciones.filter(p => {
+            if(p.provincia.toLowerCase().includes(busqueda)){
+                console.log("provincia true")
+            }
+            if(p.municipio.toLowerCase().includes(busqueda)){
+                console.log("municipio true")
+            }
+            if(p.localidad.toLowerCase().includes(busqueda)){
+                console.log("localidad true")
+            }
             return (
                 p.provincia.toLowerCase().includes(busqueda) ||
                 p.municipio.toLowerCase().includes(busqueda) ||
@@ -170,9 +180,17 @@ const principal = () => {
                 <Layout perfil={true}>
                     <div className={styles.main}>
                         <div className={styles.izquierda}>
-                            <MapNoSSR
-                                positions={positions}
-                            />
+
+                            <div className={styles.filtros}>
+                                <Filtros />
+                            </div>
+
+                            <div style={{width: "100%", height: "100%", position: "relative", zIndex: "1"}}>
+                                <MapNoSSR
+                                    positions={positions}
+                                />
+                            </div>
+
                         </div>
 
                         <div className={styles.derecha}>

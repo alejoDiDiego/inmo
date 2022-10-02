@@ -144,6 +144,7 @@ const InformacionBasica = ({
                     if ("suburb" in selectPosition.address) {
                         setLocalidad(selectPosition.address.suburb)
                     }
+                    setMunicipio(selectPosition.address.city_district)
                 } else {
 
                     if ("town" in selectPosition.address) {
