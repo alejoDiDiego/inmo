@@ -23,7 +23,7 @@ const InputBusqueda = () => {
 
     return (
         <div className={styles.main}>
-            <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder='Direccion, localidad, provincia, vendedor' />
+            <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder='Provincia, Municipio, Localidad' />
             <div onClick={() => handleBuscar()} className={styles.div_img}>
                 <Image src='/search2.png' layout='fill' />
             </div>

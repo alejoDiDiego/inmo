@@ -89,13 +89,11 @@ const principal = () => {
             return (
                 p.provincia.toLowerCase().includes(busqueda) ||
                 p.municipio.toLowerCase().includes(busqueda) ||
-                p.localidad.toLowerCase().includes(busqueda) ||
-                p.type.toLowerCase().includes(busqueda) ||
-                p.tipoVivienda.toLowerCase().includes(busqueda) ||
-                p.descripcion.toLowerCase().includes(busqueda)
+                p.localidad.toLowerCase().includes(busqueda)
             )
         })
         setResultado(filtro)
+        console.log(filtro)
 
     }, [q, publicaciones])
 
