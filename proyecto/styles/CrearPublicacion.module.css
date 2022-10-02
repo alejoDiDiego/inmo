@@ -790,6 +790,24 @@
     margin-bottom: 20px;
 }
 
+.cuadradoHighlited{
+    height: 225px;
+    width: 225px;
+    border-radius: 10px;
+    padding: 18px;
+    background-color: white;
+    position: relative;
+    font-size: medium;
+    border: 1px solid #0071b3;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.cuadrado:hover{
+    border: 1px solid #0071b3;
+}
+
 .infoc{
  font-size: medium;
 }
@@ -824,6 +842,3 @@
     margin-bottom: 20px;
 }
 
-.cuadrado:hover{
-    border: 1px solid #0071b3;
-}

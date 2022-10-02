@@ -45,6 +45,10 @@ const principal = () => {
   const referenciaUbi = useRef(null)
   const referenciaInfo = useRef(null)
   const referenciaImg = useRef(null)
+  const [ubiTrigger, setUbiTrigger] = useState(true)
+  const [infoTrigger, setInfoTrigger] = useState(false)
+  const [imgTrigger, setImgTrigger] = useState(false)
+  const [loadTrigger, setLoadTrigger] = useState(false)
 
   const router = useRouter()
 
@@ -212,14 +216,15 @@ const principal = () => {
                 <div className={styles.cardDivider}>
 
                   <div className={styles.cuadradoContainer} onClick={handleUbi}>
-                    <div className={styles.cuadrado} >
+
+                    <div className={ubiTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
                       <h3>1. Ubicacion</h3>
                       <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
                     </div>
                   </div>
 
                   <div className={styles.cuadradoContainer} onClick={handleInfo}>
-                    <div className={styles.cuadrado}>
+                    <div className={infoTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
                       <h3 >2. Informacion Basica</h3>
                       <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
                     </div>
@@ -231,13 +236,13 @@ const principal = () => {
               <div className={styles.cardDivider}>
 
                 <div className={styles.cuadradoContainer} onClick={handleImg}>
-                  <div className={styles.cuadrado}>
+                  <div className={imgTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>3. Subir imagenes</h3>
                     <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
                   </div>
                 </div>
                 <div className={styles.cuadradoContainer} onClick={handleImg}>
-                  <div className={styles.cuadrado}>
+                  <div className={loadTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>4. Cargar publicacion</h3>
                     <p className={styles.infoc}>finalizar el proceso de publicacion</p>
                   </div>
@@ -298,6 +303,9 @@ const principal = () => {
                         setNumeroLetraDepto={setNumeroLetraDepto}
                         referenciaUbi={referenciaUbi}
                         referenciaInfo={referenciaInfo}
+                        setUbiTrigger={setUbiTrigger}
+                        setInfoTrigger={setInfoTrigger}
+                        setImgTrigger={setImgTrigger}
                       />
 
 
