@@ -5,7 +5,7 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '../../components/layout/Layout'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore'
 import styles from '../../styles/Principal.module.css'
 import Axios from 'axios'
 import Head from 'next/head'
@@ -14,6 +14,8 @@ import Cropper from 'react-easy-crop'
 import { updateProfile } from 'firebase/auth'
 import Select from 'react-select'
 import MisPublicaciones from '../../components/Perfil/MisPublicaciones'
+import Comentarios from '../../components/Perfil/Comentarios'
+import MisComentarios from '../../components/Perfil/MisComentarios'
 
 
 
@@ -55,6 +57,14 @@ const principal = () => {
     const [botonConfirmar, setBotonConfirmar] = useState(false)
 
     const [cargando, setCargando] = useState(false)
+
+
+    const [misPublicaciones, setMisPublicaciones] = useState(true)
+    const [comentarios, setComentarios] = useState(false)
+    const [misComentarios, setMisComentarios] = useState(false)
+
+
+    const [publicaciones, setPublicaciones] = useState([])
 
 
 
@@ -280,6 +290,7 @@ const principal = () => {
                         setNuevaDireccion(docSnap.data().direccion)
                         setNuevaDescripcion(docSnap.data().descripcion)
                         setEmailPublico(docSnap.data().emailPublico)
+                        queryFirebase()
                         console.log(docSnap.data())
 
                     }
@@ -651,6 +662,30 @@ const principal = () => {
             setNuevaLocalidad(value)
         }
     }
+
+
+
+
+    const queryFirebase = async () => {
+        const colRef = collection(firebase.db, "Publicaciones")
+
+        const q = query(colRef, where("publicador", "==", `${usuario.uid}`))
+
+        const querySnapshot = await getDocs(q);
+        let ps = []
+        querySnapshot.forEach((doc) => {
+            ps.push(doc.data())
+        });
+        setPublicaciones(ps)
+        console.log(ps)
+    }
+
+
+
+
+
+
+
 
 
     if (info == null) {
@@ -1490,10 +1525,31 @@ const principal = () => {
 
 
 
-                            <MisPublicaciones
-                                usuario={usuario}
-                                info={info}
-                            />
+                            <div>
+                                <div className={styles.headers}>
+                                    <p onClick={() => { setMisPublicaciones(true); setComentarios(false); setMisComentarios(false) }} className={misPublicaciones == true ? styles.h2 : null}>Mis Publicaciones</p>
+                                    <p onClick={() => { setMisPublicaciones(false); setComentarios(true); setMisComentarios(false) }} className={comentarios == true ? styles.h2 : null}>Comentarios</p>
+                                    <p onClick={() => { setMisPublicaciones(false); setComentarios(false); setMisComentarios(true) }} className={misComentarios == true ? styles.h2 : null}>Tus Comentarios</p>
+                                </div>
+                                {
+                                    misPublicaciones == true &&
+                                    <MisPublicaciones
+                                        publicaciones={publicaciones}
+                                        setPublicaciones={setPublicaciones}
+                                        queryFirebase={queryFirebase}
+                                    />
+                                }
+
+                                {
+                                    comentarios == true &&
+                                    <Comentarios />
+                                }
+
+                                {
+                                    misComentarios == true &&
+                                    <MisComentarios />
+                                }
+                            </div>
 
 
 
