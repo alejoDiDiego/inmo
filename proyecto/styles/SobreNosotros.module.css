@@ -129,3 +129,54 @@ h2 .span{
     margin-right: 50px;
 }
 
+@media screen and (max-width:1800px){
+    .titulo{
+        font-size:30px;
+        justify-content: center;
+    }
+    .texto{
+        font-size: 20px;
+        justify-content: center;
+    }
+    .titulo_sec{
+        font-size: 30px;
+        justify-content: center;
+    }
+    .texto_sec{
+        font-size: 20px;
+        justify-content: center;
+    }
+
+    .img{
+        background-position: 50%;
+        height: 500px;
+        width: 850px;
+    }
+    .img_Sec{
+        background-position: 50%;
+        height: 500px;
+        width: 850px;
+    }
+}
+@media screen and (max-width:1540px){
+    .img{
+        height: 450px;
+        width: 800px;
+    }
+    .img_Sec{
+        width: 800px;
+        height: 450px;
+    }
+    .titulo{
+        font-size: 25px;
+    }
+    .texto{
+        justify-content: center;
+    }
+    .titulo_sec{
+        font-size: 25px;
+    }
+    .texto_sec{
+        justify-content: center;
+    }
+}

@@ -131,3 +131,24 @@ h2 .span{
     font-size: 22px;
     line-height: 35px;
 }
+@media screen and (max-width:1790px){
+    .titulo,.titulo_sec{
+        font-size: 25px;
+        justify-content: center;
+    }
+    .texto,.texto2{
+        font-size: 20px;
+        justify-content: center;
+    }
+    .img{
+        position: relative;
+        width: 900px;
+        height:600px ;
+    }
+}
+@media screen and (max-width:1580px){
+    .img{
+        width:800px;
+        height: 400px;
+    }
+}
