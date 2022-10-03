@@ -415,7 +415,7 @@ const ContainerRegister = ({
 
 
                             <div className={styles.div_link}>
-                                <label className={styles.label_link}>Permito que utilizen mi informacion segun estos terminos: <Link href='/'><a>www.link.com</a></Link></label>
+                                <label className={styles.label_link}>Permito que utilizen mi informacion según estos terminos: <Link href='/'><a>www.link.com</a></Link></label>
                                 <input type='checkbox' />
                             </div>
 

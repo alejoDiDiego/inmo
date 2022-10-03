@@ -472,6 +472,20 @@
         border-radius: 0%;
     }
 }
+@media screen and (max-width:520px){
+    .form{
+        font-size: 14px;
+    }
+    .main_container h2{
+        font-size: 25px;
+        margin-left: 15px;
+    }
+    .div_link{
+        width: 400px;
+        margin-left: 3px;
+        font-size: 15px;
+    }
+}
 
 /*
 @media screen and (max-height:768px) {
