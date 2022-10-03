@@ -83,12 +83,12 @@ const Filtros = ({ router }) => {
         setNuevoPrecioMax(precioMax)
         setNuevoBanosMin(cantBanosMin)
         setNuevoBanosMax(cantBanosMax)
-        setNuevoCantAmbientesMin(cantAmbientesMax)
-        setNuevoCantAmbientesMax(cantAmbientesMin)
-        setNuevoCantCocherasMin(cantCocherasMax)
-        setNuevoCantCocherasMax(cantCocherasMin)
-        setNuevoCantHabitacionesMin(cantHabitacionesMax)
-        setNuevoCantHabitacionesMax(cantHabitacionesMin)
+        setNuevoCantAmbientesMin(cantAmbientesMin)
+        setNuevoCantAmbientesMax(cantAmbientesMax)
+        setNuevoCantCocherasMin(cantCocherasMin)
+        setNuevoCantCocherasMax(cantCocherasMax)
+        setNuevoCantHabitacionesMin(cantHabitacionesMin)
+        setNuevoCantHabitacionesMax(cantHabitacionesMax)
     }, [router])
 
 
@@ -123,12 +123,12 @@ const Filtros = ({ router }) => {
                 precioMax: nuevoPrecioMax,
                 cantBanosMin: nuevoBanosMin,
                 cantBanosMax: nuevoBanosMax,
-                cantAmbientesMax: nuevoCantAmbientesMin,
-                cantAmbientesMin: nuevoCantAmbientesMax,
-                cantCocherasMax: nuevoCantCocherasMin,
-                cantCocherasMin: nuevoCantCocherasMax,
-                cantHabitacionesMax: nuevoCantHabitacionesMin,
-                cantHabitacionesMin: nuevoCantHabitacionesMax
+                cantAmbientesMax: nuevoCantAmbientesMax,
+                cantAmbientesMin: nuevoCantAmbientesMin,
+                cantCocherasMax: nuevoCantCocherasMax,
+                cantCocherasMin: nuevoCantCocherasMin,
+                cantHabitacionesMax: nuevoCantHabitacionesMax,
+                cantHabitacionesMin: nuevoCantHabitacionesMin
             }
         })
     }
@@ -169,12 +169,12 @@ const Filtros = ({ router }) => {
                 }
                 <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(isNumber(e))} />
                 <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(isNumber(e))} />
-                <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(e.target.value)} />
-                <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(e.target.value)} />
-                <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(e.target.value)} />
-                <input placeholder="nuevoCantCocherasMax" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(e.target.value)} />
-                <input placeholder="nuevoCantHabitacionesMin" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(e.target.value)} />
-                <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(e.target.value)} />
+                <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(isNumber(e))} />
+                <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(isNumber(e))} />
+                <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(isNumber(e))} />
+                <input placeholder="nuevoCantCocherasMax" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(isNumber(e))} />
+                <input placeholder="nuevoCantHabitacionesMin" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(isNumber(e))} />
+                <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(isNumber(e))} />
             </div>
 
             <button onClick={() => handleBuscar()}>Aplicar</button>

@@ -128,13 +128,13 @@ const InformacionBasica = ({
 
                 }
 
-                if ("city" in selectPosition.address) {
-                    if (selectPosition.address.city.includes("Partido de")) {
-                        setMunicipio(selectPosition.address.city.slice(11))
-                    } else if (selectPosition.address.city.includes("Partido")) {
-                        setMunicipio(selectPosition.address.city.slice(8))
+                if ("state_district" in selectPosition.address) {
+                    if (selectPosition.address.state_district.includes("Partido de")) {
+                        setMunicipio(selectPosition.address.state_district.slice(11))
+                    } else if (selectPosition.address.state_district.includes("Partido")) {
+                        setMunicipio(selectPosition.address.state_district.slice(8))
                     } else {
-                        setMunicipio(selectPosition.address.city)
+                        setMunicipio(selectPosition.address.state_district)
 
                     }
                 }
@@ -144,28 +144,21 @@ const InformacionBasica = ({
                     if ("suburb" in selectPosition.address) {
                         setLocalidad(selectPosition.address.suburb)
                     }
-                    setMunicipio(selectPosition.address.city_district)
-                } else {
+                    if ("city_district" in selectPosition.address) setMunicipio(selectPosition.address.city_district)
+                    if ("state_district" in selectPosition.address) setMunicipio(selectPosition.address.state_district)
 
-                    if ("town" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.town)
-                    } if ("quarter" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.quarter)
-                    } if ("village" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.village)
-                    } if ("suburb" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.suburb)
-                    } if ("neighbourhood" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.neighbourhood)
-                    } if ("district" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.district)
-                    } if ("county" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.county)
-                    } if ("residential" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.residential)
-                    } if ("city_district" in selectPosition.address) {
-                        setLocalidad(selectPosition.address.city_district)
-                    }
+                } else {
+                    if ("city" in selectPosition.address) setLocalidad(selectPosition.address.city)
+                    if ("town" in selectPosition.address) setLocalidad(selectPosition.address.town)
+                    if ("quarter" in selectPosition.address) setLocalidad(selectPosition.address.quarter)
+                    if ("village" in selectPosition.address) setLocalidad(selectPosition.address.village)
+                    if ("suburb" in selectPosition.address) setLocalidad(selectPosition.address.suburb)
+                    if ("neighbourhood" in selectPosition.address) setLocalidad(selectPosition.address.neighbourhood)
+                    if ("district" in selectPosition.address) setLocalidad(selectPosition.address.district)
+                    if ("county" in selectPosition.address) setLocalidad(selectPosition.address.county)
+                    if ("residential" in selectPosition.address) setLocalidad(selectPosition.address.residential)
+                    if ("city_district" in selectPosition.address) setLocalidad(selectPosition.address.city_district)
+                    
                 }
 
 

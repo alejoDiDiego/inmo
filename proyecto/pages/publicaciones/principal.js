@@ -142,6 +142,30 @@ const principal = () => {
                             cantBanosMin.length == 0 ? true : p.cantBanos >= cantBanosMin
                         )
                 )
+                &&
+                (
+                    cantAmbientesMax.length > 0 && cantAmbientesMin.length > 0 ?
+                        p.cantAmbientes >= cantAmbientesMin && p.cantAmbientes <= cantAmbientesMax
+                        :
+                        (
+                            cantAmbientesMax.length == 0 ? true : p.cantAmbientes <= cantAmbientesMax
+                        ) &&
+                        (
+                            cantAmbientesMin.length == 0 ? true : p.cantAmbientes >= cantAmbientesMin
+                        )
+                )
+                &&
+                (
+                    cantCocherasMax.length > 0 && cantCocherasMin.length > 0 ?
+                        p.cantCocheras >= cantCocherasMin && p.cantCocheras <= cantCocherasMax
+                        :
+                        (
+                            cantCocherasMax.length == 0 ? true : p.cantCocheras <= cantCocherasMax
+                        ) &&
+                        (
+                            cantCocherasMin.length == 0 ? true : p.cantCocheras >= cantCocherasMin
+                        )
+                )
                 
 
 
