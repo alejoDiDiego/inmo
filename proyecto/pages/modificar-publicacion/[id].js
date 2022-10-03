@@ -1,5 +1,5 @@
 import { useRouter, } from 'next/router'
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useRef } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import { collection, doc, onSnapshot, getDoc, query, where, getDocs, collectionGroup, updateDoc } from 'firebase/firestore'
 import Layout from '../../components/layout/Layout'
@@ -60,6 +60,15 @@ const ModificarPublicacion = () => {
   const { query: { id } } = router
 
   const { usuario } = useContext(FirebaseContext)
+
+  const [ubiTrigger, setUbiTrigger] = useState(true)
+  const [infoTrigger, setInfoTrigger] = useState(false)
+  const [imgTrigger, setImgTrigger] = useState(false)
+  const [loadTrigger, setLoadTrigger] = useState(false)
+
+  const referenciaUbi = useRef(null)
+  const referenciaInfo = useRef(null)
+  const referenciaImg = useRef(null)
 
   const queryFirebase = async () => {
     const docRef = doc(firebase.db, "Publicaciones", id)
@@ -442,6 +451,11 @@ const ModificarPublicacion = () => {
                   setMt2Utilizados={setMt2Utilizados}
                   numeroLetraDepto={numeroLetraDepto}
                   setNumeroLetraDepto={setNumeroLetraDepto}
+                  referenciaUbi={referenciaUbi}
+                  referenciaInfo={referenciaInfo}
+                  setUbiTrigger={setUbiTrigger}
+                  setInfoTrigger={setInfoTrigger}
+                  setImgTrigger={setImgTrigger}
                 />
 
 
