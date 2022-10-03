@@ -4,6 +4,7 @@ import firebase from '../../firebase'
 import styles from '../../styles/Header.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import InputBusqueda from './InputBusqueda'
 
 
 
@@ -71,7 +72,7 @@ const Header = ({ usuario, enRegistro }) => {
 
             {
                 barraBusqueda &&
-                <input placeholder='Direccion, localidad, provincia, vendedor' />
+                <InputBusqueda />
             }
 
 
