@@ -145,7 +145,7 @@ const Publicacion = ({ p, queryFirebase }) => {
                                 {
                                     p.expensas.length > 0 &&
                                     (
-                                        <p>Expensas ARS$/Mes {p.expensas}</p>
+                                        <p>Expensas ARS$/Mes {numeroConPuntos(p.expensas)}</p>
                                     )
                                 }
 
