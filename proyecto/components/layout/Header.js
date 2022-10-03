@@ -95,11 +95,13 @@ const Header = ({ usuario, enRegistro }) => {
                         Object.keys(usuario).length < 1 ?
                             <div className={styles.options}>
                                 <div className={styles.title}>
+
                                     <Link href='/'>
                                         <div className={styles.link}>
                                             <h1>Inmo</h1>
                                         </div>
                                     </Link>
+
                                 </div>
                                 <Link href='/inicio-sesion/principal'>
                                     <div className={styles.menuButton}>
@@ -143,6 +145,7 @@ const Header = ({ usuario, enRegistro }) => {
                             :
                             <div>
                                 <div className={styles.options}>
+
                                     <div className={styles.title}>
                                         <Link href='/'>
                                             <div className={styles.link}>

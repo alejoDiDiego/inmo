@@ -128,13 +128,21 @@
     height: 30px;
 }
 
+
+
+.link h2:hover{
+    color: #007cc3;
+}
+
+
+
 .options{
     display: flex;
     flex-direction: column;
     margin-top: 20px;
 }
 
-.options h1{
+.options h2{
     margin-left: 20px;
 }
 
@@ -156,6 +164,8 @@
 
 .buttonInsideLogout img{
     height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
     width: 30px;
 }
 
@@ -228,8 +238,9 @@
     height: 30px;
 }
 
-.link h1{
+.link h2{
     cursor: pointer;
+    font-size: 2em;
 }
 
 .title{
