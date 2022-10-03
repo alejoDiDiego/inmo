@@ -166,6 +166,18 @@ const principal = () => {
                             cantCocherasMin.length == 0 ? true : p.cantCocheras >= cantCocherasMin
                         )
                 )
+                &&
+                (
+                    cantHabitacionesMax.length > 0 && cantHabitacionesMin.length > 0 ?
+                        p.cantHabitaciones >= cantHabitacionesMin && p.cantHabitaciones <= cantHabitacionesMax
+                        :
+                        (
+                            cantHabitacionesMax.length == 0 ? true : p.cantHabitaciones <= cantHabitacionesMax
+                        ) &&
+                        (
+                            cantHabitacionesMin.length == 0 ? true : p.cantHabitaciones >= cantHabitacionesMin
+                        )
+                )
                 
 
 

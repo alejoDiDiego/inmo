@@ -136,6 +136,32 @@ const Filtros = ({ router }) => {
 
 
 
+
+
+    const handleReiniciar = () => {
+        Router.push({
+            pathname: '/publicaciones/principal',
+            query: {
+                direccion: direccion,
+                tipoPublicacion: "",
+                tipoVivienda: "",
+                precioMax: "",
+                precioMin: "",
+                cantBanosMin: "",
+                cantBanosMax: "",
+                cantAmbientesMax: "",
+                cantAmbientesMin: "",
+                cantCocherasMax: "",
+                cantCocherasMin: "",
+                cantHabitacionesMax: "",
+                cantHabitacionesMin: ""
+            }
+        })
+    }
+
+
+
+
     const isNumber = e => {
         return e.target.value.replace(/\D/g, '');
     };
@@ -178,6 +204,7 @@ const Filtros = ({ router }) => {
             </div>
 
             <button onClick={() => handleBuscar()}>Aplicar</button>
+            <button onClick={() => handleReiniciar()}>Limpiar Filtros</button>
         </div>
     )
 }
