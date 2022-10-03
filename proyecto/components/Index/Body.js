@@ -118,21 +118,22 @@ const Body = () => {
                                 </div>
                             </Link>
 
+                            <Link href='/mas-info/creditos'>
+                                <div className={styles.square}>
 
-                            <div className={styles.square}>
+                                    <div className={styles.logo_creditos}>
+                                        <img className={styles.img_creditos} src="Creditos.png" />
+                                    </div>
 
-                                <div className={styles.logo_creditos}>
-                                    <img className={styles.img_creditos} src="Creditos.png" />
+                                    <div className={styles.txt_creditos}>
+                                        <h3>Creditos</h3>
+
+                                        <p>Quienes fueron los que nos ayudaron con este proyecto.</p>
+
+                                    </div>
+
                                 </div>
-
-                                <div className={styles.txt_creditos}>
-                                    <h3>Creditos</h3>
-
-                                    <p>Quienes fueron los que nos ayudaron con este proyecto.</p>
-
-                                </div>
-
-                            </div>
+                            </Link>
 
                             <div className={styles.titleM}>
                                 <p>Mas sobre <span className={styles.inmo}>Inmo</span></p>

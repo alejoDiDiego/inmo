@@ -142,7 +142,7 @@ const Header = ({ usuario, enRegistro }) => {
                                         <div className={styles.menuButton}>
                                             <div className={styles.line}></div>
                                             <div className={styles.buttonInside}>
-                                                <img></img>
+                                                <img src='/account2.png'></img>
                                                 <h4>Mi Perfil</h4>
                                             </div>
                                             <div className={styles.line}></div>
@@ -153,7 +153,7 @@ const Header = ({ usuario, enRegistro }) => {
                                         <div className={styles.menuButton}>
                                             <div className={styles.line}></div>
                                             <div className={styles.buttonInside}>
-                                                <img></img>
+                                                <img src='/home4.png'></img>
                                                 <h4>Crear Publicacion</h4>
                                             </div>
                                             <div className={styles.line}></div>
@@ -188,7 +188,7 @@ const Header = ({ usuario, enRegistro }) => {
                                                         </div>
                                                         <h3>{usuario.displayName}</h3>
                                                         <div>
-                                                            <div onClick={firebase.handleSignOut} className={styles.buttonInside}>
+                                                            <div onClick={firebase.handleSignOut} className={styles.buttonInsideLogout}>
                                                                 <img src='/logout.png'></img>
                                                             </div>
                                                         </div>
