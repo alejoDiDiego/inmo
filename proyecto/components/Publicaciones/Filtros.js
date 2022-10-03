@@ -142,14 +142,31 @@ const Filtros = ({ router }) => {
 
 
 
+    useEffect(() => {
+        setNuevoPrecioMax("")
+        setNuevoPrecioMin("")
+    }, [nuevoTipoPublicacion])
+
+
+
     return (
         <div>
             <div>
                 <input value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
                 <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} value={{ value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }}></Select>
                 <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} value={{ value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
-                <input placeholder="nuevoPrecioMin" value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(e.target.value)} />
-                <input placeholder="nuevoPrecioMax" value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(e.target.value)} />
+                {
+                    nuevoTipoPublicacion.length == 0 ?
+                        <>
+                            <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
+                            <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
+                        </>
+                        :
+                        <>
+                            <input placeholder={`nuevoPrecioMin ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(isNumber(e))} />
+                            <input placeholder={`nuevoPrecioMax ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(isNumber(e))} />
+                        </>
+                }
                 <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(e.target.value)} />
                 <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(e.target.value)} />
                 <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(e.target.value)} />
@@ -160,7 +177,7 @@ const Filtros = ({ router }) => {
                 <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(e.target.value)} />
             </div>
 
-            <button onClick={() => handleBuscar()}>Buscar</button>
+            <button onClick={() => handleBuscar()}>Aplicar</button>
         </div>
     )
 }
