@@ -144,16 +144,16 @@ const Filtros = ({ router }) => {
                 <input value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
                 <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} value={{ value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }}></Select>
                 <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} value={{ value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
-                <input value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(e.target.value)} />
-                <input value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(e.target.value)} />
-                <input value={nuevoBanosMin} onChange={e => setNuevoBanosMin(e.target.value)} />
-                <input value={nuevoBanosMax} onChange={e => setNuevoBanosMax(e.target.value)} />
-                <input value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(e.target.value)} />
-                <input value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(e.target.value)} />
-                <input value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(e.target.value)} />
-                <input value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(e.target.value)} />
-                <input value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(e.target.value)} />
-                <input value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(e.target.value)} />
+                <input placeholder="nuevoPrecioMin" value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(e.target.value)} />
+                <input placeholder="nuevoPrecioMax" value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(e.target.value)} />
+                <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(e.target.value)} />
+                <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(e.target.value)} />
+                <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(e.target.value)} />
+                <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(e.target.value)} />
+                <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(e.target.value)} />
+                <input placeholder="nuevoCantCocherasMax" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(e.target.value)} />
+                <input placeholder="nuevoCantHabitacionesMin" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(e.target.value)} />
+                <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(e.target.value)} />
             </div>
 
             <button onClick={() => handleBuscar()}>Buscar</button>

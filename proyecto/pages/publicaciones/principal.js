@@ -99,33 +99,30 @@ const principal = () => {
 
         if (direccion == "" || direccion == null) return
         if (publicaciones.length == 0) return
+        console.log(tipoPublicacion)
 
-        const busqueda = direccion.toLowerCase()
         const filtro = publicaciones.filter(p => {
-            if (p.provincia.toLowerCase().includes(busqueda)) {
-                console.log("provincia true")
-            }
-            if (p.municipio.toLowerCase().includes(busqueda)) {
-                console.log("municipio true")
-            }
-            if (p.localidad.toLowerCase().includes(busqueda)) {
-                console.log("localidad true")
-            }
             return (
-                p.provincia.toLowerCase().includes(busqueda) ||
-                p.municipio.toLowerCase().includes(busqueda) ||
-                p.localidad.toLowerCase().includes(busqueda) ||
-                p.codigoPostal.includes(busqueda)
+                (
+                    p.provincia.toLowerCase().includes(direccion.toLowerCase()) ||
+                    p.municipio.toLowerCase().includes(direccion.toLowerCase()) ||
+                    p.localidad.toLowerCase().includes(direccion.toLowerCase()) ||
+                    p.codigoPostal.includes(busqueda)
+                ) 
+                &&
+                (
+                    tipoPublicacion.length == 0 ? p.tipoPublicacion : p.tipoPublicacion.toLowerCase().includes(tipoPublicacion.toLowerCase())
+                )
             )
         })
         setResultado(filtro)
         console.log(filtro)
 
-    }, [direccion, publicaciones])
+    }, [router, publicaciones])
 
 
     useEffect(() => {
-        if (resultado.length == 0) return
+        if (resultado.length == 0) {setPositions([]); return}
 
         const posiciones = resultado.map(p => {
             return ({
