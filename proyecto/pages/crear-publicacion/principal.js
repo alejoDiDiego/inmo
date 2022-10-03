@@ -248,7 +248,7 @@ const principal = () => {
                 <div className={styles.cuadradoContainer} onClick={onFinish == false? handleImg : null}>
                   <div className={loadTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>4. Cargar publicacion</h3>
-                    <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                    <p className={styles.infoc}>Finalizar el proceso de publicacion</p>
                   </div>
                 </div>
               </div>
