@@ -38,12 +38,16 @@ const Filtros = ({ router }) => {
 
 
     const tipoViviendaOptions =
-        [{ value: "casa", label: "Casa" },
-        { value: "departamento", label: "Departamento" }]
+        [
+            { value: "", label: "Filtro vacio" },
+            { value: "casa", label: "Casa" },
+            { value: "departamento", label: "Departamento" }]
 
     const tipoPublicacionOptions =
-        [{ value: "venta", label: "Venta" },
-        { value: "alquiler", label: "Alquiler" }]
+        [
+            { value: "", label: "Filtro vacio" },
+            { value: "venta", label: "Venta" },
+            { value: "alquiler", label: "Alquiler" }]
 
 
     const handleSelectTipoVivienda = (event) => {

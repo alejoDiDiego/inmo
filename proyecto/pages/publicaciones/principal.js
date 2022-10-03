@@ -99,20 +99,41 @@ const principal = () => {
 
         if (direccion == "" || direccion == null) return
         if (publicaciones.length == 0) return
-        console.log(tipoPublicacion)
+        console.log(precioMin)
 
         const filtro = publicaciones.filter(p => {
+
             return (
                 (
                     p.provincia.toLowerCase().includes(direccion.toLowerCase()) ||
                     p.municipio.toLowerCase().includes(direccion.toLowerCase()) ||
                     p.localidad.toLowerCase().includes(direccion.toLowerCase()) ||
-                    p.codigoPostal.includes(busqueda)
-                ) 
+                    p.codigoPostal.includes(direccion.toLowerCase())
+                )
                 &&
                 (
                     tipoPublicacion.length == 0 ? p.tipoPublicacion : p.tipoPublicacion.toLowerCase().includes(tipoPublicacion.toLowerCase())
                 )
+                &&
+                (
+                    tipoVivienda.length == 0 ? p.tipoVivienda : p.tipoVivienda.toLowerCase().includes(tipoVivienda.toLowerCase())
+                )
+                &&
+                (
+                    precioMax.length > 0 && precioMin.length > 0 ?
+                    p.precio >= precioMin && p.precio <= precioMax
+                    :
+                    (
+                        precioMax.length == 0 ? true : p.precio <= precioMax
+                    )&&
+                    (
+                        precioMin.length == 0 ? true : p.precio >= precioMin
+                    )
+                    )
+                
+                
+                
+
             )
         })
         setResultado(filtro)
@@ -122,7 +143,7 @@ const principal = () => {
 
 
     useEffect(() => {
-        if (resultado.length == 0) {setPositions([]); return}
+        if (resultado.length == 0) { setPositions([]); return }
 
         const posiciones = resultado.map(p => {
             return ({
