@@ -462,9 +462,28 @@
         height: 100%;
         width: 100%;
         border-radius: 0%;
-        /*hay que hacer un weight y height 100% pero no se en que div ponerlo*/
     }
     .inside_container{
         font-size: 15px;
+    }
+    .div_supremo{
+        overflow: hidden;
+    }
+.container_Restablecer{
+    height: 100%;
+    width: 100%;
+    border-radius: 0%;
+}
+}
+
+@media screen and (max-width:500px){
+    .inside_container{
+        font-size: 15px;
+        margin-left: 15px;
+    }
+    .inside_container h2{
+        font-size: 25px;
+        text-align: left;
+        margin-left: 10px;
     }
 }
