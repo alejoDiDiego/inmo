@@ -167,8 +167,8 @@ const Filtros = ({ router }) => {
                             <input placeholder={`nuevoPrecioMax ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(isNumber(e))} />
                         </>
                 }
-                <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(e.target.value)} />
-                <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(e.target.value)} />
+                <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(isNumber(e))} />
+                <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(isNumber(e))} />
                 <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(e.target.value)} />
                 <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(e.target.value)} />
                 <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(e.target.value)} />

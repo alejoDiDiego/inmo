@@ -121,18 +121,32 @@ const principal = () => {
                 &&
                 (
                     precioMax.length > 0 && precioMin.length > 0 ?
-                    p.precio >= precioMin && p.precio <= precioMax
-                    :
-                    (
-                        precioMax.length == 0 ? true : p.precio <= precioMax
-                    )&&
-                    (
-                        precioMin.length == 0 ? true : p.precio >= precioMin
-                    )
-                    )
+                        p.precio >= precioMin && p.precio <= precioMax
+                        :
+                        (
+                            precioMax.length == 0 ? true : p.precio <= precioMax
+                        ) &&
+                        (
+                            precioMin.length == 0 ? true : p.precio >= precioMin
+                        )
+                )
+                &&
+                (
+                    cantBanosMax.length > 0 && cantBanosMin.length > 0 ?
+                        p.cantBanos >= cantBanosMin && p.cantBanos <= cantBanosMax
+                        :
+                        (
+                            cantBanosMax.length == 0 ? true : p.cantBanos <= cantBanosMax
+                        ) &&
+                        (
+                            cantBanosMin.length == 0 ? true : p.cantBanos >= cantBanosMin
+                        )
+                )
                 
-                
-                
+
+
+
+
 
             )
         })
