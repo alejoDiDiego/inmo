@@ -177,6 +177,18 @@ const ModificarPublicacion = () => {
 
 
 
+  const handleUbi = () => {
+    referenciaUbi.current.scrollIntoView()
+  }
+
+  const handleInfo = () => {
+    referenciaInfo.current.scrollIntoView()
+  }
+
+  const handleImg = () => {
+    referenciaImg.current.scrollIntoView()
+  }
+
 
 
 
@@ -380,7 +392,7 @@ const ModificarPublicacion = () => {
           <meta name="description" content="Generated" />
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
-        <Layout>
+        <Layout perfil={true}>
           <div>cargando</div>
         </Layout>
       </>
@@ -398,9 +410,51 @@ const ModificarPublicacion = () => {
           <meta name="description" content="Generated" />
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
-        <Layout>
+        <Layout perfil={true}>
           <div className={styles.main}>
             <div className={styles.izquierda}>
+            <h1>Publica tu <span>propiedad</span></h1>
+              <p>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
+                maximizar la
+                comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</p>
+
+              <div className={styles.cardsContainer}>
+
+                <div className={styles.cardDivider}>
+
+                  <div className={styles.cuadradoContainer} onClick={handleUbi}>
+
+                    <div className={ubiTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
+                      <h3>1. Ubicacion</h3>
+                      <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                    </div>
+                  </div>
+
+                  <div className={styles.cuadradoContainer} onClick={handleInfo}>
+                    <div className={infoTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
+                      <h3 >2. Informacion Basica</h3>
+                      <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className={styles.cardDivider}>
+
+                <div className={styles.cuadradoContainer} onClick={handleImg}>
+                  <div className={imgTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
+                    <h3>3. Subir imagenes</h3>
+                    <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                  </div>
+                </div>
+                <div className={styles.cuadradoContainer} onClick={handleImg}>
+                  <div className={loadTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
+                    <h3>4. Cargar publicacion</h3>
+                    <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                  </div>
+                </div>
+              </div>
 
             </div>
 
@@ -462,14 +516,18 @@ const ModificarPublicacion = () => {
                 <SubirImagenes
                   imagenes={nuevasImagenes}
                   setImagenes={setNuevasImagenes}
+                  referenciaImg={referenciaImg}
                 />
 
 
-                <button onClick={() => handleEditar()}>Siguiente</button>
-              </div>
 
-
-
+                  <div className={styles.div_buttonContinue}>
+                        <label className={styles.buttonConfirm} onClick={() => handleEditar()}>
+                          <div className={styles.buttonConfirm_back}></div>
+                          <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
+                        </label>
+                      </div>
+                    </div>
             </div>
 
 
@@ -478,7 +536,7 @@ const ModificarPublicacion = () => {
 
 
           </div>
-        </Layout>
+        </Layout >
       </>
 
     )
