@@ -95,11 +95,11 @@ const Header = ({ usuario, enRegistro }) => {
                         Object.keys(usuario).length < 1 ?
                             <div className={styles.options}>
                                 <div className={styles.title}>
-                                <Link href='/'>
-                                    <div className={styles.link}>
-                                        <h1>Inmo</h1>
-                                    </div>
-                                </Link>
+                                    <Link href='/'>
+                                        <div className={styles.link}>
+                                            <h1>Inmo</h1>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <Link href='/inicio-sesion/principal'>
                                     <div className={styles.menuButton}>
@@ -139,17 +139,17 @@ const Header = ({ usuario, enRegistro }) => {
                                         <h4>Todavia no has iniciado sesion</h4>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                             :
                             <div>
                                 <div className={styles.options}>
-                                <div className={styles.title}>
-                                <Link href='/'>
-                                    <div className={styles.link}>
-                                        <h1>Inmo</h1>
+                                    <div className={styles.title}>
+                                        <Link href='/'>
+                                            <div className={styles.link}>
+                                                <h1>Inmo</h1>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                                </div>
                                     <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}>
                                         <div className={styles.menuButton}>
                                             <div className={styles.line}></div>
