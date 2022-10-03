@@ -16,7 +16,7 @@ import Select from 'react-select'
 import MisPublicaciones from '../../components/Perfil/MisPublicaciones'
 import Comentarios from '../../components/Perfil/Comentarios'
 import MisComentarios from '../../components/Perfil/MisComentarios'
-
+import Spinner from '../../components/Spinner/Spinner'
 
 
 const principal = () => {
@@ -703,7 +703,9 @@ const principal = () => {
                     <link rel="icon" href="/Logo_inmo_new.png" />
                 </Head>
                 <Layout perfil={true}>
-                    <p>cargando</p>
+                    <div className={styles.loading}>
+                        <Spinner></Spinner>
+                    </div>
                 </Layout>
             </div>
 
@@ -897,7 +899,7 @@ const principal = () => {
                                                 ) :
                                                 (
                                                     <div className={styles.div_controls}>
-                                                        <p>cargando</p>
+                                                        <Spinner></Spinner>
                                                     </div>
                                                 )
                                         }
@@ -1186,7 +1188,10 @@ const principal = () => {
                                                 </div>
                                             )
                                     ) :
-                                    <p>cargando</p>
+                                    <div className={styles.loadingMod}>
+                                         <Spinner></Spinner>
+                                    </div>
+                                   
                             }
                         </div>
 
@@ -1235,7 +1240,7 @@ const principal = () => {
                                                     </div>
                                                 ) :
                                             <div className={styles.div_buttons}>
-                                                <p>Cargando...</p>
+                                                
                                             </div>
                                     }
 
@@ -1280,7 +1285,7 @@ const principal = () => {
                                                         )
                                                 ) :
                                                 <div className={styles.div_buttons}>
-                                                    <p>Cargando...</p>
+                                                    
                                                 </div>
 
                                         }

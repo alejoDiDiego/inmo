@@ -843,3 +843,8 @@
     margin-bottom: 20px;
 }
 
+.loading{
+    align-items: center;
+    justify-content: center;
+    margin-top: 400px;
+}

@@ -12,6 +12,9 @@ const MapNoSSR = dynamic(() => import("./Map"), {
 
 const FinalizarPublicacion = ({
   setSiguiente,
+  setLoadTrigger,
+  setImgTrigger,
+  setOnFinish,
   provincia,
   municipio,
   localidad,
@@ -42,7 +45,12 @@ const FinalizarPublicacion = ({
 
   const router = useRouter()
 
-
+  const handleVolver = async () => {
+    setSiguiente(false)
+    setLoadTrigger(false)
+    setImgTrigger(true)
+    setOnFinish(false)
+  }
   const handlePublicar = async () => {
     console.log("Publicando...")
     setError("")
@@ -85,7 +93,7 @@ const FinalizarPublicacion = ({
       })
 
 
-      
+
 
       const map = async () => {
 
@@ -187,7 +195,7 @@ const FinalizarPublicacion = ({
           ) :
           (
             <div>
-              <button onClick={() => setSiguiente(false)}>Editar</button>
+              <button onClick={handleVolver}>Editar</button>
               <button onClick={() => handlePublicar()}>Publicar</button>
             </div>
           )

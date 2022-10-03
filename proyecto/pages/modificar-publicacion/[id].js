@@ -10,7 +10,7 @@ import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/Fin
 import styles from '../../styles/CrearPublicacion.module.css'
 import Axios from 'axios'
 import { deleteObject, getBlob, getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage'
-
+import Spinner from '../../components/Spinner/Spinner'
 
 
 const ModificarPublicacion = () => {
@@ -310,37 +310,37 @@ const ModificarPublicacion = () => {
         })
       )
 
-      
+
       const map = async () => {
-          // nuevasImagenes.map(async m => {
-          //   // let random = Math.floor(Math.random() * 100) + Date.now()
-          //   const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now()}`)
-          //   const snapshot = await uploadBytes(imageRef, m)
-          //   const url = await getDownloadURL(snapshot.ref)
-          //   console.log(url)
-          //   imgs.push(url)
-          //   console.log(imgs)
-          // }
-          // )
-          let imgs = []
+        // nuevasImagenes.map(async m => {
+        //   // let random = Math.floor(Math.random() * 100) + Date.now()
+        //   const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now()}`)
+        //   const snapshot = await uploadBytes(imageRef, m)
+        //   const url = await getDownloadURL(snapshot.ref)
+        //   console.log(url)
+        //   imgs.push(url)
+        //   console.log(imgs)
+        // }
+        // )
+        let imgs = []
 
-          for (const m of nuevasImagenes) {
-            const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now() + imgs.length}`)
-            console.log(m)
-            const snapshot = await uploadBytes(imageRef, m)
-            const url = await getDownloadURL(snapshot.ref)
-            console.log(url)
-            imgs.push(url)
-            console.log(imgs)
-          }
+        for (const m of nuevasImagenes) {
+          const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now() + imgs.length}`)
+          console.log(m)
+          const snapshot = await uploadBytes(imageRef, m)
+          const url = await getDownloadURL(snapshot.ref)
+          console.log(url)
+          imgs.push(url)
+          console.log(imgs)
+        }
 
-          await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
-            imagenes: imgs,
-          }).catch((error) => {
-            setCargando(false)
-            setError(error)
-            console.log(error)
-          })
+        await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
+          imagenes: imgs,
+        }).catch((error) => {
+          setCargando(false)
+          setError(error)
+          console.log(error)
+        })
 
 
       }
@@ -393,7 +393,9 @@ const ModificarPublicacion = () => {
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
         <Layout perfil={true}>
-          <div>cargando</div>
+          <div className={styles.loading}>
+            <Spinner></Spinner>
+          </div>
         </Layout>
       </>
 
@@ -413,10 +415,8 @@ const ModificarPublicacion = () => {
         <Layout perfil={true}>
           <div className={styles.main}>
             <div className={styles.izquierda}>
-            <h1>Publica tu <span>propiedad</span></h1>
-              <p>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
-                maximizar la
-                comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</p>
+              <h1>Edita tu<span> publicacion</span></h1>
+              <p>Modifica la informacion que sea necesaria para tener tu publicacion actualizada, agrega imagenes nuevas o informacion extra que creas que puede llamar la atencion a posibles compradores/inquilinos</p>
 
               <div className={styles.cardsContainer}>
 
@@ -424,14 +424,14 @@ const ModificarPublicacion = () => {
 
                   <div className={styles.cuadradoContainer} onClick={handleUbi}>
 
-                    <div className={ubiTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
+                    <div className={ubiTrigger == false ? styles.cuadrado : styles.cuadradoHighlited} >
                       <h3>1. Ubicacion</h3>
                       <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
                     </div>
                   </div>
 
                   <div className={styles.cuadradoContainer} onClick={handleInfo}>
-                    <div className={infoTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
+                    <div className={infoTrigger == false ? styles.cuadrado : styles.cuadradoHighlited} >
                       <h3 >2. Informacion Basica</h3>
                       <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
                     </div>
@@ -443,13 +443,13 @@ const ModificarPublicacion = () => {
               <div className={styles.cardDivider}>
 
                 <div className={styles.cuadradoContainer} onClick={handleImg}>
-                  <div className={imgTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
+                  <div className={imgTrigger == false ? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>3. Subir imagenes</h3>
                     <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
                   </div>
                 </div>
                 <div className={styles.cuadradoContainer} onClick={handleImg}>
-                  <div className={loadTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
+                  <div className={loadTrigger == false ? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>4. Cargar publicacion</h3>
                     <p className={styles.infoc}>finalizar el proceso de publicacion</p>
                   </div>
@@ -510,6 +510,8 @@ const ModificarPublicacion = () => {
                   setUbiTrigger={setUbiTrigger}
                   setInfoTrigger={setInfoTrigger}
                   setImgTrigger={setImgTrigger}
+                  setEditTrigger={true}
+
                 />
 
 
@@ -521,13 +523,13 @@ const ModificarPublicacion = () => {
 
 
 
-                  <div className={styles.div_buttonContinue}>
-                        <label className={styles.buttonConfirm} onClick={() => handleEditar()}>
-                          <div className={styles.buttonConfirm_back}></div>
-                          <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
-                        </label>
-                      </div>
-                    </div>
+                <div className={styles.div_buttonContinue}>
+                  <label className={styles.buttonConfirm} onClick={() => handleEditar()}>
+                    <div className={styles.buttonConfirm_back}></div>
+                    <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
+                  </label>
+                </div>
+              </div>
             </div>
 
 

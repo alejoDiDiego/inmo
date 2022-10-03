@@ -242,3 +242,11 @@
     width: 30px;
     height: 30px;
 }
+
+.link h1{
+    cursor: pointer;
+}
+
+.title{
+    margin-bottom: 30px;
+}

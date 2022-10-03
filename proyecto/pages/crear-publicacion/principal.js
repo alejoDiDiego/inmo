@@ -8,7 +8,7 @@ import InformacionBasica from '../../components/CrearPublicacionPrincipal/Inform
 import SubirImagenes from '../../components/CrearPublicacionPrincipal/SubirImagenes'
 import FinalizarPublicacion from '../../components/CrearPublicacionPrincipal/FinalizarPublicacion'
 import { doc, getDoc } from 'firebase/firestore'
-
+import Spinner from '../../components/Spinner/Spinner'
 
 
 const principal = () => {
@@ -49,7 +49,7 @@ const principal = () => {
   const [infoTrigger, setInfoTrigger] = useState(false)
   const [imgTrigger, setImgTrigger] = useState(false)
   const [loadTrigger, setLoadTrigger] = useState(false)
-
+  const [onFinish, setOnFinish] = useState(false)
   const router = useRouter()
 
 
@@ -156,7 +156,9 @@ const principal = () => {
       return
     }
 
-
+    setLoadTrigger(true)
+    setImgTrigger(false)
+    setOnFinish(true)
     setSiguiente(true)
 
 
@@ -186,7 +188,9 @@ const principal = () => {
           <link rel="icon" href="/Logo_inmo_new.png" />
         </Head>
         <Layout perfil={true}>
-          <p>cargando</p>
+          <div className={styles.loading}>
+              <Spinner></Spinner>
+          </div>
         </Layout>
       </div>
     )
@@ -215,7 +219,7 @@ const principal = () => {
 
                 <div className={styles.cardDivider}>
 
-                  <div className={styles.cuadradoContainer} onClick={handleUbi}>
+                  <div className={styles.cuadradoContainer} onClick={onFinish == false? handleUbi : null}>
 
                     <div className={ubiTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
                       <h3>1. Ubicacion</h3>
@@ -223,7 +227,7 @@ const principal = () => {
                     </div>
                   </div>
 
-                  <div className={styles.cuadradoContainer} onClick={handleInfo}>
+                  <div className={styles.cuadradoContainer} onClick={onFinish == false? handleInfo: null}>
                     <div className={infoTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
                       <h3 >2. Informacion Basica</h3>
                       <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
@@ -235,13 +239,13 @@ const principal = () => {
 
               <div className={styles.cardDivider}>
 
-                <div className={styles.cuadradoContainer} onClick={handleImg}>
+                <div className={styles.cuadradoContainer} onClick={onFinish == false? handleImg : null}>
                   <div className={imgTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>3. Subir imagenes</h3>
                     <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
                   </div>
                 </div>
-                <div className={styles.cuadradoContainer} onClick={handleImg}>
+                <div className={styles.cuadradoContainer} onClick={onFinish == false? handleImg : null}>
                   <div className={loadTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
                     <h3>4. Cargar publicacion</h3>
                     <p className={styles.infoc}>finalizar el proceso de publicacion</p>
@@ -306,6 +310,7 @@ const principal = () => {
                         setUbiTrigger={setUbiTrigger}
                         setInfoTrigger={setInfoTrigger}
                         setImgTrigger={setImgTrigger}
+                        setEditTrigger={false}
                       />
 
 
@@ -336,6 +341,9 @@ const principal = () => {
                   (
                     <FinalizarPublicacion
                       setSiguiente={setSiguiente}
+                      setImgTrigger={setImgTrigger}
+                      setOnFinish={setOnFinish}
+                      setLoadTrigger={setLoadTrigger}
                       provincia={provincia}
                       municipio={municipio}
                       localidad={localidad}

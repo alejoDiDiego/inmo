@@ -93,8 +93,14 @@ const Header = ({ usuario, enRegistro }) => {
                     {
                         Object.keys(usuario).length < 1 ?
                             <div className={styles.options}>
-                                <h1>Inmo</h1>
-                                <Link className={styles.link} href='/inicio-sesion/principal'>
+                                <div className={styles.title}>
+                                <Link href='/'>
+                                    <div className={styles.link}>
+                                        <h1>Inmo</h1>
+                                    </div>
+                                </Link>
+                                </div>
+                                <Link href='/inicio-sesion/principal'>
                                     <div className={styles.menuButton}>
                                         <div className={styles.buttonInside}>
                                             <img src='/key.png'></img>
@@ -110,7 +116,7 @@ const Header = ({ usuario, enRegistro }) => {
                                         </div>
                                     </div>
                                 </Link>
-                                <Link href='/mas-info/creditos'>
+                                <Link href='/mas-info/sobre-nosotros'>
                                     <div className={styles.menuButton}>
                                         <div className={styles.buttonInside}>
                                             <img src='/customer-service.png'></img>
@@ -118,7 +124,7 @@ const Header = ({ usuario, enRegistro }) => {
                                         </div>
                                     </div>
                                 </Link>
-                                <Link href='/mas-info/sobre-nosotros'>
+                                <Link href='/mas-info/creditos'>
                                     <div className={styles.menuButton}>
                                         <div className={styles.buttonInside}>
                                             <img src='/people.png'></img>
@@ -132,12 +138,17 @@ const Header = ({ usuario, enRegistro }) => {
                                         <h4>Todavia no has iniciado sesion</h4>
                                     </div>
                                 </div>
-
-                            </div>
+                                </div>
                             :
                             <div>
                                 <div className={styles.options}>
-                                    <h1>Inmo</h1>
+                                <div className={styles.title}>
+                                <Link href='/'>
+                                    <div className={styles.link}>
+                                        <h1>Inmo</h1>
+                                    </div>
+                                </Link>
+                                </div>
                                     <Link href={usuario.emailVerified ? '/perfil/principal' : '/verificar'}>
                                         <div className={styles.menuButton}>
                                             <div className={styles.line}></div>
@@ -159,7 +170,7 @@ const Header = ({ usuario, enRegistro }) => {
                                             <div className={styles.line}></div>
                                         </div>
                                     </Link>
-                                    <Link href='/mas-info/creditos'>
+                                    <Link href='/mas-info/sobre-nosotros'>
                                         <div className={styles.menuButton}>
                                             <div className={styles.buttonInside}>
                                                 <img src='/customer-service.png'></img>
@@ -167,7 +178,7 @@ const Header = ({ usuario, enRegistro }) => {
                                             </div>
                                         </div>
                                     </Link>
-                                    <Link href='/mas-info/sobre-nosotros'>
+                                    <Link href='/mas-info/creditos '>
                                         <div className={styles.menuButton}>
                                             <div className={styles.buttonInside}>
                                                 <img src='/people.png'></img>

@@ -910,3 +910,14 @@
     align-items: flex-start;
 }
 
+.loading{
+    align-items: center;
+    justify-content: center;
+    margin-top: 400px;
+}
+
+.loadingMod{
+   margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}

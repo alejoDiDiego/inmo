@@ -59,7 +59,8 @@ const InformacionBasica = ({
     referenciaValor,
     setUbiTrigger,
     setInfoTrigger,
-    setImgTrigger
+    setImgTrigger,
+    setEditTrigger
 }) => {
 
     const [searchText, setSearchText] = useState("")
@@ -258,7 +259,15 @@ const InformacionBasica = ({
         <div className={styles.main}>
 
             <div className={styles.ubicacion}>
-                <h1 ref={referenciaUbi}>Crear Publicacion</h1>
+                {
+                    setEditTrigger == true?
+                    (
+                        <h1 ref={referenciaUbi}>Editar publicacion</h1>
+                    ):
+                    (
+                        <h1 ref={referenciaUbi}>Crear Publicacion</h1>
+                    )
+                }
                 <p>Los campos marcados con un asterisco (*) son obligatorios</p>
                     <h2 className={styles.ubiTitle}>1. Ubicacion</h2>
                     <div className={styles.mapPlusData}>
