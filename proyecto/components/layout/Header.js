@@ -98,7 +98,7 @@ const Header = ({ usuario, enRegistro }) => {
 
                                     <Link href='/'>
                                         <div className={styles.link}>
-                                            <h1>Inmo</h1>
+                                            <h2>Inmo</h2>
                                         </div>
                                     </Link>
 
@@ -149,7 +149,7 @@ const Header = ({ usuario, enRegistro }) => {
                                     <div className={styles.title}>
                                         <Link href='/'>
                                             <div className={styles.link}>
-                                                <h1>Inmo</h1>
+                                                <h2>Inmo</h2>
                                             </div>
                                         </Link>
                                     </div>
