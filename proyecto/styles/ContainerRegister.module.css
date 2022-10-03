@@ -1,4 +1,4 @@
-.div_supremo{
+.div_supremo {
     display: flex;
     width: 100vw;
     height: 100%;
@@ -13,7 +13,7 @@
 
 
 
-.main_container{
+.main_container {
     position: relative;
     height: 800px;
     width: 600px;
@@ -26,7 +26,7 @@
 }
 
 
-.spinner_container{
+.spinner_container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -38,30 +38,30 @@
 
 
 
-.main_container h2{
+.main_container h2 {
     font-size: 40px;
     margin-right: 40px;
     line-height: 80px;
     margin-bottom: 20px;
 }
 
-.text_blue{
+.text_blue {
     color: #38B6FF;
 }
 
-.inside_container{
+.inside_container {
     width: 500px;
     height: 700px;
 }
 
 
-.form{
+.form {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     margin-left: 10px;
     gap: 26px;
-    
+
 }
 
 
@@ -69,13 +69,13 @@
 
 
 
-.label_link{
+.label_link {
     padding-top: 20px;
     line-height: 30px;
 }
 
 
-.form a{
+.form a {
     color: #38B6FF;
     text-decoration: underline;
     font-weight: 600;
@@ -83,7 +83,7 @@
 
 
 
-.div_link input{
+.div_link input {
     height: 15px;
     width: 15px;
     margin-left: 10px;
@@ -91,27 +91,27 @@
 }
 
 
-.div_link{
+.div_link {
     margin-top: 16px;
 }
 
 
 
-.select{
+.select {
     margin-top: 26px;
 }
 
 
 
-.div_buttons{
-    
+.div_buttons {
+
     display: flex;
     justify-content: center;
     margin-top: 10px;
     gap: 50px;
 }
 
-.div_spinner{
+.div_spinner {
     margin-top: 10px;
     display: flex;
     justify-content: center;
@@ -217,13 +217,13 @@
 } */
 
 
-.buttonGoogle{
+.buttonGoogle {
     width: 230px;
     height: 60px;
     cursor: pointer;
 }
 
-.buttonGoogle_back{
+.buttonGoogle_back {
     width: 230px;
     height: 60px;
     position: absolute;
@@ -232,47 +232,47 @@
     z-index: 0;
 }
 
-.buttonGoogle_content{
+.buttonGoogle_content {
     z-index: 1;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     width: 230px;
     height: 60px;
     background-color: #E8EFF4;
     transition: all ease-in-out .2s;
-    border-bottom: 1px solid  black;
+    border-bottom: 1px solid black;
 }
 
-.buttonGoogle_content span{
+.buttonGoogle_content span {
     font-weight: bold;
     width: 170px;
 }
 
 
-.buttonGoogle:hover .buttonGoogle_content{
+.buttonGoogle:hover .buttonGoogle_content {
     transform: translate(3px, -3px);
-    border-bottom: 1px solid  black;
+    border-bottom: 1px solid black;
 
 }
 
-.buttonGoogle:hover .buttonGoogle_back{
+.buttonGoogle:hover .buttonGoogle_back {
     transform: translate(-3px, 3px);
 }
 
 
 
-.button{
+.button {
     width: 150px;
     height: 60px;
     cursor: pointer;
     margin-left: 10px;
-    
+
 }
 
-.button_back{
+.button_back {
     width: 150px;
     height: 60px;
     position: absolute;
@@ -281,7 +281,7 @@
     z-index: 0;
 }
 
-.button_content{
+.button_content {
     z-index: 1;
     position: absolute;
     display: flex;
@@ -292,20 +292,20 @@
     background-color: #E8EFF4;
     transition: all ease-in-out .2s;
     border-bottom: 1px solid black;
-    
+
 }
 
-.button_content span{
+.button_content span {
     font-weight: bold;
 }
 
 
-.button:hover .button_content{
+.button:hover .button_content {
     transform: translate(3px, -3px);
 
 }
 
-.button:hover .button_back{
+.button:hover .button_back {
     transform: translate(-3px, 3px);
 }
 
@@ -391,9 +391,9 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background:
-    linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
-    linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
-    linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+        linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+        linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+        linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
     transition: background-size 0.3s ease;
 }
 
@@ -408,7 +408,7 @@
 
 
 
-.custom_field i{
+.custom_field i {
     position: relative;
     margin-left: -30px;
     cursor: pointer;
@@ -416,14 +416,14 @@
 
 
 
-.selectContainer{
+.selectContainer {
     width: 450px;
     margin-top: 20px;
 }
 
 
 
-.div_error{
+.div_error {
     position: absolute;
     background-color: red;
     width: 450px;
@@ -434,25 +434,45 @@
     border-bottom-right-radius: 5px;
 }
 
-.div_error p{
+.div_error p {
     margin-left: 12px;
     color: white;
-    
+
     font-size: 12px;
 }
-.selectCuenta{
+
+.selectCuenta {
     width: 50px;
     border: 1px solid white;
 }
+
 @media screen and (max-height:880px) {
-    .main_container{
+    .main_container {
         height: 750px;
     }
-    .form{
+
+    .form {
         font-size: 15px;
         height: 250px;
     }
+    .main_container h2{
+        font-size: 30px;
+        text-align: left;
+        margin-left: 10px;
+    }
+    .div_link{
+        margin-left: 10px;
+    }
 }
+
+@media screen and (max-width:650px) {
+    .main_container{
+        height: 100%;
+        width: 100%;
+        border-radius: 0%;
+    }
+}
+
 /*
 @media screen and (max-height:768px) {
     .main_container{

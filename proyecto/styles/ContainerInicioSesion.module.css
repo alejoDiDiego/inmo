@@ -459,6 +459,12 @@
 @media screen and (max-width:650px){
     .main_container{
         justify-content: center;
+        height: 100%;
+        width: 100%;
+        border-radius: 0%;
         /*hay que hacer un weight y height 100% pero no se en que div ponerlo*/
+    }
+    .inside_container{
+        font-size: 15px;
     }
 }
