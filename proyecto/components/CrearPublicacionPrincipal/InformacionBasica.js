@@ -214,8 +214,6 @@ const InformacionBasica = ({
     }
 
 
-
-
     const isNumber = e => {
         return e.target.value.replace(/\D/g, '');
     };

@@ -50,6 +50,12 @@ const Publicacion = ({ p, queryFirebase }) => {
 
 
 
+    function numeroConPuntos(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+
+
 
 
 
@@ -122,7 +128,7 @@ const Publicacion = ({ p, queryFirebase }) => {
                                             <div className={styles.price}>
                                                 <h3>En venta</h3>
                                                 <h2>USD$</h2>
-                                                <h2>{p.precio}</h2>
+                                                <h2>{numeroConPuntos(p.precio)}</h2>
                                             </div>
 
                                         ) :
@@ -130,7 +136,7 @@ const Publicacion = ({ p, queryFirebase }) => {
                                             <div className={styles.price}>
                                                 <h3>En alquiler</h3>
                                                 <h2>ARS$/Mes</h2>
-                                                <h2>{p.precio}</h2>
+                                                <h2>{numeroConPuntos(p.precio)}</h2>
                                             </div>
 
                                         )
