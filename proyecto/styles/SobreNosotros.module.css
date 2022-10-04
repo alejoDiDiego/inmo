@@ -1,5 +1,15 @@
 .body{
     margin: 0px;
+    /*
+    display: grid;
+    grid-template-areas:
+    "header"
+    "div1"
+    "div2"
+    "div3"
+    "div4"
+    "footer";
+    */
 }
 
 .contenedor_Principal{
@@ -179,6 +189,8 @@ h2 .span{
     .texto_sec{
         justify-content: center;
     }
-    
+}
+
+@media screen and (max-height:768px){
 
 }

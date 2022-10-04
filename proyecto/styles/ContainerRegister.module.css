@@ -455,46 +455,96 @@
         font-size: 15px;
         height: 250px;
     }
-    .main_container h2{
+
+    .main_container h2 {
         font-size: 30px;
         text-align: left;
         margin-left: 10px;
     }
-    .div_link{
+
+    .div_link {
         margin-left: 10px;
     }
 }
 
 @media screen and (max-width:650px) {
-    .main_container{
+    .main_container {
         height: 100%;
         width: 100%;
         border-radius: 0%;
     }
 }
-@media screen and (max-width:520px){
-    .form{
-        font-size: 14px;
-    }
-    .main_container h2{
-        font-size: 25px;
-        margin-left: 15px;
-    }
-    .div_link{
+
+@media screen and (max-height:830px) {
+    .form input {
         width: 400px;
-        margin-left: 3px;
-        font-size: 15px;
+    }
+
+    .div_link {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .div_link input {
+        margin-left: 5px;
+    }
+
+    .selectContainer {
+        width: 400px;
+    }
+
+    .button {
+        width: 150px;
+        font-size: 12px;
+    }
+
+    .buttonGoogle {
+        font-size: 12px;
+    }
+
+    .buttonGoogle_content span {
+        width: 130px;
     }
 }
 
-/*
-@media screen and (max-height:768px) {
-    .main_container{
-        height: 500px;
+@media screen and (max-height:800px) {
+    .main_container {
+        height: 650px;
     }
-    .form{
-        font-size: 10px;
-        height: 200px;
+
+    .main_container h2
+     {
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    .form {
+        gap:initial;
+    }
+    .custom_field{
+        font-size: 12px;
+    }
+    .custom_field input{
+        width: 400px;
+        height:fit-content;
     }
 }
-*/
+
+@media screen and (max-width:520px) {
+    .form {
+        font-size: 12px;
+        gap: 2px;
+    }
+
+    .main_container h2 {
+        margin-top: 15px;
+        font-size: 20px;
+        margin-left: 15px;
+    }
+
+    .div_link {
+        width: 400px;
+        margin-left: 3px;
+        font-size: 12px;
+    }
+}

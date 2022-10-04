@@ -192,8 +192,9 @@ const ContainerInicioSesion = ({ loadingBig }) => {
               enviado &&
               <p>Mail de restablecimiento de contraseña enviado a {emailReestablecer}</p>
             }
-            <div className={styles.form}>
+            <div className= {styles.form}>
             <p className={styles.subtitulo}>Se enviará un mensaje de verificación para restablecer tu contraseña.</p>
+
               <label className={`${styles.custom_field} ${styles.two}`}>
                 <input value={emailReestablecer} onChange={e => { setEmailReestablecer(e.target.value); }} type="text" readOnly={loading} placeholder="&nbsp;" />
                 <span className={styles.placeholder}>Email</span>
