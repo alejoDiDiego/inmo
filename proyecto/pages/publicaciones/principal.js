@@ -7,6 +7,8 @@ import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'fireb
 import dynamic from 'next/dynamic'
 import styles from "../../styles/PublicacionesPrincipal.module.css"
 import Filtros from '../../components/Publicaciones/Filtros'
+import Publicacion from '../../components/Publicaciones/Publicacion'
+
 
 const MapNoSSR = dynamic(() => import("../../components/Publicaciones/Map"), {
     ssr: false,
@@ -278,6 +280,23 @@ const principal = () => {
                         </div>
 
                         <div className={styles.derecha}>
+                            {
+                                resultado.length == 0 ?
+                                <h2>No se han encontrado resultados</h2>
+
+                                :
+
+                                (
+                                    resultado.map((p, i) => {
+                                        return (
+                                            <Publicacion
+                                                publicacion={p}
+                                                key={i}
+                                            />
+                                        )
+                                    })
+                                )
+                            }
 
                         </div>
                     </div>

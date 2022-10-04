@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../styles/Publicacion.module.css'
+import styles from '../../styles/PublicacionPerfil.module.css'
 import PublicacionExtendida from './PublicacionExtendida'
 import { doc, deleteDoc } from "firebase/firestore";
 import firebase, { FirebaseContext } from '../../firebase'
