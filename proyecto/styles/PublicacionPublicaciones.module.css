@@ -1,9 +1,192 @@
 .publicacion{
     display: flex;
+    border-radius: 10px;
+    background-color: white;
     height: 300px;
-    background-color: gray;
-    
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
     width: 95%;
     margin: 0 auto;
     margin-bottom: 50px;
+}
+
+.publicacion:hover{
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
+    transition: all ease-in-out 0.2s;
+}
+
+.img{
+    width: 300px;
+    height: 300px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.headPlusDir{
+    display: flex;
+    flex-direction: row;
+}
+
+.infoInside{
+    height: 100%;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoInside p{
+    margin-top: -2px;
+}
+
+.price h2{
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.price p{
+    margin-top: 5px;
+}
+
+
+.infoContainer{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.head{
+    display: flex;
+}
+
+
+.cantidades{
+    display: flex;
+    gap: 10px;
+}
+
+
+.imagesAndCant{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+
+.publicacion_div_img{
+    border-radius: 10px;
+    position: relative;
+}
+
+
+
+.arrows{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+.div_buttons{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+
+.edit_icon {
+    background-color: white;
+    padding: 3px;
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.delete_icon {
+    background-color: white;
+    padding: 4px;
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+.fake{
+    width: 30px;
+    height: 30px;
+}
+
+.dire{
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.cantidades{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-left: -110px;
+}
+
+.infoInside img{
+    width: 40px;
+    height: 40px;
+}
+
+.cantContainerDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pAndD{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.cantContainer p{
+    margin: 0px;
+}
+
+.cantContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.meters{
+    display: flex;
+    flex-direction: row;
+    margin-left: 110px;
+    gap: 30px;
+}
+
+.meters p{
+    margin-top: -10px;
+    margin-bottom: 0px;
+}
+
+.meters h4{
+    margin-top: 15px;
+}
+
+.metersContainer{
+    display: flex;
+    flex-direction: column;
 }

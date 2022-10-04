@@ -290,7 +290,7 @@ const principal = () => {
                                     resultado.map((p, i) => {
                                         return (
                                             <Publicacion
-                                                publicacion={p}
+                                                p={p}
                                                 key={i}
                                             />
                                         )
