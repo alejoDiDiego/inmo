@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "../../styles/PublicacionPublicaciones.module.css"
 import PublicacionExtendida from './PublicacionExtendida'
 
@@ -7,6 +7,7 @@ const Publicacion = ({ p }) => {
 
 
   const [extendido, setExtendido] = useState(false)
+
 
 
   console.log(p)
@@ -19,8 +20,9 @@ const Publicacion = ({ p }) => {
 
 
 
+
   return (
-    <div onClick={() => setExtendido(!extendido)} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
+    <div onClick={extendido == true ? null : () => setExtendido(!extendido)} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
 
       {
         extendido == true ? null :

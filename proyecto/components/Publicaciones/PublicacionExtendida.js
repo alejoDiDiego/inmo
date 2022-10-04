@@ -21,8 +21,19 @@ const PublicacionExtendida = ({ p }) => {
 
     return (
         <div className={styles.publicacion_extendida}>
-            <div>
+            <div className={styles.div_imgs}>
+                <img src={p.imagenes[0]} className={styles.img_principal} />
+                {
+                    p.imagenes.length > 1 &&
+                    <div className={styles.img_secundarias}>
+                        <img src={p.imagenes[1]} />
+                        <img src={p.imagenes[2]} />
+                    </div>
+                }
+            </div>
 
+            <div className={styles.div_descripcion}>
+                <p>{p.descripcion}</p>
             </div>
         </div>
     )

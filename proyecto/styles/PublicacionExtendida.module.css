@@ -1,5 +1,34 @@
 .publicacion_extendida{
     background-color: gray;
     height: 100%;
-    width: 100%;
+    width: 95%;
+    padding: 15px 0;
+    margin-right: 15px;
+}
+
+.div_imgs{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.img_principal{
+    width: 300px;
+}
+
+.img_secundarias{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.img_secundarias img{
+    width: 148px;
+}
+
+
+.div_descripcion{
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
 }

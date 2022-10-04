@@ -27,7 +27,9 @@
 
 
 .publicacion_extendido{
-    height: 600px;
+    cursor: default;
+    height: 800px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
     display: flex;
     
 }
@@ -54,6 +56,18 @@
 .publicacion_extendido .dire{
     margin: 0;
 }
+
+
+.publicacion_extendido .cantidades{
+    margin: 0;
+}
+
+.publicacion_extendido .meters{
+    margin: 0;
+}
+
+
+
 
 
 
