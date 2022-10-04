@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import styles from "../../styles/PublicacionPublicaciones.module.css"
+import PublicacionExtendida from './PublicacionExtendida'
 
 
 const Publicacion = ({ p }) => {
+
+
+  const [extendido, setExtendido] = useState(false)
 
 
   console.log(p)
@@ -16,12 +20,15 @@ const Publicacion = ({ p }) => {
 
 
   return (
-    <div className={styles.publicacion}>
+    <div onClick={() => setExtendido(!extendido)} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
 
-      <div className={styles.publicacion_div_img}>
+      {
+        extendido == true ? null :
+          <div className={styles.publicacion_div_img}>
 
-        <img className={styles.img} src={p.imagenes[0]} />
-      </div>
+            <img className={styles.img} src={p.imagenes[0]} />
+          </div>
+      }
 
 
 
@@ -38,16 +45,20 @@ const Publicacion = ({ p }) => {
                     (
                       <div className={styles.price}>
                         <h3>En venta</h3>
-                        <h2>USD$</h2>
-                        <h2>{numeroConPuntos(p.precio)}</h2>
+                        <div className={styles.price_valores}>
+                          <h2>USD$</h2>
+                          <h2>{numeroConPuntos(p.precio)}</h2>
+                        </div>
                       </div>
 
                     ) :
                     (
                       <div className={styles.price}>
                         <h3>En alquiler</h3>
-                        <h2>ARS$/Mes</h2>
-                        <h2>{numeroConPuntos(p.precio)}</h2>
+                        <div className={styles.price_valores}>
+                          <h2>ARS$/Mes</h2>
+                          <h2>{numeroConPuntos(p.precio)}</h2>
+                        </div>
                       </div>
 
                     )
@@ -149,6 +160,13 @@ const Publicacion = ({ p }) => {
 
 
       </div>
+
+      {
+        extendido == false ? null :
+          (
+            <PublicacionExtendida p={p} />
+          )
+      }
     </div>
   )
 }
