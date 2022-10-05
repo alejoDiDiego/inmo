@@ -3,7 +3,7 @@ import styles from '../../styles/CrearPublicacion.module.css'
 import dynamic from "next/dynamic"
 import SearchBox from './SearchBox'
 import Select from 'react-select'
-import ScrollTrigger from 'react-scroll-trigger';
+import ScrollTrigger from 'react-scroll-trigger'; // npm i react-scroll-trigger
 
 
 const MapNoSSR = dynamic(() => import("./Map"), {

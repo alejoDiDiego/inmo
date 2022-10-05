@@ -297,6 +297,7 @@ const principal = () => {
                         docSnap.data().valoraciones.map(v => {
                             puntajeEstrellas += v.estrellas
                         })
+                        console.log(puntajeEstrellas)
                         console.log(docSnap.data())
 
                     }
