@@ -47,9 +47,17 @@ const InputBusqueda = () => {
         if (tipoBusqueda == "usuario") {
             Router.push({
                 pathname: '/usuarios/principal',
+                // query: {
+                //     q: busqueda,
+                //     nombre: "",
+                //     provincia: "",
+                //     municipio: "",
+                //     localidad: "",
+                //     codigoPostal: ""
+                    
+                // }
                 query: {
-                    provincia: "",
-                    municipio: ""
+                    q: busqueda,
                     
                 }
             })
