@@ -1,12 +1,16 @@
-import { doc, getDoc } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import React, { useContext, useEffect, useState } from 'react'
 import firebase from '../../firebase'
 import styles from "../../styles/PublicacionExtendida.module.css"
-
+import { FirebaseContext } from '../../firebase'
 
 const PublicacionExtendida = ({ p }) => {
 
     const [publicador, setPublicador] = useState({})
+
+    const [pregunta, setPregunta] = useState("")
+
+    const { usuario } = useContext(FirebaseContext)
 
 
     let puntajeEstrellas = 0
@@ -21,6 +25,24 @@ const PublicacionExtendida = ({ p }) => {
         setPublicador(docSnap.data())
 
     }
+
+
+    const handlePregunta = async () => {
+        if(usuario == {}){
+            alert("Necesita una cuenta para poder publicar")
+            return
+        }
+
+        if(pregunta.length == 0){
+            alert("Escriba una pregunta")
+            return
+        }
+
+        const docRef = doc(firebase.db, "Publicaciones", p.id)
+        const docSnap = await getDoc(docRef)
+    }
+
+
 
     useEffect(() => {
         if(!publicador.hasOwnProperty("creado")) {
@@ -46,6 +68,12 @@ const PublicacionExtendida = ({ p }) => {
 
             <div className={styles.div_descripcion}>
                 <p>{p.descripcion}</p>
+            </div>
+
+            <div>
+                <p>Preguntas:</p>
+                <input value={pregunta} onChange={e => setPregunta(e.target.value)} placeholder='Escribe tu pregunta' />
+                <button onClick={() => handlePregunta()}>Preguntar</button> 
             </div>
 
             {
