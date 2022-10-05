@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import styles from '../../styles/FinalizarPublicacion.module.css'
 import dynamic from "next/dynamic"
 import { useRouter } from 'next/router'
@@ -82,15 +82,18 @@ const FinalizarPublicacion = ({
     }
 
 
-    let randomDoc = Math.floor(Math.random() * 100) + Date.now()
+    // let randomDoc = Math.floor(Math.random() * 100) + Date.now()
 
     try {
-      const publi = await setDoc(doc(firebase.db, "Publicaciones", `${randomDoc}`),
+      const publi = await addDoc(collection(firebase.db, "Publicaciones"),
         publicacion
       ).catch(err => {
         setCargando(false)
         setError(err)
       })
+
+      console.log(publi)
+      console.log(publi.id)
 
 
 
@@ -110,7 +113,7 @@ const FinalizarPublicacion = ({
         // )
         let imgs = []
         for (const m of imagenes) {
-          const imageRef = ref(firebase.storage, `publicaciones/${randomDoc}/${Date.now() + imgs.length}`)
+          const imageRef = ref(firebase.storage, `publicaciones/${publi.id}/${Date.now() + imgs.length}`)
           console.log(m)
           const snapshot = await uploadBytes(imageRef, m)
           const url = await getDownloadURL(snapshot.ref)
@@ -118,9 +121,9 @@ const FinalizarPublicacion = ({
           imgs.push(url)
           console.log(imgs)
         }
-        await updateDoc(doc(firebase.db, "Publicaciones", `${randomDoc}`), {
+        await updateDoc(doc(firebase.db, "Publicaciones", `${publi.id}`), {
           imagenes: imgs,
-          id: randomDoc
+          id: publi.id
         }).catch((error) => {
           setCargando(false)
           setError(error)
