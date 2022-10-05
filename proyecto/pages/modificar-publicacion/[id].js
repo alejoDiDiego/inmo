@@ -73,12 +73,13 @@ const ModificarPublicacion = () => {
   const queryFirebase = async () => {
     const docRef = doc(firebase.db, "Publicaciones", id)
     const docSnap = await getDoc(docRef)
+    // // console.log(docSnap.data())
     if (docSnap.exists() == false) {
-      console.log("no existe la publicacion")
+      // // console.log("no existe la publicacion")
       return
     }
     if (docSnap.data().publicador != usuario.uid) {
-      console.log("no tiene permiso")
+      // console.log("no tiene permiso")
       return
     }
     setProducto(docSnap.data())
@@ -89,7 +90,7 @@ const ModificarPublicacion = () => {
     setCodigoPostal(docSnap.data().codigoPostal)
     setAltura(docSnap.data().altura)
     setLatLon(docSnap.data().latLon)
-    console.log(docSnap.data().latLon)
+    // console.log(docSnap.data().latLon)
     setTipoVivienda(docSnap.data().tipoVivienda)
     setPiso(docSnap.data().piso)
     setNumeroLetraDepto(docSnap.data().numeroLetraDepto)
@@ -105,7 +106,7 @@ const ModificarPublicacion = () => {
     setDescripcion(docSnap.data().descripcion)
     setImagenes(docSnap.data().imagenes)
 
-    console.log(docSnap.data())
+    // console.log(docSnap.data())
 
 
 
@@ -119,23 +120,23 @@ const ModificarPublicacion = () => {
           let objectURL = URL.createObjectURL(blob);
           let myImage = new Image();
           myImage.src = objectURL;
-          console.log(myImage.src)
+          // console.log(myImage.src)
           return myImage.src
         });
 
 
 
-      // console.log("imagen   " + img)
+      // // console.log("imagen   " + img)
       // Axios.get(img).then(async (res) => {
-      //   console.log(data)
+      //   // console.log(data)
       //   let data = await res.blob()
       //   let file = new File([data], "test.jpg", { type: "image/jpeg" })
-      //   console.log(file)
+      //   // console.log(file)
 
 
 
       // }).catch((err) => {
-      //   console.log(err)
+      //   // console.log(err)
       // })
 
     }
@@ -165,11 +166,11 @@ const ModificarPublicacion = () => {
           let objectURL = URL.createObjectURL(blob);
           let myImage = new Image();
           myImage.src = objectURL;
-          console.log(myImage.src)
+          // console.log(myImage.src)
           return blob
         });
 
-      console.log(file)
+      // console.log(file)
       setNuevasImagenes(current => [...current, file]);
     })
   }, [imagenes])
@@ -209,8 +210,8 @@ const ModificarPublicacion = () => {
           return true
 
         } catch (err) {
-          console.log(err)
-          console.log("a chekear")
+          // console.log(err)
+          // console.log("a chekear")
           setTimeout(() => {
             check()
             return
@@ -227,7 +228,7 @@ const ModificarPublicacion = () => {
     while (prueba == false) {
       setInterval(() => {
         prueba = check()
-        console.log("probando")
+        // console.log("probando")
       }, 200)
 
     }
@@ -300,12 +301,12 @@ const ModificarPublicacion = () => {
 
 
       const refFolder = ref(firebase.storage, `publicaciones/${producto.id}`)
-      console.log(refFolder)
+      // console.log(refFolder)
       const allItems = await listAll(refFolder)
-      console.log(allItems)
+      // console.log(allItems)
       await Promise.all(
         allItems.items.map(async i => {
-          console.log(i)
+          // console.log(i)
           await deleteObject(i)
         })
       )
@@ -317,21 +318,21 @@ const ModificarPublicacion = () => {
         //   const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now()}`)
         //   const snapshot = await uploadBytes(imageRef, m)
         //   const url = await getDownloadURL(snapshot.ref)
-        //   console.log(url)
+        //   // console.log(url)
         //   imgs.push(url)
-        //   console.log(imgs)
+        //   // console.log(imgs)
         // }
         // )
         let imgs = []
 
         for (const m of nuevasImagenes) {
           const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now() + imgs.length}`)
-          console.log(m)
+          // console.log(m)
           const snapshot = await uploadBytes(imageRef, m)
           const url = await getDownloadURL(snapshot.ref)
-          console.log(url)
+          // console.log(url)
           imgs.push(url)
-          console.log(imgs)
+          // console.log(imgs)
         }
 
         await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
@@ -339,7 +340,7 @@ const ModificarPublicacion = () => {
         }).catch((error) => {
           setCargando(false)
           setError(error)
-          console.log(error)
+          // console.log(error)
         })
 
 
@@ -348,11 +349,11 @@ const ModificarPublicacion = () => {
       await map()
 
       setCargando(false)
-      console.log("Listo")
+      // console.log("Listo")
 
 
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
 
 

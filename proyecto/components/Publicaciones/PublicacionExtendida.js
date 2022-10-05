@@ -4,7 +4,7 @@ import firebase from '../../firebase'
 import styles from "../../styles/PublicacionExtendida.module.css"
 import { FirebaseContext } from '../../firebase'
 
-const PublicacionExtendida = ({ p }) => {
+const PublicacionExtendida = ({ p, setExtendido }) => {
 
     const [publicador, setPublicador] = useState({})
 
@@ -56,6 +56,7 @@ const PublicacionExtendida = ({ p }) => {
     return (
         <div className={styles.publicacion_extendida}>
             <div className={styles.div_imgs}>
+            <p onClick={() => {window.history.back(); setExtendido(false)}}>Cerrar</p>
                 <img src={p.imagenes[0]} className={styles.img_principal} />
                 {
                     p.imagenes.length > 1 &&

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Select from 'react-select'
 
 const Filtros = ({ router }) => {
@@ -17,8 +17,11 @@ const Filtros = ({ router }) => {
         cantCocherasMax,
         cantCocherasMin,
         cantHabitacionesMax,
-        cantHabitacionesMin
+        cantHabitacionesMin,
+        publicacion
     } } = router
+
+    const r = useRouter()
 
 
     const [nuevaDireccion, setNuevaDireccion] = useState("")
@@ -76,6 +79,23 @@ const Filtros = ({ router }) => {
 
 
     useEffect(() => {
+        if(
+            direccion == null ||
+            tipoPublicacion == null ||
+            tipoVivienda == null ||
+            precioMin == null ||
+            precioMax == null ||
+            cantBanosMin == null ||
+            cantBanosMax == null ||
+            cantAmbientesMax == null ||
+            cantAmbientesMin == null ||
+            cantCocherasMax == null ||
+            cantCocherasMin == null ||
+            cantHabitacionesMax == null ||
+            cantHabitacionesMin == null
+        ){
+            return
+        }
         setNuevaDireccion(direccion)
         setNuevoTipoPublicacion(tipoPublicacion)
         setNuevoTipoVivienda(tipoVivienda)
@@ -139,10 +159,14 @@ const Filtros = ({ router }) => {
 
 
     const handleReiniciar = () => {
+        let dire = direccion
+        if(dire == "") {
+            dire = "buenos aires"
+        }
         Router.push({
             pathname: '/publicaciones/principal',
             query: {
-                direccion: direccion,
+                direccion: dire,
                 tipoPublicacion: "",
                 tipoVivienda: "",
                 precioMax: "",

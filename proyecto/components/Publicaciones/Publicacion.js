@@ -1,3 +1,4 @@
+import Router, { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import styles from "../../styles/PublicacionPublicaciones.module.css"
 import PublicacionExtendida from './PublicacionExtendida'
@@ -8,6 +9,7 @@ const Publicacion = ({ p }) => {
 
   const [extendido, setExtendido] = useState(false)
 
+  const router = useRouter()
 
 
   console.log(p)
@@ -17,12 +19,52 @@ const Publicacion = ({ p }) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
+  const handleExtendido = async () => {
+    // console.log("router.query.publicacion " + router.query.publicacion)
+    // console.log("p.id " + p.id)
+    setExtendido(true)
+    Router.push({
+      pathname: '/publicaciones/principal',
+      query: {
+        publicacion: p.id
+      }
+    })
+
+  }
+
+  useEffect(() => {
+    console.log(extendido)
+  }, [extendido])
+
+  // useEffect(() => {
+  //   console.log("a")
+  //   if ("publicacion" in router.query) {
+  //     console.log("true")
+  //     if (router.query.publicacion == p.id) {
+  //       console.log("true2")
+  //       setExtendido(true)
+  //     }
+  //   } else {
+  //     if (extendido == true && "direccion" in router.query) {
+  //       window.history.back()
+  //     }
+  //   }
+  // }, [router])
+
+  useEffect(() => {
+    console.log("a")
+    if ("publicacion" in router.query) {
+      setExtendido(true)
+    } else {
+      setExtendido(false)
+    }
+  }, [router])
 
 
 
 
   return (
-    <div onClick={extendido == true ? null : () => setExtendido(!extendido)} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
+    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
 
       {
         extendido == true ? null :
@@ -41,6 +83,7 @@ const Publicacion = ({ p }) => {
         <div className={styles.infoContainer}>
           <div className={styles.headPlusDir}>
             <div className={styles.head}>
+
               <div className={styles.infoInside}>
                 {
                   p.tipoPublicacion == "venta" ?
@@ -164,9 +207,14 @@ const Publicacion = ({ p }) => {
       </div>
 
       {
-        extendido == false ? null :
+        extendido == true &&
           (
-            <PublicacionExtendida p={p} />
+            <div>
+              <PublicacionExtendida
+                p={p}
+                setExtendido={setExtendido}
+              />
+            </div>
           )
       }
     </div>

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import firebase, { FirebaseContext } from '../../firebase'
-import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, collection, query, where, getDocs, limit } from 'firebase/firestore'
 import dynamic from 'next/dynamic'
 import styles from "../../styles/PublicacionesPrincipal.module.css"
 import Filtros from '../../components/Publicaciones/Filtros'
@@ -34,9 +34,10 @@ const principal = () => {
         cantCocherasMax,
         cantCocherasMin,
         cantHabitacionesMax,
-        cantHabitacionesMin
+        cantHabitacionesMin,
+        publicacion
     } } = router
-    console.log(direccion)
+    // console.log(direccion)
 
     const [publicaciones, setPublicaciones] = useState([])
     const [resultado, setResultado] = useState([])
@@ -62,8 +63,8 @@ const principal = () => {
                     return true
 
                 } catch (err) {
-                    console.log(err)
-                    console.log("a chekear")
+                    // console.log(err)
+                    // console.log("a chekear")
                     setTimeout(() => {
                         check()
                         return
@@ -80,7 +81,7 @@ const principal = () => {
         while (prueba == false) {
             setInterval(() => {
                 prueba = check()
-                console.log("probando")
+                // console.log("probando")
             }, 200)
 
         }
@@ -98,10 +99,47 @@ const principal = () => {
 
 
     useEffect(() => {
+        if (publicaciones.length == 0) return
+
+        if (publicacion != null) {
+            // console.log(publicacion)
+            // console.log(publicaciones)
+            const filtro = publicaciones.filter(p => {
+                return (p.id == publicacion)
+            })
+            if (filtro.length == 0) {
+                const query = async () => {
+                    try {
+                        const docRef = doc(firebase.db, "Publicaciones", publicacion)
+                        const docSnap = await getDoc(docRef)
+
+                        if (docSnap.data() == undefined) {
+                            alert("La publicacion no existe")
+                            return
+                        }
+                        let p = []
+                        p.push(docSnap.data())
+                        setResultado(p)
+                        // console.log("No estaba en la lista")
+                        return
+
+                    } catch (err) { console.log(err) }
+                }
+
+                query()
+                return
+
+            }
+            setResultado(filtro)
+            return
+        }
+
+
 
         if (direccion == "" || direccion == null) return
-        if (publicaciones.length == 0) return
-        console.log(precioMin)
+
+        // console.log(precioMin)
+
 
         const filtro = publicaciones.filter(p => {
 
@@ -180,7 +218,7 @@ const principal = () => {
                             cantHabitacionesMin.length == 0 ? true : p.cantHabitaciones >= cantHabitacionesMin
                         )
                 )
-                
+
 
 
 
@@ -189,7 +227,7 @@ const principal = () => {
             )
         })
         setResultado(filtro)
-        console.log(filtro)
+        // console.log(filtro)
 
     }, [router, publicaciones])
 
@@ -203,7 +241,7 @@ const principal = () => {
                 latLon: p.latLon
             })
         })
-        console.log(posiciones)
+        // console.log(posiciones)
         setPositions(posiciones)
     }, [resultado])
 
@@ -216,7 +254,8 @@ const principal = () => {
 
     const queryFirebase = async () => {
         const colRef = collection(firebase.db, "Publicaciones")
-        const querySnapshot = await getDocs(colRef);
+        const q = query(colRef, limit(5))
+        const querySnapshot = await getDocs(q);
         let ps = []
         querySnapshot.forEach((doc) => {
             ps.push(doc.data())
@@ -282,20 +321,20 @@ const principal = () => {
                         <div className={styles.derecha}>
                             {
                                 resultado.length == 0 ?
-                                <h2>No se han encontrado resultados</h2>
+                                    <h2>No se han encontrado resultados</h2>
 
-                                :
+                                    :
 
-                                (
-                                    resultado.map((p, i) => {
-                                        return (
-                                            <Publicacion
-                                                p={p}
-                                                key={i}
-                                            />
-                                        )
-                                    })
-                                )
+                                    (
+                                        resultado.map((p, i) => {
+                                            return (
+                                                <Publicacion
+                                                    p={p}
+                                                    key={i}
+                                                />
+                                            )
+                                        })
+                                    )
                             }
 
                         </div>
