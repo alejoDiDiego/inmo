@@ -160,9 +160,10 @@ const Filtros = ({ router }) => {
 
     const handleReiniciar = () => {
         let dire = direccion
-        if(dire == "") {
+        if(dire == "" || dire == null) {
             dire = "buenos aires"
         }
+        console.log(dire)
         Router.push({
             pathname: '/publicaciones/principal',
             query: {

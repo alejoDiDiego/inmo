@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet' // npm i leaflet react-leaflet
 import 'leaflet/dist/leaflet.css'
 import L, { latLng } from "leaflet"
+import Router, { useRouter } from 'next/router'
 
 const icon = L.icon({
     iconUrl: "/location-sign.png", // <a href="https://www.flaticon.com/free-icons/gps" title="gps icons">Gps icons created by Freepik - Flaticon</a>
@@ -31,12 +32,74 @@ const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/reverse?"
 // }
 
 
+function CenterSelect({ positions }) {
+    const map = useMap()
+    const router = useRouter()
+
+
+
+
+    useEffect(() => {
+        if ("publicacion" in router.query) {
+            console.log("pasa")
+            const filter = positions.filter(p => {
+                return (
+                    p.id == router.query.publicacion
+                )
+            })
+            console.log(filter)
+
+            map.setView(
+                [filter[0].latLon.lat, filter[0].latLon.lon],
+                20,
+                {
+                    animate: true
+                }
+            )
+            return
+        } else{
+            map.setView(
+                position,
+                10,
+                {
+                    animate: true
+                }
+            )
+        }
+    }, [router])
+}
+
 const Map = ({ positions }) => {
+
+    const [zoom, setZoom] = useState(10)
+    const [selected, setSelected] = useState({})
+
+    const router = useRouter()
+
+
+
+
+
+
+
+    const handleClick = (p) => {
+        setSelected(p)
+        Router.push({
+            pathname: '/publicaciones/principal',
+            query: {
+                publicacion: p.id
+            }
+        })
+    }
+
+
+
+
 
 
     return (
 
-        <MapContainer center={position} zoom={10} scrollWheelZoom={true} style={{ width: "100%", height: "100%" }}>
+        <MapContainer center={position} zoom={zoom} scrollWheelZoom={true} style={{ width: "100%", height: "100%" }}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -49,9 +112,15 @@ const Map = ({ positions }) => {
                     console.log(latLon)
 
                     return (
-                        <Marker position={latLon} icon={icon}>
+                        <>
+                            <Marker eventHandlers={{
+                                click: (e) => { handleClick(p) }
+                            }} position={latLon} icon={icon}>
+                                <div onClick={() => console.log("click")}>hola</div>
+                            </Marker>
 
-                        </Marker>
+                        </>
+
                     )
                 })
             }
@@ -70,8 +139,8 @@ const Map = ({ positions }) => {
             } */}
 
             {/* <ResetCenterView selectPosition={selectPosition} /> */}
-
-        </MapContainer>
+            <CenterSelect positions={positions} />
+        </MapContainer >
 
 
     )
