@@ -304,6 +304,7 @@ const ModificarPublicacion = () => {
       // console.log(refFolder)
       const allItems = await listAll(refFolder)
       // console.log(allItems)
+      console.log("delete")
       await Promise.all(
         allItems.items.map(async i => {
           // console.log(i)
@@ -327,6 +328,7 @@ const ModificarPublicacion = () => {
 
         for (const m of nuevasImagenes) {
           const imageRef = ref(firebase.storage, `publicaciones/${producto.id}/${Date.now() + imgs.length}`)
+          console.log("for")
           // console.log(m)
           const snapshot = await uploadBytes(imageRef, m)
           const url = await getDownloadURL(snapshot.ref)
@@ -349,7 +351,7 @@ const ModificarPublicacion = () => {
       await map()
 
       setCargando(false)
-      // console.log("Listo")
+      console.log("Listo")
 
 
     } catch (err) {
