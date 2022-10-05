@@ -83,6 +83,7 @@ class Firebase {
         mail: this.auth.currentUser.email,
         type: "particular",
         direccion: "",
+        codigoPostal: "",
         localidad: "",
         municipio: "",
         provincia: "",

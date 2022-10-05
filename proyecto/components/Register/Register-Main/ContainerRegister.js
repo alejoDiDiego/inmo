@@ -173,6 +173,7 @@ const ContainerRegister = ({
                 direccion: "",
                 localidad: "",
                 municipio: "",
+                codigoPostal: "",
                 provincia: "",
                 descripcion: "",
                 numeroCelular: "",

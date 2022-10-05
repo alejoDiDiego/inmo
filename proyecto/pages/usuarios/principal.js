@@ -124,7 +124,7 @@ const principal = () => {
                 u.provincia.toLowerCase().includes(q.toLowerCase()) ||
                 u.municipio.toLowerCase().includes(q.toLowerCase()) ||
                 u.localidad.toLowerCase().includes(q.toLowerCase()) ||
-                u.codigoPostal.includes(q.toLowerCase())
+                u.codigoPostal.toLowerCase().includes(q.toLowerCase())
             )
         })
 

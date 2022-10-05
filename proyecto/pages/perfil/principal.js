@@ -42,6 +42,7 @@ const principal = () => {
 
     const [nuevaProvincia, setNuevaProvincia] = useState("")
     const [nuevoMunicipio, setNuevoMunicipio] = useState("")
+    const [nuevoCodigoPostal, setNuevoCodigoPostal] = useState("")
     const [nuevaLocalidad, setNuevaLocalidad] = useState("")
 
     const [nuevaDireccion, setNuevaDireccion] = useState("")
@@ -289,6 +290,7 @@ const principal = () => {
                         setNuevoNumeroTelefono(docSnap.data().numeroTelefono)
                         setNuevaProvincia(docSnap.data().provincia)
                         setNuevoMunicipio(docSnap.data().municipio)
+                        setNuevoCodigoPostal(docSnap.data().codigoPostal)
                         setNuevaLocalidad(docSnap.data().localidad)
                         setNuevaDireccion(docSnap.data().direccion)
                         setNuevaDescripcion(docSnap.data().descripcion)
@@ -392,7 +394,9 @@ const principal = () => {
 
 
 
-
+    const isNumber = e => {
+        return e.target.value.replace(/\D/g, '');
+    };
 
 
 
@@ -413,14 +417,10 @@ const principal = () => {
     const handleModificar = async () => {
         setCargando(true)
         if (
-            (nuevoNombre.length == 0
+            (
+                nuevoNombre.length == 0
                 && nuevoTipo.length == 0
-                && nuevoNumeroCelular.length == 0
-                && nuevaProvincia.length == 0
-                && nuevoMunicipio.length == 0
-                && nuevaLocalidad.length == 0
-                && nuevaDireccion.length == 0
-                && nuevaDescripcion.length == 0)
+            )
             ||
             (
                 nuevoNombre === info.nombreUsuario
@@ -432,7 +432,9 @@ const principal = () => {
                 && nuevaLocalidad === info.localidad
                 && nuevaDireccion === info.direccion
                 && nuevaDescripcion === info.descripcion
-                && emailPublico === info.emailPublico)
+                && emailPublico === info.emailPublico
+                && nuevoCodigoPostal === info.codigoPostal
+            )
 
         ) {
             alert("No se aplicaron cambios")
@@ -481,6 +483,7 @@ const principal = () => {
                 ['numeroTelefono']: nuevoNumeroTelefono,
                 ['provincia']: nuevaProvincia,
                 ['municipio']: nuevoMunicipio,
+                ['codigoPostal']: nuevoCodigoPostal,
                 ['localidad']: nuevaLocalidad,
                 ['direccion']: nuevaDireccion,
                 ['descripcion']: nuevaDescripcion,
@@ -1083,6 +1086,13 @@ const principal = () => {
                                     }
                                 </div>
 
+                                <div className={styles.fieldDir}>
+                                    <p>Codigo Postal*</p>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        <input maxLength={30} value={nuevoCodigoPostal} onChange={e => { setNuevoCodigoPostal(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                    </label>
+                                </div>
+
                                 <div>
                                     {
                                         toggleLocalidad == false ?
@@ -1319,6 +1329,14 @@ const principal = () => {
                                                                             info.municipio.length > 0 &&
                                                                             (
                                                                                 info.municipio
+                                                                            )
+                                                                        }
+                                                                        {
+                                                                            info.codigoPostal.length > 0 &&
+                                                                            (
+                                                                                <>
+                                                                                    ,{`${" "}`}{info.codigoPostal}
+                                                                                </>
                                                                             )
                                                                         }
                                                                         {

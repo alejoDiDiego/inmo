@@ -19,7 +19,7 @@ const MisPublicaciones = ({ publicaciones, info, setPublicaciones, queryFirebase
 
 
     const redirect = () => {
-        if(info.municipio == "" || info.numeroCelular == "" || info.provincia == ""){
+        if(info.municipio == "" || info.numeroCelular == "" || info.provincia == "" || info.codigoPostal == ""){
             alert("Le falta completar informacion para poder publicar")
             return
         }

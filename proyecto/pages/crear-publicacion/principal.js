@@ -66,7 +66,8 @@ const principal = () => {
             if (
               data.municipio == "" ||
               data.numeroCelular == "" ||
-              data.provincia == ""
+              data.provincia == "" ||
+              data.codigoPostal == ""
             ) {
               router.push("/perfil/principal")
               return true
