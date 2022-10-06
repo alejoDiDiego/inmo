@@ -17,41 +17,43 @@ const Body = () => {
                             <div className={styles.titleF}>
                                 <p>Tu hogar a un click de distancia, <span className={styles.inmo}>Inmo</span></p>
                             </div>
-                            <Link href='/'>
-                                <div className={styles.square}>
-                                    <div className={styles.image}>
-                                        <img src='/home.png' alt='casa' />
+
+                            <div className={styles.squareMedia}>
+                                <Link href='/'>
+                                    <div className={styles.square}>
+                                        <div className={styles.image}>
+                                            <img src='/home.png' alt='casa' />
+                                        </div>
+                                        <h3>Propiedades en venta</h3>
+                                        <p>Encuentra tu hogar entre las publicaciones hechas por los usuarios</p>
                                     </div>
-                                    <h3>Propiedades en venta</h3>
-                                    <p>Encuentra tu hogar entre las publicaciones hechas por los usuarios</p>
+                                </Link>
+
+
+                                <div className={styles.div_square_chico}>
+                                    <Link href='/'>
+                                        <div className={styles.square_chico}>
+                                            <div className={styles.square_chico_txt}>
+                                                <h3>Publicar</h3>
+                                                <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
+                                            </div>
+                                            <div className={styles.image}>
+                                                <img src='/discount-tag.png' />
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    <Link href='/'>
+                                        <div className={styles.square_chico}>
+                                            <div className={styles.square_chico_txt}>
+                                                <h3>En alquiler</h3>
+                                                <p className='pInicio'>Contacta con arrendatarios y compara entre diferentes opciones</p>
+                                            </div>
+                                            <div className={styles.image}>
+                                                <img src='/secret.png' />
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </div>
-                            </Link>
-
-
-                            <div className={styles.div_square_chico}>
-                                <Link href='/'>
-                                    <div className={styles.square_chico}>
-                                        <div className={styles.square_chico_txt}>
-                                            <h3>Publicar</h3>
-                                            <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
-                                        </div>
-                                        <div className={styles.image}>
-                                            <img src='/discount-tag.png' />
-                                        </div>
-                                    </div>
-                                </Link>
-                                <Link href='/'>
-                                    <div className={styles.square_chico}>
-                                        <div className={styles.square_chico_txt}>
-                                            <h3>En alquiler</h3>
-                                            <p className='pInicio'>Contacta con arrendatarios y compara entre diferentes opciones</p>
-                                        </div>
-                                        <div className={styles.image}>
-                                            <img src='/secret.png' />
-                                        </div>
-                                    </div>
-                                </Link>
-
                             </div>
                         </div>
                     </div>
@@ -101,40 +103,42 @@ const Body = () => {
                             <video autoPlay muted loop className={styles.videoD}>
                                 <source src='/cityLapse2.mp4' type='video/mp4'></source>
                             </video>
-                            <Link href='/mas-info/sobre-nosotros'>
-                                <div className={styles.square}>
 
-                                    <div className={styles.logo_nosotros}>
-                                        <img className={styles.img_nosotros} src="sobrenosotros.png" />
-                                    </div>
+                            <div className={styles.sobreNosotrosMedia}>
+                                <Link href='/mas-info/sobre-nosotros'>
+                                    <div className={styles.square}>
 
-                                    <div className={styles.txt_nosotros}>
-                                        <h3>Sobre Nosotros</h3>
+                                        <div className={styles.logo_nosotros}>
+                                            <img className={styles.img_nosotros} src="sobrenosotros.png" />
+                                        </div>
 
-                                        <p>Conoce mas sobre quienes son las personas que hacen de inmo una realidad</p>
+                                        <div className={styles.txt_nosotros}>
+                                            <h3>Sobre Nosotros</h3>
 
-                                    </div>
+                                            <p>Conoce mas sobre quienes son las personas que hacen de inmo una realidad</p>
 
-                                </div>
-                            </Link>
-
-                            <Link href='/mas-info/creditos'>
-                                <div className={styles.square}>
-
-                                    <div className={styles.logo_creditos}>
-                                        <img className={styles.img_creditos} src="Creditos.png" />
-                                    </div>
-
-                                    <div className={styles.txt_creditos}>
-                                        <h3>Creditos</h3>
-
-                                        <p>Quienes fueron los que nos ayudaron con este proyecto.</p>
+                                        </div>
 
                                     </div>
+                                </Link>
 
-                                </div>
-                            </Link>
+                                <Link href='/mas-info/creditos'>
+                                    <div className={styles.square}>
 
+                                        <div className={styles.logo_creditos}>
+                                            <img className={styles.img_creditos} src="Creditos.png" />
+                                        </div>
+
+                                        <div className={styles.txt_creditos}>
+                                            <h3>Creditos</h3>
+
+                                            <p>Quienes fueron los que nos ayudaron con este proyecto.</p>
+
+                                        </div>
+
+                                    </div>
+                                </Link>
+                            </div>
                             <div className={styles.titleM}>
                                 <p>Mas sobre <span className={styles.inmo}>Inmo</span></p>
                             </div>

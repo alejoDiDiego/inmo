@@ -45,7 +45,7 @@
     line-height: 35px;
 }
 
-.inmo{
+.inmo {
     color: #38B6FF;
 }
 
@@ -83,7 +83,7 @@
 }
 
 
-.inside_div_derecha{
+.inside_div_derecha {
     display: flex;
     align-items: center;
     margin-left: -175px;
@@ -94,7 +94,7 @@
     justify-content: flex-end;
 }
 
-.square{
+.square {
     z-index: 2;
     height: 450px;
     width: 450px;
@@ -106,33 +106,32 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
-} 
+}
 
-.square:hover{
+.square:hover {
     border: #38B6FF solid 3px;
     transition: all ease-in-out 0.1s;
 }
 
-.square_chico:hover{
+.square_chico:hover {
     border: #38B6FF solid 3px;
     transition: all ease-in-out 0.1s;
 }
 
 
-.square .image{
+.square .image {
     width: 110px;
     height: 110px;
 }
 
-.square h3{
-    
+.square h3 {
+
     font-size: 30px;
     margin-top: 15px;
     margin-bottom: 0px;
 }
 
-.square p{
+.square p {
     width: 285px;
     font-size: 23px;
     line-height: 40px;
@@ -143,7 +142,7 @@
 
 
 
-.div_square_chico{
+.div_square_chico {
     height: 450px;
     width: 400px;
     display: flex;
@@ -152,7 +151,7 @@
 }
 
 
-.square_chico{
+.square_chico {
     z-index: 2;
     width: 100%;
     height: 210px;
@@ -165,18 +164,18 @@
 }
 
 
-.square_chico_txt{
+.square_chico_txt {
     display: flex;
     flex-direction: column;
 }
 
 
-.square_chico_txt h3{
+.square_chico_txt h3 {
     font-size: 23px;
     margin-bottom: 0px;
 }
 
-.square_chico_txt p{
+.square_chico_txt p {
     font-size: 16px;
     width: 180px;
     line-height: 25px;
@@ -184,13 +183,13 @@
 
 
 
-.square_chico .image{
+.square_chico .image {
     width: 110px;
     height: 110px;
     margin: auto;
 }
 
-.img_nosotros{
+.img_nosotros {
     margin-top: 20px;
     margin-left: 20px;
     height: 82px;
@@ -198,9 +197,9 @@
 }
 
 
-.video{
-    width: 91%;
-    height: 100%;
+.video {
+    width: 1615px;
+    height: 800px;
     position: absolute;
     object-fit: cover;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -208,11 +207,11 @@
     border-bottom-right-radius: 20px;
     top: 0;
     left: 0;
-  }
+}
 
-  .videoD{
-    width: 91%;
-    height: 100%;
+.videoD {
+    width: 1615px;
+    height: 800px;
     position: absolute;
     object-fit: cover;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -220,35 +219,35 @@
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     right: 0;
-  }
+}
 
 
-.txt_nosotros{
+.txt_nosotros {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-.txt_nosotros h3{
+.txt_nosotros h3 {
     font-size: 30px;
 }
 
-.txt_nosotros p{
+.txt_nosotros p {
     font-size: 23px;
     width: 350px;
 }
 
-.logo_creditos{
+.logo_creditos {
     margin-left: 20px;
 }
 
-.img_creditos{
+.img_creditos {
     height: 125px;
     width: 125px;
 }
 
-.txt_creditos{
+.txt_creditos {
     margin-top: -3px;
-    margin-left: 20px ;
+    margin-left: 20px;
 }
 
 .arriba {
@@ -257,7 +256,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 
 
 }
@@ -266,7 +265,7 @@
 .inside_arriba {
     height: 100%;
     display: flex;
-    
+
 }
 
 
@@ -283,7 +282,7 @@
     border-radius: 0px 0px 20px 0px;
 }
 
-.div_inside_izquierda_arriba{
+.div_inside_izquierda_arriba {
     position: relative;
     display: flex;
     align-items: center;
@@ -293,21 +292,9 @@
     gap: 30px;
 }
 
-@media screen and (max-width: 1700px) {
-    .square_chico{
-        align-items: center;
-        width: 300px;
-        height: 200px;
-    }
-    .square{
-        width: 350px;
-        height: 350px;
-        gap: 5px;
-        
-    }
-}
 
-.titleF{
+
+.titleF {
     z-index: 2;
     height: 300px;
     width: 600px;
@@ -316,7 +303,7 @@
 }
 
 
-.titleM{
+.titleM {
     z-index: 2;
     height: 300px;
     width: 600px;
@@ -325,14 +312,192 @@
 }
 
 
-.titleF p{
-    font-size: 70px; 
-    color:  white;
+.titleF p {
+    font-size: 70px;
+    color: white;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.titleM p{
-    font-size: 70px; 
-    color:  white;
+.titleM p {
+    font-size: 70px;
+    color: white;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.squareMedia{
+    display: flex;
+    gap: 20px;
+}
+
+.sobreNosotrosMedia{
+    display: flex;
+    gap: 20px;
+}
+
+@media screen and (max-width: 1700px) {
+    .square_chico {
+        align-items: center;
+        width: 300px;
+        height: 200px;
+    }
+
+    .square {
+        width: 350px;
+        height: 350px;
+        gap: 5px;
+
+    }
+}
+
+@media screen and (max-width: 412px) {
+
+    .div_inside_izquierda_arriba {
+        width: 100%;
+        height: 300px;
+        justify-content: center;
+    }
+
+    .div_derecha_arriba {
+        display: none;
+    }
+
+    .div_derecha {
+        width: 412px;
+        height: 400px;
+    }
+
+    .inside_div_derecha {
+        height: 400px;
+        width: 100%;
+    }
+
+    .videoD {
+        width: 100%;
+    }
+
+    .video {
+        border-radius: 0px;
+    }
+}
+
+
+@media screen and (max-width:1366px) {
+    .div_izquierda_arriba {
+        width: 800px;
+    }
+
+    .arriba {
+        justify-content: start;
+    }
+
+    .div_inside_izquierda_arriba {
+        justify-content: center;
+    }
+
+    .video {
+        width: 1400px;
+        height: 750px;
+    }
+
+    .titleF {
+        position: absolute;
+        height: 300px;
+        width: 600px;
+        margin-right: 210px;
+    }
+
+    .titleF p {
+        font-size: 60px;
+    }
+
+    .square {
+        width: 350px;
+        height: 450px;
+ 
+    }
+
+    .square img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .square h3 {
+        font-size: 25px;
+    }
+
+    .square p {
+        font-size: 20px;
+    }
+
+    .square_chico {
+        width: 375px;
+    }
+
+    .squares {
+        width: 100%;
+        height: 300px;
+        gap: 300px;
+        justify-content: center;
+        margin-left: 100px;
+        margin-top: 50px;
+    }
+
+    .square_medio{
+        height: 200px;
+        width: 220px;
+    }
+
+    .squareMedia{
+        margin-left: 1300px;
+        display: flex;
+        gap: 20px;
+    }
+    
+
+    .inside_div_derecha{
+        width: 1400px;
+        height: 750px;
+        margin-left: 0px;
+    }
+
+    .div_derecha{
+        width: 1400px;
+        height: 750px;
+    }
+
+    .videoD{
+        width: 1400px;
+        height: 750px;
+        
+    }
+
+    .txt_nosotros{
+        margin-top: 20px;
+        margin-left: 0px;
+    }
+
+    .txt_nosotros p {
+        font-size: 20px;
+        width: 280px;
+    }
+
+    .logo_creditos {
+        margin-left: 0px;
+    }
+    .txt_creditos {
+        margin-top: 20px;
+        margin-left: 0px;
+    }
+
+    .img_nosotros{
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+
+    .sobreNosotrosMedia{
+        display: flex;
+        gap: 20px;
+        position: absolute;
+        margin-right: 750px;
+    }
 }

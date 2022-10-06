@@ -13,3 +13,11 @@
     font-size: 25px;
     margin-top: 75px;
 }
+
+@media screen and (max-width: 412) {
+
+.videoD{
+    width: 30%;
+}
+    
+}
