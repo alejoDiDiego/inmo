@@ -5,6 +5,7 @@ import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import Layout from '../../components/layout/Layout'
 import Usuario from '../../components/Usuarios/Usuario'
+import Link from 'next/link'
 
 
 const principal = () => {
@@ -113,6 +114,11 @@ const principal = () => {
         if (usuarios.length == 0) return
         console.log(usuarios)
 
+        if(q == null || q.length == 0){
+            setResultado([])
+            return
+        }
+
 
 
         // console.log(precioMin)
@@ -184,6 +190,11 @@ const principal = () => {
                     <link rel="icon" href="/Logo_inmo_new.png" />
                 </Head>
                 <Layout perfil={true}>
+                    <div>
+                        <Link href="/publicaciones/principal">
+                            <button>Buscar Publicaciones</button>
+                        </Link>
+                    </div>
                     <div>
                         {
                             resultado.map((u, i) => {

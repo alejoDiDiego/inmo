@@ -131,8 +131,6 @@ const Filtros = ({ router }) => {
 
 
     const handleBuscar = () => {
-        if (nuevaDireccion.trim() === "") return
-
         Router.push({
             pathname: '/publicaciones/principal',
             query: {
@@ -159,15 +157,10 @@ const Filtros = ({ router }) => {
 
 
     const handleReiniciar = () => {
-        let dire = direccion
-        if(dire == "" || dire == null) {
-            dire = "buenos aires"
-        }
-        console.log(dire)
         Router.push({
             pathname: '/publicaciones/principal',
             query: {
-                direccion: dire,
+                direccion: "",
                 tipoPublicacion: "",
                 tipoVivienda: "",
                 precioMax: "",

@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import styles from "../../styles/PublicacionesPrincipal.module.css"
 import Filtros from '../../components/Publicaciones/Filtros'
 import Publicacion from '../../components/Publicaciones/Publicacion'
+import Link from 'next/link'
 
 
 const MapNoSSR = dynamic(() => import("../../components/Publicaciones/Map"), {
@@ -136,7 +137,10 @@ const principal = () => {
 
 
 
-        if (direccion == "" || direccion == null) return
+        if (direccion == "" || direccion == null) {
+            setResultado([])
+            return
+        }
 
         // console.log(precioMin)
 
@@ -307,6 +311,9 @@ const principal = () => {
                         <div className={styles.izquierda}>
 
                             <div className={styles.filtros}>
+                                <Link href="/usuarios/principal">
+                                    <button>Buscar usuarios</button>
+                                </Link>
                                 <Filtros router={router} />
                             </div>
 
@@ -321,7 +328,7 @@ const principal = () => {
                         <div className={styles.derecha}>
                             {
                                 resultado.length == 0 ?
-                                    <h2>No se han encontrado resultados</h2>
+                                    <h2>No se han encontrado resultados, escriba una provincia, municipio, localidad o codigo postal</h2>
 
                                     :
 

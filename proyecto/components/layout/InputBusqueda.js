@@ -9,6 +9,7 @@ const InputBusqueda = () => {
     const [busqueda, setBusqueda] = useState("")
 
     const [tipoBusqueda, setTipoBusqueda] = useState("publicacion")
+    const [barraHabilitada, setBarraHabilitada] = useState(true)
 
     const router = useRouter()
 
@@ -70,6 +71,16 @@ const InputBusqueda = () => {
 
 
 
+    useEffect(() => {
+        if (router.pathname.includes("publicaciones") || router.pathname.includes("usuarios")) {
+            setBarraHabilitada(false)
+            return
+        }
+        setBarraHabilitada(true)
+
+    }, [router])
+
+
 
     const handleSelectTipoBusqueda = (event) => {
         console.log(event.value)
@@ -97,21 +108,23 @@ const InputBusqueda = () => {
 
 
 
-    return (
-        <div className={styles.main}>
-            {
-                tipoBusqueda == "" ? null :
-                <>
-                    <Select className={styles.selectContainer} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicacion", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicacion") }}></Select>
-                    <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder={tipoBusqueda == "publicacion" ? 'Provincia, Municipio, Localidad, Codigo Postal' : "Nombre, Provincia, Municipio, Localidad, Codigo Postal"} />
-                    <div onClick={() => handleBuscar()} className={styles.div_img}>
-                        <Image src='/search2.png' layout='fill' />
-                    </div>
-                </>
-            }
+    if (barraHabilitada == true) {
+        return (
+            <div className={styles.main}>
+                {
+                    tipoBusqueda == "" ? null :
+                        <>
+                            <Select className={styles.selectContainer} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicacion", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicacion") }}></Select>
+                            <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder={tipoBusqueda == "publicacion" ? 'Provincia, Municipio, Localidad, Codigo Postal' : "Nombre, Provincia, Municipio, Localidad, Codigo Postal"} />
+                            <div onClick={() => handleBuscar()} className={styles.div_img}>
+                                <Image src='/search2.png' layout='fill' />
+                            </div>
+                        </>
+                }
 
-        </div>
-    )
+            </div>
+        )
+    }
 }
 
 export default InputBusqueda
