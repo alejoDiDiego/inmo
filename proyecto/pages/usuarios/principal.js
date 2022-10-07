@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Layout from '../../components/layout/Layout'
 import Usuario from '../../components/Usuarios/Usuario'
 import Link from 'next/link'
+import Filtros from '../../components/Usuarios/Filtros'
 
 
 const principal = () => {
@@ -52,11 +53,8 @@ const principal = () => {
     const router = useRouter()
     const { query: {
         q,
-        nombre,
-        provincia,
-        municipio,
-        localidad,
-        codigoPostal
+        tipo,
+        user
     } } = router
 
 
@@ -114,23 +112,67 @@ const principal = () => {
         if (usuarios.length == 0) return
         console.log(usuarios)
 
-        if(q == null || q.length == 0){
+
+        
+
+        if (user != null) {
+            // console.log(publicacion)
+            // console.log(publicaciones)
+            const filtro = usuarios.filter(u => {
+                return (u.uid == user)
+            })
+            if (filtro.length == 0) {
+                const query = async () => {
+                    try {
+                        const docRef = doc(firebase.db, "Usuarios", user)
+                        const docSnap = await getDoc(docRef)
+
+                        if (docSnap.data() == undefined) {
+                            alert("La publicacion no existe")
+                            return
+                        }
+                        let u = []
+                        u.push(docSnap.data())
+                        setResultado(u)
+                        // console.log("No estaba en la lista")
+                        return
+
+                    } catch (err) { console.log(err) }
+                }
+
+                query()
+                return
+
+            }
+            setResultado(filtro)
+            return
+        }
+
+
+        if (q == null || q.length == 0) {
             setResultado([])
             return
         }
 
 
 
-        // console.log(precioMin)
+
+
 
 
         const filtro = usuarios.filter(u => {
             return (
-                u.nombreUsuario.toLowerCase().includes(q.toLowerCase()) ||
-                u.provincia.toLowerCase().includes(q.toLowerCase()) ||
-                u.municipio.toLowerCase().includes(q.toLowerCase()) ||
-                u.localidad.toLowerCase().includes(q.toLowerCase()) ||
-                u.codigoPostal.toLowerCase().includes(q.toLowerCase())
+                (
+                    u.nombreUsuario.toLowerCase().includes(q.toLowerCase()) ||
+                    u.provincia.toLowerCase().includes(q.toLowerCase()) ||
+                    u.municipio.toLowerCase().includes(q.toLowerCase()) ||
+                    u.localidad.toLowerCase().includes(q.toLowerCase()) ||
+                    u.codigoPostal.toLowerCase().includes(q.toLowerCase())
+                )
+                &&
+                (
+                    "tipo" in router.query == false || tipo.length == 0 ? u.type : u.type.toLowerCase().includes(tipo.toLowerCase())
+                )
             )
         })
 
@@ -144,6 +186,30 @@ const principal = () => {
         // console.log(filtro)
 
     }, [router, usuarios])
+
+
+
+
+    const handleBuscarPublicaciones = () => {
+        Router.push({
+            pathname: '/publicaciones/principal',
+            query: {
+                direccion: "",
+                tipoPublicacion: "",
+                tipoVivienda: "",
+                precioMin: "",
+                precioMax: "",
+                cantBanosMin: "",
+                cantBanosMax: "",
+                cantAmbientesMax: "",
+                cantAmbientesMin: "",
+                cantCocherasMax: "",
+                cantCocherasMin: "",
+                cantHabitacionesMax: "",
+                cantHabitacionesMin: ""
+            }
+        })
+    }
 
 
 
@@ -191,9 +257,10 @@ const principal = () => {
                 </Head>
                 <Layout perfil={true}>
                     <div>
-                        <Link href="/publicaciones/principal">
-                            <button>Buscar Publicaciones</button>
-                        </Link>
+                        <button onClick={() => handleBuscarPublicaciones()}>Buscar Publicaciones</button>
+                    </div>
+                    <div>
+                        <Filtros />
                     </div>
                     <div>
                         {

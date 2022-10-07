@@ -271,6 +271,19 @@ const principal = () => {
 
 
 
+    const handleBuscarUsuarios = () => {
+        Router.push({
+            pathname: '/usuarios/principal',
+            query: {
+                q: "",
+                tipo: ""
+            }
+        })
+    }
+
+
+
+
 
 
 
@@ -311,9 +324,9 @@ const principal = () => {
                         <div className={styles.izquierda}>
 
                             <div className={styles.filtros}>
-                                <Link href="/usuarios/principal">
-                                    <button>Buscar usuarios</button>
-                                </Link>
+
+                                <button onClick={() => handleBuscarUsuarios()}>Buscar usuarios</button>
+
                                 <Filtros router={router} />
                             </div>
 

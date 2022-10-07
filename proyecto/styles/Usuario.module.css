@@ -1,0 +1,9 @@
+.usuario{
+    background-color: gray;
+    border: 1px solid black;
+}
+
+.usuario img{
+    width: 200px;
+    height: 200px;
+}

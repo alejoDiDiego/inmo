@@ -62,6 +62,7 @@ const InputBusqueda = () => {
                 // }
                 query: {
                     q: busqueda,
+                    tipo: ""
 
                 }
             })
