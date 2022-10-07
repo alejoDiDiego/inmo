@@ -21,7 +21,29 @@ const InputBusqueda = () => {
         { value: "usuario", label: "Usuario" }]
 
 
+        const customSelectStyles = {
+            control: (provided, state) => ({
+                ...provided,
+                
+                backgroundColor: 'none',
+                border: state.IsOpen? 'none': 'none',
+              }),
 
+            indicatorSeparator: (provided, state) => ({
+                ...provided,
+                backgroundColor: 'white',
+            }),
+
+            indicatorsContainer: (provided, state) => ({
+                ...provided,
+                color: 'none',
+            }),
+
+            singleValue: (provided, state) => ({
+                ...provided,
+                color: 'white',
+            }),
+          }
 
 
     const handleBuscar = () => {
@@ -115,7 +137,10 @@ const InputBusqueda = () => {
                 {
                     tipoBusqueda == "" ? null :
                         <>
-                            <Select className={styles.selectContainer} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicacion", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicacion") }}></Select>
+                            <div className={styles.selectContainer}>
+                                <Select styles={customSelectStyles} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicacion", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicacion") }}></Select>
+                            </div>
+
                             <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder={tipoBusqueda == "publicacion" ? 'Provincia, Municipio, Localidad, Codigo Postal' : "Nombre, Provincia, Municipio, Localidad, Codigo Postal"} />
                             <div onClick={() => handleBuscar()} className={styles.div_img}>
                                 <Image src='/search2.png' layout='fill' />
