@@ -11,6 +11,14 @@ const Usuario = ({ u }) => {
 
   const router = useRouter()
 
+  let puntajeEstrellas = 0
+
+  useEffect(() => {
+    u.valoraciones.map(v => {
+      puntajeEstrellas += v.estrellas
+    })
+  }, [])
+
   const handleExtendido = async () => {
     // console.log("router.query.publicacion " + router.query.publicacion)
     // console.log("p.id " + p.id)
@@ -53,7 +61,7 @@ const Usuario = ({ u }) => {
 
 
   return (
-    <div onClick={() => handleExtendido()} className={styles.usuario}>
+    <div onClick={() => handleExtendido()} className={`${styles.usuario} ${extendido == true && styles.usuario_extendido}`}>
       <div>
         {u.nombreUsuario}{" "}
         {u.provincia}{" "}
@@ -61,6 +69,13 @@ const Usuario = ({ u }) => {
         {u.localidad.length > 0 && u.localidad}{" "}
         {u.direccion.length > 0 && u.direccion}{" "}
         {u.type}
+        {u.descripcion}
+        {
+          u.valoraciones.length == 0 ?
+            <p>No tiene ninguna valoracion todavia</p>
+            :
+            <p>{puntajeEstrellas / u.valoraciones.length} Estrellas de {u.valoraciones.length} valoraciones</p>
+        }
 
       </div>
       <img src={u.fotoPerfilURL} />
@@ -68,7 +83,7 @@ const Usuario = ({ u }) => {
 
       {
         extendido &&
-        <UsuarioExtendido 
+        <UsuarioExtendido
           u={u}
         />
       }

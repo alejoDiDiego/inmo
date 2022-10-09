@@ -48,6 +48,9 @@ function CenterSelect({ positions }) {
                 )
             })
             console.log(filter)
+            if(filter.length == 0){
+                return
+            }
 
             map.setView(
                 [filter[0].latLon.lat, filter[0].latLon.lon],

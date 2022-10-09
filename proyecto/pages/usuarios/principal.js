@@ -113,7 +113,7 @@ const principal = () => {
         console.log(usuarios)
 
 
-        
+
 
         if (user != null) {
             // console.log(publicacion)
@@ -256,12 +256,18 @@ const principal = () => {
                     <link rel="icon" href="/Logo_inmo_new.png" />
                 </Head>
                 <Layout perfil={true}>
-                    <div>
-                        <button onClick={() => handleBuscarPublicaciones()}>Buscar Publicaciones</button>
-                    </div>
-                    <div>
-                        <Filtros />
-                    </div>
+                    {
+                        "user" in router.query ? null :
+                        <>
+                            <div>
+                                <button onClick={() => handleBuscarPublicaciones()}>Buscar Publicaciones</button>
+                            </div>
+
+                            <div>
+                                <Filtros />
+                            </div>
+                        </>
+                    }
                     <div>
                         {
                             resultado.map((u, i) => {
@@ -281,3 +287,5 @@ const principal = () => {
 }
 
 export default principal
+
+

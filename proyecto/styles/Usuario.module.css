@@ -1,9 +1,20 @@
 .usuario{
-    background-color: gray;
-    border: 1px solid black;
+    height: 300px;
+    width: 90%;
+    max-width: 1850px;
+    margin: 20px auto;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
 }
 
 .usuario img{
     width: 200px;
     height: 200px;
+}
+
+
+.usuario_extendido{
+    cursor: default;
+    height: calc(100vh - 90px);
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
 }
