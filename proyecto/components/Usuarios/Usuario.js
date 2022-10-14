@@ -8,6 +8,7 @@ const Usuario = ({ u }) => {
 
 
   const [extendido, setExtendido] = useState(false)
+  
 
   const router = useRouter()
 
@@ -61,7 +62,7 @@ const Usuario = ({ u }) => {
 
 
   return (
-    <div onClick={() => handleExtendido()} className={`${styles.usuario} ${extendido == true && styles.usuario_extendido}`}>
+    <div onClick={() => extendido == false ? handleExtendido() : null} className={`${styles.usuario} ${extendido == true && styles.usuario_extendido}`}>
       <div>
         {u.nombreUsuario}{" "}
         {u.provincia}{" "}

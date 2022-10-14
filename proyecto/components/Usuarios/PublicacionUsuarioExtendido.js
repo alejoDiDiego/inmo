@@ -64,22 +64,14 @@ const PublicacionUsuarioExtendido = ({ p }) => {
 
 
   return (
-    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
+    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion}`}>
 
-      {
-        extendido == true ? null :
-          <div className={styles.publicacion_div_img}>
-
-            <img className={styles.img} src={p.imagenes[0]} />
-          </div>
-      }
-
-
+      <div className={styles.publicacion_div_img}>
+        <img className={styles.img} src={p.imagenes[0]} />
+      </div>
 
 
       <div>
-
-
         <div className={styles.infoContainer}>
           <div className={styles.headPlusDir}>
             <div className={styles.head}>
@@ -205,18 +197,6 @@ const PublicacionUsuarioExtendido = ({ p }) => {
 
 
       </div>
-
-      {
-        extendido == true &&
-          (
-            <div>
-              <PublicacionExtendida
-                p={p}
-                setExtendido={setExtendido}
-              />
-            </div>
-          )
-      }
     </div>
   )
 }
