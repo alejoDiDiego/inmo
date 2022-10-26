@@ -77,40 +77,6 @@ const PublicacionExtendida = ({ p, setExtendido }) => {
                 <button onClick={() => handlePregunta()}>Preguntar</button> 
             </div>
 
-            {
-                !publicador.hasOwnProperty("creado") ? null :
-
-                    (
-                        <div className={styles.publicador}>
-                            <img src={publicador.fotoPerfilURL} />
-                            <div>
-                                <p>{publicador.nombreUsuario}</p>
-                                <p>{publicador.type}</p>
-                                <p>{publicador.numeroCelular}</p>
-
-                            </div>
-                            {
-                                publicador.numeroTelefono.length == 0 ? null :
-                                    <p>{publicador.numeroTelefono}</p>
-                            }
-
-                            {
-                                publicador.emailPublico == true &&
-                                <p>{publicador.mail}</p>
-
-                            }
-                            {
-
-                                publicador.valoraciones.length == 0 ?
-                                    <p>0 Estrellas de 0 Valoraciones.</p>
-                                    :
-                                    <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
-                            }
-
-
-                        </div>
-                    )
-            }
         </div>
     )
 }

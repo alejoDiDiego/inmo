@@ -2,15 +2,20 @@ import Router, { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import styles from "../../styles/PublicacionPublicaciones.module.css"
 import PublicacionExtendida from './PublicacionExtendida'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { FirebaseContext } from '../../firebase'
+import firebase from '../../firebase'
 
 
 const Publicacion = ({ p }) => {
 
+  const [publicador, setPublicador] = useState({})
 
   const [extendido, setExtendido] = useState(false)
 
   const router = useRouter()
 
+  let puntajeEstrellas = 0
 
   console.log(p)
 
@@ -59,6 +64,23 @@ const Publicacion = ({ p }) => {
       setExtendido(false)
     }
   }, [router])
+
+  const queryFirebase = async () => {
+    const docRef = doc(firebase.db, "Usuarios", p.publicador)
+    const docSnap = await getDoc(docRef)
+    console.log(docSnap.data())
+    docSnap.data().valoraciones.map(v => {
+        puntajeEstrellas += v.estrellas
+    })
+    setPublicador(docSnap.data())
+
+}
+
+useEffect(() => {
+  if(!publicador.hasOwnProperty("creado")) {
+      queryFirebase()
+  }
+}, [publicador])
 
 
 
@@ -202,6 +224,46 @@ const Publicacion = ({ p }) => {
             </div> */}
 
         </div>
+
+        {
+           extendido == true &&
+           (
+            
+              !publicador.hasOwnProperty("creado") ? null :
+
+                  (
+                      <div className={styles.publicador}>
+                          <img src={publicador.fotoPerfilURL} />
+                          <div>
+                              <p>{publicador.nombreUsuario}</p>
+                              <p>{publicador.type}</p>
+                              <p>{publicador.numeroCelular}</p>
+
+                          </div>
+                          {
+                              publicador.numeroTelefono.length == 0 ? null :
+                                  <p>{publicador.numeroTelefono}</p>
+                          }
+
+                          {
+                              publicador.emailPublico == true &&
+                              <p>{publicador.mail}</p>
+
+                          }
+                          {
+
+                              publicador.valoraciones.length == 0 ?
+                                  <p>0 Estrellas de 0 Valoraciones.</p>
+                                  :
+                                  <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
+                          }
+
+
+                      </div>
+                  )
+          
+           )
+        }
 
 
       </div>
