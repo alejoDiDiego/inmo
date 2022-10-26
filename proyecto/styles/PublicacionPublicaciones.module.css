@@ -1,6 +1,7 @@
 .publicacion{
+    position: relative;
     display: flex;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     background-color: white;
     height: 300px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -10,10 +11,7 @@
     margin-bottom: 50px;
 }
 
-.publicacion:hover{
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
-    transition: all ease-in-out 0.2s;
-}
+
 
 
 .price_valores{
@@ -24,11 +22,31 @@
 }
 
 
+.escondido{
+    background-color: #007cc3; 
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    left: 0;
+    z-index: 100;
+    bottom: 0;
+    height: 0px;
+    transition: all ease-in-out 0.2s;
+
+}
+
+.publicacion:hover .escondido{
+    /* box-shadow: 4px 4px 4px #007cc3; */
+    transition: all ease-in-out 0.2s;
+    height: 10px;
+}
+
+
 
 
 .publicacion_extendido{
     cursor: default;
-    height: 800px;
+    height: fit-content;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
     display: flex;
     
@@ -81,8 +99,8 @@
 .img{
     width: 200px;
     height: 200px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    /* border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px; */
 }
 
 .headPlusDir{
@@ -254,4 +272,25 @@
 .metersContainer{
     display: flex;
     flex-direction: column;
+}
+
+.userNameContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.type{
+    margin-top: -5px;
+}
+
+.divider{
+    font-weight: 600;
+    font-size: 18px;
 }

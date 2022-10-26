@@ -70,20 +70,26 @@ const Publicacion = ({ p }) => {
     const docSnap = await getDoc(docRef)
     console.log(docSnap.data())
     docSnap.data().valoraciones.map(v => {
-        puntajeEstrellas += v.estrellas
+      puntajeEstrellas += v.estrellas
     })
     setPublicador(docSnap.data())
 
-}
-
-useEffect(() => {
-  if(!publicador.hasOwnProperty("creado")) {
-      queryFirebase()
   }
-}, [publicador])
+
+  useEffect(() => {
+    if (!publicador.hasOwnProperty("creado")) {
+      queryFirebase()
+    }
+  }, [publicador])
 
 
-
+  function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+}
 
   return (
     <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
@@ -216,6 +222,54 @@ useEffect(() => {
               </div>
 
             </div>
+
+            {
+              extendido == true &&
+              (
+
+                !publicador.hasOwnProperty("creado") ? null :
+
+                  (
+
+                    <div className={styles.publicador}>
+                      <p className={styles.divider}>Publicado por: </p>
+                      <div className={styles.userNameContainer}>
+                        <img src={publicador.fotoPerfilURL} />
+                        <div className={styles.userInfo}>
+                          <p>{publicador.nombreUsuario}</p>
+                          <p className={styles.type}>{titleCase(publicador.type)}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p>{publicador.numeroCelular}</p>
+
+                      </div>
+                      {
+                        publicador.numeroTelefono.length == 0 ? null :
+                          <p>{publicador.numeroTelefono}</p>
+                      }
+
+                      {
+                        publicador.emailPublico == true &&
+                        <p>{publicador.mail}</p>
+
+                      }
+                      {
+
+                        publicador.valoraciones.length == 0 ?
+                          <p>0 Estrellas de 0 Valoraciones.</p>
+                          :
+                          <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
+                      }
+
+
+                    </div>
+                  )
+
+              )
+            }
+
           </div>
 
 
@@ -225,59 +279,22 @@ useEffect(() => {
 
         </div>
 
-        {
-           extendido == true &&
-           (
-            
-              !publicador.hasOwnProperty("creado") ? null :
 
-                  (
-                      <div className={styles.publicador}>
-                          <img src={publicador.fotoPerfilURL} />
-                          <div>
-                              <p>{publicador.nombreUsuario}</p>
-                              <p>{publicador.type}</p>
-                              <p>{publicador.numeroCelular}</p>
-
-                          </div>
-                          {
-                              publicador.numeroTelefono.length == 0 ? null :
-                                  <p>{publicador.numeroTelefono}</p>
-                          }
-
-                          {
-                              publicador.emailPublico == true &&
-                              <p>{publicador.mail}</p>
-
-                          }
-                          {
-
-                              publicador.valoraciones.length == 0 ?
-                                  <p>0 Estrellas de 0 Valoraciones.</p>
-                                  :
-                                  <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
-                          }
-
-
-                      </div>
-                  )
-          
-           )
-        }
-
-
+        <div className={styles.escondido}></div>
       </div>
+
+      
 
       {
         extendido == true &&
-          (
-            <div>
-              <PublicacionExtendida
-                p={p}
-                setExtendido={setExtendido}
-              />
-            </div>
-          )
+        (
+          <div>
+            <PublicacionExtendida
+              p={p}
+              setExtendido={setExtendido}
+            />
+          </div>
+        )
       }
     </div>
   )

@@ -59,6 +59,8 @@ const Publicacion = ({ p, queryFirebase }) => {
 
 
 
+
+
     return (
         <div className={styles.publicacion}>
 
@@ -234,9 +236,10 @@ const Publicacion = ({ p, queryFirebase }) => {
                     </div> */}
 
                 </div>
-
-
+                
+                <div className={styles.escondido}></div>
             </div>
+
         </div>
 
     )
