@@ -92,7 +92,7 @@ const Publicacion = ({ p }) => {
   }
 
   return (
-    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
+    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${extendido == true ? styles.publicacion_extendido : styles.publicacion}`}>
 
       {
         extendido == true ? null :
