@@ -237,7 +237,7 @@ const Publicacion = ({ p, queryFirebase }) => {
 
                 </div>
                 
-                <div className={styles.escondido}></div>
+                <div className={styles.escondido }></div>
             </div>
 
         </div>

@@ -55,8 +55,9 @@ const PublicacionExtendida = ({ p, setExtendido }) => {
 
     return (
         <div className={styles.publicacion_extendida}>
+
             <div className={styles.div_imgs}>
-            <p onClick={() => {window.history.back(); setExtendido(false)}}>Cerrar</p>
+            
                 <img src={p.imagenes[0]} className={styles.img_principal} />
                 {
                     p.imagenes.length > 1 &&
@@ -68,15 +69,19 @@ const PublicacionExtendida = ({ p, setExtendido }) => {
             </div>
 
             <div className={styles.div_descripcion}>
+                <h2>Descripcion:</h2>
                 <p>{p.descripcion}</p>
             </div>
 
-            <div>
-                <p>Preguntas:</p>
+            <div className={styles.preguntas}>
+                <h2>Preguntas:</h2>
+                <div className={styles.preguntasContainer}>
+
+                </div>
                 <input value={pregunta} onChange={e => setPregunta(e.target.value)} placeholder='Escribe tu pregunta' />
                 <button onClick={() => handlePregunta()}>Preguntar</button> 
             </div>
-
+            <p onClick={() => {window.history.back(); setExtendido(false)}}>Cerrar</p>
         </div>
     )
 }

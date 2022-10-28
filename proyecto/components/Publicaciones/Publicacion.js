@@ -86,10 +86,10 @@ const Publicacion = ({ p }) => {
   function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
     return splitStr.join(' ');
-}
+  }
 
   return (
     <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion} ${extendido == true && styles.publicacion_extendido}`}>
@@ -106,9 +106,7 @@ const Publicacion = ({ p }) => {
 
 
       <div>
-
-
-        <div className={styles.infoContainer}>
+        <div className={`${styles.infoContainer} ${extendido == true && styles.infoContainer_extendido}`}>
           <div className={styles.headPlusDir}>
             <div className={styles.head}>
 
@@ -278,12 +276,15 @@ const Publicacion = ({ p }) => {
             </div> */}
 
         </div>
-
-
-        <div className={styles.escondido}></div>
+        {
+          extendido == false &&
+          (
+            <div className={styles.escondido}></div>
+          )
+        }
       </div>
 
-      
+
 
       {
         extendido == true &&

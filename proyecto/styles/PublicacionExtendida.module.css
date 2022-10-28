@@ -1,38 +1,48 @@
 .publicacion_extendida{
-    background-color: gray;
+    
     height: 100%;
-    width: 95%;
-    padding: 15px 0;
-    margin-right: 15px;
+    width: 550px;
 }
 
 .div_imgs{
     display: flex;
-    justify-content: center;
-    gap: 5px;
 }
 
 .img_principal{
-    width: 300px;
+    width: 350px;
+    height: 350px;
 }
 
 .img_secundarias{
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
 .img_secundarias img{
-    width: 148px;
+    width: 194px;
+    height: 175px;
 }
 
 
 .div_descripcion{
+    margin-top: 10px;
     display: flex;
-    justify-content: center;
-    margin: 0 20px;
+    flex-direction: column;
 }
 
 .publicador img{
     width: 100px;
+}
+
+.preguntas{
+    margin-top: 90px;
+    width: 100%;
+
+}
+
+.preguntasContainer{
+    overflow-y: scroll;
+    width: 100%;
+    height: 150px;
+
 }

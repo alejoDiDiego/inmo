@@ -46,10 +46,9 @@
 
 .publicacion_extendido{
     cursor: default;
-    height: fit-content;
+    height: 850px;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
     display: flex;
-    
 }
 
 .publicacion_extendido .price h3{
@@ -130,6 +129,13 @@
 
 
 .infoContainer{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.infoContainer_extendido{
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 10px;
@@ -274,6 +280,11 @@
     flex-direction: column;
 }
 
+
+.publicador{
+    margin-top: 55px;
+}
+
 .userNameContainer{
     display: flex;
     flex-direction: row;
@@ -294,3 +305,4 @@
     font-weight: 600;
     font-size: 18px;
 }
+
