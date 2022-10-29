@@ -92,6 +92,8 @@ const principal = () => {
     const [confirmarEliminacionFondo, setConfirmarEliminacionFondo] = useState(false)
     const [confirmarEliminacionPerfil, setConfirmarEliminacionPerfil] = useState(false)
 
+    const [estrellas, setEstrellas] = useState(0)
+
     let puntajeEstrellas = 0
 
 
@@ -298,6 +300,8 @@ const principal = () => {
                         queryFirebase()
                         docSnap.data().valoraciones.map(v => {
                             puntajeEstrellas += v.estrellas
+                            console.log(puntajeEstrellas)
+                            setEstrellas(puntajeEstrellas)
                         })
                         console.log(puntajeEstrellas)
                         console.log(docSnap.data())
@@ -1418,7 +1422,7 @@ const principal = () => {
                                                     info.valoraciones.length == 0 ?
                                                     <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
                                                     :
-                                                    <p>{puntajeEstrellas / info.valoraciones.length} Estrellas de {info.valoraciones.length} valoraciones</p>
+                                                    <p>{estrellas / info.valoraciones.length} Estrellas de {info.valoraciones.length} valoraciones</p>
                                                 }
 
                                                 {
