@@ -14,6 +14,8 @@ const UsuarioExtendido = ({ u }) => {
     const [publicacionesMostrar, setPublicacionesMostrar] = useState(true)
     const [comentariosMostrar, setComentariosMostrar] = useState(false)
 
+    const [usuariosComentadores, setUsuariosComentadores] = useState([])
+
 
     const [publicaciones, setPublicaciones] = useState([])
 
@@ -49,6 +51,13 @@ const UsuarioExtendido = ({ u }) => {
     useEffect(() => {
         queryFirebase()
     }, [])
+
+    useEffect(() => {
+        let uc = listaComentarios.map((v, id) => {
+            return v.usuarioComentador.uid
+        })
+        setUsuariosComentadores(uc)
+    }, [listaComentarios])
 
 
     const isNumber = e => {
@@ -94,6 +103,7 @@ const UsuarioExtendido = ({ u }) => {
 
         const docRefPropio = doc(firebase.db, "Usuarios", usuario.uid)
         const docSnapPropio = await getDoc(docRefPropio)
+        console.log(docSnapPropio.data())
         let mc = docSnapPropio.data().misComentarios
         mc.push({
             tipo: "usuario",
@@ -142,14 +152,14 @@ const UsuarioExtendido = ({ u }) => {
 
 
 
-    const handleResponder = async (e, v) =>{
+    const handleResponder = async (e, v) => {
         e.preventDefault()
 
         const docRef = doc(firebase.db, "Usuarios", u.uid)
         const docSnap = await getDoc(docRef)
         let vs = docSnap.data().valoraciones
         vs.forEach(e => {
-            if(e.usuarioComentador.uid == v.usuarioComentador.uid){
+            if (e.usuarioComentador.uid == v.usuarioComentador.uid) {
                 e.respuesta = {
                     fecha: Date.now(),
                     texto: respuesta
@@ -190,11 +200,13 @@ const UsuarioExtendido = ({ u }) => {
                 <div>
                     {
                         usuario.uid != u.uid ?
-                            <form onSubmit={e => handleComentar(e)}>
-                                <input required value={estrella} placeholder="estrellas" max="5" maxLength="1" onChange={e => e.target.value > 5 ? null : setEstrella(isNumber(e))} />
-                                <input required value={comentario} placeholder="comentario" maxLength="200" onChange={e => setComentario(e.target.value)} />
-                                <input type="submit" />
-                            </form>
+                            usuariosComentadores.includes(usuario.uid) ?
+                                null :
+                                <form onSubmit={e => handleComentar(e)}>
+                                    <input required value={estrella} placeholder="estrellas" max="5" maxLength="1" onChange={e => e.target.value > 5 ? null : setEstrella(isNumber(e))} />
+                                    <input required value={comentario} placeholder="comentario" maxLength="200" onChange={e => setComentario(e.target.value)} />
+                                    <input type="submit" />
+                                </form>
                             : null
                     }
 
@@ -206,6 +218,7 @@ const UsuarioExtendido = ({ u }) => {
                             <div>
                                 {
                                     listaComentarios.map((v, id) => {
+
                                         return (
                                             <div key={id}>
                                                 <p>{v.estrellas} Estrellas</p>
@@ -218,12 +231,12 @@ const UsuarioExtendido = ({ u }) => {
 
                                                 {
                                                     usuario.uid == u.uid && Object.keys(v.respuesta).length == 0 ?
-                                                    <form onSubmit={(e) => handleResponder(e, v)}>
-                                                        <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
-                                                        <input type="submit" value="Responder" />
-                                                    </form>
-                                                    :
-                                                    null
+                                                        <form onSubmit={(e) => handleResponder(e, v)}>
+                                                            <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
+                                                            <input type="submit" value="Responder" />
+                                                        </form>
+                                                        :
+                                                        null
                                                 }
 
                                                 {

@@ -299,7 +299,7 @@ const principal = () => {
                         setEmailPublico(docSnap.data().emailPublico)
                         queryFirebase()
                         docSnap.data().valoraciones.map(v => {
-                            puntajeEstrellas += v.estrellas
+                            puntajeEstrellas += parseInt(v.estrellas)
                             console.log(puntajeEstrellas)
                             setEstrellas(puntajeEstrellas)
                         })
