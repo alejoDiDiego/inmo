@@ -64,6 +64,9 @@ const principal = () => {
     const [comentarios, setComentarios] = useState(false)
     const [misComentarios, setMisComentarios] = useState(false)
 
+    const [misComentariosUsuarios, setMisComentariosUsuarios] = useState([])
+    const [misComentariosPublicaciones, setMisComentariosPublicaciones] = useState([])
+
 
     const [publicaciones, setPublicaciones] = useState([])
 
@@ -267,7 +270,13 @@ const principal = () => {
 
 
 
+    useEffect(() => {
+        console.log(misComentariosUsuarios)
+    }, [misComentariosUsuarios])
 
+    useEffect(() => {
+        console.log(misComentariosPublicaciones)
+    }, [misComentariosPublicaciones])
 
 
 
@@ -304,14 +313,22 @@ const principal = () => {
                             setEstrellas(puntajeEstrellas)
                         })
 
-                        
-                        
+                        for(const c of docSnap.data().misComentarios){
+                            console.log(c)
+                            if(c.tipo == "usuario"){
+                                const usRef = doc(firebase.db, "Usuarios", c.id)
+                                const usSnap = await getDoc(usRef)
+                                console.log(usSnap.data())
+                                setMisComentariosUsuarios([...misComentariosUsuarios, usSnap.data()]) 
 
+                            }
+                            if(c.tipo == "publicacion"){
+                                const pubRef = doc(firebase.db, "Publicaciones", c.id)
+                                const pubSnap = await getDoc(pubRef)
+                                setMisComentariosPublicaciones([...misComentariosPublicaciones, pubSnap.data()]) 
+                            }
+                        }
 
-                            
-
-                        console.log(puntajeEstrellas)
-                        console.log(docSnap.data())
 
                     }
                     return true
@@ -1617,6 +1634,9 @@ const principal = () => {
                                     misComentarios == true &&
                                     <MisComentarios
                                         usuario={usuario}
+                                        info={info}
+                                        misComentariosUsuarios={misComentariosUsuarios}
+                                        misComentariosPublicaciones={misComentariosPublicaciones}
                                     />
                                 }
                             </div>
@@ -1630,6 +1650,8 @@ const principal = () => {
             </div>
         )
     }
+
+
 
 
 }
