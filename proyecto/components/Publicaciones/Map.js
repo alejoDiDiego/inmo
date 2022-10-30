@@ -41,13 +41,11 @@ function CenterSelect({ positions }) {
 
     useEffect(() => {
         if ("publicacion" in router.query) {
-            console.log("pasa")
             const filter = positions.filter(p => {
                 return (
                     p.id == router.query.publicacion
                 )
             })
-            console.log(filter)
             if(filter.length == 0){
                 return
             }
@@ -109,14 +107,13 @@ const Map = ({ positions }) => {
             />
 
             {
-                positions.map(p => {
+                positions.map((p, id) => {
                     const { id, latLon } = p
-                    console.log(id)
-                    console.log(latLon)
+
 
                     return (
                         <>
-                            <Marker eventHandlers={{
+                            <Marker key={id} eventHandlers={{
                                 click: (e) => { handleClick(p) }
                             }} position={latLon} icon={icon}>
                                 <div onClick={() => console.log("click")}>hola</div>

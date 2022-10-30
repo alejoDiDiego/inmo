@@ -13,11 +13,13 @@ const Publicacion = ({ p }) => {
 
   const [extendido, setExtendido] = useState(false)
 
+  const [cargando, setCargando] = useState(false)
+
   const router = useRouter()
 
   let puntajeEstrellas = 0
 
-  console.log(p)
+
 
 
   function numeroConPuntos(x) {
@@ -37,9 +39,6 @@ const Publicacion = ({ p }) => {
 
   }
 
-  useEffect(() => {
-    console.log(extendido)
-  }, [extendido])
 
   // useEffect(() => {
   //   console.log("a")
@@ -57,7 +56,6 @@ const Publicacion = ({ p }) => {
   // }, [router])
 
   useEffect(() => {
-    console.log("a")
     if ("publicacion" in router.query) {
       setExtendido(true)
     } else {
@@ -65,19 +63,23 @@ const Publicacion = ({ p }) => {
     }
   }, [router])
 
+  useEffect(() => {
+    queryFirebase()
+  }, [extendido])
+
   const queryFirebase = async () => {
+    setCargando(true)
     const docRef = doc(firebase.db, "Usuarios", p.publicador)
     const docSnap = await getDoc(docRef)
-    console.log(docSnap.data())
     docSnap.data().valoraciones.map(v => {
       puntajeEstrellas += v.estrellas
     })
     setPublicador(docSnap.data())
-
+    setCargando(false)
   }
 
   useEffect(() => {
-    if (!publicador.hasOwnProperty("creado")) {
+    if (!publicador.hasOwnProperty("uid")) {
       queryFirebase()
     }
   }, [publicador])
@@ -222,50 +224,53 @@ const Publicacion = ({ p }) => {
             </div>
 
             {
-              extendido == true &&
-              (
+              extendido == true ?
+                (
 
-                !publicador.hasOwnProperty("creado") ? null :
+                  !publicador.hasOwnProperty("uid") ? null :
 
-                  (
+                    (
 
-                    <div className={styles.publicador}>
-                      <p className={styles.divider}>Publicado por: </p>
-                      <div className={styles.userNameContainer}>
-                        <img src={publicador.fotoPerfilURL} />
-                        <div className={styles.userInfo}>
-                          <p>{publicador.nombreUsuario}</p>
-                          <p className={styles.type}>{titleCase(publicador.type)}</p>
-                        </div>
-                      </div>
+                      cargando == false ?
+                        (
+                          <div className={styles.publicador}>
+                            <p className={styles.divider}>Publicado por: </p>
+                            <div className={styles.userNameContainer}>
+                              <img src={publicador.fotoPerfilURL} />
+                              <div className={styles.userInfo}>
+                                <p>{publicador.nombreUsuario}</p>
+                                <p className={styles.type}>{titleCase(publicador.type)}</p>
+                              </div>
+                            </div>
 
-                      <div>
-                        <p>{publicador.numeroCelular}</p>
+                            <div>
+                              <p>{publicador.numeroCelular}</p>
 
-                      </div>
-                      {
-                        publicador.numeroTelefono.length == 0 ? null :
-                          <p>{publicador.numeroTelefono}</p>
-                      }
+                            </div>
+                            {
+                              publicador.numeroTelefono.length == 0 ? null :
+                                <p>{publicador.numeroTelefono}</p>
+                            }
 
-                      {
-                        publicador.emailPublico == true &&
-                        <p>{publicador.mail}</p>
+                            {
+                              publicador.emailPublico == true &&
+                              <p>{publicador.mail}</p>
 
-                      }
-                      {
+                            }
+                            {
 
-                        publicador.valoraciones.length == 0 ?
-                          <p>0 Estrellas de 0 Valoraciones.</p>
-                          :
-                          <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
-                      }
+                              publicador.valoraciones.length == 0 ?
+                                <p>0 Estrellas de 0 Valoraciones.</p>
+                                :
+                                <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
+                            }
 
 
-                    </div>
-                  )
+                          </div>
+                        ) : null
+                    )
 
-              )
+                ) : null
             }
 
           </div>
@@ -287,15 +292,16 @@ const Publicacion = ({ p }) => {
 
 
       {
-        extendido == true &&
-        (
-          <div>
-            <PublicacionExtendida
-              p={p}
-              setExtendido={setExtendido}
-            />
-          </div>
-        )
+        extendido == true ?
+          (
+            <div>
+              <PublicacionExtendida
+                p={p}
+                setExtendido={setExtendido}
+                publicador={publicador}
+              />
+            </div>
+          ) : null
       }
     </div>
   )
