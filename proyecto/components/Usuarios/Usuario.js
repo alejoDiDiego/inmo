@@ -14,18 +14,19 @@ const Usuario = ({ u }) => {
 
   const router = useRouter()
 
-  let puntajeEstrellas = 0
+  
 
   useEffect(() => {
-    
+    let puntajeEstrellas = 0
     u.valoraciones.map(v => {
       puntajeEstrellas = parseInt(puntajeEstrellas) +  parseInt(v.estrellas)
       setEstrellas(puntajeEstrellas)
       console.log(v)
       console.log(estrellas)
     })
-    
   }, [u])
+
+
 
   const handleExtendido = async () => {
     // console.log("router.query.publicacion " + router.query.publicacion)
