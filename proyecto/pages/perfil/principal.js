@@ -299,10 +299,17 @@ const principal = () => {
                         setEmailPublico(docSnap.data().emailPublico)
                         queryFirebase()
                         docSnap.data().valoraciones.map(v => {
-                            puntajeEstrellas += parseInt(v.estrellas)
+                            puntajeEstrellas = parseInt(puntajeEstrellas) + parseInt(v.estrellas)
                             console.log(puntajeEstrellas)
                             setEstrellas(puntajeEstrellas)
                         })
+
+                        
+                        
+
+
+                            
+
                         console.log(puntajeEstrellas)
                         console.log(docSnap.data())
 
@@ -356,6 +363,23 @@ const principal = () => {
         }
         return splitStr.join(' ');
     }
+
+
+    // function roundToHalf(value) {
+    //     let number = value / info.valoraciones.length
+    //     console.log(number)
+    //     let converted = parseFloat(number); // Make sure we have a number
+    //     let decimal = (converted - parseInt(converted, 10));
+    //     decimal = Math.round(decimal * 10);
+    //     if (decimal == 5) { return (parseInt(converted, 10) + 0.5); }
+    //     if ((decimal < 3) || (decimal > 7)) {
+    //         console.log(Math.round(converted))
+    //         return Math.round(converted);
+    //     } else {
+    //         console.log(parseInt(converted, 10) + 0.5)
+    //         return (parseInt(converted, 10) + 0.5);
+    //     }
+    // }
 
 
 
@@ -1204,9 +1228,9 @@ const principal = () => {
                                             )
                                     ) :
                                     <div className={styles.loadingMod}>
-                                         <Spinner></Spinner>
+                                        <Spinner></Spinner>
                                     </div>
-                                   
+
                             }
                         </div>
 
@@ -1255,7 +1279,7 @@ const principal = () => {
                                                     </div>
                                                 ) :
                                             <div className={styles.div_buttons}>
-                                                
+
                                             </div>
                                     }
 
@@ -1300,7 +1324,7 @@ const principal = () => {
                                                         )
                                                 ) :
                                                 <div className={styles.div_buttons}>
-                                                    
+
                                                 </div>
 
                                         }
@@ -1420,9 +1444,9 @@ const principal = () => {
                                                 <p>{publicaciones.length} Publicaciones</p>
                                                 {
                                                     info.valoraciones.length == 0 ?
-                                                    <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
-                                                    :
-                                                    <p>{estrellas / info.valoraciones.length} Estrellas de {info.valoraciones.length} valoraciones</p>
+                                                        <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
+                                                        :
+                                                        <p>{Math.round(estrellas / info.valoraciones.length * 10) / 10} Estrellas de {info.valoraciones.length} valoraciones</p>
                                                 }
 
                                                 {
@@ -1583,7 +1607,7 @@ const principal = () => {
 
                                 {
                                     comentarios == true &&
-                                    <Comentarios 
+                                    <Comentarios
                                         usuario={usuario}
                                         info={info}
                                     />
@@ -1592,7 +1616,7 @@ const principal = () => {
                                 {
                                     misComentarios == true &&
                                     <MisComentarios
-                                        usuario={usuario} 
+                                        usuario={usuario}
                                     />
                                 }
                             </div>

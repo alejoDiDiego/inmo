@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
 import styles from "../../styles/UsuarioExtendido.module.css"
 import Publicacion from '../Publicaciones/Publicacion'
+import Comentario from './Comentario'
 import PublicacionUsuarioExtendido from './PublicacionUsuarioExtendido'
 
 
@@ -117,61 +118,10 @@ const UsuarioExtendido = ({ u }) => {
     }
 
 
-    const handleEliminar = async () => {
-        const docRef = doc(firebase.db, "Usuarios", u.uid)
-        const docSnap = await getDoc(docRef)
-        let vs = docSnap.data().valoraciones
-        const filtro = vs.filter((v) => {
-            return (
-                v.usuarioComentador.uid != usuario.uid
-            )
-        })
-        console.log(filtro)
-        await updateDoc(doc(firebase.db, "Usuarios", u.uid), {
-            valoraciones: filtro
-        })
-        setListaComentarios(filtro)
-
-
-        const docRefPropio = doc(firebase.db, "Usuarios", usuario.uid)
-        const docSnapPropio = await getDoc(docRefPropio)
-        let mc = docSnapPropio.data().misComentarios
-        console.log(mc)
-        const filtro2 = mc.filter((m) => {
-            return (
-                m.id != u.uid && m.tipo == "usuario"
-            )
-        })
-        console.log(filtro2)
-        await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
-            misComentarios: filtro2
-        })
-
-        console.log("piola")
-    }
 
 
 
-    const handleResponder = async (e, v) => {
-        e.preventDefault()
 
-        const docRef = doc(firebase.db, "Usuarios", u.uid)
-        const docSnap = await getDoc(docRef)
-        let vs = docSnap.data().valoraciones
-        vs.forEach(e => {
-            if (e.usuarioComentador.uid == v.usuarioComentador.uid) {
-                e.respuesta = {
-                    fecha: Date.now(),
-                    texto: respuesta
-                }
-            }
-        });
-
-        await updateDoc(doc(firebase.db, "Usuarios", u.uid), {
-            valoraciones: vs
-        })
-        setListaComentarios(vs)
-    }
 
 
 
@@ -220,32 +170,14 @@ const UsuarioExtendido = ({ u }) => {
                                     listaComentarios.map((v, id) => {
 
                                         return (
-                                            <div key={id}>
-                                                <p>{v.estrellas} Estrellas</p>
-                                                <p>{v.comentario}</p>
-                                                <p>Publicado por {v.usuarioComentador.nombre}</p>
-                                                {
-                                                    Object.keys(v.respuesta).length == 0 ? null :
-                                                        <p>Respuesta del publicador: {v.respuesta.texto}</p>
-                                                }
+                                            <Comentario
+                                                key={id}
+                                                v={v}
+                                                setListaComentarios={setListaComentarios}
+                                                usuario={usuario}
+                                                u={u}
+                                            />
 
-                                                {
-                                                    usuario.uid == u.uid && Object.keys(v.respuesta).length == 0 ?
-                                                        <form onSubmit={(e) => handleResponder(e, v)}>
-                                                            <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
-                                                            <input type="submit" value="Responder" />
-                                                        </form>
-                                                        :
-                                                        null
-                                                }
-
-                                                {
-                                                    v.usuarioComentador.uid == usuario.uid ?
-                                                        <button onClick={() => handleEliminar()}>Eliminar comentario</button>
-                                                        :
-                                                        null
-                                                }
-                                            </div>
                                         )
                                     })
                                 }
