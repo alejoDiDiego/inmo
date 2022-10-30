@@ -27,6 +27,10 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
 
     // }
 
+    useEffect(() => {
+        setListaComentarios(p.comentarios)
+    }, [p])
+
 
     const handlePreguntar = async (e) => {
         try {
@@ -67,12 +71,14 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
             let mc = docSnapPropio.data().misComentarios
             mc.push({
                 tipo: "publicacion",
-                id: p.id
+                id: p.id,
+                idComentario: comentarioObj.fecha
             })
             await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
                 misComentarios: mc
             })
             setListaComentarios(cs)
+            setComentario("")
         } catch (err) {
             console.log(err)
             alert("Hubo un error")
@@ -114,10 +120,14 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
                 <h2>Preguntas:</h2>
                 <div className={styles.preguntasContainer}>
                     {
-                        listaComentarios.map((p, id) => {
+                        listaComentarios.map((c, id) => {
                             return (
                                 <Comentario
                                     key={id}
+                                    comentario={c}
+                                    usuario={usuario}
+                                    p={p}
+                                    setListaComentarios={setListaComentarios}
                                 />
                             )
                         })

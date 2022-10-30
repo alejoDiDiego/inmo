@@ -50,7 +50,7 @@ const Comentario = ({ v, u, setListaComentarios, usuario }) => {
         console.log(mc)
         const filtro2 = mc.filter((m) => {
             return (
-                m.id != u.uid && m.tipo == "usuario"
+                m.id != u.uid
             )
         })
         console.log(filtro2)
