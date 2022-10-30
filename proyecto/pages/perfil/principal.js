@@ -97,7 +97,7 @@ const principal = () => {
 
     const [estrellas, setEstrellas] = useState(0)
 
-    let puntajeEstrellas = 0
+
 
 
     const [tipos, setTipos] = useState(
@@ -307,11 +307,11 @@ const principal = () => {
                         setNuevaDescripcion(docSnap.data().descripcion)
                         setEmailPublico(docSnap.data().emailPublico)
                         queryFirebase()
-                        docSnap.data().valoraciones.map(v => {
+                        let puntajeEstrellas = 0
+                        for(const v of docSnap.data().valoraciones){
                             puntajeEstrellas = parseInt(puntajeEstrellas) + parseInt(v.estrellas)
-                            console.log(puntajeEstrellas)
-                            setEstrellas(puntajeEstrellas)
-                        })
+                        }
+                        setEstrellas(puntajeEstrellas)
 
                         for(const c of docSnap.data().misComentarios){
                             console.log(c)

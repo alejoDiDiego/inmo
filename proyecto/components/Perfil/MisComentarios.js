@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
-import Usuario from './Usuario'
+import PublicacionComentarios from './PublicacionComentarios'
+import UsuarioComentarios from './UsuarioComentarios'
 
 const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublicaciones }) => {
 
@@ -19,7 +20,7 @@ const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublica
         select == "usuarios" ?
           misComentariosUsuarios.map((u, id) => {
             return (
-              <Usuario 
+              <UsuarioComentarios 
                 key={id}
                 u={u}
                 usuario={usuario}
@@ -28,6 +29,17 @@ const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublica
           })
           :
           null
+      }
+      {
+        misComentariosPublicaciones.map((p, id) => {
+          return(
+            <PublicacionComentarios
+              p={p}
+              usuario={usuario}
+              id={id}
+            />
+          )
+        })
       }
     </div>
   )

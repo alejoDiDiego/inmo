@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Usuario = ({ u, usuario }) => {
+const UsuarioComentarios = ({ u, usuario }) => {
 
 
     function titleCase(str) {
@@ -49,4 +49,4 @@ const Usuario = ({ u, usuario }) => {
     )
 }
 
-export default Usuario
+export default UsuarioComentarios
