@@ -111,14 +111,6 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
             <p>{comentario.comentario}</p>
             <p>Publicado por: {comentario.usuarioComentador.nombre}</p>
             <p>Publicado: {fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
-            {
-                Object.keys(comentario.respuesta) == 0 ? null :
-                    (
-                        <div>
-
-                        </div>
-                    )
-            }
 
             {
                 comentario.usuarioComentador.uid == usuario.uid ?

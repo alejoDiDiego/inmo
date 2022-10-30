@@ -68,13 +68,14 @@ const Publicacion = ({ p }) => {
     queryFirebase()
   }, [extendido])
 
+
   
-  let puntajeEstrellas = 0
 
   const queryFirebase = async () => {
     setCargando(true)
     const docRef = doc(firebase.db, "Usuarios", p.publicador)
     const docSnap = await getDoc(docRef)
+    let puntajeEstrellas = 0
     for (const v of docSnap.data().valoraciones) {
       puntajeEstrellas = parseInt(puntajeEstrellas) + parseInt(v.estrellas)
     }
@@ -263,7 +264,6 @@ const Publicacion = ({ p }) => {
 
                             }
                             {
-
                               publicador.valoraciones.length == 0 ?
                                 <p>0 Estrellas de 0 Valoraciones.</p>
                                 :
@@ -275,7 +275,27 @@ const Publicacion = ({ p }) => {
                         ) : null
                     )
 
-                ) : null
+                ) :
+                !publicador.hasOwnProperty("uid") ? null :
+                  (
+                    cargando == false ?
+                      <div>
+                        <div className={styles.userNameContainer}>
+                          <img src={publicador.fotoPerfilURL} />
+                          <div className={styles.userInfo}>
+                            <p>{publicador.nombreUsuario}</p>
+                            <p className={styles.type}>{titleCase(publicador.type)}</p>
+                          </div>
+                        </div>
+                        {
+                          publicador.valoraciones.length == 0 ?
+                            <p>0 Estrellas de 0 Valoraciones.</p>
+                            :
+                            <p>{Math.round(estrellas / publicador.valoraciones.length * 10) / 10} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
+                        }
+                      </div>
+                      : null
+                  )
             }
 
           </div>
