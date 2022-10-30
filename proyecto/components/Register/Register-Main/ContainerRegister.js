@@ -180,6 +180,7 @@ const ContainerRegister = ({
                 numeroTelefono: "",
                 creado: Date.now(),
                 valoraciones: [],
+                misComentarios: {},
                 emailPublico: false
             })
 

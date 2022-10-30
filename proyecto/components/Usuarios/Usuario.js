@@ -8,6 +8,8 @@ const Usuario = ({ u }) => {
 
 
   const [extendido, setExtendido] = useState(false)
+
+  const [estrellas, setEstrellas] = useState(0)
   
 
   const router = useRouter()
@@ -15,10 +17,15 @@ const Usuario = ({ u }) => {
   let puntajeEstrellas = 0
 
   useEffect(() => {
+    
     u.valoraciones.map(v => {
-      puntajeEstrellas += v.estrellas
+      puntajeEstrellas = parseInt(puntajeEstrellas) +  parseInt(v.estrellas)
+      setEstrellas(puntajeEstrellas)
+      console.log(v)
+      console.log(estrellas)
     })
-  }, [])
+    
+  }, [u])
 
   const handleExtendido = async () => {
     // console.log("router.query.publicacion " + router.query.publicacion)
@@ -75,7 +82,7 @@ const Usuario = ({ u }) => {
           u.valoraciones.length == 0 ?
             <p>No tiene ninguna valoracion todavia</p>
             :
-            <p>{puntajeEstrellas / u.valoraciones.length} Estrellas de {u.valoraciones.length} valoraciones</p>
+            <p>{Math.round(estrellas / u.valoraciones.length * 10) / 10} Estrellas de {u.valoraciones.length} valoraciones</p>
         }
 
       </div>
