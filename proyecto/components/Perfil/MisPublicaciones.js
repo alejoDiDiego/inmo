@@ -7,7 +7,7 @@ import Publicacion from './Publicacion'
 
 const MisPublicaciones = ({ publicaciones, info, setPublicaciones, queryFirebase }) => {
 
-    
+
 
     useEffect(() => {
         console.log(publicaciones)
@@ -19,7 +19,7 @@ const MisPublicaciones = ({ publicaciones, info, setPublicaciones, queryFirebase
 
 
     const redirect = () => {
-        if(info.municipio == "" || info.numeroCelular == "" || info.provincia == "" || info.codigoPostal == ""){
+        if (info.municipio == "" || info.numeroCelular == "" || info.provincia == "" || info.codigoPostal == "") {
             alert("Le falta completar informacion para poder publicar")
             return
         }
@@ -44,13 +44,15 @@ const MisPublicaciones = ({ publicaciones, info, setPublicaciones, queryFirebase
                             )
                         })
                         :
-                            (
-                                <div>
-                                    <p>Comienza a publicar</p>
-                                    <button onClick={() => redirect()}>Publicar</button>
-
+                        (
+                            <div>
+                                <h3>No tienes ninguna publicacion activa.</h3>
+                                <div className={styles.buttonConfirm} onClick={() => redirect()}>
+                                    <div className={styles.buttonConfirm_back}></div>
+                                    <div className={styles.buttonConfirm_content}><span>Crear publicación</span></div>
                                 </div>
-                            )
+                            </div>
+                        )
                 }
             </div>
 

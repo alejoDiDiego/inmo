@@ -4,3 +4,47 @@
     gap: 30px;
 }
 
+.buttonConfirm{
+    width: 250px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    
+}
+
+.buttonConfirm_back{
+    width: 250px;
+    height: 40px;
+    background-color: #0071b3;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    position: absolute;
+}
+
+.buttonConfirm_content{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 250px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid #0071b3;
+    
+}
+
+.buttonConfirm_content span{
+    font-weight: bold;
+}
+
+
+.buttonConfirm:hover .buttonConfirm_content{
+    transform: translate(3px, -3px);
+
+}
+
+.buttonConfirm:hover .buttonConfirm_back{
+    transform: translate(-3px, 3px);
+}
