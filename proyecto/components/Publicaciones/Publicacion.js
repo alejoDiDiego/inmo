@@ -15,9 +15,10 @@ const Publicacion = ({ p }) => {
 
   const [cargando, setCargando] = useState(false)
 
+  const [estrellas, setEstrellas] = useState(0)
+
   const router = useRouter()
 
-  let puntajeEstrellas = 0
 
 
 
@@ -67,13 +68,17 @@ const Publicacion = ({ p }) => {
     queryFirebase()
   }, [extendido])
 
+  
+  let puntajeEstrellas = 0
+
   const queryFirebase = async () => {
     setCargando(true)
     const docRef = doc(firebase.db, "Usuarios", p.publicador)
     const docSnap = await getDoc(docRef)
-    docSnap.data().valoraciones.map(v => {
-      puntajeEstrellas += v.estrellas
-    })
+    for (const v of docSnap.data().valoraciones) {
+      puntajeEstrellas = parseInt(puntajeEstrellas) + parseInt(v.estrellas)
+    }
+    setEstrellas(puntajeEstrellas)
     setPublicador(docSnap.data())
     setCargando(false)
   }
@@ -262,7 +267,7 @@ const Publicacion = ({ p }) => {
                               publicador.valoraciones.length == 0 ?
                                 <p>0 Estrellas de 0 Valoraciones.</p>
                                 :
-                                <p>{puntajeEstrellas / publicador.valoraciones.length} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
+                                <p>{Math.round(estrellas / publicador.valoraciones.length * 10) / 10} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
                             }
 
 

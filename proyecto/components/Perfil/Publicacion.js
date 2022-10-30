@@ -4,6 +4,8 @@ import { doc, deleteDoc } from "firebase/firestore";
 import firebase, { FirebaseContext } from '../../firebase'
 import { getStorage, listAll, ref, deleteObject } from "firebase/storage";
 import Link from 'next/link';
+import Router from 'next/router';
+
 
 
 const Publicacion = ({ p, queryFirebase }) => {
@@ -54,6 +56,16 @@ const Publicacion = ({ p, queryFirebase }) => {
     }
 
 
+    const handlePublicacion = () => {
+        Router.push({
+            pathname: '/publicaciones/principal',
+            query: {
+                publicacion: p.id
+            }
+        })
+    }
+
+
 
 
 
@@ -62,7 +74,7 @@ const Publicacion = ({ p, queryFirebase }) => {
 
 
     return (
-        <div className={styles.publicacion}>
+        <div onClick={() => handlePublicacion()} className={styles.publicacion}>
 
             <div className={styles.publicacion_div_img}>
 
@@ -236,8 +248,8 @@ const Publicacion = ({ p, queryFirebase }) => {
                     </div> */}
 
                 </div>
-                
-                <div className={styles.escondido }></div>
+
+                <div className={styles.escondido}></div>
             </div>
 
         </div>

@@ -4,7 +4,7 @@ import firebase, { FirebaseContext } from '../../firebase'
 
 const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
 
-
+    const [respuesta, setRespuesta] = useState("")
 
 
     const handleEliminar = async () => {
@@ -12,9 +12,9 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
             const docRef = doc(firebase.db, "Publicaciones", p.id)
             const docSnap = await getDoc(docRef)
             let cs = docSnap.data().comentarios
-            const filtro = cs.filter((v) => {
+            const filtro = cs.filter((c) => {
                 return (
-                    v.fecha != comentario.fecha
+                    c.fecha != comentario.fecha
                 )
             })
             console.log(filtro)
@@ -34,13 +34,13 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                     m.idComentario != comentario.fecha
                 )
             })
-            
+
             console.log(filtro2)
             await updateDoc(doc(firebase.db, "Usuarios", usuario.uid), {
                 misComentarios: filtro2
             })
 
-            
+
         } catch (err) {
             console.log(err)
             alert("Hubo un error")
@@ -49,10 +49,63 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
 
 
 
+    const handleResponder = async (e) => {
+        try {
+            e.preventDefault()
+
+            const docRef = doc(firebase.db, "Publicaciones", p.id)
+            const docSnap = await getDoc(docRef)
+            let cs = docSnap.data().comentarios
+            cs.forEach(e => {
+                if (e.fecha == comentario.fecha) {
+                    e.respuesta = {
+                        fecha: Date.now(),
+                        texto: respuesta
+                    }
+                }
+            });
+
+            await updateDoc(doc(firebase.db, "Publicaciones", p.id), {
+                comentarios: cs
+            })
+            setListaComentarios(cs)
+            setRespuesta("")
+        } catch (err) { console.log(err) }
+    }
+
+
+
+    const handleEliminarRespuesta = async (c) => {
+        const docRef = doc(firebase.db, "Publicaciones", p.id)
+        const docSnap = await getDoc(docRef)
+        let vs = docSnap.data().comentarios
+        let newVs = []
+        for (const v of vs) {
+            console.log(vs)
+            console.log(v)
+            if (v.fecha == c.fecha) {
+                v.respuesta = {}
+            }
+            newVs.push(v)
+        }
+        await updateDoc(doc(firebase.db, "Publicaciones", p.id), {
+            comentarios: newVs
+        })
+        setListaComentarios(newVs)
+
+    }
+
+
+
 
 
 
     let fecha = new Date(comentario.fecha)
+    let fechaRespuesta = {}
+    if (Object.keys(comentario.respuesta).length > 0) {
+        fechaRespuesta = new Date(comentario.respuesta.fecha)
+    }
+
     return (
         <div>
             <p>{comentario.comentario}</p>
@@ -66,7 +119,47 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                         </div>
                     )
             }
-            <button onClick={() => handleEliminar()}>Eliminar</button>
+
+            {
+                comentario.usuarioComentador.uid == usuario.uid ?
+                    <button onClick={() => handleEliminar()}>Eliminar</button>
+                    : null
+            }
+
+
+            {
+                p.publicador == usuario.uid ?
+                    Object.keys(comentario.respuesta).length == 0 ?
+                        (
+
+
+                            <form onSubmit={(e) => handleResponder(e)}>
+                                <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
+                                <input type="submit" value="Responder" />
+                            </form>
+
+                        )
+
+                        :
+                        <div>
+                            <div>
+                                <p>Respuesta del publicador: {comentario.respuesta.texto}</p>
+                                <p>Publicado: {fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+
+                            </div>
+                            <button onClick={() => handleEliminarRespuesta(comentario)}>Eliminar respuesta</button>
+                        </div>
+                    :
+                    Object.keys(comentario.respuesta).length > 0 ?
+                        <div>
+                            <p>Respuesta del publicador: {comentario.respuesta.texto}</p>
+                            <p>Publicado: {fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+
+                        </div>
+                        : null
+            }
+
+
         </div>
     )
 }

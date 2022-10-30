@@ -29,6 +29,8 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
 
     useEffect(() => {
         setListaComentarios(p.comentarios)
+        console.log(usuario.uid)
+        console.log(p)
     }, [p])
 
 
