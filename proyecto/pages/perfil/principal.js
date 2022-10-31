@@ -990,7 +990,7 @@ const principal = () => {
                                             nuevoNumeroCelular.length == 0 ? <span className={styles.placeholder}>5491112341234</span> : null
                                         }
 
-                                        <input maxLength={16} value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={16} value={nuevoNumeroCelular} onChange={e => { setNuevoNumeroCelular(isNumber(e)); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
 
@@ -1002,7 +1002,7 @@ const principal = () => {
                                         }
 
 
-                                        <input maxLength={16} value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
+                                        <input maxLength={16} value={nuevoNumeroTelefono} onChange={e => { setNuevoNumeroTelefono(isNumber(e)); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
                                 </div>
                             </div>
