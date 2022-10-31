@@ -49,7 +49,6 @@ const principal = () => {
 
 
 
-
     useEffect(() => {
 
         const check = async () => {
@@ -103,6 +102,7 @@ const principal = () => {
         if (publicaciones.length == 0) return
 
         if (publicacion != null) {
+            
             // console.log(publicacion)
             // console.log(publicaciones)
             const filtro = publicaciones.filter(p => {
@@ -265,6 +265,7 @@ const principal = () => {
             ps.push(doc.data())
         });
         setPublicaciones(ps)
+        console.log("queryf")
         return true
     }
 
@@ -347,9 +348,10 @@ const principal = () => {
 
                                     (
                                         resultado.map((p, i) => {
+                                            console.log(p.id)
                                             return (
                                                 <Publicacion
-                                                    p={p}
+                                                    publicacion={p}
                                                     key={i}
                                                 />
                                             )

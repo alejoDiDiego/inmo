@@ -31,7 +31,7 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
         setListaComentarios(p.comentarios)
         console.log(usuario.uid)
         console.log(p)
-    }, [p])
+    }, [])
 
 
     const handlePreguntar = async (e) => {
@@ -139,9 +139,8 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
                     usuario.uid == publicador.uid ? null :
                         <form onSubmit={(e) => handlePreguntar(e)}>
                             <div className={styles.fieldDir}>
-                                <p>Nombre*:</p>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="&nbsp;" />
+                                    <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="Realiza una pregunta" />
                                 </label>
                             </div>
                             <input type="submit" value="Preguntar" />

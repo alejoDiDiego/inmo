@@ -1,7 +1,8 @@
-.publicacion_extendida {
-
+.publicacion_extendida {    
+    border-left: 1px black solid;
     height: 100%;
     width: 550px;
+    padding: 15px;
 }
 
 .div_imgs {
@@ -38,14 +39,15 @@
 
 .preguntas {
     margin-top: 30px;
+    margin-bottom: 30px;
     width: 500px;
-
+    border-radius: 10px;
 }
 
 .preguntasContainer {
     overflow-y: scroll;
     width: 100%;
-    height: 150px;
+    height: 300px;
 }
 
 .headerPreg {
@@ -139,4 +141,28 @@
     top: -10px;
     font-size: 12px;
     color: #222;
+} 
+
+.custom_field.two input {
+    border-radius: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background:
+    linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+    linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+    linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+    transition: background-size 0.3s ease;
+}
+
+.custom_field.two input.dirty,
+.custom_field.two input:not(:placeholder-shown),
+.custom_field.two input:focus {
+    background-size: 100% 0.15em, 100% 0.1em, 100%;
+}
+
+
+.custom_field i{
+    position: relative;
+    margin-left: -30px;
+    cursor: pointer;
 }
