@@ -74,7 +74,7 @@ const Publicacion = ({ p, queryFirebase }) => {
 
 
     return (
-        <div onClick={() => handlePublicacion()} className={styles.publicacion}>
+        <div className={styles.publicacion}>
 
             <div className={styles.publicacion_div_img}>
 
@@ -131,7 +131,7 @@ const Publicacion = ({ p, queryFirebase }) => {
                 }
 
 
-                <div className={styles.infoContainer}>
+                <div onClick={() => handlePublicacion()} className={styles.infoContainer}>
                     <div className={styles.headPlusDir}>
                         <div className={styles.head}>
                             <div className={styles.infoInside}>
