@@ -28,6 +28,8 @@
     margin-top: 10px;
     display: flex;
     flex-direction: column;
+    overflow-wrap: break-word;
+    width: 500px;
 }
 
 .publicador img{
@@ -35,7 +37,7 @@
 }
 
 .preguntas{
-    margin-top: 90px;
+    margin-top: 30px;
     width: 100%;
 
 }

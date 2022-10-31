@@ -69,7 +69,7 @@ const Publicacion = ({ p }) => {
   }, [extendido])
 
 
-  
+
 
   const queryFirebase = async () => {
     setCargando(true)
@@ -123,7 +123,9 @@ const Publicacion = ({ p }) => {
                   p.tipoPublicacion == "venta" ?
                     (
                       <div className={styles.price}>
-                        <h3>En venta</h3>
+                        <div className={styles.profile}>
+                          <h3>En venta</h3>
+                        </div>
                         <div className={styles.price_valores}>
                           <h2>USD$</h2>
                           <h2>{numeroConPuntos(p.precio)}</h2>
@@ -229,7 +231,7 @@ const Publicacion = ({ p }) => {
 
             </div>
 
-            {
+             {
               extendido == true ?
                 (
 
@@ -280,23 +282,10 @@ const Publicacion = ({ p }) => {
                   (
                     cargando == false ?
                       <div>
-                        <div className={styles.userNameContainer}>
-                          <img src={publicador.fotoPerfilURL} />
-                          <div className={styles.userInfo}>
-                            <p>{publicador.nombreUsuario}</p>
-                            <p className={styles.type}>{titleCase(publicador.type)}</p>
-                          </div>
-                        </div>
-                        {
-                          publicador.valoraciones.length == 0 ?
-                            <p>0 Estrellas de 0 Valoraciones.</p>
-                            :
-                            <p>{Math.round(estrellas / publicador.valoraciones.length * 10) / 10} Estrellas de {publicador.valoraciones.length} Valoraciones</p>
-                        }
                       </div>
                       : null
                   )
-            }
+            } 
 
           </div>
 
