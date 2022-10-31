@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
 import Select from 'react-select'
+import styles from "../../styles/Filtros.module.css"
 
 const Filtros = ({ router }) => {
 
@@ -22,6 +23,8 @@ const Filtros = ({ router }) => {
     } } = router
 
     const r = useRouter()
+
+    const [active, setActive] = useState(false)
 
 
     const [nuevaDireccion, setNuevaDireccion] = useState("")
@@ -79,7 +82,7 @@ const Filtros = ({ router }) => {
 
 
     useEffect(() => {
-        if(
+        if (
             direccion == null ||
             tipoPublicacion == null ||
             tipoVivienda == null ||
@@ -93,7 +96,7 @@ const Filtros = ({ router }) => {
             cantCocherasMin == null ||
             cantHabitacionesMax == null ||
             cantHabitacionesMin == null
-        ){
+        ) {
             return
         }
         setNuevaDireccion(direccion)
@@ -199,26 +202,44 @@ const Filtros = ({ router }) => {
                 <input value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
                 <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} value={{ value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }}></Select>
                 <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} value={{ value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
-                {
-                    nuevoTipoPublicacion.length == 0 ?
-                        <>
-                            <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
-                            <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
-                        </>
-                        :
-                        <>
-                            <input placeholder={`nuevoPrecioMin ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(isNumber(e))} />
-                            <input placeholder={`nuevoPrecioMax ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(isNumber(e))} />
-                        </>
-                }
-                <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(isNumber(e))} />
-                <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(isNumber(e))} />
-                <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(isNumber(e))} />
-                <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(isNumber(e))} />
-                <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(isNumber(e))} />
-                <input placeholder="nuevoCantCocherasMax" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(isNumber(e))} />
-                <input placeholder="nuevoCantHabitacionesMin" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(isNumber(e))} />
-                <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(isNumber(e))} />
+
+
+                <div className={styles.div_menu}>
+                    <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active) }}>
+                        <div className={styles.bar}></div>
+                        <div className={styles.bar}></div>
+                        <div className={styles.bar}></div>
+                    </div>
+
+
+                    <div className={`${styles.hidden_menu} ${active == true ? styles.active : null}`}>
+                        <div className={styles.inside_hidden_menu}>
+                            {
+                                nuevoTipoPublicacion.length == 0 ?
+                                    <>
+                                        <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
+                                        <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
+                                    </>
+                                    :
+                                    <>
+                                        <input placeholder={`nuevoPrecioMin ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(isNumber(e))} />
+                                        <input placeholder={`nuevoPrecioMax ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(isNumber(e))} />
+                                    </>
+                            }
+                            <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(isNumber(e))} />
+                            <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(isNumber(e))} />
+                            <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(isNumber(e))} />
+                            <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(isNumber(e))} />
+                            <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(isNumber(e))} />
+                            <input placeholder="nuevoCantCocherasMax" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(isNumber(e))} />
+                            <input placeholder="nuevoCantHabitacionesMin" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(isNumber(e))} />
+                            <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(isNumber(e))} />
+
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <button onClick={() => handleBuscar()}>Aplicar</button>
