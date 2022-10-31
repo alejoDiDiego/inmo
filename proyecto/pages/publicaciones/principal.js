@@ -326,9 +326,10 @@ const principal = () => {
 
                             <div className={styles.filtros}>
 
-                                <button onClick={() => handleBuscarUsuarios()}>Buscar usuarios</button>
-
+                                
+                            
                                 <Filtros router={router} />
+                                <button onClick={() => handleBuscarUsuarios()}>Buscar usuarios</button>
                             </div>
 
                             <div style={{ width: "100%", height: "100%", position: "relative", zIndex: "1" }}>

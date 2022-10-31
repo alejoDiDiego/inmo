@@ -130,8 +130,20 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
 
 
                             <form onSubmit={(e) => handleResponder(e)}>
-                                <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
-                                <input type="submit" value="Responder" />
+                                <div className={styles.rtaForm}>
+                                    <div className={styles.fieldDir}>
+                                        <label className={`${styles.custom_fieldRta} ${styles.two}`}>
+                                            <input maxLength={40} onChange={(e) => setRespuesta(e.target.value)} placeholder="Responde a la pregunta" />
+                                        </label>
+                                    </div>
+                                    <button type="submit" className={styles.buttonConfirmRta}>
+                                        <div className={styles.buttonConfirmRta_back}></div>
+                                        <div className={styles.buttonConfirmRta_content}><span>Responder</span></div>
+                                    </button>
+
+                                </div>
+
+
                             </form>
 
                         )
@@ -150,8 +162,9 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                                 <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
                                 <button onClick={() => handleEliminarRespuesta(comentario)}>Eliminar respuesta</button>
                             </div>
-                            <p>{comentario.respuesta.texto}</p>
-
+                            <div className={styles.rtaBody}>
+                                <p >{comentario.respuesta.texto}</p>
+                            </div>
                         </div>
                     :
                     Object.keys(comentario.respuesta).length > 0 ?
@@ -167,7 +180,10 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                                     </div>
                                     <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
                                 </div>
-                                <p className={styles.rtaBody}>{comentario.respuesta.texto}</p>
+                                <div className={styles.rtaBody}>
+                                    <p >{comentario.respuesta.texto}</p>
+                                </div>
+
                             </div>
 
 

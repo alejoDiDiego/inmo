@@ -199,7 +199,11 @@ const Filtros = ({ router }) => {
     return (
         <div>
             <div>
-                <input value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
+                <div className={styles.fieldDir}>
+                    <label className={`${styles.custom_field} ${styles.two}`}>
+                        <input maxLength={40} value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
+                    </label>
+                </div>
                 <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} value={{ value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }}></Select>
                 <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} value={{ value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
 

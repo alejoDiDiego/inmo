@@ -1,8 +1,6 @@
 .publicacion_extendida {    
-    border-left: 1px black solid;
     height: 100%;
     width: 550px;
-    padding: 15px;
 }
 
 .div_imgs {
@@ -63,6 +61,7 @@
     flex-direction: row;
     gap: 15px;
     margin-top: -20px;
+    margin-left: 20px;
 
 }
 
@@ -73,8 +72,8 @@
 }
 
 .rtaBody {
-    margin-top: -5px;
-    margin-left: 30px;
+    margin-top: -20px;
+    margin-left: 50px;
 }
 
 .lineUp {
@@ -165,4 +164,185 @@
     position: relative;
     margin-left: -30px;
     cursor: pointer;
+}
+
+.fieldDir{
+    margin-top: 10px;
+}
+
+.buttonConfirm{
+    width: 250px;
+    height: 40px;
+
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.buttonConfirm_back{
+    width: 250px;
+    height: 40px;
+    background-color: #0071b3;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    position: absolute;
+}
+
+.buttonConfirm_content{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 250px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid #0071b3;
+    
+}
+
+.buttonConfirm_content span{
+    font-weight: bold;
+}
+
+
+.buttonConfirm:hover .buttonConfirm_content{
+    transform: translate(3px, -3px);
+
+}
+
+.buttonConfirm:hover .buttonConfirm_back{
+    transform: translate(-3px, 3px);
+}
+
+.custom_fieldRta {
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+    --field-padding: 12px;
+}
+
+.custom_fieldRta input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: var(--field-padding);
+    border-radius: 10px;
+    width: 300px;
+    outline: none;
+    font-size: 14px;
+}
+
+.custom_fieldRta .placeholder {
+    position: absolute;
+    left: var(--field-padding);
+    width: calc(100% - (var(--field-padding) * 2) - 20px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 20px;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        color 0.3s ease,
+        font-size 0.3s ease;
+}
+
+.custom_fieldRta input.dirty+.placeholder,
+.custom_fieldRta input:focus+.placeholder,
+.custom_fieldRta input:not(:placeholder-shown)+.placeholder {
+    top: -10px;
+    font-size: 12px;
+    color: #222;
+} 
+
+.custom_fieldRta.two input {
+    border-radius: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background:
+    linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+    linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+    linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+    transition: background-size 0.3s ease;
+}
+
+.custom_fieldRta.two input.dirty,
+.custom_fieldRta.two input:not(:placeholder-shown),
+.custom_fieldRta.two input:focus {
+    background-size: 100% 0.15em, 100% 0.1em, 100%;
+}
+
+
+.custom_fieldRta i{
+    position: relative;
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+.rtaForm{
+    margin-top: -10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.buttonConfirmRta{
+    margin-top: -30px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.buttonConfirmRta_back{
+    width: 150px;
+    height: 40px;
+    background-color: #0071b3;
+    transition: all ease-in-out .2s;
+    z-index: 0;
+    position: absolute;
+}
+
+.buttonConfirmRta_content{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: all ease-in-out .2s;
+    border-bottom: 1px solid #0071b3;
+    
+}
+
+.buttonConfirmRta_content span{
+    font-weight: bold;
+}
+
+
+.buttonConfirmRta:hover .buttonConfirmRta_content{
+    transform: translate(3px, -3px);
+
+}
+
+.buttonConfirmRta:hover .buttonConfirmRta_back{
+    transform: translate(-3px, 3px);
 }

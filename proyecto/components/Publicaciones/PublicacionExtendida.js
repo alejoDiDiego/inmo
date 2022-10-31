@@ -143,7 +143,12 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
                                     <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="Realiza una pregunta" />
                                 </label>
                             </div>
-                            <input type="submit" value="Preguntar" />
+                            <div>
+                            <button  type="submit" className={styles.buttonConfirm}>
+                                <div className={styles.buttonConfirm_back}></div>
+                                <div className={styles.buttonConfirm_content}><span>Publicar</span></div>
+                            </button>
+                            </div>
                         </form>
                 }
 
