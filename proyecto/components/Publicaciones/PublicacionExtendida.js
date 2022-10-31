@@ -138,13 +138,18 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
                 {
                     usuario.uid == publicador.uid ? null :
                         <form onSubmit={(e) => handlePreguntar(e)}>
-                            <input value={comentario} onChange={e => setComentario(e.target.value)} placeholder='Escribe tu pregunta' />
+                            <div className={styles.fieldDir}>
+                                <p>Nombre*:</p>
+                                <label className={`${styles.custom_field} ${styles.two}`}>
+                                    <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="&nbsp;" />
+                                </label>
+                            </div>
                             <input type="submit" value="Preguntar" />
                         </form>
                 }
 
             </div>
-            <p onClick={() => { window.history.back(); setExtendido(false) }}>Cerrar</p>
+
         </div>
     )
 }

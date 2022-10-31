@@ -123,8 +123,16 @@ const Publicacion = ({ p }) => {
                   p.tipoPublicacion == "venta" ?
                     (
                       <div className={styles.price}>
-                        <div className={styles.profile}>
-                          <h3>En venta</h3>
+                        <div className={styles.header}>
+                        <h3>En venta</h3>
+                        {
+                          extendido == true ? (
+                            <p onClick={() => { window.history.back(); setExtendido(false) }}>Cerrar</p>
+                          ) :
+                            (
+                              <div></div>
+                            )
+                        }
                         </div>
                         <div className={styles.price_valores}>
                           <h2>USD$</h2>
@@ -135,7 +143,17 @@ const Publicacion = ({ p }) => {
                     ) :
                     (
                       <div className={styles.price}>
+                        <div className={styles.header}>
                         <h3>En alquiler</h3>
+                        {
+                          extendido == true ? (
+                            <p onClick={() => { window.history.back(); setExtendido(false) }}>Cerrar</p>
+                          ) :
+                            (
+                              <div></div>
+                            )
+                        }
+                        </div>
                         <div className={styles.price_valores}>
                           <h2>ARS$/Mes</h2>
                           <h2>{numeroConPuntos(p.precio)}</h2>
@@ -231,7 +249,7 @@ const Publicacion = ({ p }) => {
 
             </div>
 
-             {
+            {
               extendido == true ?
                 (
 
@@ -285,7 +303,7 @@ const Publicacion = ({ p }) => {
                       </div>
                       : null
                   )
-            } 
+            }
 
           </div>
 

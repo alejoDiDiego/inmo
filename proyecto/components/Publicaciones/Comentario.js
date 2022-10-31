@@ -1,5 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore'
 import React, { useEffect, useState, useContext } from 'react'
+import styles from "../../styles/PublicacionExtendida.module.css"
 import firebase, { FirebaseContext } from '../../firebase'
 
 const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
@@ -108,15 +109,18 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
 
     return (
         <div>
+            <div className={styles.headerPreg}>
+                <p>{comentario.usuarioComentador.nombre}</p>
+                <p>{fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
+                {
+                    comentario.usuarioComentador.uid == usuario.uid ?
+                        <button onClick={() => handleEliminar()}>Eliminar</button>
+                        : null
+                }
+            </div>
             <p>{comentario.comentario}</p>
-            <p>Publicado por: {comentario.usuarioComentador.nombre}</p>
-            <p>Publicado: {fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
 
-            {
-                comentario.usuarioComentador.uid == usuario.uid ?
-                    <button onClick={() => handleEliminar()}>Eliminar</button>
-                    : null
-            }
+
 
 
             {
@@ -133,19 +137,39 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                         )
 
                         :
-                        <div>
-                            <div>
-                                <p>Respuesta del publicador: {comentario.respuesta.texto}</p>
-                                <p>Publicado: {fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+                        <div >
+                            <div className={styles.headerRta}>
+                                <div className={styles.headerInside}>
+                                    <div className={styles.lines}>
+                                        <div className={styles.lineLeft}></div>
+                                        <div className={styles.lineUp}></div>
+                                    </div>
+                                    <p>Publicador</p>
+                                </div>
 
+                                <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+                                <button onClick={() => handleEliminarRespuesta(comentario)}>Eliminar respuesta</button>
                             </div>
-                            <button onClick={() => handleEliminarRespuesta(comentario)}>Eliminar respuesta</button>
+                            <p>{comentario.respuesta.texto}</p>
+
                         </div>
                     :
                     Object.keys(comentario.respuesta).length > 0 ?
                         <div>
-                            <p>Respuesta del publicador: {comentario.respuesta.texto}</p>
-                            <p>Publicado: {fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+                            <div className={styles.rta}>
+                                <div className={styles.headerRta}>
+                                    <div className={styles.headerInside}>
+                                        <div className={styles.lines}>
+                                            <div className={styles.lineLeft}></div>
+                                            <div className={styles.lineUp}></div>
+                                        </div>
+                                        <p>Publicador</p>
+                                    </div>
+                                    <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+                                </div>
+                                <p className={styles.rtaBody}>{comentario.respuesta.texto}</p>
+                            </div>
+
 
                         </div>
                         : null
