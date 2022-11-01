@@ -45,13 +45,13 @@ const Filtros = ({ router }) => {
 
     const tipoViviendaOptions =
         [
-            { value: "", label: "Filtro vacio" },
+            { value: "", label: "Todos" },
             { value: "casa", label: "Casa" },
             { value: "departamento", label: "Departamento" }]
 
     const tipoPublicacionOptions =
         [
-            { value: "", label: "Filtro vacio" },
+            { value: "", label: "Todos" },
             { value: "venta", label: "Venta" },
             { value: "alquiler", label: "Alquiler" }]
 
@@ -199,20 +199,35 @@ const Filtros = ({ router }) => {
     return (
         <div>
             <div>
-                <div className={styles.fieldDir}>
-                    <label className={`${styles.custom_field} ${styles.two}`}>
-                        <input maxLength={40} value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
-                    </label>
+                <div className={styles.mapFilters}>
+
+                    <div className={styles.searchPlusButtons}>
+                        <div className={styles.fieldDir}>
+                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                <input maxLength={40} value={nuevaDireccion} onChange={e => setNuevaDireccion(e.target.value)} placeholder='Provincia, Municipio, Localidad, Codigo Postal' />
+                            </label>
+                        </div>
+                        <div onClick={() => handleBuscar()} className={styles.div_img}>
+                            <img src='/search2.png' layout='fill' />
+                        </div>
+                        <div onClick={() => handleReiniciar()} className={styles.div_img}>
+                            <img className={styles.div_img2} src='/bin.png' layout='fill' />
+                        </div>
+                    </div>
+
+
+                    <div className={styles.filtersSelects}>
+                        <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Tipo de propiedad"}></Select>
+                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Tipo de publicacion"}></Select>
+                    </div>
+
+
                 </div>
-                <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de vivienda"} value={{ value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }}></Select>
-                <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} value={{ value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
 
 
                 <div className={styles.div_menu}>
                     <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active) }}>
-                        <div className={styles.bar}></div>
-                        <div className={styles.bar}></div>
-                        <div className={styles.bar}></div>
+                        <p>Mas filtros</p>
                     </div>
 
 
@@ -246,8 +261,6 @@ const Filtros = ({ router }) => {
 
             </div>
 
-            <button onClick={() => handleBuscar()}>Aplicar</button>
-            <button onClick={() => handleReiniciar()}>Limpiar Filtros</button>
         </div>
     )
 }
