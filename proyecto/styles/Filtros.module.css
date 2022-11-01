@@ -1,15 +1,16 @@
-.div_menu{
+.div_menu {
     display: flex;
     align-items: center;
     gap: 25px;
+    margin-left: 20px;
 }
 
 
-.menu{
+.menu {
     cursor: pointer;
 }
 
-.bar{
+.bar {
     display: block;
     width: 25px;
     height: 3px;
@@ -19,23 +20,23 @@
     background-color: black;
 }
 
-.menu.active .bar:nth-child(2){
+.menu.active .bar:nth-child(2) {
     opacity: 0;
 }
 
-.menu.active .bar:nth-child(1){
+.menu.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
 
-.menu.active .bar:nth-child(3){
+.menu.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
 
 
-.hidden_menu{
+.hidden_menu {
     z-index: 1;
-    right: 3px;
     top: 45px;
+    margin-top: 120px;
     position: absolute;
     height: 0px;
     width: 350px;
@@ -46,14 +47,14 @@
 
 
 
-.hidden_menu.active{
+.hidden_menu.active {
     border-bottom-left-radius: 10px;
     height: 600px;
     z-index: 1;
-    
+
 }
 
-.inside_hidden_menu{
+.inside_hidden_menu {
     z-index: 1;
     position: relative;
     display: flex;
@@ -66,9 +67,6 @@
 .fieldDir {
     display: flex;
     flex-direction: column;
-    margin-left: 50px;
-    margin-top: 20px;
-    margin-bottom: 100px;
 }
 
 .custom_field {
@@ -87,7 +85,7 @@
     background: #f2f2f2;
     padding: var(--field-padding);
     border-radius: 10px;
-    width: 800px;
+    width: 600px;
     outline: none;
     font-size: 14px;
 }
@@ -139,5 +137,43 @@
 .custom_field i {
     position: relative;
     margin-left: -30px;
+    cursor: pointer;
+}
+
+.filtersSelects {
+    display: flex;
+    width: 500px;
+}
+
+.mapFilters {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 20px;
+    gap: 10px;
+}
+
+.filtersSelects{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.searchPlusButtons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.div_img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.div_img2{
+    max-width: 25px;
+    max-height: 25px;
     cursor: pointer;
 }
