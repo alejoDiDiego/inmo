@@ -114,7 +114,7 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
             </div>
 
             <div className={styles.div_descripcion}>
-                <h2>Descripcion:</h2>
+                <h2>Descripción:</h2>
                 <p>{p.descripcion}</p>
             </div>
 

@@ -263,14 +263,14 @@ const InformacionBasica = ({
                 {
                     setEditTrigger == true?
                     (
-                        <h1 ref={referenciaUbi}>Editar publicacion</h1>
+                        <h1 ref={referenciaUbi}>Editar publicación</h1>
                     ):
                     (
                         <h1 ref={referenciaUbi}>Crear Publicacion</h1>
                     )
                 }
                 <p>Los campos marcados con un asterisco (*) son obligatorios</p>
-                <h2 className={styles.ubiTitle}>1. Ubicacion</h2>
+                <h2 className={styles.ubiTitle}>1. Ubicación</h2>
                 <div className={styles.mapPlusData}>
                     <div className={styles.mapPlusInfo}>
                         <div className={styles.mapa}>
@@ -281,8 +281,8 @@ const InformacionBasica = ({
                                 <MapNoSSR selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
                             </div>
                             <div className={styles.advices}>
-                                <p>ATENCION 1: es posible que no encuentre su direccion y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la direccion/altura de esta debajo.</p>
-                                <p>ATENCION 2: es posible que no pueda marcar correctamente la direccion haciendo click. En ese caso intente marcar la ubicacion de su casa con la mayor exactitud y escriba la direccion debajo.</p>
+                                <p>ATENCIÓN 1: es posible que no encuentre su dirección y/o altura. Haga click en el lugar mas exacto de su casa y luego escriba la dirección/altura de esta debajo.</p>
+                                <p>ATENCIÓN 2: es posible que no pueda marcar correctamente la dirección haciendo click. En ese caso intente marcar la ubicación de su casa con la mayor exactitud y escriba la dirección debajo.</p>
                             </div>
                         </div>
                     </div>
@@ -336,8 +336,8 @@ const InformacionBasica = ({
             <div className={styles.informacionV} ref={referenciaInfo}>
                 <div className={styles.basicInfo}>
                     <div className={styles.fieldsInputs}>
-                        <h2>2. Informacion de la propiedad</h2>
-                        <h3>Informacion basica</h3>
+                        <h2>2. Información de la propiedad</h2>
+                        <h3>Información básica</h3>
 
 
                         <div>
@@ -446,7 +446,7 @@ const InformacionBasica = ({
                                             {
                                                 direccion == "" ?
                                                     (
-                                                        <p>Direccion de la propiedad</p>
+                                                        <p>Dirección de la propiedad</p>
                                                     ) :
                                                     (
                                                         <p>{direccion}</p>
@@ -565,7 +565,7 @@ const InformacionBasica = ({
                                             {
                                                 direccion == "" ?
                                                     (
-                                                        <p>Direccion de la propiedad</p>
+                                                        <p>Dirección de la propiedad</p>
                                                     ) :
                                                     (
                                                         <p>{direccion}</p>
@@ -686,9 +686,9 @@ const InformacionBasica = ({
                         <h3>Valor</h3>
 
                         <div>
-                            <p className={styles.selectLabel}>Tipo de publicacion</p>
+                            <p className={styles.selectLabel}>Tipo de publicación</p>
                             <div className={styles.selectContainer}>
-                                <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
+                                <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicación"} defaultValue={{ value: tipoPublicacion, label: titleCase(tipoPublicacion) }}></Select>
                             </div>
                         </div>
 
@@ -816,7 +816,7 @@ const InformacionBasica = ({
 
 
             <div className={styles.descripAreaContainer}>
-                <h3>Descripcion: <span>{descripcion.length}/200</span></h3>
+                <h3>Descripción: <span>{descripcion.length}/200</span></h3>
 
                 <div className={styles.fieldDir}>
                     <textarea className={styles.descripArea} value={descripcion} onChange={e => setDescripcion(e.target.value)} maxLength="200" type="text" placeholder="&nbsp;"></textarea>

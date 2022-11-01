@@ -418,8 +418,8 @@ const ModificarPublicacion = () => {
         <Layout perfil={true}>
           <div className={styles.main}>
             <div className={styles.izquierda}>
-              <h1>Edita tu<span> publicacion</span></h1>
-              <p>Modifica la informacion que sea necesaria para tener tu publicacion actualizada, agrega imagenes nuevas o informacion extra que creas que puede llamar la atencion a posibles compradores/inquilinos</p>
+              <h1>Edita tu<span> publicación</span></h1>
+              <p>Modifica la información que sea necesaria para tener tu publicación actualizada, agrega imagenes nuevas o información extra que creas que puede llamar la atención a posibles compradores/inquilinos</p>
 
               <div className={styles.cardsContainer}>
 
@@ -428,15 +428,15 @@ const ModificarPublicacion = () => {
                   <div className={styles.cuadradoContainer} onClick={handleUbi}>
 
                     <div className={ubiTrigger == false ? styles.cuadrado : styles.cuadradoHighlited} >
-                      <h3>1. Ubicacion</h3>
-                      <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                      <h3>1. Ubicación</h3>
+                      <p className={styles.infoc}>Selecciona la ubicación de la propiedad sobre el mapa</p>
                     </div>
                   </div>
 
                   <div className={styles.cuadradoContainer} onClick={handleInfo}>
                     <div className={infoTrigger == false ? styles.cuadrado : styles.cuadradoHighlited} >
-                      <h3 >2. Informacion Basica</h3>
-                      <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                      <h3 >2. Información Básica</h3>
+                      <p className={styles.infoc}>Añade información de relevancia sobre las características de la propiedad</p>
                     </div>
                   </div>
                 </div>
@@ -453,8 +453,8 @@ const ModificarPublicacion = () => {
                 </div>
                 <div className={styles.cuadradoContainer} onClick={handleImg}>
                   <div className={loadTrigger == false ? styles.cuadrado : styles.cuadradoHighlited}>
-                    <h3>4. Cargar publicacion</h3>
-                    <p className={styles.infoc}>finalizar el proceso de publicacion</p>
+                    <h3>4. Cargar publicación</h3>
+                    <p className={styles.infoc}>finalizar el proceso de publicación</p>
                   </div>
                 </div>
               </div>

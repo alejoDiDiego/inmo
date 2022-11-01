@@ -72,21 +72,21 @@ const Body = () => {
                         <img className={styles.img} src="InmoBusqueda.png" />
                     </div>
 
-                    <p className={styles.parrafo}>Busqueda simple y resumida, resultados faciles de filtrar, todo al alcance del <span className={styles.span}>usuario.</span></p>
+                    <p className={styles.parrafo}>Búsqueda simple y resumida, resultados fáciles de filtrar, todo al alcance del <span className={styles.span}>usuario.</span></p>
                 </div>
 
                 <div className={styles.square_medio}>
                     <div className={styles.img_div}>
                         <img className={styles.img} src="InmoRubik.png" />
                     </div>
-                    <p className={styles.parrafo}>Simplicidad para la creacion de publicaciones, maximo <span className={styles.span}>alcance.</span></p>
+                    <p className={styles.parrafo}>Simplicidad para la creación de publicaciones, máximo <span className={styles.span}>alcance.</span></p>
                 </div>
 
                 <div className={styles.square_medio}>
                     <div className={styles.img_div}>
                         <img className={styles.img} src="InmoCuentas.png" />
                     </div>
-                    <p className={styles.parrafo}>Incorporacion de cuentas inmobiliarias y empresariales, distincion <span className={styles.span}>instantanea</span></p>
+                    <p className={styles.parrafo}>Incorporación de cuentas inmobiliarias y empresariales, distinción <span className={styles.span}>instantánea</span></p>
                 </div>
 
             </div>
@@ -130,7 +130,7 @@ const Body = () => {
                                         </div>
 
                                         <div className={styles.txt_creditos}>
-                                            <h3>Creditos</h3>
+                                            <h3>Créditos</h3>
 
                                             <p>Quienes fueron los que nos ayudaron con este proyecto.</p>
 

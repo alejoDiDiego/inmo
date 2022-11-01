@@ -17,7 +17,7 @@ const InputBusqueda = () => {
 
 
     const tipoBusquedaOptions =
-        [{ value: "publicacion", label: "Publicacion" },
+        [{ value: "publicacion", label: "Publicación" },
         { value: "usuario", label: "Usuario" }]
 
 
@@ -109,7 +109,7 @@ const InputBusqueda = () => {
         console.log(event.value)
         setBusqueda("")
         if (event == null) {
-            setTipoBusqueda("publicacion")
+            setTipoBusqueda("publicación")
         }
         else {
             const value = event.value
@@ -141,7 +141,7 @@ const InputBusqueda = () => {
                                 <Select styles={customSelectStyles} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicacion", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicacion") }}></Select>
                             </div>
 
-                            <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder={tipoBusqueda == "publicacion" ? 'Provincia, Municipio, Localidad, Codigo Postal' : "Nombre, Provincia, Municipio, Localidad, Codigo Postal"} />
+                            <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder={tipoBusqueda == "publicacion" ? 'Provincia, Municipio, Localidad, Código Postal' : "Nombre, Provincia, Municipio, Localidad, Código Postal"} />
                             <div onClick={() => handleBuscar()} className={styles.div_img}>
                                 <Image src='/search2.png' layout='fill' />
                             </div>

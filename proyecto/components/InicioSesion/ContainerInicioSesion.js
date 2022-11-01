@@ -94,7 +94,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
         setErrorEmailMensaje("Contraseña incorrecta")
 
       } else if (errorCode.includes("auth/user-not-found")) {
-        setErrorEmailMensaje("Usuario no encontrado")
+        setErrorEmailMensaje("usuario no encontrado")
       } else {
         console.log(errorCode)
         setErrorEmailMensaje("Error: " + errorCode)
@@ -116,7 +116,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
             loadingBig == false ?
               (
                 <div className={styles.inside_container}>
-                  <h2>Inicia sesion en <span className={styles.text_blue}>Inmo</span></h2>
+                  <h2>Inicia sesión en <span className={styles.text_blue}>Inmo</span></h2>
                   {
                     errorEmail &&
                     (
@@ -145,11 +145,11 @@ const ContainerInicioSesion = ({ loadingBig }) => {
                           {/*<button className={styles.buttonGoogle} onClick={handleGoogle}><span>Google</span><Image src='/google.png' width={25} height={25} /></button> <a href="https://www.flaticon.es/iconos-gratis/google" title="google iconos">Google iconos creados por Freepik - Flaticon</a>*/}
                           <div className={styles.button} onClick={handleIniciarSesion}>
                             <div className={styles.button_back}></div>
-                            <div className={styles.button_content}><span>Iniciar Sesion</span></div>
+                            <div className={styles.button_content}><span>Iniciar Sesión</span></div>
                           </div>
                           <div className={styles.buttonGoogle} onClick={handleGoogle}>
                             <div className={styles.buttonGoogle_back}></div>
-                            <div className={styles.buttonGoogle_content}><span>Iniciar sesion con Google</span><Image src='/google.png' width={25} height={25} /></div>
+                            <div className={styles.buttonGoogle_content}><span>Iniciar sesión con Google</span><Image src='/google.png' width={25} height={25} /></div>
                           </div>
 
                           

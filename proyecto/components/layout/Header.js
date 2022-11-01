@@ -107,7 +107,7 @@ const Header = ({ usuario, enRegistro }) => {
                                     <div className={styles.menuButton}>
                                         <div className={styles.buttonInside}>
                                             <img src='/key.png'></img>
-                                            <h4>Iniciar Sesion</h4>
+                                            <h4>Iniciar Sesión</h4>
                                         </div>
                                     </div>
                                 </Link>
@@ -131,14 +131,14 @@ const Header = ({ usuario, enRegistro }) => {
                                     <div className={styles.menuButton}>
                                         <div className={styles.buttonInside}>
                                             <img src='/people.png'></img>
-                                            <h4>Creditos</h4>
+                                            <h4>Créditos</h4>
                                         </div>
                                     </div>
                                 </Link>
                                 <div className={styles.currentUser}>
                                     <div className={styles.userDivider}>
                                         <img src='/register_picture.png'></img>
-                                        <h4>Todavia no has iniciado sesion</h4>
+                                        <h4>Todavía no has iniciado sesión</h4>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@ const Header = ({ usuario, enRegistro }) => {
                                             <div className={styles.line}></div>
                                             <div className={styles.buttonInside}>
                                                 <img src='/home4.png'></img>
-                                                <h4>Crear Publicacion</h4>
+                                                <h4>Crear Publicación</h4>
                                             </div>
                                             <div className={styles.line}></div>
                                         </div>
@@ -186,7 +186,7 @@ const Header = ({ usuario, enRegistro }) => {
                                         <div className={styles.menuButton}>
                                             <div className={styles.buttonInside}>
                                                 <img src='/people.png'></img>
-                                                <h4>Creditos</h4>
+                                                <h4>Créditos</h4>
                                             </div>
                                         </div>
                                     </Link>
@@ -195,7 +195,7 @@ const Header = ({ usuario, enRegistro }) => {
                                         {
                                             Object.keys(usuario).length > 0 ?
                                                 <div>
-                                                    <p>Sesion iniciada como:</p>
+                                                    <p>Sesión iniciada como:</p>
                                                     <div className={styles.userDividerLogged}>
 
                                                         <div className={styles.foto}>

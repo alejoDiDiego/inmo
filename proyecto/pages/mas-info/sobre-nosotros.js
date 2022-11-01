@@ -22,7 +22,7 @@ const sobreNosotros = () => {
 
                             <h2 className={styles.titulo}>Mas que una simple página, un <span className={styles.span}>proyecto</span></h2>
 
-                            <p className={styles.texto}>Nuestro compromiso en inmo es poder traer al usuario una nueva experiencia de busqueda teniendo como puntos centrales la <span className={styles.span}>simplicidad</span> y la <span className={styles.span}>accesibilidad</span>.</p>
+                            <p className={styles.texto}>Nuestro compromiso en inmo es poder traer al usuario una nueva experiencia de búsqueda teniendo como puntos centrales la <span className={styles.span}>simplicidad</span> y la <span className={styles.span}>accesibilidad</span>.</p>
 
                         </div>
                     </div>
@@ -34,7 +34,7 @@ const sobreNosotros = () => {
 
                             <h2 className={styles.titulo_sec}>Un grupo pequeño de estudiantes. Con grandes <span className={styles.span}>metas</span></h2>
 
-                            <p className={styles.texto_sec}>No hace falta tener un gran equipo para llegar a lugares grandes, actualmente nuestro equipo esta compuesto por un grupo de 5 estudiantes de informatica basados en argentina que se plantearon una meta en comun, llegando a un resultado final <span className={styles.span}>Inmo.</span></p>
+                            <p className={styles.texto_sec}>No hace falta tener un gran equipo para llegar a lugares grandes, actualmente nuestro equipo esta compuesto por un grupo de 5 estudiantes de informática basados en argentina que se plantearon una meta en común, llegando a un resultado final <span className={styles.span}>Inmo.</span></p>
 
                         </div>
 

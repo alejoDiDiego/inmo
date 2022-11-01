@@ -213,7 +213,7 @@ const SubirImagenes = ({
     return (
         <div ref={referenciaImg} className={styles.mainImg}>
             <div>
-                <h2>3. Subir Imagenes</h2>
+                <h2>3. Subir imágenes</h2>
                 <p>La primer imagen sera utilizada como portada de la publicación</p>
 
                 <div className={styles.dropzoneStyle}>
@@ -262,7 +262,7 @@ const SubirImagenes = ({
                         }
                     </div>
                     <div className={styles.limitViewer}>
-                        <p>Imagenes subidas {imagenes.length}/20</p>
+                        <p>Imágenes subidas {imagenes.length}/20</p>
                     </div>
 
                 </div>

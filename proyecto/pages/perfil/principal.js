@@ -967,7 +967,7 @@ const principal = () => {
                             <div className={styles.pInfo}>
                                 <h1>Tu perfil</h1>
                                 <p>Los campos marcados con * son obligatorios para realizar publicaciones</p>
-                                <h2>Informacion personal:</h2>
+                                <h2>Información personal:</h2>
 
 
                                 <div className={styles.fieldDir}>
@@ -995,7 +995,7 @@ const principal = () => {
                                 </div>
 
                                 <div className={styles.fieldDir}>
-                                    <p>Numero de telefono:</p>
+                                    <p>Numero de teléfono:</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
                                         {
                                             nuevoNumeroTelefono.length == 0 ? <span className={styles.placeholder}>12341234</span> : null
@@ -1008,9 +1008,9 @@ const principal = () => {
                             </div>
 
                             <div className={styles.uInfo}>
-                                <h2>Ubicacion:</h2>
+                                <h2>Ubicación:</h2>
                                 <div className={styles.ubi}>
-                                    <h3>Tu ubicacion actual:</h3>
+                                    <h3>Tu ubicación actual:</h3>
                                     {
 
                                         info.provincia.length > 0 || info.municipio.length > 0 || info.localidad.length > 0 ?
@@ -1049,7 +1049,7 @@ const principal = () => {
 
                                             ) :
                                             (
-                                                <p>No tiene ninguna ubicacion asignada</p>
+                                                <p>No tiene ninguna ubicación asignada</p>
                                             )
                                     }
                                     <div className={styles.reloadBtn} onClick={() => { provincia(); setNuevaProvincia(""); setNuevoMunicipio(""); setNuevaLocalidad(""); setMunicipios([]); setLocalidades([]) }}><img src="/reload.png" /></div>
@@ -1174,7 +1174,7 @@ const principal = () => {
                                 </div>
 
                                 <div className={styles.fieldDir}>
-                                    <p>Direccion</p>
+                                    <p>Dirección</p>
                                     <label className={`${styles.custom_field} ${styles.two}`}>
                                         <input maxLength={30} value={nuevaDireccion} onChange={e => { setNuevaDireccion(e.target.value); }} type="text" readOnly={cargando} placeholder="&nbsp;" />
                                     </label>
@@ -1183,7 +1183,7 @@ const principal = () => {
 
 
                             <div className={styles.dInfo}>
-                                <h2>Descripcion: <span>{nuevaDescripcion.length}/200</span></h2>
+                                <h2>Descripcioón: <span>{nuevaDescripcion.length}/200</span></h2>
                                 <div className={styles.fieldDir}>
                                     <textarea className={styles.descripArea} value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="200" type="text" readOnly={cargando} placeholder="&nbsp;"></textarea>
                                 </div>
@@ -1219,7 +1219,7 @@ const principal = () => {
                                                             setNuevaDescripcion(info.descripcion)
                                                         }}>
                                                             <div className={styles.buttonDiscard_back}></div>
-                                                            <div className={styles.buttonDiscard_content}><span>Descartar Cambios</span></div>
+                                                            <div className={styles.buttonDiscard_content}><span>Descartar cambios</span></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1404,7 +1404,7 @@ const principal = () => {
 
                                                                 ) :
                                                                 (
-                                                                    <p>No tiene ninguna ubicacion asignada</p>
+                                                                    <p>No tiene ninguna ubicación asignada</p>
                                                                 )
                                                         }
                                                     </div>
@@ -1461,7 +1461,7 @@ const principal = () => {
                                                 <p>{publicaciones.length} Publicaciones</p>
                                                 {
                                                     info.valoraciones.length == 0 ?
-                                                        <p>No tienes ninguna recomendacion, deja una buena impresion en los otros usuarios de inmo para mejorar la reputacion de tu perfil.</p>
+                                                        <p>No tienes ninguna recomendación, deja una buena impresión en los otros usuarios de inmo para mejorar la reputación de tu perfil.</p>
                                                         :
                                                         <p>{Math.round(estrellas / info.valoraciones.length * 10) / 10} Estrellas de {info.valoraciones.length} valoraciones</p>
                                                 }

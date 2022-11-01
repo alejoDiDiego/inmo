@@ -214,7 +214,7 @@ const principal = () => {
               <h1>Publica tu <span>propiedad</span></h1>
               <p>Completa los datos de la propiedad a vender, agrega datos extras y detalles para
                 maximizar la
-                comunicacion con el usuario, tu informacion de contacto aparecera junto a tu publicacion.</p>
+                comunicación con el usuario, tu información de contacto aparecerá junto a tu publicación.</p>
 
               <div className={styles.cardsContainer}>
 
@@ -223,15 +223,15 @@ const principal = () => {
                   <div className={styles.cuadradoContainer} onClick={onFinish == false? handleUbi : null}>
 
                     <div className={ubiTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
-                      <h3>1. Ubicacion</h3>
-                      <p className={styles.infoc}>Selecciona la ubicacion de la propiedad sobre el mapa</p>
+                      <h3>1. Ubicación</h3>
+                      <p className={styles.infoc}>Selecciona la ubicación de la propiedad sobre el mapa</p>
                     </div>
                   </div>
 
                   <div className={styles.cuadradoContainer} onClick={onFinish == false? handleInfo: null}>
                     <div className={infoTrigger == false? styles.cuadrado : styles.cuadradoHighlited} >
-                      <h3 >2. Informacion Basica</h3>
-                      <p className={styles.infoc}>Añade informacion de relevancia sobre las caracteristicas de la propiedad</p>
+                      <h3 >2. Información Básica</h3>
+                      <p className={styles.infoc}>Añade información de relevancia sobre las características de la propiedad</p>
                     </div>
                   </div>
                 </div>
@@ -242,14 +242,14 @@ const principal = () => {
 
                 <div className={styles.cuadradoContainer} onClick={onFinish == false? handleImg : null}>
                   <div className={imgTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
-                    <h3>3. Subir imagenes</h3>
-                    <p className={styles.infoc}>Sube imagenes para que los usuarios puedan conocer en detalle tu propiedad</p>
+                    <h3>3. Subir imágenes</h3>
+                    <p className={styles.infoc}>Sube imágenes para que los usuarios puedan conocer en detalle tu propiedad</p>
                   </div>
                 </div>
                 <div className={styles.cuadradoContainer} onClick={onFinish == false? handleImg : null}>
                   <div className={loadTrigger == false? styles.cuadrado : styles.cuadradoHighlited}>
-                    <h3>4. Cargar publicacion</h3>
-                    <p className={styles.infoc}>Finalizar el proceso de publicacion</p>
+                    <h3>4. Cargar publicación</h3>
+                    <p className={styles.infoc}>Finalizar el proceso de publicación</p>
                   </div>
                 </div>
               </div>

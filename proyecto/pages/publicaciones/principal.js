@@ -343,7 +343,7 @@ const principal = () => {
                         <div className={styles.derecha}>
                             {
                                 resultado.length == 0 ?
-                                    <h2>No se han encontrado resultados, escriba una provincia, municipio, localidad o codigo postal</h2>
+                                    <h2>No se han encontrado resultados, escriba una provincia, municipio, localidad o código postal</h2>
 
                                     :
 

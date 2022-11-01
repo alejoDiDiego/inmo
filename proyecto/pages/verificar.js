@@ -57,8 +57,8 @@ const verificar = () => {
                         (
                             <div>
                                 <h2>por favor verifique su cuenta</h2>
-                                <p>se ha enviado el mail de verificacion a {usuario.email}, si llego haga click en el boton de abajo</p>
-                                <button onClick={() => { firebase.verificar() }}>Reenviar mail de verificacion</button>
+                                <p>se ha enviado el mail de verificación a {usuario.email}, si llego haga click en el botón de abajo</p>
+                                <button onClick={() => { firebase.verificar() }}>Reenviar mail de verificación</button>
                             </div>
                         )
                 }

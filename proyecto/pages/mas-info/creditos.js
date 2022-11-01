@@ -11,7 +11,7 @@ const creditos = () => {
 
                         <div className={styles.img}>
                             <div>
-                                <h2 className={styles.h1}>Creditos</h2>
+                                <h2 className={styles.h1}>Créditos</h2>
 
                                 <img className={styles.img_footer} src="/icono_about.png" />
                             </div>
@@ -22,7 +22,7 @@ const creditos = () => {
 
                             <h2 className={styles.titulo}>Una carta a todos los que nos<span className={styles.span}>ayudaron.</span></h2>
 
-                            <p className={styles.texto}>Ademas de nuestro grupo de trabajo contamos con la ayuda infaltable de nuestros profesores y el apoyo de nuestros directivos durante todo nuestro desarrollo, sin su ayuda <span className={styles.span}>Inmo</span> no seria lo que es hoy, por esta misma razon no nos queda mas que estar agradecidos.</p>
+                            <p className={styles.texto}>Ademas de nuestro grupo de trabajo contamos con la ayuda infaltable de nuestros profesores y el apoyo de nuestros directivos durante todo nuestro desarrollo, sin su ayuda <span className={styles.span}>Inmo</span> no seria lo que es hoy, por esta misma razón no nos queda mas que estar agradecidos.</p>
 
                             <p className={styles.texto2}>A todos los que hicieron este proyecto posible. <span className={styles.span}>Gracias.</span></p>
                         </div>
@@ -33,11 +33,11 @@ const creditos = () => {
 
                         <div className={styles.textos_sec}>
 
-                            <h2 className={styles.titulo_sec}>Creditos por multimedia</h2>
+                            <h2 className={styles.titulo_sec}>Créditos por multimedia</h2>
 
                             <div className={styles.contenedor_img}>
 
-                                <p className={styles.texto_sec}>Imagenes:</p>
+                                <p className={styles.texto_sec}>Imágenes:</p>
 
                                 <p className={styles.link}></p>
 
