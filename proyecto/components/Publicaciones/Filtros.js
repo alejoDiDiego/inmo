@@ -230,7 +230,10 @@ const Filtros = ({ router }) => {
 
                 <div className={styles.div_menu}>
                     <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active) }}>
-                        <p>Mas filtros</p>
+                        <div className={styles.filtersControl}>
+                        <p>Filtros avanzados</p>
+                            <img className={styles.div_imgFilters} src='/down.png' layout='fill'></img>
+                        </div>
                     </div>
 
 

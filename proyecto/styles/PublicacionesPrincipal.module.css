@@ -48,17 +48,26 @@
 }
 
 .userSearch{
-    margin-left: 750px;
-    margin-top: -145px;
+    display: flex;
+    margin-left: 745px;
+    margin-top: -157px;
+    width: 150px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fafafac1;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.userSearch:hover{
+
+    background-color: white;
+
 }
 
 .userSearch p{
-    font-size: large;
+    font-size: medium;
     font-weight: 500;
-    color: #1263e6;
 }
 
-.userSearch p:hover{
-    color: #5512e6;
-    cursor: pointer;
-}

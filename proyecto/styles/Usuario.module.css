@@ -3,13 +3,13 @@
     width: 90%;
     max-width: 1850px;
     margin: 20px auto;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
 
 .usuario img{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
 }
 
 
@@ -17,4 +17,31 @@
     cursor: default;
     height: calc(100vh - 90px);
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
+}
+
+.profilePill{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    background-color: white;
+    height: 300px;
+    width: 1300px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+   justify-content: center;
+   padding: 40px;
+}
+
+.profileContainer{
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+
+}
+
+.name{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
 }
