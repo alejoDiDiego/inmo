@@ -39,7 +39,7 @@
     margin-top: 120px;
     position: absolute;
     height: 0px;
-    width: 350px;
+    width: 450px;
     background-color: #E8EFF4;
     transition: 0.3s ease-in-out;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -60,6 +60,8 @@
     display: flex;
     height: 100%;
     flex-direction: column;
+    padding: 10px;
+    gap: 10px;
     overflow: hidden;
     transition: all 0.3 linear;
 }
@@ -175,5 +177,84 @@
 .div_img2{
     max-width: 25px;
     max-height: 25px;
+    cursor: pointer;
+}
+
+.filtersUnit{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.custom_fieldFilter {
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+    --field-padding: 12px;
+}
+
+.custom_fieldFilter input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: var(--field-padding);
+    border-radius: 10px;
+    width: 200px;
+    outline: none;
+    font-size: 14px;
+}
+
+.custom_fieldFilter .placeholder {
+    position: absolute;
+    left: var(--field-padding);
+    width: calc(100% - (var(--field-padding) * 2) - 20px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 20px;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: #f2f2f2;
+    transition:
+        top 0.3s ease,
+        color 0.3s ease,
+        font-size 0.3s ease;
+}
+
+.custom_fieldFilter input.dirty+.placeholder,
+.custom_fieldFilter input:focus+.placeholder,
+.custom_fieldFilter input:not(:placeholder-shown)+.placeholder {
+    top: -10px;
+    font-size: 12px;
+    color: #222;
+}
+
+
+
+.custom_fieldFilter.two input {
+    border-radius: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background:
+        linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+        linear-gradient(90deg, #f2f2f2, #f2f2f2) left bottom/100% 0.15em no-repeat,
+        linear-gradient(90deg, #f2f2f2, #f2f2f2) left bottom/100% no-repeat;
+    transition: background-size 0.3s ease;
+}
+
+.custom_fieldFilter.two input.dirty,
+.custom_fieldFilter.two input:not(:placeholder-shown),
+.custom_fieldFilter.two input:focus {
+    background-size: 100% 0.15em, 100% 0.1em, 100%;
+}
+
+.custom_fieldFilter i {
+    position: relative;
+    margin-left: -30px;
     cursor: pointer;
 }

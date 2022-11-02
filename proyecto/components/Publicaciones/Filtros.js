@@ -236,39 +236,71 @@ const Filtros = ({ router }) => {
                             {
                                 nuevoTipoPublicacion.length == 0 ?
                                     <>
-                                        <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
-                                        <input placeholder="Seleccione un tipo de vivienda" readOnly={true} />
+
                                     </>
                                     :
                                     <>
-                                        <input placeholder={`nuevoPrecioMin ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(isNumber(e))} />
-                                        <input placeholder={`nuevoPrecioMax ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(isNumber(e))} />
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input placeholder={`nuevoPrecioMin ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMin} onChange={e => setNuevoPrecioMin(isNumber(e))} />
+                                        </label>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input placeholder={`nuevoPrecioMax ${nuevoTipoPublicacion == "alquiler" ? "$ARS" : "$USD"}`} value={nuevoPrecioMax} onChange={e => setNuevoPrecioMax(isNumber(e))} />
+                                        </label>
                                     </>
                             }
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoBanosMin" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(isNumber(e))} />                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoBanosMax" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(isNumber(e))} />
-                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoCantAmbientesMin" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(isNumber(e))} />
-                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoCantAmbientesMax" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(isNumber(e))} />
-                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoCantCocherasMin" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(isNumber(e))} />
-                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoCantCocherasMax" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(isNumber(e))} />
-                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoCantHabitacionesMin" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(isNumber(e))} />
-                            </label>
-                            <label className={`${styles.custom_field} ${styles.two}`}>
-                                <input placeholder="nuevoCantHabitacionesMax" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(isNumber(e))} />
-                            </label>
 
+
+                            <h4>Cantidad de ambientes:</h4>
+
+                            <div className={styles.filtersUnit}>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Minimo" value={nuevoCantAmbientesMin} onChange={e => setNuevoCantAmbientesMin(isNumber(e))} />
+                                </label>
+                                <h2>-</h2>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Maximo" value={nuevoCantAmbientesMax} onChange={e => setNuevoCantAmbientesMax(isNumber(e))} />
+                                </label>
+                            </div>
+
+
+                            <h4>Cantidad de habitaciones:</h4>
+
+                            <div className={styles.filtersUnit}>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Minimo" value={nuevoCantHabitacionesMin} onChange={e => setNuevoCantHabitacionesMin(isNumber(e))} />
+                                </label>
+                                <h2>-</h2>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Maximo" value={nuevoCantHabitacionesMax} onChange={e => setNuevoCantHabitacionesMax(isNumber(e))} />
+                                </label>
+                            </div>
+
+
+                            <h4>Cantidad de baños:</h4>
+
+                            <div className={styles.filtersUnit}>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Minimo" value={nuevoBanosMin} onChange={e => setNuevoBanosMin(isNumber(e))} />
+                                </label>
+                                <h2>-</h2>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Maximo" value={nuevoBanosMax} onChange={e => setNuevoBanosMax(isNumber(e))} />
+                                </label>
+                            </div>
+
+
+
+                            <h4>Cantidad de cocheras:</h4>
+
+                            <div className={styles.filtersUnit}>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Minimo" value={nuevoCantCocherasMin} onChange={e => setNuevoCantCocherasMin(isNumber(e))} />
+                                </label>
+                                <h2>-</h2>
+                                <label className={`${styles.custom_fieldFilter} ${styles.two}`}>
+                                    <input placeholder="Maximo" value={nuevoCantCocherasMax} onChange={e => setNuevoCantCocherasMax(isNumber(e))} />
+                                </label>
+                            </div>
 
                         </div>
                     </div>
