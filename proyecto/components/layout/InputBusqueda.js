@@ -138,7 +138,7 @@ const InputBusqueda = () => {
                     tipoBusqueda == "" ? null :
                         <>
                             <div className={styles.selectContainer}>
-                                <Select styles={customSelectStyles} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicacion", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicacion") }}></Select>
+                                <Select styles={customSelectStyles} options={tipoBusquedaOptions} onChange={handleSelectTipoBusqueda} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de busqueda"} defaultValue={{ value: router.pathname.includes("usuarios") ? 'usuario' : "publicación", label: titleCase(router.pathname.includes("usuarios") ? 'usuario' : "publicación") }}></Select>
                             </div>
 
                             <input value={busqueda} onChange={e => setBusqueda(e.target.value)} className={styles.input} placeholder={tipoBusqueda == "publicacion" ? 'Provincia, Municipio, Localidad, Código Postal' : "Nombre, Provincia, Municipio, Localidad, Código Postal"} />

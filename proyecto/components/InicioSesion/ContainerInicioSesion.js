@@ -207,7 +207,7 @@ const ContainerInicioSesion = ({ loadingBig }) => {
                   <div className={`${styles.button_back} ${styles.button_back_reestablecer}`}></div>
                   <div className={`${styles.button_content} ${styles.button_content_reestablecer}`}><span>Restablecer contraseña</span></div>
                 </div>
-                <p className={styles.buttonVolver} onClick={() => { setReestablecerPassword(false) }}>Volver a iniciar sesion</p>
+                <p className={styles.buttonVolver} onClick={() => { setReestablecerPassword(false) }}>Volver a iniciar sesión</p>
               </div>
             </div>
           </div>

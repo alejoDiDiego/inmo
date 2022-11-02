@@ -20,7 +20,7 @@ const MisPublicaciones = ({ publicaciones, info, setPublicaciones, queryFirebase
 
     const redirect = () => {
         if (info.municipio == "" || info.numeroCelular == "" || info.provincia == "" || info.codigoPostal == "") {
-            alert("Le falta completar informacion para poder publicar")
+            alert("Le falta completar información para poder publicar")
             return
         }
         router.push("/crear-publicacion/principal")

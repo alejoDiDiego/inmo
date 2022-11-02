@@ -46,3 +46,19 @@
         width: 100%;
     }
 }
+
+.userSearch{
+    margin-left: 750px;
+    margin-top: -145px;
+}
+
+.userSearch p{
+    font-size: large;
+    font-weight: 500;
+    color: #1263e6;
+}
+
+.userSearch p:hover{
+    color: #5512e6;
+    cursor: pointer;
+}

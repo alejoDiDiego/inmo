@@ -38,9 +38,7 @@ const creditos = () => {
                             <div className={styles.contenedor_img}>
 
                                 <p className={styles.texto_sec}>Imágenes:</p>
-
                                 <p className={styles.link}></p>
-
                             </div>
 
                         </div>

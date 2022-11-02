@@ -102,7 +102,7 @@ const principal = () => {
         if (publicaciones.length == 0) return
 
         if (publicacion != null) {
-            
+
             // console.log(publicacion)
             // console.log(publicaciones)
             const filtro = publicaciones.filter(p => {
@@ -326,10 +326,13 @@ const principal = () => {
 
                             <div className={styles.filtros}>
 
-                                
-                            
+
+
                                 <Filtros router={router} />
-                                <button onClick={() => handleBuscarUsuarios()}>Buscar usuarios</button>
+                                <div className={styles.userSearch}>
+                                    <p onClick={() => handleBuscarUsuarios()}>Ir a buscar usuarios</p>
+                                </div>
+
                             </div>
 
                             <div style={{ width: "100%", height: "100%", position: "relative", zIndex: "1" }}>

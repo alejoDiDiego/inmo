@@ -32,7 +32,7 @@ const sobreNosotros = () => {
 
                         <div className={styles.textos_sec}>
 
-                            <h2 className={styles.titulo_sec}>Un grupo pequeño de estudiantes. Con grandes <span className={styles.span}>metas</span></h2>
+                            <h2 className={styles.titulo_sec}>Un pequeño grupo de estudiantes. Con grandes<span className={styles.span}>metas</span></h2>
 
                             <p className={styles.texto_sec}>No hace falta tener un gran equipo para llegar a lugares grandes, actualmente nuestro equipo esta compuesto por un grupo de 5 estudiantes de informática basados en argentina que se plantearon una meta en común, llegando a un resultado final <span className={styles.span}>Inmo.</span></p>
 

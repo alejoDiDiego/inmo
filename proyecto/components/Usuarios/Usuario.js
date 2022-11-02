@@ -81,7 +81,7 @@ const Usuario = ({ u }) => {
         {u.descripcion}
         {
           u.valoraciones.length == 0 ?
-            <p>No tiene ninguna valoracion todavia</p>
+            <p>No tiene ninguna valoración todavía</p>
             :
             <p>{Math.round(estrellas / u.valoraciones.length * 10) / 10} Estrellas de {u.valoraciones.length} valoraciones</p>
         }
