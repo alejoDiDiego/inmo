@@ -222,8 +222,8 @@ const Filtros = ({ router }) => {
 
 
                     <div className={styles.filtersSelects}>
-                        <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} defaultValue={nuevoTipoVivienda == "" ? { value: null, label: "Tipo de propiedad" } : { value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }} ></Select>
-                        <Select options={tipoPublicacionOptions}  onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} defaultValue={nuevoTipoPublicacion == "" ? { value: null, label: "Tipo de publicacion" } : { value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
+                        <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} value={nuevoTipoVivienda == "" ? { value: null, label: "Tipo de propiedad" } : { value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }} ></Select>
+                        <Select options={tipoPublicacionOptions}  onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} value={nuevoTipoPublicacion == "" ? { value: null, label: "Tipo de publicacion" } : { value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
                     </div>
 
 
