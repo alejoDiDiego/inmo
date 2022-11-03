@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import React, { useState } from 'react'
 import Select from 'react-select'
+import styles from "../../styles/Usuario.module.css"
 
 
 const Filtros = () => {
@@ -39,9 +40,9 @@ const Filtros = () => {
 
 
 
-    
+
     const handleBuscar = () => {
-        if(busqueda.length == 0){
+        if (busqueda.length == 0) {
             return
         }
 
@@ -58,8 +59,8 @@ const Filtros = () => {
         Router.push({
             pathname: '/usuarios/principal',
             query: {
-                q: busqueda,
-                tipo: tipoCuenta
+                q: "",
+                tipo: ""
             }
         })
     }
@@ -71,11 +72,19 @@ const Filtros = () => {
 
 
     return (
-        <div>
-            <input placeholder="Nombre, Provincia, Municipio, Localidad, Codigo Postal" value={busqueda} onChange={(e) => setBusqueda(e.target.value)}/>
-            <Select options={tipoCuentaOptions} onChange={handleSelectTipoCuenta} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} value={{ value: tipoCuenta, label: titleCase(tipoCuenta) }}></Select>
-            <button onClick={() => handleBuscar()}>Filtrar</button>
-            <button onClick={() => handleReiniciar()}>Limpiar Filtros</button>
+        <div className={styles.controls}>
+            <label className={`${styles.custom_field} ${styles.two}`}>
+                <input placeholder="Nombre, Provincia, Municipio, Localidad, Codigo Postal" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+            </label>
+            <div className={styles.searchControl}>
+                <div onClick={() => handleBuscar()} className={styles.div_img}>
+                    <img className={styles.div_img2} src='/lupa3.png' layout='fill' />
+                </div>
+                <div onClick={() => handleReiniciar()} className={styles.div_img}>
+                    <img className={styles.div_img3} src='/crossed.png' layout='fill' />
+                </div>
+            </div>
+            <Select options={tipoCuentaOptions} onChange={handleSelectTipoCuenta} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={tipoCuenta == "" ? { value: null, label: "Tipo de propiedad" } : { value: tipoCuenta, label: titleCase(tipoCuenta) }}></Select>
         </div>
     )
 }

@@ -71,3 +71,27 @@
     font-weight: 500;
 }
 
+
+.pubSearch{
+    display: flex;
+    position: absolute;
+    margin-left: 1050px;
+    margin-top: 75px;
+    width: 150px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fafafac1;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pubSearch:hover{
+    background-color: white;
+
+}
+
+.pubSearch p{
+    font-size: medium;
+    font-weight: 500;
+}

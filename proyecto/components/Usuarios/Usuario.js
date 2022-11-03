@@ -29,12 +29,13 @@ const Usuario = ({ u }) => {
   function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
     return splitStr.join(' ');
-}
+  }
 
 
+  console.log(u)
 
   const handleExtendido = async () => {
     // console.log("router.query.publicacion " + router.query.publicacion)
@@ -87,25 +88,61 @@ const Usuario = ({ u }) => {
             <img src={u.fotoPerfilURL} />
           </div>
           <div className={styles.profilePill}>
-            <div className={styles.name}>
-              <h2>{u.nombreUsuario}{" "}</h2>
-              <h3>{titleCase(u.type)}</h3>
-            
-            </div>
-            
-            {u.provincia}{" "}
-            {u.municipio}{" "}
-            {u.localidad.length > 0 && u.localidad}{" "}
-            {u.direccion.length > 0 && u.direccion}{" "}
-           
-            {u.descripcion}
-            {
-              u.valoraciones.length == 0 ?
-                <p>No tiene ninguna valoración todavía</p>
-                :
-                <p>{Math.round(estrellas / u.valoraciones.length * 10) / 10} Estrellas de {u.valoraciones.length} valoraciones</p>
-            }
 
+            <div className={styles.infoContainer}>
+              <div>
+                <div className={styles.userData}>
+                </div>
+                <div className={styles.name}>
+                  <h2>{u.nombreUsuario}{" "}</h2>
+                  <h3>{titleCase(u.type)}</h3>
+                </div>
+                <div>
+                  {u.provincia}{" "}
+                  {u.municipio}{" "}
+                  {u.localidad.length > 0 && u.localidad}{" "}
+                  {u.direccion.length > 0 && u.direccion}{" "}
+                </div>
+
+              </div>
+              <div className={styles.descrip}>
+                {
+                  u.descripcion.length == 0 ?
+                    (
+                      <>
+                      </>
+                    ) :
+                    (
+                      <>
+                        <h4>Descripcion del usuario:</h4>
+                        {u.descripcion}
+                      </>
+                    )
+                }
+
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <div className={styles.starsPill}>
+            <div className={styles.valorations}>
+              <p>Valoraciones:</p>
+              {
+                u.valoraciones.length == 0 ?
+                  <p>Nadie ha valorado a este usuario todavia.</p>
+                  :
+                  <p>{Math.round(estrellas / u.valoraciones.length * 10) / 10} Estrellas de {u.valoraciones.length} valoraciones</p>
+              }
+              <div className={styles.contactInfo}>
+                <p>Informacion de contacto:</p>
+                <p>{u.numeroCelular}{" "}</p>
+                <p>{u.numeroTelefono}{" "}</p>
+              </div>
+
+            </div>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import firebase, { FirebaseContext } from '../../firebase'
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import styles from '../../styles/FinalizarPublicacion.module.css'
+import Publicacion from '../../components/Publicaciones/Publicacion'
 import dynamic from "next/dynamic"
 import { useRouter } from 'next/router'
 
@@ -51,6 +52,11 @@ const FinalizarPublicacion = ({
     setImgTrigger(true)
     setOnFinish(false)
   }
+
+  function numeroConPuntos(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   const handlePublicar = async () => {
     console.log("Publicando...")
     setError("")
@@ -158,57 +164,184 @@ const FinalizarPublicacion = ({
 
   return (
     <div className={styles.main}>
+      <h3>Ubicación en el mapa:</h3>
       <div className={styles.map}>
         <MapNoSSR selectPosition={selectPosition} />
       </div>
-      <p>provincia: {provincia}</p>
-      <p>municipio: {municipio}</p>
-      <p>localidad: {localidad}</p>
-      <p>direccion: {direccion}</p>
-      <p>codigoPostal: {codigoPostal}</p>
-      <p>altura: {altura}</p>
-      <p>piso: {piso}</p>
-      <p>numeroLetraDepto: {numeroLetraDepto}</p>
-      <p>tipoVivienda: {tipoVivienda}</p>
-      <p>cantAmbientes: {cantAmbientes}</p>
-      <p>cantBanos: {cantBanos}</p>
-      <p>cantHabitaciones: {cantHabitaciones}</p>
-      <p>cantCocheras: {cantCocheras}</p>
-      <p>mt2Totales: {mt2Totales}</p>
-      <p>mt2Utilizados: {mt2Utilizados}</p>
-      <p>tipoPublicacion: {tipoPublicacion}</p>
-      <p>precio: {precio}</p>
-      <p>expensas: {expensas}</p>
-      <p>descripcion: {descripcion}</p>
-      {
-        imagenes.map(m => {
-          let urlCreator = window.URL || window.webkitURL;
-          let index = imagenes.indexOf(m)
-          console.log(index)
+      <h3 className={styles.title}>Vista previa de publicacion:</h3>
+      <div className={styles.pubContainer}>
+        {
+          imagenes.map(m => {
+            let urlCreator = window.URL || window.webkitURL;
+            let index = imagenes.indexOf(m)
+            console.log(index)
 
-          return (
-            <img key={index} src={urlCreator.createObjectURL(m)} />
+            return (
+              <img className={styles.pubImg} key={index} src={urlCreator.createObjectURL(m)} />
+            )
+          })
+        }
+
+        {
+          error.length > 0 &&
+          (
+            <p>Error {error}</p>
           )
-        })
-      }
+        }
+        <div>
+          <div className={styles.infoContainer}>
+            <div className={styles.headPlusDir}>
+              <div className={styles.head}>
+
+                <div className={styles.infoInside}>
+                  {
+                    tipoPublicacion == "venta" ?
+                      (
+                        <div className={styles.price}>
+                          <div className={styles.header}>
+                            <h3>En venta</h3>
+
+
+                          </div>
+                          <div className={styles.price_valores}>
+                            <h2>USD$</h2>
+                            <h2>{numeroConPuntos(precio)}</h2>
+                          </div>
+                        </div>
+
+                      ) :
+                      (
+                        <div className={styles.price}>
+                          <div className={styles.header}>
+                            <h3>En alquiler</h3>
+
+
+                          </div>
+                          <div className={styles.price_valores}>
+                            <h2>ARS$/Mes</h2>
+                            <h2>{numeroConPuntos(precio)}</h2>
+                          </div>
+                        </div>
+
+                      )
+                  }
+
+                  {
+                    expensas.length > 0 &&
+                    (
+                      <p>Expensas ARS$/Mes {numeroConPuntos(expensas)}</p>
+                    )
+                  }
+
+                  <div className={styles.imagesAndCant}>
+                    <div className={styles.cantContainerDiv}>
+                      <div className={styles.cantContainer}>
+                        <img src='/open-door.png'></img>
+                        <p>{cantAmbientes}</p>
+                      </div>
+                      <div className={styles.cantContainer}>
+                        <img src='/bed.png'></img>
+                        <p>{cantAmbientes}</p>
+                      </div>
+                    </div>
+                    <div className={styles.cantContainerDiv}>
+                      <div className={styles.cantContainer}>
+                        <img src='/shower.png'></img>
+                        <p>{cantBanos}</p>
+                      </div>
+                      <div className={styles.cantContainer}>
+                        <img src='/garage.png'></img>
+                        <p>{cantCocheras}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.dire}>
+                <h3>{direccion} {altura}</h3>
+                <p>{provincia}, <span>{municipio},</span> <span>{localidad}</span></p>
+
+                {
+                  piso.length > 0 ?
+                    (
+                      <div className={styles.pAndD}>
+                        <p>Piso: {piso}</p>
+                        {
+                          numeroLetraDepto != 0 ?
+                            (
+                              <p>Depto: {numeroLetraDepto}</p>
+                            ) :
+                            (
+                              <p></p>
+                            )
+                        }
+                      </div>
+
+                    ) :
+                    (
+                      piso.length == 0 && numeroLetraDepto.length > 0 ?
+                        (
+                          <div className={styles.pAndD}>
+                            <p>Depto: {numeroLetraDepto}</p>
+                          </div>
+
+                        ) : null
+                    )
+                }
+
+                <div className={styles.cantidades}>
+                  <div className={styles.meters}>
+                    <div className={styles.metersContainer}>
+                      <h4>Mt<sup>2</sup> Totales: </h4>
+                      <p>{mt2Totales}</p>
+                    </div>
+
+                    {
+                      mt2Utilizados.length > 0 ?
+                        (
+                          <div className={styles.metersContainer}>
+                            <h4>Mt<sup>2</sup> Utilizados: </h4>
+                            <p>{mt2Utilizados}</p>
+                          </div>
+                        ) :
+                        null
+                    }
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
       {
         cargando == true ?
           (
             <p>Cargando</p>
           ) :
           (
-            <div>
-              <button onClick={handleVolver}>Editar</button>
-              <button onClick={() => handlePublicar()}>Publicar</button>
+
+            <div className={styles.buttons}>
+              <div className={styles.button}  onClick={handleVolver}>
+                <div className={styles.button_back}></div>
+                <div className={styles.button_content}><span>Editar</span></div>
+              </div>
+              <div className={styles.button} onClick={() => handlePublicar()}>
+                <div className={styles.button_back}></div>
+                <div className={styles.button_content}><span>Publicar</span></div>
+              </div>
             </div>
           )
       }
-      {
-        error.length > 0 &&
-        (
-          <p>Error {error}</p>
-        )
-      }
+
+
     </div>
   )
 }

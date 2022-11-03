@@ -1,4 +1,22 @@
 .extendido{
     width: 1000px;
-    
+    padding-bottom: 15px;
+}
+
+.headers{
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.headers p{
+    margin: 0;
+    cursor: pointer;
+}
+
+.h2{
+    font-size: 25px;
+    font-weight: bold;
+    align-items: flex-start;
 }

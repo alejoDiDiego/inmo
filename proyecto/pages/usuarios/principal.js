@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Layout from '../../components/layout/Layout'
 import Usuario from '../../components/Usuarios/Usuario'
 import Link from 'next/link'
+import styles from "../../styles/PublicacionesPrincipal.module.css"
 import Filtros from '../../components/Usuarios/Filtros'
 
 
@@ -258,15 +259,16 @@ const principal = () => {
                 <Layout perfil={true}>
                     {
                         "user" in router.query ? null :
-                        <>
-                            <div>
-                                <button onClick={() => handleBuscarPublicaciones()}>Buscar Publicaciones</button>
-                            </div>
+                            <>
 
-                            <div>
-                                <Filtros />
-                            </div>
-                        </>
+
+                                <div className={styles.pubSearch}>
+                                    <p onClick={() => handleBuscarPublicaciones()}>Ir a buscar usuarios</p>
+                                </div>
+                                <div>
+                                    <Filtros />
+                                </div>
+                            </>
                     }
                     <div>
                         {

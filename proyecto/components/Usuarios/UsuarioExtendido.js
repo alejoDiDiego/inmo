@@ -130,10 +130,11 @@ const UsuarioExtendido = ({ u }) => {
 
     return (
         <div className={styles.extendido}>
-            <div>
-                <p onClick={() => { setPublicacionesMostrar(true); setComentariosMostrar(false) }} className={publicacionesMostrar == true ? styles.h2 : null}>Publicaciones <span>{publicaciones.length}</span></p>
-                <p onClick={() => { setPublicacionesMostrar(false); setComentariosMostrar(true) }} className={comentariosMostrar == true ? styles.h2 : null}>Valoraciones <span>{listaComentarios.length}</span> </p>
 
+            <div className={styles.headers}>
+                    <p onClick={() => { setPublicacionesMostrar(true); setComentariosMostrar(false)}} className={publicacionesMostrar == true ? styles.h2 : null}>Publicaciones <span>{publicaciones.length}</span></p>
+                    <p onClick={() => { setPublicacionesMostrar(false); setComentariosMostrar(true)  }} className={comentariosMostrar == true ? styles.h2 : null}>Valoraciones <span>{listaComentarios.length}</span> </p>
+                    
             </div>
 
             {
