@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState, useMemo} from 'react'
+import React, { useCallback, useEffect, useState, useMemo } from 'react'
 import { getCroppedImg, getRotatedImage } from '../../crop/auxCrop'
 import Cropper from 'react-easy-crop'
 import styles from '../../styles/CrearPublicacion.module.css'
 import Image from 'next/image'
-import {useDropzone} from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 
 
 
@@ -43,52 +43,52 @@ const SubirImagenes = ({
         color: '#bdbdbd',
         outline: 'none',
         transition: 'border .24s ease-in-out',
-      };
-      
-      const focusedStyle = {
+    };
+
+    const focusedStyle = {
         borderColor: '#38B6FF'
-      };
-      
-      const acceptStyle = {
+    };
+
+    const acceptStyle = {
         borderColor: '#00e676'
-      };
-      
-      const rejectStyle = {
+    };
+
+    const rejectStyle = {
         borderColor: '#ff1744'
-      };
-      
-      function StyledDropzone(props) {
+    };
+
+    function StyledDropzone(props) {
         const onDrop = useCallback(acceptedFiles => {
             setImagePerfilUpload(acceptedFiles[0])
-          }, [])
+        }, [])
         const {
-          getRootProps,
-          getInputProps,
-          isFocused,
-          isDragAccept,
-          isDragReject
-        } = useDropzone({onDrop, accept: {'image/*': []}});
-      
+            getRootProps,
+            getInputProps,
+            isFocused,
+            isDragAccept,
+            isDragReject
+        } = useDropzone({ onDrop, accept: { 'image/*': [] } });
+
         const style = useMemo(() => ({
-          ...baseStyle,
-          ...(isFocused ? focusedStyle : {}),
-          ...(isDragAccept ? acceptStyle : {}),
-          ...(isDragReject ? rejectStyle : {})
+            ...baseStyle,
+            ...(isFocused ? focusedStyle : {}),
+            ...(isDragAccept ? acceptStyle : {}),
+            ...(isDragReject ? rejectStyle : {})
         }), [
-          isFocused,
-          isDragAccept,
-          isDragReject
+            isFocused,
+            isDragAccept,
+            isDragReject
         ]);
-      
+
         return (
-          <div className="container">
-            <div {...getRootProps({style})}>
-              <input {...getInputProps()} />
-              <p>Arrastra una imagen o haz click para abrir el explorador de archivos</p>
+            <div className="container">
+                <div {...getRootProps({ style })}>
+                    <input {...getInputProps()} />
+                    <p>Arrastra una imagen o haz click para abrir el explorador de archivos</p>
+                </div>
             </div>
-          </div>
         );
-      }
+    }
 
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -216,9 +216,13 @@ const SubirImagenes = ({
                 <h2>3. Subir imágenes (minimo 3)</h2>
                 <p>La primer imagen sera utilizada como portada de la publicación</p>
 
-                <div className={styles.dropzoneStyle}>
-                    <StyledDropzone ></StyledDropzone>
-                </div>
+                {
+                    imagenes.length == 20 ?
+                        null :
+                        <div className={styles.dropzoneStyle}>
+                            <StyledDropzone ></StyledDropzone>
+                        </div>
+                }
 
 
                 <div className={styles.imagesContainer}>
