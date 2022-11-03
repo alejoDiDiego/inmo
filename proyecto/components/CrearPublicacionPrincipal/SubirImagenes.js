@@ -213,7 +213,7 @@ const SubirImagenes = ({
     return (
         <div ref={referenciaImg} className={styles.mainImg}>
             <div>
-                <h2>3. Subir imágenes</h2>
+                <h2>3. Subir imágenes (minimo 3)</h2>
                 <p>La primer imagen sera utilizada como portada de la publicación</p>
 
                 <div className={styles.dropzoneStyle}>
