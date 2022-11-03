@@ -326,7 +326,9 @@ const FinalizarPublicacion = ({
       {
         cargando == true ?
           (
-            <Spinner />
+            <div className={styles.spinner}>
+              <Spinner />
+            </div>
           ) :
           (
 

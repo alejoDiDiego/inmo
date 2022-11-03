@@ -546,7 +546,10 @@ const ModificarPublicacion = () => {
                       </label>
                     </div>
                     :
-                    <Spinner />
+                    <div className={styles.spinner}>
+                      <Spinner />
+                    </div>
+
                 }
               </div>
             </div>
