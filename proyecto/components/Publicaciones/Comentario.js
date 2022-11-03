@@ -77,22 +77,27 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
 
 
     const handleEliminarRespuesta = async (c) => {
-        const docRef = doc(firebase.db, "Publicaciones", p.id)
-        const docSnap = await getDoc(docRef)
-        let vs = docSnap.data().comentarios
-        let newVs = []
-        for (const v of vs) {
-            console.log(vs)
-            console.log(v)
-            if (v.fecha == c.fecha) {
-                v.respuesta = {}
+        try{
+            const docRef = doc(firebase.db, "Publicaciones", p.id)
+            const docSnap = await getDoc(docRef)
+            let vs = docSnap.data().comentarios
+            let newVs = []
+            for (const v of vs) {
+                console.log(vs)
+                console.log(v)
+                if (v.fecha == c.fecha) {
+                    v.respuesta = {}
+                }
+                newVs.push(v)
             }
-            newVs.push(v)
+            await updateDoc(doc(firebase.db, "Publicaciones", p.id), {
+                comentarios: newVs
+            })
+            setListaComentarios(newVs)
+        } catch(err){
+            console.log(err)
+            alert(err)
         }
-        await updateDoc(doc(firebase.db, "Publicaciones", p.id), {
-            comentarios: newVs
-        })
-        setListaComentarios(newVs)
 
     }
 
@@ -114,7 +119,7 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                 <p>{fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
                 {
                     comentario.usuarioComentador.uid == usuario.uid ?
-                        <button className={styles.delButton} onClick={() => handleEliminar(c.usuarioComentador)}>
+                        <button className={styles.delButton} onClick={() => handleEliminar(comentario.usuarioComentador)}>
                             <img className={styles.divImgSubmit} src='/delete.png'></img>
                         </button>
                         : null
@@ -160,7 +165,7 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                                 </div>
 
                                 <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
-                                <button className={styles.delButton} onClick={() => handleEliminar(c.usuarioComentador)}>
+                                <button className={styles.delButton} onClick={() => handleEliminarRespuesta(comentario)}>
                                     <img className={styles.divImgSubmit} src='/delete.png'></img>
                                 </button>
                             </div>
