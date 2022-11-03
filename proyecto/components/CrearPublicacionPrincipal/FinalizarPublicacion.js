@@ -6,6 +6,7 @@ import styles from '../../styles/FinalizarPublicacion.module.css'
 import Publicacion from '../../components/Publicaciones/Publicacion'
 import dynamic from "next/dynamic"
 import { useRouter } from 'next/router'
+import Spinner from '../Spinner/Spinner'
 
 const MapNoSSR = dynamic(() => import("./Map"), {
   ssr: false,
@@ -325,7 +326,7 @@ const FinalizarPublicacion = ({
       {
         cargando == true ?
           (
-            <p>Cargando</p>
+            <Spinner />
           ) :
           (
 
