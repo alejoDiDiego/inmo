@@ -1,6 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore'
 import React, { useEffect, useState, useContext } from 'react'
 import firebase, { FirebaseContext } from '../../firebase'
+import styles from '../../styles/Comentario.module.css'
 
 const Comentario = ({ v, u, setListaComentarios, usuario }) => {
 
@@ -92,44 +93,92 @@ const Comentario = ({ v, u, setListaComentarios, usuario }) => {
 
 
     return (
-        <div>
-            <p>{v.estrellas} Estrellas</p>
-            <p>{v.comentario}</p>
-            <p>Publicado por {v.usuarioComentador.nombre}</p>
-            <p>Publicado: {fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
-            {
-                Object.keys(v.respuesta).length == 0 ? null :
+        <div className={styles.valorationContainer}>
+            <div className={styles.valoration}>
+                <div className={styles.header}>
+                    <h3>{v.usuarioComentador.nombre}</h3>
+                    <p>{fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
+                    {
+                        v.usuarioComentador.uid == usuario.uid ?
+                            <button className={styles.delButton} onClick={() => handleEliminar()}>
+                                <img className={styles.divImgSubmit} src='/delete.png'></img>
+                            </button>
+
+                            :
+                            null
+                    }
+                </div>
+
+                <div className={styles.stars}>
+                    <h3>{v.estrellas}</h3>
                     <div>
-                        <p>Respuesta del publicador: {v.respuesta.texto}</p>
-                        <p>Publicado: {fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+                        <img className={styles.divImg2} src='/estrella.png'></img>
                     </div>
+                </div>
+                <div className={styles.commentBody}>
+                    <h4>Comentario del usuario:</h4>
+                    <p className={styles.responseText}>{v.comentario}</p>
+                </div>
+            </div>
+
+            <div className={styles.response}>
+                {
+                    Object.keys(v.respuesta).length == 0 ? null :
+                        <div>
+                            <div className={styles.responseHeader}>
+                                <h4>Respuesta del usuario</h4>
+                                <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
+                                {
+                                usuario.uid == u.uid ?
+                                ( 
+                                    <button className={styles.delButton} onClick={() => handleEliminarRespuesta(v.usuarioComentador)}>
+                                    <img className={styles.divImgSubmit} src='/delete.png'></img>
+                                </button>
+                                ):
+                                (
+                                    <></>
+                                )
+                                
+                                
+                            }
+
+                            </div>
+                            <p className={styles.responseText}> {v.respuesta.texto}</p>
+
+                        </div>
 
 
-            }
+                }
 
-            {
-                usuario.uid == u.uid ?
-                    <div>
-                        {
-                            Object.keys(v.respuesta).length == 0 ?
-                                <form onSubmit={(e) => handleResponder(e, v)}>
-                                    <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
-                                    <input type="submit" value="Responder" />
-                                </form>
-                                :
-                                <button onClick={() => handleEliminarRespuesta(v.usuarioComentador)}>Eliminar respuesta</button>
-                        }
-                    </div>
-                    :
-                    null
-            }
+                {
+                    usuario.uid == u.uid ?
+                        <div>
+                            {
+                                Object.keys(v.respuesta).length == 0 ?
+                                    <form onSubmit={(e) => handleResponder(e, v)}>
+                                        <h4>Responder a esta valoracion:</h4>
 
-            {
-                v.usuarioComentador.uid == usuario.uid ?
-                    <button onClick={() => handleEliminar()}>Eliminar comentario</button>
-                    :
-                    null
-            }
+                                        <div className={styles.responseForm}>
+                                            <label className={`${styles.custom_field} ${styles.two}`}>
+                                                <input value={respuesta} required onChange={(e) => setRespuesta(e.target.value)} />
+                                            </label>
+                                            <div>
+                                                <button className={styles.responseButton} type="submit" value="Responder">
+                                                    <img className={styles.divImgSubmit2} src='/arrowrotate.png'></img>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    :
+                                    <></>
+                            }
+                        </div>
+                        :
+                        null
+                }
+            </div>
+
+
         </div>
     )
 }

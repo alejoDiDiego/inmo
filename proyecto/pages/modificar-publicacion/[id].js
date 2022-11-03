@@ -463,7 +463,6 @@ const ModificarPublicacion = () => {
 
 
             <div className={styles.derecha}>
-
               <div>
                 <InformacionBasica
                   selectPosition={selectPosition}

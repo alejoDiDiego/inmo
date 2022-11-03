@@ -44,8 +44,9 @@
 
 .preguntasContainer {
     overflow-y: scroll;
-    width: 100%;
-    height: 300px;
+    width: 520px;
+    max-height: 300px;
+    height: fit-content;
 }
 
 .headerPreg {
@@ -56,12 +57,24 @@
     margin-bottom: -20px;
 }
 
+.preg{
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 450px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
 .headerRta {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 15px;
     margin-top: -20px;
-    margin-left: 20px;
+    margin-left: 15px;
 
 }
 
@@ -73,7 +86,7 @@
 
 .rtaBody {
     margin-top: -20px;
-    margin-left: 50px;
+    margin-left: 45px;
 }
 
 .lineUp {
@@ -292,6 +305,7 @@
 
 .rtaForm{
     margin-top: -10px;
+    gap: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -345,4 +359,61 @@
 
 .buttonConfirmRta:hover .buttonConfirmRta_back{
     transform: translate(-3px, 3px);
+}
+
+
+.responseButton1{
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #fafafa;
+}
+
+.responseButton2{
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #fafafa;
+   
+}
+
+.responseForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.delButton {
+    max-height: 40px;
+    max-width: 40px;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    justify-items: center;
+    align-items: center;
+    display: flex;
+}
+
+.divImgSubmit{
+    max-width: 1px;
+    max-height: 1px;
 }

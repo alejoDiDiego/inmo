@@ -75,9 +75,9 @@
 .pubSearch{
     display: flex;
     position: absolute;
-    margin-left: 1050px;
+    margin-left: 1030px;
     margin-top: 75px;
-    width: 150px;
+    width: 200px;
     height: 40px;
     border-radius: 2px;
     background-color: #fafafac1;

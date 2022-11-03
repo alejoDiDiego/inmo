@@ -263,7 +263,7 @@ const principal = () => {
 
 
                                 <div className={styles.pubSearch}>
-                                    <p onClick={() => handleBuscarPublicaciones()}>Ir a buscar usuarios</p>
+                                    <p onClick={() => handleBuscarPublicaciones()}>Ir a buscar publicaciones</p>
                                 </div>
                                 <div>
                                     <Filtros />

@@ -132,9 +132,9 @@ const UsuarioExtendido = ({ u }) => {
         <div className={styles.extendido}>
 
             <div className={styles.headers}>
-                    <p onClick={() => { setPublicacionesMostrar(true); setComentariosMostrar(false)}} className={publicacionesMostrar == true ? styles.h2 : null}>Publicaciones <span>{publicaciones.length}</span></p>
-                    <p onClick={() => { setPublicacionesMostrar(false); setComentariosMostrar(true)  }} className={comentariosMostrar == true ? styles.h2 : null}>Valoraciones <span>{listaComentarios.length}</span> </p>
-                    
+                <p onClick={() => { setPublicacionesMostrar(true); setComentariosMostrar(false) }} className={publicacionesMostrar == true ? styles.h2 : null}>Publicaciones <span>{publicaciones.length}</span></p>
+                <p onClick={() => { setPublicacionesMostrar(false); setComentariosMostrar(true) }} className={comentariosMostrar == true ? styles.h2 : null}>Valoraciones <span>{listaComentarios.length}</span> </p>
+
             </div>
 
             {
@@ -154,9 +154,20 @@ const UsuarioExtendido = ({ u }) => {
                             usuariosComentadores.includes(usuario.uid) ?
                                 null :
                                 <form onSubmit={e => handleComentar(e)}>
-                                    <input required value={estrella} placeholder="estrellas" max="5" maxLength="1" onChange={e => e.target.value > 5 ? null : setEstrella(isNumber(e))} />
-                                    <input required value={comentario} placeholder="comentario" maxLength="200" onChange={e => setComentario(e.target.value)} />
-                                    <input type="submit" />
+                                    <div className={styles.formComment}>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input required value={estrella} placeholder="Cantidad de estrellas 1-5" max="5" maxLength="1" onChange={e => e.target.value > 5 ? null : setEstrella(isNumber(e))} />
+                                        </label>
+                                        <label className={`${styles.custom_field} ${styles.two}`}>
+                                            <input required value={comentario} placeholder="Comentario" maxLength="200" onChange={e => setComentario(e.target.value)} />
+                                        </label>
+                                        <div>
+                                            <button className={styles.responseButton} type="submit" value="Responder">
+                                                <img className={styles.divImgSubmit2} src='/arrowrotate.png'></img>
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </form>
                             : null
                     }
@@ -164,7 +175,7 @@ const UsuarioExtendido = ({ u }) => {
                     {
                         listaComentarios.length == 0 ?
                             <div>
-                                No hay comentarios
+                                <h2>Todavia nadie a dejado una reseña de este usuario, se el primero en hacerlo.</h2>
                             </div> :
                             <div>
                                 {

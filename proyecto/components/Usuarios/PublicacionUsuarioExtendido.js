@@ -64,7 +64,7 @@ const PublicacionUsuarioExtendido = ({ p }) => {
 
 
   return (
-    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion}`}>
+    <div onClick={extendido == true ? null : () => handleExtendido()} className={`${styles.publicacion1}`}>
 
       <div className={styles.publicacion_div_img}>
         <img className={styles.img} src={p.imagenes[0]} />

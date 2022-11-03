@@ -20,3 +20,101 @@
     font-weight: bold;
     align-items: flex-start;
 }
+
+.custom_field {
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+    --field-padding: 12px;
+}
+
+.custom_field input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: var(--field-padding);
+    border-radius: 10px;
+    width: 250px;
+    outline: none;
+    font-size: 14px;
+}
+
+.custom_field .placeholder {
+    position: absolute;
+    left: var(--field-padding);
+    width: calc(100% - (var(--field-padding) * 2) - 20px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 20px;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        color 0.3s ease,
+        font-size 0.3s ease;
+}
+
+.custom_field input.dirty+.placeholder,
+.custom_field input:focus+.placeholder,
+.custom_field input:not(:placeholder-shown)+.placeholder {
+    top: -10px;
+    font-size: 12px;
+    color: #222;
+}
+
+
+
+.custom_field.two input {
+    border-radius: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background:
+        linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+        linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+        linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+    transition: background-size 0.3s ease;
+}
+
+.custom_field.two input.dirty,
+.custom_field.two input:not(:placeholder-shown),
+.custom_field.two input:focus {
+    background-size: 100% 0.15em, 100% 0.1em, 100%;
+}
+
+
+.custom_field i {
+    position: relative;
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+.formComment{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 20px;
+
+}
+
+.divImgSubmit2 {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.responseButton {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #fafafa;
+}

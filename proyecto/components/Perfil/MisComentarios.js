@@ -2,25 +2,41 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 import PublicacionComentarios from './PublicacionComentarios'
 import UsuarioComentarios from './UsuarioComentarios'
+import styles from '../../styles/Comentario.module.css'
 
 const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublicaciones }) => {
 
   const [select, setSelect] = useState("usuarios")
 
+  const [tipos, setTipos] = useState(
+    [{ value: "usuarios", label: "Usuario" },
+    { value: "publicaciones", label: "Publicaciones" }]
+  )
 
+  const handleSelectTipo = (event) => {
+    const value = event.value
+    setSelect(value)
+  }
+
+  function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+}
 
   return (
     <div>
-      <select value={select} onChange={e => setSelect(e.target.value)}>
-        <option value="usuarios">Usuario</option>
-        <option value="publicaciones">Publicaciones</option>
-      </select>
+      <div className={styles.fieldDirSelect}>
+        <Select options={tipos} onChange={handleSelectTipo} isClearable={false} isSearchable={false} placeholder={"Tipo de comentario"} value={{ value: select, label: titleCase(select)}}></Select>
+      </div>
 
       {
         select == "usuarios" ?
           misComentariosUsuarios.map((u, id) => {
             return (
-              <UsuarioComentarios 
+              <UsuarioComentarios
                 key={id}
                 u={u}
                 usuario={usuario}
@@ -32,7 +48,7 @@ const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublica
       }
       {
         misComentariosPublicaciones.map((p, id) => {
-          return(
+          return (
             <PublicacionComentarios
               p={p}
               usuario={usuario}

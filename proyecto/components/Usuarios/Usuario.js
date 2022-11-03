@@ -82,10 +82,9 @@ const Usuario = ({ u }) => {
     <div onClick={() => extendido == false ? handleExtendido() : null} className={`${styles.usuario} ${extendido == true && styles.usuario_extendido}`}>
       <div>
 
-
         <div className={styles.profileContainer}>
           <div className={styles.image}>
-            <img src={u.fotoPerfilURL} />
+            <img className={styles.usuarioImg} src={u.fotoPerfilURL} />
           </div>
           <div className={styles.profilePill}>
 
@@ -148,6 +147,8 @@ const Usuario = ({ u }) => {
 
       </div>
 
+      
+
 
       {
         extendido &&
@@ -155,7 +156,11 @@ const Usuario = ({ u }) => {
           u={u}
         />
       }
+
+
     </div>
+
+
   )
 }
 

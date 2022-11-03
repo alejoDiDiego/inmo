@@ -108,13 +108,15 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
     }
 
     return (
-        <div>
+        <div className={styles.preg}>
             <div className={styles.headerPreg}>
                 <p>{comentario.usuarioComentador.nombre}</p>
                 <p>{fecha.toLocaleDateString("es-ES")} {fecha.getHours()}:{fecha.getMinutes()}</p>
                 {
                     comentario.usuarioComentador.uid == usuario.uid ?
-                        <button onClick={() => handleEliminar()}>Eliminar</button>
+                        <button className={styles.delButton} onClick={() => handleEliminar(c.usuarioComentador)}>
+                            <img className={styles.divImgSubmit} src='/delete.png'></img>
+                        </button>
                         : null
                 }
             </div>
@@ -136,11 +138,9 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                                             <input maxLength={40} onChange={(e) => setRespuesta(e.target.value)} placeholder="Responde a la pregunta" />
                                         </label>
                                     </div>
-                                    <button type="submit" className={styles.buttonConfirmRta}>
-                                        <div className={styles.buttonConfirmRta_back}></div>
-                                        <div className={styles.buttonConfirmRta_content}><span>Responder</span></div>
+                                    <button className={styles.responseButton2} type="submit" value="Responder">
+                                        <img className={styles.divImgSubmit} src='/arrowrotate.png'></img>
                                     </button>
-
                                 </div>
 
 
@@ -160,7 +160,9 @@ const Comentario = ({ comentario, usuario, p, setListaComentarios }) => {
                                 </div>
 
                                 <p>{fechaRespuesta.toLocaleDateString("es-ES")} {fechaRespuesta.getHours()}:{fechaRespuesta.getMinutes()}</p>
-                                <button onClick={() => handleEliminarRespuesta(comentario)}>Eliminar respuesta</button>
+                                <button className={styles.delButton} onClick={() => handleEliminar(c.usuarioComentador)}>
+                                    <img className={styles.divImgSubmit} src='/delete.png'></img>
+                                </button>
                             </div>
                             <div className={styles.rtaBody}>
                                 <p >{comentario.respuesta.texto}</p>

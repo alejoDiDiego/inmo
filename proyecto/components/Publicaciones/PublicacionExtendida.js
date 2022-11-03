@@ -138,16 +138,17 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
                 {
                     usuario.uid == publicador.uid ? null :
                         <form onSubmit={(e) => handlePreguntar(e)}>
+                            <div className={styles.responseForm}>
                             <div className={styles.fieldDir}>
                                 <label className={`${styles.custom_field} ${styles.two}`}>
                                     <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="Realiza una pregunta" />
                                 </label>
                             </div>
                             <div>
-                            <button  type="submit" className={styles.buttonConfirm}>
-                                <div className={styles.buttonConfirm_back}></div>
-                                <div className={styles.buttonConfirm_content}><span>Publicar</span></div>
+                            <button className={styles.responseButton1} type="submit" value="Responder">
+                                    <img className={styles.divImgSubmit} src='/arrowrotate.png'></img>
                             </button>
+                            </div>
                             </div>
                         </form>
                 }
