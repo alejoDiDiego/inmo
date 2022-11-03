@@ -4,6 +4,7 @@ import firebase from '../../firebase'
 import styles from "../../styles/PublicacionExtendida.module.css"
 import { FirebaseContext } from '../../firebase'
 import Comentario from './Comentario'
+import ImageSlider from './ImageSlider'
 
 const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
 
@@ -98,21 +99,26 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
     // }, [publicador])
 
 
-
-
     return (
         <div className={styles.publicacion_extendida}>
 
             {
                 modal == false ? null :
                     <div className={styles.modal}>
-                        <div className={styles.modal_inside}>
-                            <div className={styles.menu} onClick={() => setModal(!modal) }>
-                                <div className={styles.bar}></div>
-                                <div className={styles.bar}></div>
-                                <div className={styles.bar}></div>
-                            </div>
+
+                        <div className={styles.menu} onClick={() => setModal(!modal)}>
+                            <div className={styles.bar}></div>
+                            <div className={styles.bar}></div>
+                            <div className={styles.bar}></div>
                         </div>
+                        <div className={styles.container_slider}>
+                            <ImageSlider
+                                slides={p.imagenes}
+                            />
+                        </div>
+
+
+
                     </div>
             }
 

@@ -1,4 +1,4 @@
-.publicacion_extendida {    
+.publicacion_extendida {
     height: 100%;
     width: 550px;
 }
@@ -9,7 +9,7 @@
     transition: all .1 ease-in-out;
 }
 
-.div_imgs:hover{
+.div_imgs:hover {
     transition: all .1 ease-in-out;
     background-color: #0071b3;
 }
@@ -65,7 +65,7 @@
     margin-bottom: -20px;
 }
 
-.preg{
+.preg {
     background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
@@ -161,16 +161,16 @@
     top: -10px;
     font-size: 12px;
     color: #222;
-} 
+}
 
 .custom_field.two input {
     border-radius: 0;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background:
-    linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
-    linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
-    linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+        linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+        linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+        linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
     transition: background-size 0.3s ease;
 }
 
@@ -181,17 +181,17 @@
 }
 
 
-.custom_field i{
+.custom_field i {
     position: relative;
     margin-left: -30px;
     cursor: pointer;
 }
 
-.fieldDir{
+.fieldDir {
     margin-top: 10px;
 }
 
-.buttonConfirm{
+.buttonConfirm {
     width: 250px;
     height: 40px;
 
@@ -204,7 +204,7 @@
     outline: none;
 }
 
-.buttonConfirm_back{
+.buttonConfirm_back {
     width: 250px;
     height: 40px;
     background-color: #0071b3;
@@ -213,7 +213,7 @@
     position: absolute;
 }
 
-.buttonConfirm_content{
+.buttonConfirm_content {
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -224,20 +224,20 @@
     background-color: #ffffff;
     transition: all ease-in-out .2s;
     border-bottom: 1px solid #0071b3;
-    
+
 }
 
-.buttonConfirm_content span{
+.buttonConfirm_content span {
     font-weight: bold;
 }
 
 
-.buttonConfirm:hover .buttonConfirm_content{
+.buttonConfirm:hover .buttonConfirm_content {
     transform: translate(3px, -3px);
 
 }
 
-.buttonConfirm:hover .buttonConfirm_back{
+.buttonConfirm:hover .buttonConfirm_back {
     transform: translate(-3px, 3px);
 }
 
@@ -285,16 +285,16 @@
     top: -10px;
     font-size: 12px;
     color: #222;
-} 
+}
 
 .custom_fieldRta.two input {
     border-radius: 0;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background:
-    linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
-    linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
-    linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+        linear-gradient(90deg, #0071b3, #0071b3) center bottom/0 0.15em no-repeat,
+        linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+        linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
     transition: background-size 0.3s ease;
 }
 
@@ -305,13 +305,13 @@
 }
 
 
-.custom_fieldRta i{
+.custom_fieldRta i {
     position: relative;
     margin-left: -30px;
     cursor: pointer;
 }
 
-.rtaForm{
+.rtaForm {
     margin-top: -10px;
     gap: 10px;
     display: flex;
@@ -319,7 +319,7 @@
     align-items: center;
 }
 
-.buttonConfirmRta{
+.buttonConfirmRta {
     margin-top: -30px;
     width: 150px;
     height: 40px;
@@ -332,7 +332,7 @@
     outline: none;
 }
 
-.buttonConfirmRta_back{
+.buttonConfirmRta_back {
     width: 150px;
     height: 40px;
     background-color: #0071b3;
@@ -341,7 +341,7 @@
     position: absolute;
 }
 
-.buttonConfirmRta_content{
+.buttonConfirmRta_content {
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -352,25 +352,25 @@
     background-color: #ffffff;
     transition: all ease-in-out .2s;
     border-bottom: 1px solid #0071b3;
-    
+
 }
 
-.buttonConfirmRta_content span{
+.buttonConfirmRta_content span {
     font-weight: bold;
 }
 
 
-.buttonConfirmRta:hover .buttonConfirmRta_content{
+.buttonConfirmRta:hover .buttonConfirmRta_content {
     transform: translate(3px, -3px);
 
 }
 
-.buttonConfirmRta:hover .buttonConfirmRta_back{
+.buttonConfirmRta:hover .buttonConfirmRta_back {
     transform: translate(-3px, 3px);
 }
 
 
-.responseButton1{
+.responseButton1 {
     width: 40px;
     height: 40px;
     margin-top: 10px;
@@ -384,7 +384,7 @@
     background-color: #fafafa;
 }
 
-.responseButton2{
+.responseButton2 {
     width: 40px;
     height: 40px;
     margin-top: 8px;
@@ -396,10 +396,10 @@
     cursor: pointer;
     outline: none;
     background-color: #fafafa;
-   
+
 }
 
-.responseForm{
+.responseForm {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -421,7 +421,7 @@
     display: flex;
 }
 
-.divImgSubmit{
+.divImgSubmit {
     max-width: 20px;
     max-height: 20px;
 }
@@ -451,10 +451,12 @@
 
 
 .menu {
+    position: absolute;
     cursor: pointer;
     align-self: flex-end;
     margin-bottom: 30px;
-
+    right: 20px;
+    top: 15px;
 
 }
 
@@ -477,4 +479,23 @@
 
 .menu .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
+}
+
+
+.modal_inside {
+    width: 700px;
+    height: 100%;
+}
+
+.slide[data-active] {
+    opacity: 1;
+    z-index: 1;
+    transition-delay: 0ms;
+  }
+
+
+.container_slider{
+    width: 700px;
+    height: 700px;
+    
 }
