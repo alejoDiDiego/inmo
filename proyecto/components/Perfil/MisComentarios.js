@@ -44,18 +44,15 @@ const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublica
             )
           })
           :
-          null
-      }
-      {
-        misComentariosPublicaciones.map((p, id) => {
-          return (
-            <PublicacionComentarios
-              p={p}
-              usuario={usuario}
-              id={id}
-            />
-          )
-        })
+          misComentariosPublicaciones.map((p, id) => {
+            return (
+              <PublicacionComentarios
+                p={p}
+                usuario={usuario}
+                id={id}
+              />
+            )
+          })
       }
     </div>
   )

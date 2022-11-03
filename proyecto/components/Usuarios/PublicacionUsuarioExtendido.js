@@ -115,17 +115,17 @@ const PublicacionUsuarioExtendido = ({ p }) => {
                       <p>{p.cantAmbientes}</p>
                     </div>
                     <div className={styles.cantContainer}>
-                      <img className={styles.iconImg}  src='/bed.png'></img>
+                      <img className={styles.iconImg} src='/bed.png'></img>
                       <p>{p.cantHabitaciones}</p>
                     </div>
                   </div>
                   <div className={styles.cantContainerDiv}>
                     <div className={styles.cantContainer}>
-                      <img className={styles.iconImg}  src='/shower.png'></img>
+                      <img className={styles.iconImg} src='/shower.png'></img>
                       <p>{p.cantBanos}</p>
                     </div>
                     <div className={styles.cantContainer}>
-                      <img className={styles.iconImg}  src='/garage.png'></img>
+                      <img className={styles.iconImg} src='/garage.png'></img>
                       <p>{p.cantCocheras}</p>
                     </div>
                   </div>
@@ -195,7 +195,7 @@ const PublicacionUsuarioExtendido = ({ p }) => {
 
         </div>
 
-
+        <div className={styles.escondido}></div>
       </div>
     </div>
   )

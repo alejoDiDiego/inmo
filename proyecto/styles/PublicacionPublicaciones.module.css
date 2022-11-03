@@ -48,7 +48,6 @@
     bottom: 0;
     height: 0px;
     transition: all ease-in-out 0.2s;
-
 }
 
 .publicacion:hover {
@@ -56,7 +55,13 @@
     transition: all ease-in-out 0.15s;
 }
 
-.publicacion:hover .escondido{
+.publicacion1:hover {
+    background-color: rgba(255, 255, 255, .4);
+    transition: all ease-in-out 0.15s;
+}
+
+
+.publicacion1:hover .escondido{
     /* box-shadow: 4px 4px 4px #007cc3; */
     transition: all ease-in-out 0.2s;
     height: 10px;
