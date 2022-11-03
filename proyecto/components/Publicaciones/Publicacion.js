@@ -57,12 +57,16 @@ const Publicacion = ({ publicacion }) => {
   // }, [router])
 
   useEffect(() => {
-    if ("publicacion" in router.query && Object.keys(p).length > 0) {
+    console.log(router.query)
+    if ("publicacion" in router.query) {
+      console.log("si")
       setExtendido(true)
-    } else {
+    }
+     else {
+      console.log("no")
       setExtendido(false)
     }
-  }, [router])
+  }, [router, p])
 
   useEffect(() => {
     queryFirebase()
