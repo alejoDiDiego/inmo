@@ -14,6 +14,8 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
 
     const { usuario } = useContext(FirebaseContext)
 
+    const [modal, setModal] = useState(false)
+
 
     // let puntajeEstrellas = 0
 
@@ -101,7 +103,20 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
     return (
         <div className={styles.publicacion_extendida}>
 
-            <div className={styles.div_imgs}>
+            {
+                modal == false ? null :
+                    <div className={styles.modal}>
+                        <div className={styles.modal_inside}>
+                            <div className={styles.menu} onClick={() => setModal(!modal) }>
+                                <div className={styles.bar}></div>
+                                <div className={styles.bar}></div>
+                                <div className={styles.bar}></div>
+                            </div>
+                        </div>
+                    </div>
+            }
+
+            <div onClick={() => setModal(!modal)} className={styles.div_imgs}>
 
                 <img src={p.imagenes[0]} className={styles.img_principal} />
                 {
@@ -139,16 +154,16 @@ const PublicacionExtendida = ({ p, setExtendido, publicador }) => {
                     usuario.uid == publicador.uid ? null :
                         <form onSubmit={(e) => handlePreguntar(e)}>
                             <div className={styles.responseForm}>
-                            <div className={styles.fieldDir}>
-                                <label className={`${styles.custom_field} ${styles.two}`}>
-                                    <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="Realiza una pregunta" />
-                                </label>
-                            </div>
-                            <div>
-                            <button className={styles.responseButton1} type="submit" value="Responder">
-                                    <img className={styles.divImgSubmit} src='/arrowrotate.png'></img>
-                            </button>
-                            </div>
+                                <div className={styles.fieldDir}>
+                                    <label className={`${styles.custom_field} ${styles.two}`}>
+                                        <input maxLength={40} value={comentario} onChange={e => setComentario(e.target.value)} placeholder="Realiza una pregunta" />
+                                    </label>
+                                </div>
+                                <div>
+                                    <button className={styles.responseButton1} type="submit" value="Responder">
+                                        <img className={styles.divImgSubmit} src='/arrowrotate.png'></img>
+                                    </button>
+                                </div>
                             </div>
                         </form>
                 }
