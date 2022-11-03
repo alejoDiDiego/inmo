@@ -1183,7 +1183,7 @@ const principal = () => {
 
 
                             <div className={styles.dInfo}>
-                                <h2>Descripcioón: <span>{nuevaDescripcion.length}/200</span></h2>
+                                <h2>Descripción: <span>{nuevaDescripcion.length}/200</span></h2>
                                 <div className={styles.fieldDir}>
                                     <textarea className={styles.descripArea} value={nuevaDescripcion} onChange={e => { setNuevaDescripcion(e.target.value); }} maxLength="200" type="text" readOnly={cargando} placeholder="&nbsp;"></textarea>
                                 </div>

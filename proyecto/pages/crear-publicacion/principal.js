@@ -135,25 +135,29 @@ const principal = () => {
       tipoPublicacion.length == 0 ||
       precio.length == 0 || precio == 0 ||
       descripcion.length == 0 ||
-      imagenes.length == 0 ||
+      imagenes.length < 3 ||
       mt2Totales.length == 0 || mt2Totales == 0
     ) {
       setErrorSiguiente(true)
+      alert("Faltan datos")
       return
     }
 
     if (tipoVivienda == "departamento" && (piso.length == 0 || piso == 0)) {
       setErrorSiguiente(true)
+      alert("Faltan datos en piso")
       return
     }
 
     if (tipoVivienda == "casa" && (mt2Utilizados.length == 0 || mt2Utilizados == 0)) {
       setErrorSiguiente(true)
+      alert("Faltan datos en los metros cuadrados")
       return
     }
 
     if (tipoVivienda == "departamento" && piso.length == 0 && numeroLetraDepto.length == 0) {
       setErrorSiguiente(true)
+      alert("Faltan datos en piso o depto")
       return
     }
 

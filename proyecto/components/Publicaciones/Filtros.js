@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
-import Select from 'react-select'
+import Select, { components } from 'react-select'
 import styles from "../../styles/Filtros.module.css"
 
 const Filtros = ({ router }) => {
@@ -81,6 +81,7 @@ const Filtros = ({ router }) => {
 
 
 
+
     useEffect(() => {
         if (
             direccion == null ||
@@ -99,6 +100,7 @@ const Filtros = ({ router }) => {
         ) {
             return
         }
+        console.log(router.query)
         setNuevaDireccion(direccion)
         setNuevoTipoPublicacion(tipoPublicacion)
         setNuevoTipoVivienda(tipoVivienda)

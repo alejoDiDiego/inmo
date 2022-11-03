@@ -17,6 +17,7 @@ const ModificarPublicacion = () => {
 
   const [producto, setProducto] = useState({})
   const [cargando, setCargando] = useState(true)
+  const [cargandoEditar, setCargandoEditar] = useState(false)
 
 
   const [selectPosition, setSelectPosition] = useState(null)
@@ -238,6 +239,7 @@ const ModificarPublicacion = () => {
 
 
   const handleEditar = async () => {
+    setCargandoEditar(true)
     if (
       provincia.length == 0 ||
       municipio.length == 0 ||
@@ -258,16 +260,22 @@ const ModificarPublicacion = () => {
       mt2Utilizados.length == 0 || mt2Utilizados == 0
     ) {
       setErrorSiguiente(true)
+      setCargandoEditar(false)
+      throw "Error"
       return
     }
 
     if (tipoVivienda == "departamento" && piso.length == 0) {
       setErrorSiguiente(true)
+      setCargandoEditar(false)
+      throw "Error"
       return
     }
 
     if (tipoVivienda == "departamento" && piso.length == 0 && numeroLetraDepto.length == 0) {
       setErrorSiguiente(true)
+      setCargandoEditar(false)
+      throw "Error"
       return
     }
 
@@ -340,21 +348,25 @@ const ModificarPublicacion = () => {
         await updateDoc(doc(firebase.db, "Publicaciones", `${producto.id}`), {
           imagenes: imgs,
         }).catch((error) => {
-          setCargando(false)
+          setCargandoEditar(false)
           setError(error)
           // console.log(error)
         })
+
+        router.push("/perfil/principal")
 
 
       }
 
       await map()
 
-      setCargando(false)
+      setCargandoEditar(false)
       console.log("Listo")
 
 
     } catch (err) {
+      setCargandoEditar(false)
+      alert("Error")
       // console.log(err)
     }
 
@@ -524,13 +536,18 @@ const ModificarPublicacion = () => {
                 />
 
 
+                {
+                  cargandoEditar == false ?
 
-                <div className={styles.div_buttonContinue}>
-                  <label className={styles.buttonConfirm} onClick={() => handleEditar()}>
-                    <div className={styles.buttonConfirm_back}></div>
-                    <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
-                  </label>
-                </div>
+                    <div className={styles.div_buttonContinue}>
+                      <label className={styles.buttonConfirm} onClick={() => handleEditar()}>
+                        <div className={styles.buttonConfirm_back}></div>
+                        <div className={styles.buttonConfirm_content}><span>Confirmar</span></div>
+                      </label>
+                    </div>
+                    :
+                    <Spinner />
+                }
               </div>
             </div>
 

@@ -1,10 +1,79 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import styles from '../../styles/Body.module.css';
-
+import { FirebaseContext } from '../../firebase'
+import Router, { useRouter } from 'next/router'
 
 const Body = () => {
+
+
+    const { usuario } = useContext(FirebaseContext)
+
+    console.log(usuario)
+
+
+    const handleVenta = () => {
+        Router.push({
+            pathname: '/publicaciones/principal',
+            query: {
+                direccion: "",
+                tipoPublicacion: "venta",
+                tipoVivienda: "",
+                precioMin: "",
+                precioMax: "",
+                cantBanosMin: "",
+                cantBanosMax: "",
+                cantAmbientesMax: "",
+                cantAmbientesMin: "",
+                cantCocherasMax: "",
+                cantCocherasMin: "",
+                cantHabitacionesMax: "",
+                cantHabitacionesMin: ""
+            }
+        })
+    }
+
+
+    const handleAlquiler = () => {
+        Router.push({
+            pathname: '/publicaciones/principal',
+            query: {
+                direccion: "",
+                tipoPublicacion: "alquiler",
+                tipoVivienda: "",
+                precioMin: "",
+                precioMax: "",
+                cantBanosMin: "",
+                cantBanosMax: "",
+                cantAmbientesMax: "",
+                cantAmbientesMin: "",
+                cantCocherasMax: "",
+                cantCocherasMin: "",
+                cantHabitacionesMax: "",
+                cantHabitacionesMin: ""
+            }
+        })
+    }
+
+    const handlePublicar = () => {
+        if(Object.keys(usuario).length == 0){
+            alert("Debe estar iniciado con su cuenta")
+            return
+        }
+        Router.push({
+            pathname: '/crear-publicacion/principal'
+        })
+
+    }
+
+
+
+
+
+
+
+
     return (
         <div className={styles.div}>
             <div className={styles.arriba}>
@@ -19,40 +88,37 @@ const Body = () => {
                             </div>
 
                             <div className={styles.squareMedia}>
-                                <Link href='/'>
-                                    <div className={styles.square}>
-                                        <div className={styles.image}>
-                                            <img src='/home.png' alt='casa' />
-                                        </div>
-                                        <h3>Propiedades en venta</h3>
-                                        <p>Encuentra tu hogar entre las publicaciones hechas por los usuarios</p>
+
+                                <div onClick={() => handleVenta()} className={styles.square}>
+                                    <div className={styles.image}>
+                                        <img src='/home.png' alt='casa' />
                                     </div>
-                                </Link>
+                                    <h3>Propiedades en venta</h3>
+                                    <p>Encuentra tu hogar entre las publicaciones hechas por los usuarios</p>
+                                </div>
+
 
 
                                 <div className={styles.div_square_chico}>
-                                    <Link href='/'>
-                                        <div className={styles.square_chico}>
-                                            <div className={styles.square_chico_txt}>
-                                                <h3>Publicar</h3>
-                                                <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
-                                            </div>
-                                            <div className={styles.image}>
-                                                <img src='/discount-tag.png' />
-                                            </div>
+                                    <div onClick={() => handlePublicar()} className={styles.square_chico}>
+                                        <div className={styles.square_chico_txt}>
+                                            <h3>Publicar</h3>
+                                            <p>Publica tu casa sin cargo ya seas una inmobiliaria o un particular</p>
                                         </div>
-                                    </Link>
-                                    <Link href='/'>
-                                        <div className={styles.square_chico}>
-                                            <div className={styles.square_chico_txt}>
-                                                <h3>En alquiler</h3>
-                                                <p className='pInicio'>Contacta con arrendatarios y compara entre diferentes opciones</p>
-                                            </div>
-                                            <div className={styles.image}>
-                                                <img src='/secret.png' />
-                                            </div>
+                                        <div className={styles.image}>
+                                            <img src='/discount-tag.png' />
                                         </div>
-                                    </Link>
+                                    </div>
+
+                                    <div onClick={() => handleAlquiler()} className={styles.square_chico}>
+                                        <div className={styles.square_chico_txt}>
+                                            <h3>En alquiler</h3>
+                                            <p className='pInicio'>Contacta con arrendatarios y compara entre diferentes opciones</p>
+                                        </div>
+                                        <div className={styles.image}>
+                                            <img src='/secret.png' />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

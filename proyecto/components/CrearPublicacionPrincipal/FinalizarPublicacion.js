@@ -171,14 +171,15 @@ const FinalizarPublicacion = ({
       <h3 className={styles.title}>Vista previa de publicacion:</h3>
       <div className={styles.pubContainer}>
         {
-          imagenes.map(m => {
+          imagenes.map((m, id) => {
             let urlCreator = window.URL || window.webkitURL;
-            let index = imagenes.indexOf(m)
-            console.log(index)
 
-            return (
-              <img className={styles.pubImg} key={index} src={urlCreator.createObjectURL(m)} />
-            )
+
+            if (id == 1) {
+              return (
+                <img key={id} className={styles.pubImg} src={urlCreator.createObjectURL(m)} />
+              )
+            }
           })
         }
 
@@ -329,7 +330,7 @@ const FinalizarPublicacion = ({
           (
 
             <div className={styles.buttons}>
-              <div className={styles.button}  onClick={handleVolver}>
+              <div className={styles.button} onClick={handleVolver}>
                 <div className={styles.button_back}></div>
                 <div className={styles.button_content}><span>Editar</span></div>
               </div>
