@@ -271,6 +271,18 @@ const principal = () => {
                             </>
                     }
                     <div>
+
+                        { 
+                        resultado.length == 0?
+                        (
+                            <h2 className={styles.advice}>No se encontraron resultados, complete los campos para buscar usuarios.</h2>
+                        ):
+                        (
+                            <></>
+                        )
+
+                        }
+
                         {
                             resultado.map((u, i) => {
                                 return (
