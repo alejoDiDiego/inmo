@@ -308,26 +308,30 @@ const principal = () => {
                         setEmailPublico(docSnap.data().emailPublico)
                         queryFirebase()
                         let puntajeEstrellas = 0
-                        for(const v of docSnap.data().valoraciones){
+                        for (const v of docSnap.data().valoraciones) {
                             puntajeEstrellas = parseInt(puntajeEstrellas) + parseInt(v.estrellas)
                         }
                         setEstrellas(puntajeEstrellas)
+                        console.log(docSnap.data())
 
-                        for(const c of docSnap.data().misComentarios){
-                            console.log(c)
-                            if(c.tipo == "usuario"){
-                                const usRef = doc(firebase.db, "Usuarios", c.id)
-                                const usSnap = await getDoc(usRef)
-                                console.log(usSnap.data())
-                                setMisComentariosUsuarios([...misComentariosUsuarios, usSnap.data()]) 
+                        if (Object.keys(docSnap.data().misComentarios).length > 0) {
+                            for (const c of docSnap.data().misComentarios) {
+                                console.log(c)
+                                if (c.tipo == "usuario") {
+                                    const usRef = doc(firebase.db, "Usuarios", c.id)
+                                    const usSnap = await getDoc(usRef)
+                                    console.log(usSnap.data())
+                                    setMisComentariosUsuarios([...misComentariosUsuarios, usSnap.data()])
 
-                            }
-                            if(c.tipo == "publicacion"){
-                                const pubRef = doc(firebase.db, "Publicaciones", c.id)
-                                const pubSnap = await getDoc(pubRef)
-                                setMisComentariosPublicaciones([...misComentariosPublicaciones, pubSnap.data()]) 
+                                }
+                                if (c.tipo == "publicacion") {
+                                    const pubRef = doc(firebase.db, "Publicaciones", c.id)
+                                    const pubSnap = await getDoc(pubRef)
+                                    setMisComentariosPublicaciones([...misComentariosPublicaciones, pubSnap.data()])
+                                }
                             }
                         }
+
 
 
                     }
