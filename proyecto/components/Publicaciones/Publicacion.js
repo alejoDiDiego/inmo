@@ -80,7 +80,9 @@ const Publicacion = ({ publicacion }) => {
   })
   }
 
-
+  useEffect(() => {
+    setP(publicacion)
+  }, [publicacion])
 
 
   const queryFirebase = async () => {

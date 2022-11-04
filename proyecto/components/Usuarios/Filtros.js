@@ -53,6 +53,7 @@ const Filtros = () => {
                 tipo: tipoCuenta
             }
         })
+
     }
 
     const handleReiniciar = () => {
