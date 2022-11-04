@@ -137,7 +137,6 @@ const principal = () => {
         }
 
 
-
         if (direccion == "" || direccion == null) {
             setResultado([])
             return
@@ -149,9 +148,9 @@ const principal = () => {
         const filtro = publicaciones.filter(p => {
             const removeAccents = (str) => {
                 return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            }   
+            }
             console.log(p.tipoPublicacion == tipoPublicacion)
-            
+
             return (
                 (
                     removeAccents(p.provincia).toLowerCase().includes(removeAccents(direccion.toLowerCase())) ||

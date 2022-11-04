@@ -98,6 +98,24 @@ const Filtros = ({ router }) => {
             cantHabitacionesMax == null ||
             cantHabitacionesMin == null
         ) {
+            Router.push({
+                pathname: '/publicaciones/principal',
+                query: {
+                    direccion: "",
+                    tipoPublicacion: "",
+                    tipoVivienda: "",
+                    precioMin: "",
+                    precioMax: "",
+                    cantBanosMin: "",
+                    cantBanosMax: "",
+                    cantAmbientesMax: "",
+                    cantAmbientesMin: "",
+                    cantCocherasMax: "",
+                    cantCocherasMin: "",
+                    cantHabitacionesMax: "",
+                    cantHabitacionesMin: ""
+                }
+            })
             return
         }
         console.log(router.query)
@@ -223,7 +241,7 @@ const Filtros = ({ router }) => {
 
                     <div className={styles.filtersSelects}>
                         <Select options={tipoViviendaOptions} onChange={handleSelectTipoVivienda} isClearable={false} isSearchable={false} value={nuevoTipoVivienda == "" ? { value: null, label: "Tipo de propiedad" } : { value: nuevoTipoVivienda, label: titleCase(nuevoTipoVivienda) }} ></Select>
-                        <Select options={tipoPublicacionOptions}  onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} value={nuevoTipoPublicacion == "" ? { value: null, label: "Tipo de publicacion" } : { value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
+                        <Select options={tipoPublicacionOptions} onChange={handleSelectTipoPublicacion} isClearable={false} isSearchable={false} value={nuevoTipoPublicacion == "" ? { value: null, label: "Tipo de publicacion" } : { value: nuevoTipoPublicacion, label: titleCase(nuevoTipoPublicacion) }}></Select>
                     </div>
 
 
@@ -233,7 +251,7 @@ const Filtros = ({ router }) => {
                 <div className={styles.div_menu}>
                     <div className={`${styles.menu} ${active == true ? styles.active : null}`} onClick={() => { setActive(!active) }}>
                         <div className={styles.filtersControl}>
-                        <p>Filtros avanzados</p>
+                            <p>Filtros avanzados</p>
                             <img className={styles.div_imgFilters} src='/down.png' layout='fill'></img>
                         </div>
                     </div>
