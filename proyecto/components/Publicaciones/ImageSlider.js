@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import styles from "../../styles/PublicacionExtendida.module.css"
 
 
 
@@ -10,31 +11,6 @@ const slideStyles = {
     backgroundPosition: "center",
 };
 
-const rightArrowStyles = {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(0, -50%)",
-    right: "32px",
-    fontSize: "45px",
-    color: "white",
-    zIndex: 1,
-    cursor: "pointer",
-    backgroundColor: "black",
-    width: "50px"
-};
-
-const leftArrowStyles = {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(0, -50%)",
-    left: "32px",
-    fontSize: "45px",
-    color: "white",
-    zIndex: 1,
-    cursor: "pointer",
-    backgroundColor: "black",
-    width: "50px"
-};
 
 const sliderStyles = {
     position: "relative",
@@ -43,16 +19,13 @@ const sliderStyles = {
 
 const currentImage = {
     position: "absolute",
-    backgroundColor: "black",
+    backgroundColor: "#38363656",
     color: "white",
     textAlign: "center",
     width: "100%",
     padding: "10px 0",
     bottom: "10px"
 }
-
-
-
 
 
 
@@ -86,11 +59,11 @@ const ImageSlider = ({ slides }) => {
     return (
         <div style={sliderStyles}>
             <div>
-                <div onClick={goToPrevious} style={leftArrowStyles}>
-                    &#8656;
+                <div onClick={goToPrevious} className={styles.leftArrowStyles}>
+                <img className={styles.divImgSubmit1} src='/download.png'></img>
                 </div>
-                <div onClick={goToNext} style={rightArrowStyles}>
-                    &#8658;
+                <div onClick={goToNext} className={styles.rightArrowStyles}>
+                     <img className={styles.divImgSubmit2} src='/download.png'></img>
                 </div>
             </div>
             <div style={slideStylesWidthBackground}></div>

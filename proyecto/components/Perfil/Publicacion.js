@@ -113,13 +113,13 @@ const Publicacion = ({ p, queryFirebase }) => {
                             (
                                 <div className={styles.div_buttons}>
                                     <Link href="/modificar-publicacion/[id]" as={`/modificar-publicacion/${p.id}`}><img src='/edit.png' className={styles.edit_icon} /></Link>
-                                    <img src='/bin.png' onClick={() => { setEliminar(true) }} className={styles.delete_icon} />
+                                    <img src='/delete.png' onClick={() => { setEliminar(true) }} className={styles.delete_icon} />
                                 </div>
                             ) :
                             (
                                 <div className={styles.div_buttons}>
-                                    <img src='/bin.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
-                                    <img src='/delete.png' onClick={() => { setEliminar(false) }} className={styles.delete_icon} />
+                                    <img src='/delete.png' onClick={() => { handleEliminar() }} className={styles.delete_icon} />
+                                    <img src='/crossed.png' onClick={() => { setEliminar(false) }} className={styles.delete_icon} />
 
                                     {/* https://www.flaticon.com/free-icon/bin_6033424?term=junk&page=1&position=40&page=1&position=40&related_id=6033424&origin=search# */}
                                 </div>
