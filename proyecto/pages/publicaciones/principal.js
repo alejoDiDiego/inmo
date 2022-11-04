@@ -108,6 +108,7 @@ const principal = () => {
             const filtro = publicaciones.filter(p => {
                 return (p.id == publicacion)
             })
+
             if (filtro.length == 0) {
                 const query = async () => {
                     try {
@@ -146,12 +147,18 @@ const principal = () => {
 
 
         const filtro = publicaciones.filter(p => {
-
+            const removeAccents = (str) => {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }   
+            console.log(p)
+            console.log(removeAccents(p.provincia.toLowerCase()))
+            console.log(removeAccents(direccion.toLowerCase()))
+            console.log(removeAccents(p.provincia).toLowerCase().includes(direccion.toLowerCase()))
             return (
                 (
-                    p.provincia.toLowerCase().includes(direccion.toLowerCase()) ||
-                    p.municipio.toLowerCase().includes(direccion.toLowerCase()) ||
-                    p.localidad.toLowerCase().includes(direccion.toLowerCase()) ||
+                    removeAccents(p.provincia).toLowerCase().includes(removeAccents(direccion.toLowerCase())) ||
+                    removeAccents(p.municipio).toLowerCase().includes(removeAccents(direccion.toLowerCase())) ||
+                    removeAccents(p.localidad).toLowerCase().includes(removeAccents(direccion.toLowerCase())) ||
                     p.codigoPostal.includes(direccion.toLowerCase())
                 )
                 &&
@@ -245,6 +252,7 @@ const principal = () => {
                 latLon: p.latLon
             })
         })
+        console.log(posiciones)
         // console.log(posiciones)
         setPositions(posiciones)
     }, [resultado])
@@ -258,7 +266,7 @@ const principal = () => {
 
     const queryFirebase = async () => {
         const colRef = collection(firebase.db, "Publicaciones")
-        const q = query(colRef, limit(5))
+        const q = query(colRef)
         const querySnapshot = await getDocs(q);
         let ps = []
         querySnapshot.forEach((doc) => {
@@ -352,7 +360,6 @@ const principal = () => {
 
                                     (
                                         resultado.map((p, i) => {
-                                            console.log(p.id)
                                             return (
                                                 <Publicacion
                                                     publicacion={p}

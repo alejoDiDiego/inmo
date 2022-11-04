@@ -57,13 +57,10 @@ const Publicacion = ({ publicacion }) => {
   // }, [router])
 
   useEffect(() => {
-    console.log(router.query)
     if ("publicacion" in router.query) {
-      console.log("si")
       setExtendido(true)
     }
      else {
-      console.log("no")
       setExtendido(false)
     }
   }, [router, p])
@@ -85,7 +82,6 @@ const Publicacion = ({ publicacion }) => {
       for (const v of docSnap.data().valoraciones) {
         puntajeEstrellas = parseInt(puntajeEstrellas) + parseInt(v.estrellas)
       }
-      console.log(docSnap.data())
 
       const docPuRef = doc(firebase.db, "Publicaciones", publicacion.id)
       const docPuSnap = await getDoc(docPuRef)
