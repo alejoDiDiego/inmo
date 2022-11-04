@@ -60,7 +60,7 @@ const Publicacion = ({ publicacion }) => {
     if ("publicacion" in router.query) {
       setExtendido(true)
     }
-     else {
+    else {
       setExtendido(false)
     }
   }, [router, p])
@@ -75,9 +75,9 @@ const Publicacion = ({ publicacion }) => {
     Router.push({
       pathname: '/usuarios/principal',
       query: {
-          user: publicador.uid
+        user: publicador.uid
       }
-  })
+    })
   }
 
   useEffect(() => {
@@ -153,6 +153,15 @@ const Publicacion = ({ publicacion }) => {
                             <div className={styles.header}>
                               <h3>En venta</h3>
                               {
+                                p.tipoVivienda == "casa" ?
+                                  (
+                                    <h4>Casa</h4>
+                                  ) :
+                                  (
+                                    <h4>Departamento</h4>
+                                  )
+                              }
+                              {
                                 extendido == true ? (
                                   <p className={styles.closeBtn} onClick={() => { window.history.back(); }}>Cerrar</p>
                                 ) :
@@ -173,6 +182,16 @@ const Publicacion = ({ publicacion }) => {
                           <div className={styles.price}>
                             <div className={styles.header}>
                               <h3>En alquiler</h3>
+                              {
+                                p.tipoVivienda == "departamento" ?
+                                  (
+                                    <h4>Casa</h4>
+
+                                  ) :
+                                  (
+                                    <h4>Departamento</h4>
+                                  )
+                              }
                               {
                                 extendido == true ? (
                                   <p className={styles.closeBtn} onClick={() => { window.history.back(); setExtendido(false) }}>Cerrar</p>
