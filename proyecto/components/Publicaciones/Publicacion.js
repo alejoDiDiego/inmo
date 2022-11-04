@@ -275,7 +275,7 @@ const Publicacion = ({ publicacion }) => {
 
                           cargando == false ?
                             (
-                              <div className={styles.publicador}>
+                              <div onClick={() => handleUsuario()} className={styles.publicador}>
                                 <p className={styles.divider}>Publicado por: </p>
                                 <div className={styles.userNameContainer}>
                                   <img src={publicador.fotoPerfilURL} />
@@ -286,12 +286,12 @@ const Publicacion = ({ publicacion }) => {
                                 </div>
 
                                 <div>
-                                  <p>{publicador.numeroCelular}</p>
+                                  <p>Celular: {publicador.numeroCelular}</p>
 
                                 </div>
                                 {
                                   publicador.numeroTelefono.length == 0 ? null :
-                                    <p>{publicador.numeroTelefono}</p>
+                                    <p>Telefono: {publicador.numeroTelefono}</p>
                                 }
 
                                 {

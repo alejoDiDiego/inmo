@@ -9,6 +9,7 @@
     width: 900px;
     margin: 0 auto;
     margin-bottom: 50px;
+    border-radius: 5px;
 }
 
 .publicacion1{
@@ -70,7 +71,7 @@
 .publicacion_extendido{
     position: relative;
     display: flex;
-    /* border-radius: 10px; */
+    border-radius: 5px;
     background-color: white;
     margin: 0 auto;
     margin-bottom: 50px;
@@ -117,8 +118,8 @@
 .img{
     width: 300px;
     height: 100%;
-    /* border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px; */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .headPlusDir{
@@ -303,6 +304,16 @@
 
 .publicador{
     margin-top: 30px;
+    cursor: pointer;
+    transition: all ease-in-out .3s;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.publicador:hover{
+    transition: all ease-in-out .3s;
+    background-color: #E8EFF4;
+   
 }
 
 .userNameContainer{

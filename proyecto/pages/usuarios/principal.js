@@ -39,7 +39,7 @@ const principal = () => {
 
     const queryFirebase = async () => {
         const colRef = collection(firebase.db, "Usuarios")
-        const q = query(colRef, limit(5))
+        const q = query(colRef)
         const querySnapshot = await getDocs(q);
         let ps = []
         querySnapshot.forEach((doc) => {
@@ -162,12 +162,16 @@ const principal = () => {
 
 
         const filtro = usuarios.filter(u => {
+            const removeAccents = (str) => {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }   
+
             return (
                 (
-                    u.nombreUsuario.toLowerCase().includes(q.toLowerCase()) ||
-                    u.provincia.toLowerCase().includes(q.toLowerCase()) ||
-                    u.municipio.toLowerCase().includes(q.toLowerCase()) ||
-                    u.localidad.toLowerCase().includes(q.toLowerCase()) ||
+                    removeAccents(u.nombreUsuario).toLowerCase().includes(q.toLowerCase()) ||
+                    removeAccents(u.provincia).toLowerCase().includes(q.toLowerCase()) ||
+                    removeAccents(u.municipio).toLowerCase().includes(q.toLowerCase()) ||
+                    removeAccents(u.localidad).toLowerCase().includes(q.toLowerCase()) ||
                     u.codigoPostal.toLowerCase().includes(q.toLowerCase())
                 )
                 &&

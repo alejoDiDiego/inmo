@@ -7,27 +7,32 @@
     display: flex;
     cursor: pointer;
     transition: all .1 ease-in-out;
+    padding-top: 10px;
+    gap: 5px;
+    
 }
 
 .div_imgs:hover {
     transition: all .1 ease-in-out;
-    background-color: #0071b3;
 }
 
 
 .img_principal {
-    width: 350px;
-    height: 350px;
+    width: 340px;
+    height: 345px;
+    border-radius: 5px;
 }
 
 .img_secundarias {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .img_secundarias img {
-    width: 189px;
-    height: 175px;
+    width: 100%;
+    height: 170px;
+    border-radius: 5px;
 }
 
 
