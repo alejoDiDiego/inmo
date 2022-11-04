@@ -162,7 +162,7 @@ const Publicacion = ({ publicacion }) => {
                               <h3>En alquiler</h3>
                               {
                                 extendido == true ? (
-                                  <p onClick={() => { window.history.back(); setExtendido(false) }}>Cerrar</p>
+                                  <p className={styles.closeBtn} onClick={() => { window.history.back(); setExtendido(false) }}>Cerrar</p>
                                 ) :
                                   (
                                     <div></div>
