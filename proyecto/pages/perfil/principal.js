@@ -314,7 +314,6 @@ const principal = () => {
                         setEstrellas(puntajeEstrellas)
                         console.log(docSnap.data())
 
-<<<<<<< Updated upstream
                         if (Object.keys(docSnap.data().misComentarios).length > 0) {
                             for (const c of docSnap.data().misComentarios) {
                                 console.log(c)
@@ -330,21 +329,6 @@ const principal = () => {
                                     const pubSnap = await getDoc(pubRef)
                                     setMisComentariosPublicaciones([...misComentariosPublicaciones, pubSnap.data()])
                                 }
-=======
-                        for (const c of docSnap.data().misComentarios) {
-                            console.log(c)
-                            if (c.tipo == "usuario") {
-                                const usRef = doc(firebase.db, "Usuarios", c.id)
-                                const usSnap = await getDoc(usRef)
-                                console.log(usSnap.data())
-                                setMisComentariosUsuarios([...misComentariosUsuarios, usSnap.data()])
-
-                            }
-                            if (c.tipo == "publicacion") {
-                                const pubRef = doc(firebase.db, "Publicaciones", c.id)
-                                const pubSnap = await getDoc(pubRef)
-                                setMisComentariosPublicaciones([...misComentariosPublicaciones, pubSnap.data()])
->>>>>>> Stashed changes
                             }
                         }
 
@@ -871,9 +855,7 @@ const principal = () => {
                                                 ) :
                                                 (
                                                     <div className={styles.div_controls}>
-                                                        <div className={styles.loadingMod}>
-                                                            <Spinner></Spinner>
-                                                        </div>
+                                                        <p>cargando</p>
                                                     </div>
                                                 )
 
@@ -1305,7 +1287,7 @@ const principal = () => {
                                                         {
                                                             info.fotoFondoURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FfondoDefault.png?alt=media&token=d4bde7ff-b705-43cd-b647-899db546186b") == false ?
                                                                 (
-                                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/delete.png' />
+                                                                    <img onClick={() => { setConfirmarEliminacionFondo(true) }} className={styles.delete_icon} src='/bin.png' />
                                                                 ) : null
                                                         }
 
@@ -1313,8 +1295,8 @@ const principal = () => {
                                                 ) :
                                                 (
                                                     <div className={styles.div_buttons}>
-                                                        <img onClick={() => { handleEliminarFondo() }} className={styles.delete_icon} src='/delete.png' />
-                                                        <img onClick={() => { setConfirmarEliminacionFondo(false) }} className={styles.delete_icon} src='/crossed.png' />
+                                                        <img onClick={() => { handleEliminarFondo() }} className={styles.delete_icon} src='/bin.png' />
+                                                        <img onClick={() => { setConfirmarEliminacionFondo(false) }} className={styles.delete_icon} src='/delete.png' />
                                                     </div>
                                                 ) :
                                             <div className={styles.div_buttons}>
@@ -1347,7 +1329,7 @@ const principal = () => {
                                                                 {
                                                                     info.fotoPerfilURL.includes("https://firebasestorage.googleapis.com/v0/b/inmo-proyect.appspot.com/o/imagenesDefault%2FperfilDefault.jpg?alt=media&token=19044d3e-c7bc-493f-9850-20dc001ad5c5") == false ?
                                                                         (
-                                                                            <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/delete.png' />
+                                                                            <img onClick={() => setConfirmarEliminacionPerfil(true)} className={styles.delete_icon} src='/bin.png' />
                                                                         ) :
                                                                         null
 
@@ -1357,8 +1339,8 @@ const principal = () => {
                                                         ) :
                                                         (
                                                             <div className={styles.div_buttons}>
-                                                                <img onClick={() => handleEliminarPerfil()} className={styles.delete_icon} src='/delete.png' />
-                                                                <img onClick={() => setConfirmarEliminacionPerfil(false)} className={styles.delete_icon} src='/crossed.png' />
+                                                                <img onClick={() => handleEliminarPerfil()} className={styles.delete_icon} src='/bin.png' />
+                                                                <img onClick={() => setConfirmarEliminacionPerfil(false)} className={styles.delete_icon} src='/delete.png' />
                                                             </div>
                                                         )
                                                 ) :
