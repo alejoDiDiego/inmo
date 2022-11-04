@@ -33,26 +33,6 @@ const PublicacionComentarios = ({ p, usuario }) => {
 
         <div className={styles.publicacion_div_img}>
 
-          {
-
-            <div className={styles.arrows}>
-              {
-                imagen > 0 ?
-                  <img src='/arrow.png' onClick={() => setImagen(imagen - 1)} style={{ transform: "rotate(180deg)" }} className={styles.delete_icon} /> :
-                  <div className={styles.fake}></div>
-              }
-
-              {
-                imagen + 1 != p.imagenes.length ?
-                  <img src='/arrow.png' onClick={() => setImagen(imagen + 1)} className={styles.delete_icon} /> :
-                  <div className={styles.fake}></div>
-              }
-
-
-            </div>
-
-          }
-
 
           <img className={styles.img} src={p.imagenes[imagen]} />
         </div>

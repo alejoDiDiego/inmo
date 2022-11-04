@@ -5,6 +5,12 @@
     margin: 20px auto;
     cursor: pointer;
     align-items: center;
+    transition: all ease-in-out 0.10s;
+}
+
+.usuario:hover .profilePill{
+    background-color: rgba(255, 255, 255, .4);
+    transition: all ease-in-out 0.10s;
 }
 
 .usuarioImg{
@@ -32,6 +38,12 @@
 
 
 .usuario_extendido{
+    width: 90%;
+    max-width: 1850px;
+    margin: 20px auto;
+    cursor: pointer;
+    align-items: center;
+    transition: all ease-in-out 0.10s;
     cursor: default;
     height: calc(100vh - 90px);
 }

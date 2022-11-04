@@ -79,7 +79,7 @@ const Usuario = ({ u }) => {
 
 
   return (
-    <div onClick={() => extendido == false ? handleExtendido() : null} className={`${styles.usuario} ${extendido == true && styles.usuario_extendido}`}>
+    <div onClick={() => extendido == false ? handleExtendido() : null} className={extendido == true ? `${styles.usuario_extendido}` : `${styles.usuario}`}>
       <div>
 
         <div className={styles.profileContainer}>

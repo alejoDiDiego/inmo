@@ -71,6 +71,17 @@ const Publicacion = ({ publicacion }) => {
 
 
 
+  const handleUsuario = () => {
+    Router.push({
+      pathname: '/usuarios/principal',
+      query: {
+          user: publicador.uid
+      }
+  })
+  }
+
+
+
 
   const queryFirebase = async () => {
     try {

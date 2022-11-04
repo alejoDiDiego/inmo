@@ -45,13 +45,16 @@ const MisComentarios = ({ usuario, misComentariosUsuarios, misComentariosPublica
           })
           :
           misComentariosPublicaciones.map((p, id) => {
-            return (
-              <PublicacionComentarios
-                p={p}
-                usuario={usuario}
-                id={id}
-              />
-            )
+            console.log(p)
+            if(p != undefined){
+              return (
+                <PublicacionComentarios
+                  p={p}
+                  usuario={usuario}
+                  id={id}
+                />
+              )
+            }
           })
       }
     </div>
