@@ -150,10 +150,8 @@ const principal = () => {
             const removeAccents = (str) => {
                 return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             }   
-            console.log(p)
-            console.log(removeAccents(p.provincia.toLowerCase()))
-            console.log(removeAccents(direccion.toLowerCase()))
-            console.log(removeAccents(p.provincia).toLowerCase().includes(direccion.toLowerCase()))
+            console.log(p.tipoPublicacion == tipoPublicacion)
+            
             return (
                 (
                     removeAccents(p.provincia).toLowerCase().includes(removeAccents(direccion.toLowerCase())) ||
@@ -238,13 +236,14 @@ const principal = () => {
             )
         })
         setResultado(filtro)
-        // console.log(filtro)
+        console.log(filtro)
 
     }, [router, publicaciones])
 
 
     useEffect(() => {
         if (resultado.length == 0) { setPositions([]); return }
+        console.log(resultado)
 
         const posiciones = resultado.map(p => {
             return ({

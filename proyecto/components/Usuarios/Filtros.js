@@ -84,7 +84,7 @@ const Filtros = () => {
                     <img className={styles.div_img3} src='/crossed.png' layout='fill' />
                 </div>
             </div>
-            <Select options={tipoCuentaOptions} onChange={handleSelectTipoCuenta} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={tipoCuenta == "" ? { value: null, label: "Tipo de propiedad" } : { value: tipoCuenta, label: titleCase(tipoCuenta) }}></Select>
+            <Select options={tipoCuentaOptions} onChange={handleSelectTipoCuenta} isClearable={false} isSearchable={false} placeholder={"Seleccione un tipo de publicacion"} defaultValue={tipoCuenta == "" ? { value: null, label: "Tipo de cuenta" } : { value: tipoCuenta, label: titleCase(tipoCuenta) }}></Select>
         </div>
     )
 }
